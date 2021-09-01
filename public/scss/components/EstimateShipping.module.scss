@@ -1,0 +1,242 @@
+@import "../base/colors.scss";
+
+.wrapper
+{
+  margin: 15px 0 35px;
+}
+
+.detail
+{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  background: $color_blue_light;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 50px;
+
+  &::after
+    {
+      content: "";
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      position: absolute;
+      right: 10px;
+      top: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+      width: 24px;
+      height: 50px;
+      border: none;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 8px auto;
+      background-image: url("data:image/svg+xml,%3Csvg width='7' height='10' viewBox='0 0 7 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.625 8.75L5.375 5L1.625 1.25' stroke='%232A2A2A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    }
+
+  &_logoImage
+  {
+    width: 70px;
+    margin-right: 30px;
+  }
+
+  &_showCourier
+  {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin: calc(-50px - 16px) auto 0;
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: rgba($color_black, 0);
+    color: rgba($color_black, 0);
+    cursor: pointer;
+  }
+}
+
+.popup
+{
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @media screen and (max-width: 575px) {
+    width: 100vw;
+    height: 100vh;
+    -webkit-overflow-scrolling: auto;
+  }
+
+  &_inner
+  {
+    position: relative;
+    width: 40vw;
+    background: $color_gray;
+    border-radius: 5px;
+
+    @media screen and (max-width: 575px) {
+      margin: 0 1rem;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &_header
+  {
+   margin: 16px; 
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+  }
+
+  &_headerTitle
+  {
+    font-family: "roboto-medium";
+    font-size: 14px;
+  }
+
+  &_headerClose
+  {
+    font-family: "roboto-medium";
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  &_body
+  {
+    margin: 16px;
+    background: $color_blue_light;
+  }
+
+  &_bodyLineInfo,
+  &_bodyLabel,
+  &_bodyValue
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+    border: none;
+    margin: 0;
+  }
+
+  &_bodyLineInfo
+  {
+    border-bottom: 1px solid $color_gray_low;
+    padding: 12px;
+
+    &:last-child,
+    &:last-of-type
+    {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      border-bottom: none;
+      padding-bottom: 0;
+
+      [class*="bodyLabel"]
+      {
+        margin: 0 0 8px;
+      }
+
+      [class*="bodyValue"]
+      {
+        flex-grow: 1;
+        width: 100%;
+        margin-bottom: 16px;
+      }
+
+      [class*="css-"][class$="-container"]
+      {
+        width: 100%;
+      }
+    }
+  }
+
+  &_bodyLabel
+  {
+    padding: 0;
+    min-width: calc(25% - 15px);
+    max-width: calc(25% - 15px);
+    width: calc(25% - 15px);
+    font-size: 12px;
+    color: $color_gray_dark;
+  }
+
+  &_bodyValue
+  {
+    flex-grow: 1;
+    font-size: 14px;
+  }
+
+  &_provider
+  {
+    margin: 16px;
+    height: 220px;
+    overflow-y: auto;
+  }
+
+  &_providerLine,
+  &_providerImage,
+  &_providerLabel,
+  &_providerValue
+  {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+  }
+
+  &_providerLine
+  {
+    margin-bottom: 24px;
+
+    &:last-child
+    {
+      margin: 0;
+    }
+  }
+
+  &_providerImage
+  {
+    border: 1px solid $color_gray_semi_dark;
+    border-radius: 2px;
+    margin-right: 15px;
+    padding: 8px;
+
+    img
+    {
+      width: 50px;
+    }
+  }
+
+  &_providerLabel
+  {
+    flex-grow: 1;
+    font-size: 14px;
+  }
+}

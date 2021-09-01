@@ -1,0 +1,30 @@
+@import "../base/colors";
+@import "../components/Button.module.scss";
+
+.error
+{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: $color_white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_container
+  {
+    text-align: center;
+
+    &__title
+    {
+      font-size: 20px;
+
+      @media screen and (max-width: 575px) {
+        font-size: 16px;
+      }
+    }
+  }
+}

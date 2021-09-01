@@ -1,0 +1,7 @@
+release_name: nexus
+chart_name: nexus
+component_name: templates.uno
+staging_kube_context: gke_sirclo-1152_asia-southeast1-a_staging2
+production_kube_context: gke_sirclo-prod_asia-southeast1-c_production3
+# docker_repository_project_id: sirclo-1152 # for future needs
+# docker_repository_domain: asia.gcr.io # for future needs

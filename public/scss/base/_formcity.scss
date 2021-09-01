@@ -1,0 +1,61 @@
+.sirclo_form__city
+{
+  // Input City
+  & > div
+  {
+    & > div
+    {
+      & > div
+      {
+        padding-left: 1rem;
+
+        & > div.css-1wa3eu0-placeholder
+        {
+          position: absolute;
+          font-size: 1rem;
+        }
+
+        & > div.css-1dxjwtd-Placeholder
+        {
+          padding-left: 0;
+        }
+
+        & > div.css-1uccc91-singleValue
+        {
+          position: absolute !important;
+          top: 50%;
+        }
+
+        input
+        {
+          width: 100% !important;
+          height: calc(1.5em + 0.75rem + 2px);
+        }
+      }
+    }
+  }
+}
+
+.css-2b097c-container
+{
+  padding: 0 !important;
+  border: 0px;
+}
+
+.css-yk16xz-control,
+.css-1pahdxg-control,
+.css-g1d714-ValueContainer,
+.css-1hb7zxy-IndicatorsContainer
+{
+  height: calc(2.5em + 0.75rem + 2px);
+
+  .css-1uccc91-singleValue
+  {
+    top: 50%;
+  }
+}
+
+.css-26l3qy-menu
+{
+  top: calc(2em + 0.75rem + 2px) !important;
+}

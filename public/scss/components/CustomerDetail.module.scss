@@ -1,0 +1,214 @@
+@import "../base/colors";
+
+.customer
+{
+  margin: 1rem 0;
+
+  &_info
+  {
+    position: relative;
+  }
+
+  &_infoPerson
+  {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid $color_gray_primary;
+    border-radius: 5px;
+
+    & > a
+    {
+      cursor: pointer;
+      display: none;
+    }
+
+    &:empty
+    {
+      display: none;
+    }
+
+    &:nth-child(3)
+    {
+      display: none;
+    }
+  }
+
+  &_infoPersonValue
+    {
+      &:first-child
+      {
+        font-size: 16px;
+        margin-bottom: .5rem;
+      }
+    }
+
+  &_infoHeader
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  &_infoHeaderContainer
+  {
+    display: flex;
+    align-items: center;
+  }
+
+  &_infoHeaderTitle,
+  &_infoHeaderLink
+  {
+    font-family: "roboto-medium";
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &_infoHeaderTitle
+  {
+    color: $color_gray_dark !important;
+    margin-right: .5rem;
+  }
+
+  &_infoHeaderLink
+  {
+    color: $color_blue !important;
+  }
+
+  &_changePin
+  {
+    margin: 1.5rem 0 1rem;
+    cursor: pointer;
+
+    & > a
+    {
+      font-family: "roboto-medium";
+      font-size: 14px;
+      padding: 7px 12px;
+      border: 1px solid $color_blue;
+      border-radius: 3px;
+      color: $color_blue !important;
+    }
+  }
+
+  &_mapPopup
+  {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_mapCloseIcon
+  {
+    cursor: pointer;
+  }
+
+  &_mapPopupContainer
+  {
+    position: relative;
+    width: 50vw;
+    background: $color_white;
+    border-radius: 10px;
+
+    @media screen and (max-width: 991px) {
+      margin: 0 1rem;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &_mapPopupHeader
+  {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+  }
+
+  &_mapPopupHeaderTitle
+  {
+    flex: 1;
+    font-size: 16px;
+    color: $color_black;
+    text-align: center;
+  }
+
+  &_mapPopupClose
+  {
+    border: none;
+    background-color: transparent;
+    font-family: "roboto-black";
+    font-size: 16px;
+    color: $color_blue;
+
+    &:focus,
+    &:active
+    {
+      outline: 0;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  &_mapPopupNote
+  {
+    font-size: 14px;
+    background: $color_blue_light;
+    color: $color_black;
+    padding: 15px;
+    text-align: center;
+  }
+
+  &_mapPopupMaps
+  {
+    position: relative;
+    background-color: $color_white;
+    z-index: 1;
+    width: 100%;
+    height: 320px;
+
+    input
+    {
+      font-size: 14px;
+      width: calc(100% - 75px);
+      padding: 10px 15px;
+      border: 1px;
+      background: $color_white;
+      z-index: 2;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      left: 16px;
+      border-radius: 4px;
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  &_mapPopupCenterButton
+  {
+    position: absolute;
+    right: 10px;
+    background: #fff;
+    padding: 7.5px;
+    top: 12px;
+    border: none;
+    border-radius: 4px;
+  }
+
+  &_mapPopupLabelAddress
+  {
+    font-size: 14px;
+    background: $color_white;
+    color: $color_black;
+    padding: 15px;
+  }
+}

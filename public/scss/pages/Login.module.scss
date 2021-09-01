@@ -1,0 +1,268 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+@import "../components/Password.module.scss";
+@import "../components/Popup.module.scss";
+
+.login
+{
+  $this: &;
+
+  &_wrapper
+  {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  &_item
+  {
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+
+    & + .login_item
+    {
+      margin-top: 12px;
+    }
+
+    &__title
+    {
+      border: none;
+      margin-bottom: calc(33px - 12px);
+
+      h1, h2, h3, h4, h5, h6, p
+      {
+        font-size: 24px;
+        font-family: "roboto-medium";
+      }
+      
+      span
+      {
+        font-size: 14px;
+        color: $color_gray_semi_dark;
+      }
+    }
+
+    &__link
+    {
+      font-size: 16px;
+
+      a
+      {
+        &:link,
+        &:visited,
+        &:hover,
+        &:focus,
+        &:active
+        {
+          color: $color_blue;
+          text-decoration: none;
+        }
+
+        &:hover,
+        &:focus,
+        &:active
+        {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__form
+    {
+      .sirclo_form_row
+      {
+        label
+        {
+          color: $color_gray_dark;
+
+          span
+          {
+            margin-left: 4px;
+            color: $color_red;
+          }
+        }
+  
+        .form-control,
+        input[type="text"],
+        input[type="email"],
+        input[data-identity="input-password"],
+        input[data-identity="confirm-password"]
+        {
+          border-color: $color_gray_primary;
+  
+          &::-webkit-input-placeholder
+          {
+            color: $color_gray_semi_dark !important;
+            opacity: 1 !important;
+          }
+  
+          &:-ms-input-placeholder
+          {
+            color: $color_gray_semi_dark !important;
+            opacity: 1 !important;
+          }
+  
+          &::-moz-placeholder
+          {
+            color: $color_gray_semi_dark !important;
+            opacity: 1 !important;
+          }
+  
+          &:-moz-placeholder
+          {
+            color: $color_gray_semi_dark !important;
+            opacity: 1 !important;
+          }
+        }
+
+        button[data-identity="show-password"],
+        button[data-identity="show-confirm-password"]
+        {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: nowrap;
+          top: 0;
+          right: 1rem;
+          bottom: 0;
+          height: 100%;
+
+          color: $color_gray_semi_dark;
+
+          &:hover
+          {
+            color: $color_gray_text;
+          }
+        }
+      }
+
+      [class*="passwordValidation"]
+      {
+        margin-bottom: 0 !important;
+
+        & > span
+        {
+          display: block;
+          position: relative;
+          margin-bottom: 1rem;
+
+          &:empty
+          {
+            margin-bottom: 0;
+          }
+        }
+
+        & + [class*="formPassword"]
+        {
+          margin-top: 2rem;
+        }
+      }
+    }
+
+    &__sso
+    {
+      display: block !important;
+      position: relative;
+      margin: 0 0 12px;
+      padding: 0;
+      text-align: center;
+
+      label
+      {
+        position: relative;
+        padding: 28px 0;
+        margin: 0 0 -12px;
+
+        span
+        {
+          background-color: white;
+          padding: 0 12px;
+          z-index: 2;
+          color: $color_gray_text;
+          font-size: 11px;
+          font-style: normal;
+        }
+
+        &::before
+        {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          transform: translateY(-50%);
+          width: 100%;
+          height: 1px;
+          background: #E2E5E7;
+        }
+      }
+    }
+
+    &__ssoButton
+    {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "roboto-medium" !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      color: #444444 !important;
+      margin: 0 auto !important;
+      width: 68%;
+      height: 40px;
+      box-shadow: 0 0 0 transparent !important;
+      border: solid 1px $color_gray_primary !important;
+      background-color: $color_white;
+      border-radius: 4px !important;
+      overflow: hidden;
+
+      & > div
+      {
+        margin-right: 0 !important;
+      }
+
+      &[class$='metro']
+      {
+        margin-top: 12px !important;
+  
+        &::before
+        {
+          content: "";
+          width: 18px;
+          height: 18px;
+          margin-right: 10px;
+          background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M17.0064 0.000366243H0.992752C0.444397 0.000640901 -0.000137297 0.44545 3.181e-08 0.993942V17.0076C0.00027469 17.556 0.445084 18.0005 0.993576 18.0004H17.0064C17.5551 18.0005 17.9999 17.5558 18 17.0072C18 17.0071 18 17.0069 18 17.0068V0.993118C17.9997 0.444763 17.5549 0.000228914 17.0064 0.000366243Z' fill='%234267B2'/%3E%3Cpath d='M12.4277 18.0004V11.0394H14.7744L15.126 8.31482H12.4277V6.57953C12.4277 5.7925 12.6462 5.25623 13.7748 5.25623H15.2051V2.82591C14.9562 2.79282 14.1025 2.7188 13.109 2.7188C11.0348 2.7188 9.61523 3.98442 9.61523 6.30968V8.31482H7.27734V11.0394H9.61523V18.0004H12.4277Z' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='18' height='18' fill='white' transform='translate(0 0.000366211)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+       }
+      }
+    }
+  }
+
+  &_label
+  {
+    &__header
+    {
+      margin: 0 0 24px;
+      font-family: 'roboto-medium';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    &__required
+    {
+      color: $color_gray_dark;
+
+      span
+      {
+        margin: 0 2px;
+        color: $color_red;
+      }
+    }
+  }
+}

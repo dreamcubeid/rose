@@ -1,0 +1,125 @@
+@import "../base/colors.scss";
+
+.product
+{
+  position: relative;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 576px) {
+    margin-bottom: 1.5rem;
+  }
+
+  &_sticker
+  {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+  }
+
+  &_stickerLabel
+  {
+    font-family: "roboto-black";
+    font-size: 9px;
+    letter-spacing: 1px;
+    width: 100vw;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: .5rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-transform: uppercase;
+
+    &__outofstock
+    {
+      background: $color_gray_semi_dark;
+      color: $color_white;
+    }
+
+    &__sale
+    {
+      background: $color_red;
+      color: $color_white;
+    }
+
+    &__openorder
+    {
+      background: $color_purple;
+      color: $color_white;
+    }
+
+    &__comingsoon
+    {
+      background: $color_green;
+      color: $color_white;
+    }
+
+    &__new
+    {
+      background: $color_blue;
+      color: $color_white;
+    }
+
+    &__preorder
+    {
+      background: $color_brown;
+      color: $color_white;
+    }
+  }
+
+  &_link
+  {
+    &__image
+    {
+      width: 100%;
+      height: 225px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  &_label
+  {
+    padding: 1rem 0;
+    padding-bottom: 0;
+
+    &__title
+    {
+      font-family: "roboto-medium";
+      font-size: 16px; 
+      margin-bottom: 5px;
+      overflow: hidden;
+      max-width: calc(100% - 2rem);
+      min-width: calc(100% - 2rem);
+      width: calc(100% - 2rem);
+      height: auto;
+      white-space: initial;
+      display: block;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  &_labelPrice
+  {
+    font-size: 14px;
+    color: $color_black;
+    margin-bottom: 0;
+
+    &__sale
+    {
+      display: block;
+      color: $color_gray_dark;
+      text-decoration: line-through;
+      margin-right: .5rem;
+    }
+
+    &__price
+    {
+      display: block;
+      color: $color_red;
+    }
+  }
+}

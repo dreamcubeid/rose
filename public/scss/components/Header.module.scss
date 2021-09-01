@@ -1,0 +1,420 @@
+@import "../base/colors.scss";
+@import "../components/Placeholder.module.scss";
+@import "../components//Form.module.scss";
+@import "../components/Search.module.scss";
+
+.announce {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 32px;
+  background-color: $color_blue;
+
+  &__items {
+    padding: 0;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color_white;
+    
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: $color_white;
+
+    @media screen and (max-width: 576px) {
+      right: 0;
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    &__icon
+    {
+      @media screen and (max-width: 576px) {
+        width: 20px;
+      }
+    }
+  }
+}
+
+.header
+{
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.nav
+{
+  &_lastino
+  {
+    border: none;
+    background-color: $color_white;
+    justify-content: center;
+    height: 56px;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  &__icon,
+  &__icon-mobile
+  {
+    color: $color_black;
+
+    &:hover
+    {
+      cursor: pointer;
+    }
+  }
+}
+
+.navbar
+{
+  &_menu
+  {
+    flex: 1;
+
+    &__icon
+    {
+      cursor: pointer;
+    }
+  }
+
+  &_logo
+  {
+    flex: 1;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50px;
+    
+    a
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      height: 100%;
+    }
+
+    &__image
+    {
+      display: block;
+      position: relative;
+      margin: 0 auto;
+      min-height: 100%;
+      max-height: 100%;
+      height: 100%;
+
+      @media screen and (max-width: 575px) {
+        min-height: 25px;
+        max-height: 25px;
+        height: 25px;
+      }
+
+      &__placeholder
+      {
+        width: 105px;
+        height: 35px;
+        background-color: #D3D3D3;
+      }
+    }
+  }
+
+  &_profile_menu
+  {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .search_icon
+    {
+      position: relative;
+
+      .search
+      {
+        position: absolute;
+        right: 0;
+        top: -33px;
+        display: flex;
+        align-items: center;
+        width: 300px;
+        height: 85px;
+        background: $color_gray;
+        padding: 1rem .5rem;
+        z-index: 11;
+
+        input[type="text"]
+        {
+          padding: .5em;
+          width: 100%;
+          border: none;
+          background: transparent;
+
+          &::placeholder{
+            color: rgba(0, 0, 0, .3);
+          }
+
+          &:focus
+          {
+            outline: 0;
+          }
+        }
+
+        &_form
+        {
+          position: relative;
+          width: 100%;
+
+          .btn_search
+          {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            .icon_search{
+              color: $color_black;
+              font-size: 1.2em;
+            }
+
+            &:focus,
+            &:active{
+              outline: 0;
+              border: none;
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+
+    &__cart
+    {
+      position: relative;
+    }
+  }
+
+  &__mobile
+  {
+    @media screen and (max-width: 576px) {
+      margin: 0 1rem;
+    }
+  }
+}
+
+.badge_cart
+{
+  position: absolute;
+  font-family: "roboto-black";
+  font-size: 10px;
+  color: $color_white;
+  background: $color_blue;
+  width: 23px;
+  height: 23px;
+  line-height: 2.3;
+  text-align: center;
+  border-radius: 50%;
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+
+  @media screen and (max-width: 576px) {
+    font-size: 9px;
+    width: 20px;
+    height: 20px;
+    line-height: 2.3;
+  }
+}
+
+.navbar_mobile
+{
+  height: 56px;
+  width: 100%;
+  background: $color_white;
+  z-index: 2;
+
+  &__container
+  {
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  &__icon
+  {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+
+    &__right
+    {
+      justify-content: flex-end;
+    }
+
+    .mobile_menu_icon
+    {
+      position: relative;
+    }
+  }
+
+  &__logo
+  {
+    flex: 1;
+    text-align: center;
+    margin: auto 0;
+  }
+}
+
+.menu
+{
+  margin: 0;
+  padding: 0;
+
+  &_item
+  {
+    list-style: none;
+    padding: 1rem 0;
+    text-transform: capitalize;
+    border-bottom: 1px solid $color_gray_low;
+
+    &:first-child
+    {
+      border-top: 1px solid $color_gray_low;
+    }
+
+    span
+    {
+      display: block;
+      text-transform: uppercase;
+      padding: 0 1.5rem;
+
+      &:hover
+      {
+        font-family: "roboto-medium";
+      }
+
+      @media screen and (max-width: 576px) {
+        padding: 0 1rem;
+      }
+    }
+
+    li
+    {
+      border: none;
+
+      &:first-child
+      {
+        border: none;
+      }
+    }
+  }
+
+  &_itemSelector
+  {
+    padding: 1rem 1.5rem;
+
+    button
+    {
+      padding: 0;
+      background: transparent;
+      border: none;
+    }
+  }
+
+  &_itemSelected
+  {
+    color: $color_blue;
+
+    & > a
+    {
+      color: $color_blue !important;
+      font-family: "roboto-medium";
+    }
+  }
+
+  &_itemTitle
+  {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_itemTitleLabel
+  {
+    padding: 0 !important;
+  }
+
+  a
+  {
+    text-decoration: none;
+    color: $color_black;
+  }
+
+  &_sub
+  {
+    margin-top: 1rem;
+    padding-left: 1rem;
+
+    @media screen and (max-width: 576px) {
+      padding-left: .5rem;
+    }
+
+    li
+    {
+      &:last-child
+      {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+.sidemenu
+{
+  &_logo
+  {
+    height: 25px;
+  }
+}
+
+.icon_down
+{
+  float: right;
+  cursor: pointer;
+
+  &__svg
+  {
+    height: 1em;
+  }
+}

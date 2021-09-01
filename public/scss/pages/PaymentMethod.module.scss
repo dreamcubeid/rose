@@ -1,0 +1,531 @@
+@import "../base/colors";
+@import "../components/CustomerDetail.module.scss";
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+@import "../components/OrderSummary.module.scss";
+@import "../components/Popup.module.scss";
+
+.payment
+{
+  background: $color_white;
+
+  &_container
+  {
+    padding: 2rem 0;
+
+    @media screen and (max-width: 991px){
+      min-height: 95vh;
+    }
+  }
+
+  &_heading
+  {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+
+    h6
+    {
+      margin: 0;
+      margin-left: 1rem;
+      color: $color_black;
+    }
+  }
+
+  &_headingIcon
+  {
+    cursor: pointer;
+  }
+
+  &_line
+  {
+    border-color: $color_gray_low;
+  }
+
+  &_lineSecond
+  {
+    border-color: $color_gray_low;
+    margin: 0;
+  }
+
+  &_steps
+  {
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_shipping
+  {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid $color_gray_primary;
+    border-radius: 5px;
+  }
+
+  &_shippingTitle
+  {
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  &_shippingCost
+  {
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  &_listTitle
+  {
+    font-size: 14px;
+    font-weight: 900;
+    color: $color_gray_dark;
+  }
+
+  &_listItemDisabled
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $color_gray_primary;
+    border: 1px solid $color_gray_primary;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &_listItemEnabled
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid $color_blue;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &_listItemOverlay
+  {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0 1rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_listItemPopup
+  {
+    position: relative;
+    z-index: 10;
+    padding: 15px 10px;
+    background: $color_white;
+    border-radius: 5px;
+
+    &__close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: transparent;
+      border: none;
+      padding: .25rem .5rem;
+      cursor: pointer;
+
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        border: none; 
+      }
+    }
+
+    &__payment
+    {
+      margin: calc(45px + 27px) 0 0;
+      padding: 0 16px;
+    }
+  }
+
+  &_listItemPopupForm
+  {
+    &__body
+    {
+      margin-top: 1rem;
+    }
+
+    &__input
+    {
+      width: 300px !important;
+      border-radius: 0 !important;
+
+      @media screen and (max-width: 575px) {
+        width: max-content !important;
+      }
+    }
+
+    &__button
+    {
+      background: $color_blue;
+      color: $color_white;
+      height: calc(2em + 1rem + 4px);
+      border-color: #ced4da !important;
+      border-left: 0 !important;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  &_listItemPayment
+  {
+    display: flex;
+    flex: 1;
+    padding: 1rem;
+
+    @media screen and (max-width: 575px) {
+      padding: 1rem;
+    }
+
+    &__radio
+    {
+      margin-top: 2px;
+      margin-right: 1rem;
+      padding-right: 0;
+    }
+
+    & > p
+    {
+      margin-bottom: 0;
+    }
+
+    &__image
+    {
+      text-align: right;
+      padding: 1rem;
+
+      @media screen and (max-width: 575px) {
+        text-align: left;
+        padding: 0 1rem;
+      }
+
+      img
+      {
+        height: 25px;
+      }
+    }
+
+    &__warning
+    {
+      display: block;
+      width: 100%;
+      padding: 0 1rem;
+      color: $color_red;
+      font-size: 14px;
+    }
+  }
+  
+  &_listItemBody
+  {
+    flex-grow: 1;
+    padding: 1rem;
+    border-radius: 5px;
+    background: $color_blue_light;
+    
+    @media screen and (max-width: 575px) {
+      padding: 1rem;
+    }
+  }
+  
+  &_listItemDetail
+  {
+    margin-bottom: 2rem;
+  }
+
+  &_listItemTable
+  {
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &_listItemTableRow
+  {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: .25rem 0;
+
+    &:last-child
+    {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid $color_black;
+      font-family: "roboto-black";
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    &__label
+    {
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+
+    &__value
+    {
+      text-align: right;
+    }
+
+    &__priceSale
+    {
+      &:first-of-type:not(:only-of-type)
+      {
+        text-decoration: line-through;
+        color: $color_gray_dark;
+
+        @media screen and (max-width: 575px) {
+          display: inherit;
+        }
+      }
+    }
+
+    &__price
+    {
+      margin-left: .5rem;
+    }
+  }
+
+  &_footer
+  {
+    margin-top: 1.5rem;
+
+    &__promotion
+    {
+      margin: .5rem 0;
+    }
+
+    &__agreement
+    {
+      text-align: right;
+
+      @media screen and (max-width: 575px) {
+        text-align: left;
+      }
+    }
+
+    &__check
+    {
+      position: relative;
+      top: 1px;
+      margin-right: .5rem;
+    }
+
+    &__button
+    {
+      text-align: right;
+      margin: 1rem 0;
+    }
+  }
+
+  &_empty
+  {
+    padding: 2rem 0;
+    text-align: center;
+
+    &__icon
+    {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+
+    &__title
+    {
+      font-family: "roboto-medium";
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin: 1rem 0 .5rem 0;
+    }
+  }
+
+  &_popupProcessOverlay
+  {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  &_popupProcessContainer
+  {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 991px) {
+      padding: 0 1rem;
+    }
+  }
+
+  &_popupProcessInner
+  {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    height: auto;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 5px;
+    background-color: $color_white;
+    box-shadow: 0 0 15px rgba(0,0,0,.15);
+
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+  }
+
+  &_pointButton
+  {
+    display: flex;
+    width: max-content;
+    min-width: 300px;
+
+    @media screen and (max-width: 575px) {
+      width: 100%;
+    }
+  }
+
+  &_pointAppliedText,
+  &_voucherAppliedText
+  {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  &_pointAppliedRemove,
+  &_voucherAppliedRemove
+  {
+    cursor: pointer;
+  }
+
+  &_containerPointPopup
+  {
+    position: relative;
+    z-index: 10;
+    padding: 15px 16px;
+    background: $color_white;
+    border-radius: 5px;
+
+    &__close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: transparent;
+      border: none;
+      padding: .25rem .5rem;
+      cursor: pointer;
+
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        border: none; 
+      }
+    }
+  }
+
+  &_pointsPopupLabel
+  {
+    font-size: 14px;
+  }
+
+  &_pointsPopupValue
+  {
+    font-size: 12px;
+  }
+
+  &_buttonChangePoint
+  {
+    width: 45px;
+    background: transparent;
+    border: 1px solid $color_blue;
+    border-radius: 3px;
+    margin-left: 5px;
+    transition: 0.3s all ease;
+    font-size: 20px;
+
+    &:hover,
+    &:active
+    {
+      background: $color_blue;
+      color: $color_white;
+    }
+  }
+
+  &_pointsFormContainer
+  {
+    margin: 16px 0;
+  }
+
+  &_pointsForm
+  {
+    display: flex;
+
+    & > input
+    {
+      border-radius: 3px !important;
+
+      &:focus
+      {
+        background: $color_blue_light;
+        border: 1px solid $color_blue;
+      }
+    }
+  }
+
+  &_pointsInsufficient
+  {
+    color: $color_red;
+
+    & > p
+    {
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+
+  &_pointsWarning
+  {
+    width: 400px;
+    text-align: center;
+    color: $color_red;
+
+    @media screen and (max-width: 575px) {
+      width: 100%;
+    }
+
+    & > p
+    {
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+}

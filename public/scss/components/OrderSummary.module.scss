@@ -1,0 +1,880 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+
+.ordersummary
+{
+  position: fixed;
+  width: 50%;
+  background: $color_blue;
+  min-height: 93vh;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 2rem 0;
+
+  @media screen and (max-width: 991px){
+    min-height: 96vh;
+  }
+
+  &_heading
+  {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+
+    h6
+    {
+      margin: 0;
+      margin-left: 1rem;
+      color: $color_white;
+    }
+  }
+
+  &_line
+  {
+    border-color: $color_blue_low;
+  }
+
+  &_container
+  {
+    padding: 0 1rem;
+
+    @media screen and (max-width: 575px) {
+      padding: 0;
+    }
+  }
+
+  &_header
+  {
+    margin-bottom: 1rem;
+  }
+
+  &_headerRow
+  {
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    background: $color_blue_low;
+    border: 1px solid $color_white;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  &_headerIcon
+  {
+    img
+    {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &_headerLabel
+  {
+    font-size: 14px;
+    margin-left: .5rem;
+    color: $color_white;
+  }
+
+  &_subTotal
+  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_subTotalLabel,
+  &_subTotalPrice
+  {
+    font-family: "roboto-medium";
+    font-size: 14px;
+    color: $color_white;
+  }
+
+  &_footer
+  {
+    @media screen and (max-width: 575px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      padding: 1rem;
+      background: $color_white;
+      box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  &_collapse
+  {
+    width: 100%;
+  }
+
+  &_collapseHeading
+  {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    background: $color_blue;
+    cursor: pointer;
+  }
+
+  &_collapseTitle
+  {
+    display: flex;
+    align-items: center;
+
+    h6
+    {
+      margin: 0;
+      margin-left: 1rem;
+      color: $color_white;
+    }
+  }
+
+  &_collapseBody
+  {
+    opacity: 1;
+    height: 400px;
+    overflow-y: auto;
+    transition: height .5s ease;
+    background: $color_blue;
+    padding: 1rem;
+  }
+
+  &_collapseBodyClose
+  {
+    opacity: 0;
+    height: 0;
+    transition: height .5s ease;
+  }
+
+  &_overlay
+  {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_popup
+  {
+    margin: 1rem;
+    padding: 1.5rem;
+    background: $color_white;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  &_popupPoints
+  {
+    span:nth-child(1)
+    {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    span:nth-child(2)
+    {
+      margin-right: 5px;
+      font-family: "roboto-black";
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    svg
+    {
+      color: $color_blue;
+      height: 1rem;
+      margin-top: -5px;
+    }
+  }
+
+  &_popupFormInput
+  {
+    width: 250px !important;
+    border-radius: 0 !important;
+  }
+
+  &_popupFormButton
+  {
+    height: calc(2em + 1rem + 4px);
+    border-color: #ced4da !important;
+    border-left: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  &_popupFormContainer
+  {
+    margin-top: 1rem;
+  }
+
+  &_popupClose
+  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    color: $color_gray_text;
+    border: none;
+    padding: .25rem .5rem;
+    z-index: 1;
+    cursor: pointer;
+
+    &:focus,
+    &:active
+    {
+      outline: 0;
+      border: none; 
+    }
+
+    &:hover
+    {
+      color: $color_black;
+    }
+  }
+
+  &_popupVoucher
+  {
+    position: relative;
+    margin: 0;
+    padding: 0 16px;
+    border: none;
+
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+
+    flex-grow: 1;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &Container
+    {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      border: none;
+      background-color: $color_white;
+
+      width: 100vw;
+      height: 100vh;
+
+      @media (min-width: 768px)
+      {
+        width: 50vw;
+        height: calc(100vh - 48px);
+        border-radius: 3px;
+        overflow-x: hidden;
+      }
+
+      & > [class*="popupClose"]
+      {
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    &Title
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      margin: 0 0 8px;
+      padding: 0;
+
+      font-size: 14px;
+      line-height: 21px;
+      color: $color_gray_text;
+    }
+
+    &Item
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      position: relative;
+      margin: 0 0 12px;
+      padding: 0;
+
+      border: solid 1px #ccc;
+      border-radius: 3px;
+    }
+
+    &Detail
+    {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      margin: 0;
+      padding: 12px 20px;
+      width: 100%;
+
+      p
+      {
+        margin: 0;
+        padding: 0;
+
+        &:first-child,
+        &:first-of-type
+        {
+          font-size: 14px;
+          line-height: 21px;
+          color: $color_gray_text;
+        }
+
+        &:last-child,
+        &:last-of-type
+        {
+          font-size: 11px;
+          line-height: 16px;
+          color: $color_secondary;
+        }
+      }
+    }
+
+    &Footer
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+
+      background-color: rgba(255, 255, 255, 0);
+      border-radius: 3px;
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        background-color: rgba(233, 245, 250, 0.3);
+      }
+
+      button
+      {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-color: transparent;
+        color: transparent;
+      }
+    }
+  }
+
+  &_expanded
+  {
+    position: relative;
+
+    & > div
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      position: relative;
+      margin: 0;
+      padding: 0;
+
+      & + div
+      {
+        margin-top: 4px
+      }
+    }
+
+    &Label,
+    &Price
+    {
+      color: $color_white;
+      position: relative;
+    }
+
+    &Button
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      position: relative;
+      margin: 8px auto;
+      padding: 0;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: none;
+      color: $color_white;
+      box-shadow: 0 0 0 transparent;
+      background-color: transparent;
+
+      height: 24px;
+      cursor: pointer;
+
+      svg
+      {
+        background-color: $color_blue;
+        border: none;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+      }
+
+      &::before
+      {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 1px;
+        background-color: $color_white;
+      }
+
+      &:hover,
+      &:focus,
+      &:active
+      {
+        outline: none;
+        box-shadow: 0 0 0 transparent;
+      }
+    }
+  }
+
+  &_voucher
+  {
+    &Applied
+    {
+      &Button
+      {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        margin: 0 0 1rem;
+        padding: .5rem 1rem;
+        background: $color_blue_low;
+        border: 1px solid $color_white;
+        border-radius: 3px;
+        color: $color_white;
+        cursor: pointer;
+      }
+
+      &Icon,
+      &Remove
+      {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        border: none;
+
+        background-color: transparent;
+        background-position: center center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-image: url('../../images/mdi_ticket-percent.svg');
+      }
+
+      &Remove
+      {
+        border: none;
+        color: $color_white;
+        background-color: rgba(255, 255, 255, 0);
+        background-image: none;
+
+        &:hover,
+        &:focus
+        {
+          opacity: 0.6;
+        }
+
+      }
+
+      &Text
+      {
+        flex-grow: 1;
+        margin: 0 0 0 0.5rem;
+        color: $color_white;
+      }
+    }
+
+    &Form
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      position: relative;
+
+      margin: 0 0 25px;
+      padding: 0;
+
+      input[type="text"],
+      input[type="submit"],
+      input[type="button"]
+      button
+      {
+        height: 40px;
+        border-radius: 3px !important;
+      }
+
+      input[type="text"]
+      {
+        margin-right: 8px;
+        width: 100% !important;
+      }
+
+      &Container
+      {
+        position: relative;
+        margin: calc(45px + 27px) 0 0;
+        padding: 0 16px;
+
+        width: 100%;
+
+        &::before
+        {
+          content: "";
+          display: block;
+          position: absolute;
+          top: calc((45px + 27px) * -1);
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 45px;
+          background-color: $color_white;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+
+  &_pointsButtonApplied
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin: 0 0 1rem;
+    padding: 0.5rem 1rem;
+    background: $color_blue_low;
+    border: 1px solid $color_white;
+    border-radius: 3px;
+    color: $color_white;
+    cursor: pointer;
+  }
+
+  &_pointsAppliedText
+  {
+    flex-grow: 1;
+    font-size: 14px;
+    margin-left: 0.5rem;
+    color: $color_white;
+  }
+
+  &_headerIcon
+  {
+    &[class*="end"]
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      border: none;
+
+      background-color: transparent;
+      background-position: center center;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &_pointLabel
+  {
+    font-size: 14px;
+  }
+
+  &_totalPoints
+  {
+    & > img
+    {
+      display: none;
+    }
+  }
+
+  &_pointValue
+  {
+    font-size: 12px !important;
+    font-family: "roboto-regular" !important;
+  }
+
+  &_pointsFormContainer
+  {
+    margin: 16px 0;
+  }
+
+  &_pointsForm
+  {
+    display: flex;
+
+    & > input
+    {
+      border-radius: 3px !important;
+
+      &:focus
+      {
+        background: $color_blue_light;
+        border: 1px solid $color_blue;
+      }
+    }
+  }
+
+  &_buttonChangePoint
+  {
+    width: 45px;
+    background: transparent;
+    border: 1px solid $color_blue;
+    border-radius: 3px;
+    margin-left: 5px;
+    transition: 0.3s all ease;
+    font-size: 20px;
+
+    &:hover,
+    &:active
+    {
+      background: $color_blue;
+      color: $color_white;
+    }
+  }
+
+  &_pointsInsufficient
+  {
+    color: $color_red;
+
+    & > p
+    {
+      margin: 0;
+    }
+  }
+
+  &_pointsWarning
+  {
+    width: 330px;
+    text-align: center;
+    color: $color_red;
+
+    @media screen and (max-width: 575px) {
+      width: 100%;
+    }
+
+    & > p
+    {
+      margin: 0;
+    }
+  }
+}
+
+.cartsummary
+{
+  padding: 0 1rem;
+
+  @media screen and (max-width: 575px) {
+    padding: 0;
+  }
+
+  &_body
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+    max-height: -webkit-calc(50vh - 100px);
+    max-height: calc(50vh - 100px);
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @media screen and (max-width: 575px) {
+      max-height: -webkit-calc(50vh - 255px);
+      max-height: calc(50vh - 255px);
+      margin-bottom: 1rem;
+    }
+  }
+
+  &_item
+  {
+    margin-bottom: 1rem !important;
+
+    &Remove
+    {
+      &,
+      & > a
+      {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: nowrap;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        color: $color_white;
+      }
+
+      & > a
+      {
+        width: 100%;
+        height: 100%;
+        align-items: flex-start;
+        justify-content: flex-end;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus
+        {
+          color: $color_white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &_image
+  {
+    grid-row: 1/6 !important;;
+
+    img
+    {
+      height: 100px !important;
+    }
+  }
+
+  &_priceSummary
+  {
+    grid-row: 2 !important;
+  }
+
+  &_qty__clean
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+
+    grid-row: 3 / span 2;
+    grid-column: 2 / span 3;
+
+    &::before
+    {
+      content: "Qty :";
+      display: block;
+      position: relative;
+      margin: 0;
+      padding: 0 8px 0 0;
+      color: $color_white;
+    }
+
+    & > div,
+    button,
+    input
+    {
+      pointer-events: none;
+    }
+
+    button
+    {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    input[type="number"],
+    input[type="text"]
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      border: none;
+      background-color: transparent;
+      box-shadow: 0 0 0 transparent;
+      color: $color_white;
+
+      -moz-appearance: textfield;
+
+      &::-webkit-inner-spin-button, 
+      &::-webkit-outer-spin-button
+      { 
+        -webkit-appearance: none; 
+        margin: 0; 
+      }
+
+      &:hover,
+      &:focus
+      {
+        background-color: transparent;
+        border: none;
+        box-shadow: 0 0 0 transparent;
+        outline: none;
+      }
+    }
+  }
+}

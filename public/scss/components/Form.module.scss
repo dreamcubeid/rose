@@ -1,0 +1,180 @@
+@import "../base/colors.scss";
+
+.sirclo_form
+{
+  &_row
+  {
+    position: relative;
+    margin-bottom: 1rem;
+
+    & > textarea
+    {
+      padding: 1rem;
+    }
+
+    & > div
+    {
+      position: relative;
+      vertical-align: middle;
+
+      & > input
+      {
+        padding: 0 1rem;
+        height: calc(2em + 0.75rem + 2px);
+        border: 1px solid $color_gray_primary;
+        border-radius: .25rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+  
+        &:focus
+        {
+          outline: 0;
+          box-shadow: none;
+          border: 1px solid #ced4da;
+        }
+  
+        &[type="text"],
+        &[type="password"]
+        {
+          width: 100%;
+          padding-right: 3rem;
+        }
+      }
+
+      & > button
+      {
+        position: absolute;
+        right: 1rem;
+        top: 23%;
+        bottom: 0;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: fit-content;
+
+        &:focus
+        {
+          outline: 0;
+          box-shadow: none;
+          border: none;
+        }
+      }
+    }
+  }
+
+  &_input
+  {
+    padding: 0 1rem;
+    height: calc(2em + 0.75rem + 2px);
+
+    &:focus
+    {
+      outline: 0;
+      box-shadow: none;
+      border: 1px solid #ced4da;
+    }
+
+    &_btn
+    {
+      position: absolute;
+      right: 1rem;
+      top: 30%;
+      bottom: 0;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      height: fit-content;
+
+      &:focus
+      {
+        outline: 0;
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    &[type="file"]
+    {
+      position: relative;
+      font-size: 1rem;
+      padding: 10px 9rem;
+      vertical-align: middle;
+      
+      &::-webkit-file-upload-button
+      {
+        position: absolute;
+        top: 10px;
+        left: 1rem;
+        padding: 2.5px 1.5rem;
+        font-size: 10px;
+        text-transform: uppercase;
+        background: $color_gray;
+        border: 1px solid $color_gray_primary;
+        border-radius: 40px;
+        cursor: pointer;
+
+        &:active,
+        &:focus
+        {
+          outline: 0;
+          box-shadow: none;
+        }
+      } 
+    }
+
+    &_radio
+    {
+      display: flex;
+      align-items: center;
+
+      & > div
+      {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+
+        input
+        {
+          height: inherit !important;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  &_select
+  {
+    position: relative;
+
+    &::after
+    {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid $color_gray_dark;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    & > select
+    {
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+    }
+  }
+}
+
+.icon_password
+{
+  height: 1.25em;
+}

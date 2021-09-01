@@ -1,0 +1,186 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+
+.paymentNotif
+{
+  &_container
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_inner
+  {
+    width: 500px;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 576px) {
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    &_title
+    { 
+      & > span
+      {
+        font-size: 14px;
+        color: $color_gray_semi_dark;
+      }
+    }
+  }
+
+  &_form
+  {
+    margin-top: 3rem;
+    order: 3;
+  }
+  &_info {
+    color: $color_red_error;
+    text-align: center;
+    padding: 0px 30px;
+  }
+}
+
+.paymentConfirmation
+{
+  &_buttonConfirm {
+    @extend 
+      .btn,
+      .btn_primary;
+
+    width: 100%;
+    margin-top: 17px;
+    height: 40px;
+    
+    &:disabled{
+      background-color: $color_gray_semi_dark !important;
+    }
+  }
+
+  &_label {
+    color: $color_gray_dark;
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  &_detailContainer {
+    background: rgba(251, 192, 45, 0.1);
+    margin-top: 24px;
+    border-radius: 5px;
+  }
+  &_detailHeader {
+    padding: 16px;
+    background:rgba(251, 192, 45, 0.5);
+    display: flex;
+    justify-content: space-between;
+  }
+  &_detailTitle {
+    span {
+      display: flex;
+      font-size: 15px;
+    }
+  }
+  &_detailStatus {
+    margin: auto 0px;
+    height: auto;
+    color: $color_white;
+    background: $color_orange_dark;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: inherit;
+  }
+  &_detailContent {
+    padding: 16px;
+
+    section {
+      background: $color_white;
+      padding: 12px;
+      background: $color_white;
+      padding: 12px;
+      margin: 12px 0px 0px 0px;
+    }
+  }
+
+  &_detailHeaderDropdown {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_detailTotalAmount {
+    span {
+      display: flex;
+      color: $color_red_error;
+      font-size: 15px;
+    }
+  }
+
+  &_detailItemImg {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &_detailItemLabel {
+    width: 70%;
+    padding-left: 12px;
+    font-size: 14px;
+    span {
+      display: flex;
+      font-size: 12px;
+    }
+  }
+  &_detailItemPrice {
+    width: 30%;
+    text-align: right;
+  }
+
+  &_detailDropdown {
+    color: $color_orange_dark;
+  }
+
+  &_detailPriceBreakdown, &_detailTotalField {
+    border-top: 1px solid $color_gray_semi_dark;
+    margin: 10px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
+    line-height: 26px;
+  }
+
+  &_detailField, &_detailTotalField {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_detailTotalField {
+    font-size: 15px;
+  }
+
+  &_summaryTotalContainer
+  {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  &_summaryItemTitle
+  {
+    display: block;
+    color: $color_secondary;
+    font-family: "roboto-medium";
+    font-size: 11px;
+    line-height: 150%;
+  }
+
+  &_summaryItemPrice
+  {
+    font-family: "roboto-medium";
+    font-size: 14px;
+    line-height: 16px;
+    color: $color_error;
+    margin-top: 6px;
+  }
+}

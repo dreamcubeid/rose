@@ -1,0 +1,50 @@
+@import "../base/colors.scss";
+
+.breadcrumbs
+{
+  padding-bottom: 1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+
+  &_class 
+  {
+    position: relative;
+    font-family: "roboto-medium";
+    font-size: 11px;
+    letter-spacing: 0.75px;
+    color: $color_gray_semi_dark;
+    margin-right: 2rem;
+    cursor: pointer;
+
+    &:last-child
+    {
+      margin-right: 0;
+    }
+
+    &_number
+    {
+      position: absolute;
+      left: 0;
+      width: 19px;
+      height: 19px;
+      line-height: 19px;
+      text-align: center;
+      color: white;
+      background: $color_gray_semi_dark;
+      border-radius: 50%;
+    }
+
+    &_label
+    {
+      margin-left: 2rem;
+    }
+  }
+
+  &_activeClass {
+    color: $color_blue;
+  }
+
+  &_activeNumber {
+    background: $color_blue;
+  }
+}

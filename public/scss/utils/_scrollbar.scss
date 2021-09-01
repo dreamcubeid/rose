@@ -1,0 +1,93 @@
+.scrollbar
+{
+  &_main
+  {
+    &::-webkit-scrollbar 
+    {
+      width: 7px;
+      height: 7px;
+    }
+    
+    &::-webkit-scrollbar-corner
+    {
+      width: 7px;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track
+    {
+      background: transparent;
+    }
+     
+    /* Handle */
+    &::-webkit-scrollbar-thumb 
+    {
+      background: $color_gray; 
+      border-radius: 4px;
+      cursor: pointer; 
+    
+      &:hover 
+      {
+        background: $color_blue;
+      }
+    }
+
+     // * for mozilla
+    &::-moz-scrollbar
+    {
+      width: 6px;
+      height: 6px;
+    }
+
+    &::-moz-scrollbar-corner
+    {
+      width: 6px;
+    }
+
+    /* Track */
+    &::-moz-scrollbar-track 
+    {
+      background: transparent;
+    }
+    
+    /* Handle */
+    &::-moz-scrollbar-thumb 
+    {
+      background: $color_gray; 
+      border-radius: 4px;
+      cursor: pointer; 
+    }
+
+    /* Handle on hover */
+    &::-moz-scrollbar-thumb:hover
+    {
+      background: $color_blue; 
+    }
+  }
+
+  &_whiteTrack
+  {
+    &::-webkit-scrollbar-track
+    {
+      background: $color_white;
+    }
+
+    &::-moz-scrollbar-track 
+    {
+      background: $color_white;
+    }
+  }
+  &_none
+  {
+    &::-webkit-scrollbar
+    {
+      display: none;
+    }
+    
+    &::-moz-scrollbar
+    {
+      display: none;
+    }
+  }
+
+}

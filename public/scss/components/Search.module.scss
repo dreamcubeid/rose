@@ -1,0 +1,48 @@
+@import "./Button.module.scss";
+
+.search
+{
+  &_form {
+    display: flex;
+  }
+
+  &_inputContainer
+  {
+    position: relative;
+    width: 100%;
+  }
+
+  &_inputText
+  {
+    height: 60px;
+    padding-right: 1.5rem;
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+
+  &_buttonClear
+  {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    background: $color_gray_low;
+    border-radius: 38px;
+    padding: .25rem;
+    line-height: .5;
+    cursor: pointer;
+  }
+
+  &_buttonSearch {
+    @extend 
+      .btn,
+      .btn_primary;
+
+    border-radius: 0 0.25rem 0.25rem 0;
+    font-size: 14px;
+    padding: 1rem;
+
+    &:disabled{
+      background-color: $color_gray_semi_dark !important;
+    }
+  }
+}

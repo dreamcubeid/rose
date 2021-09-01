@@ -1,0 +1,367 @@
+@import "../base/colors";
+@import "../components/Button.module.scss";
+
+.ratingReview
+{
+  border-top: 7.5px solid $color_gray;
+  border-bottom: 7.5px solid $color_gray;
+  margin-bottom: 32px;
+  padding: 32px;
+
+  &_titleSection
+  {
+    font-family: "roboto-medium";
+    font-size: 16px;
+  }
+
+  &_filters
+  {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 22px 0;
+    overflow-x: auto;
+  }
+
+  &_filter
+  {
+    font-size: 14px;
+    border: 1px solid $color_gray;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 0 12px;
+    cursor: pointer;
+
+    &:first-child
+    {
+      margin-left: 0;
+    }
+
+    &:last-child
+    {
+      margin-right: 0;
+    }
+  }
+
+  &_filterActive
+  {
+    border-color: $color_blue;
+    background: $color_blue_light;
+  }
+
+  &_filterLabel
+  {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  &_filterInput
+  {
+    display: none;
+  }
+
+  &_filterIcon
+  {
+    margin-left: 5px;
+    color: $color_orange;
+  }
+
+  &_sort
+  {
+    margin: 22px 0;
+  }
+
+  &_sortOptions
+  {
+    width: max-content;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+    -moz-appearance: radio-container;
+    appearance: none;
+    padding-right: 35px;
+    background: url("../../images/arrow-down.svg") no-repeat;
+    background-position: right 10px top 50%;
+
+    &:focus,
+    &:active
+    {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  &_container
+  {
+    margin: 22px 0;
+  }
+
+  &_starContainer
+  {
+    font-size: 14px !important;
+    margin-right: 5px;
+  }
+
+  &_desc
+  {
+    margin: 22px 0;
+  }
+
+  &_imageContainer
+  {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &_image
+  {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 4px;
+
+    img,
+    video
+    {
+      width: 80px;
+      height: 80px;
+      max-width: 80px;
+      max-height: 80px;
+      border: 1px solid $color_gray;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+  }
+
+  &_footer
+  {
+    margin: 22px 0;
+  }
+
+  &_itemPerPage
+  {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &_itemPerPageLabel
+  {
+    margin-right: 15px;
+    p
+    {
+      margin: 0;
+    }
+  }
+
+  &_itemPerPageOptions
+  {
+    select
+    {
+      padding: 6px 12px;
+      border: 1px solid $color_gray_semi_dark;
+      border-radius: 4px;
+    }
+  }
+
+  &_popupContainer
+  {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &_popupContent
+  {
+    position: relative;
+    width: 330px;
+    background: $color_gray;
+    border-radius: 5px;
+    padding: 0 10px;
+  }
+
+  &_popupPreview
+  {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 10px 0 20px;
+  }
+
+  &_popupImage
+  {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+
+    img,
+    video
+    {
+      width: 330px;
+      height: 300px;
+      max-width: 330px;
+      max-height: 300px;
+      border: 1px solid $color_gray;
+      border-radius: 4px;
+      object-fit: cover;
+
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+
+    video
+    {
+      width: 310px !important;
+    }
+  }
+
+  &_popupImagePreview
+  {
+    width: 60px;
+    height: 60px;
+    margin: 0 5px;
+    cursor: pointer;
+
+    &:first-child
+    {
+      margin-left: 0;
+    }
+
+    img,
+    video
+    {
+      width: 60px;
+      height: 60px;
+      max-width: 60px;
+      max-height: 60px;
+      border: 1px solid $color_gray_low;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+  }
+
+  &_popupLeftButton,
+  &_popupRightButton
+  {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    background: rgba($color_white, .3);
+    border: none;
+    padding: .25rem;
+    cursor: pointer;
+  }
+
+  &_popupRightButton
+  {
+    left: unset;
+    right: 0;
+  }
+
+  &_popupButtonClose
+  {
+    padding: 15px 0;
+    text-align: right;
+
+    svg
+    {
+      cursor: pointer;
+    }
+  }
+}
+
+.pagination
+{
+  margin: 0;
+  margin-top: 2rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_item
+  {
+    padding: .5rem;
+    margin: .25rem;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  &_active
+  {
+    color: $color_blue;
+    background: $color_blue_light;
+    border: 1px solid $color_blue;
+    border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .ratingReview
+  {
+    padding: 32px 0;
+
+    &_filters
+    {
+      padding-bottom: 22px;
+    }
+
+    &_filter
+    {
+      margin: 0 5px;
+    }
+
+    &_popupContainer
+    {
+      width: 100vw;
+      height: 100vh;
+      padding: 0 20px;
+      -webkit-overflow-scrolling: auto;
+    }
+
+    &_popupContent
+    {
+      margin: 0 1rem;
+      width: 100%;
+      height: auto;
+    }
+
+    &_popupPreview
+    {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    &_popupImage
+    {
+      img,
+      video
+      {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

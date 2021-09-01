@@ -1,0 +1,52 @@
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+@import "../components/Password.module.scss";
+
+.register
+{
+  &_container
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  &_inner
+  {
+    width: 500px;
+    align-content: center;
+
+    @media screen and (max-width: 576px) {
+      width: 100%;
+    }
+  }
+
+  &_heading
+  {
+    h4
+    {
+      font-size: 24px;
+      font-family: "roboto-medium";
+    }
+  }
+
+  &_formLabel
+  {
+    font-size: 18px;
+    font-family: "roboto-medium";
+    margin: 1rem 0;
+
+    small
+    {
+      font-size: 13px;
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &_btnRegister
+  {
+    margin: 15px;
+  }
+}

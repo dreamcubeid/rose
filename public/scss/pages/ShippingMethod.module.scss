@@ -1,0 +1,231 @@
+@import "../base/colors";
+@import "../components/CustomerDetail.module.scss";
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+@import "../components/OrderSummary.module.scss";
+@import "../components/Popup.module.scss";
+@import "../components/Placeholder.module.scss";
+
+.shipping
+{
+  background: $color_white;
+
+  &_container
+  {
+    padding: 2rem 0;
+
+    @media screen and (max-width: 991px){
+      min-height: 95vh;
+    }
+  }
+
+  &_heading
+  {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+
+    h6
+    {
+      margin: 0;
+      margin-left: 1rem;
+      color: $color_black;
+    }
+  }
+
+  &_headingIcon
+  {
+    cursor: pointer;
+  }
+
+  &_line
+  {
+    border-color: $color_gray_low;
+  }
+
+  &_lineSecond
+  {
+    border-color: $color_gray_low;
+    margin: 0;
+  }
+
+  &_steps
+  {
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_popupError
+  {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  &_popupErrorTitle
+  {
+    font-family: "roboto-bold";
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+
+  &_popupErrorDesc
+  {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.shippingmethod
+{
+  margin: 2rem 0 3rem 0;
+
+  &_title
+  {
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+}
+
+.shippingMethod
+{
+  &_container
+  {
+    position: relative;
+  }
+
+  &Item
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    border: 1px solid $color_gray_primary;
+    background-color: white;
+    border-radius: 3px;
+    margin: 0 0 16px;
+    padding: 0 22px;
+    min-height: 64px;
+    cursor: pointer;
+
+    &[class*="disabled"] {
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    &:hover
+    {
+      background-color: $color_blue_light;
+      border-color: $color_blue;
+
+      [class*="_pinButton"]
+      {
+        background-color: transparent !important;
+        border: solid 1px $color_blue !important;
+        color: $color_blue !important;
+
+        &:hover
+        {
+          background-color: $color_blue !important;
+          color: $color_white !important;
+        }
+      }
+
+    }
+    
+    & > div:not([class])
+    {
+      border: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      flex-grow: 1;
+      margin: 0 16px;
+      padding: 0;
+
+      order: 3;
+
+      p
+      {
+        margin: 0;
+        padding: 0;
+        color: $color_text;
+        font-size: 11px;
+        list-style: 16px;
+      }
+
+      & ~ div[class*="shippingMethodItem_price"]
+      {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    &_pinButton
+    {
+      order: 4;
+      margin: calc(22px - 16px) 16px 22px;
+    }
+
+    &_radio,
+    &_label,
+    &_price
+    {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      position: relative;
+      margin: 22px 0;
+      padding: 0;
+
+      label
+      {
+        display: none;
+      }
+
+      p
+      {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    &_radio
+    {
+      padding: 0 16px;
+      order: 1;
+    }
+
+    &_label
+    {
+      order: 2;
+      flex-grow: 1;
+      padding: 0;
+
+      p
+      {
+        width: 100%;
+      }
+    }
+
+    &_price
+    {
+      order: 3;
+      padding: 0 16px;
+
+      p
+      {
+        color: $color_text;
+        font-size: 11px;
+        list-style: 16px;
+      }
+    }
+  }
+}

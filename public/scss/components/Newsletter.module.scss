@@ -1,0 +1,92 @@
+@import "../base/colors";
+@import "../components/Form.module.scss";
+@import "../components/Button.module.scss";
+
+.newsletter
+{
+  &_overlay
+  {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba($color_black, 0.7);
+    transition: opacity 500ms;
+    opacity: 1;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:empty
+    {
+      display: none;
+    }
+  }
+
+  &_popupContainer
+  {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+    background: $color_white;
+    border-radius: 4px;
+    width: 500px;
+    height: 500px;
+    position: relative;
+    transition: all .3s ease-in-out;
+    overflow-y: auto;
+
+    h1,h2,h3,h4,h5,h6
+    {
+      font-family: "roboto-medium";
+      font-size: 24px;
+    }
+
+    p
+    {
+      font-size: 14px;
+    }
+
+    img
+    {
+      width: 100% !important;
+    }
+
+    @media screen and (max-width: 576px) {
+      width: 100%;
+    }
+  }
+
+  &_close
+  {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+    padding: 0;
+    border: none;
+    background: none;
+    color: $color_white;
+
+    &:focus,
+    &:active
+    {
+      outline: 0;
+    }
+
+    i
+    {
+      span
+      {
+        font-family: "roboto-medium";
+        text-transform: lowercase;
+        margin-left: .5rem;
+      }
+    }
+  }
+
+  &_form
+  {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,61 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+
+.paymentStatus
+{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+  min-height: 70vh;
+
+  &_inner 
+  {
+    width: 400px;
+    padding: 1.5rem;
+    align-items: center;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+
+  &_heading
+  {
+    display: flex;
+    align-items: center;
+  }
+  
+  &_title 
+  {
+    font-family: "roboto-medium";
+    font-size: 20px;
+    text-align: center;
+    color: $color_black;
+    margin-bottom: 0;
+  }
+
+  &_content
+  {
+    margin: 2rem 0;
+  }
+
+  &_contentDesc
+  {
+    font-size: 14px;
+    color: $color_black;
+    margin-bottom: 0;
+  }
+
+  &_action
+  {
+    margin-top: 2rem;
+  }
+
+  &_actionButton
+  {
+    &:nth-child(2)
+    {
+      margin-top: 1rem;
+    }
+  }
+}

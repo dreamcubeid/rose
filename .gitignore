@@ -1,0 +1,15 @@
+# Next.js build output
+.next
+public/sw.js
+public/workbox-*.js
+
+# Dependency directories
+node_modules/
+
+# Logs
+npm-debug.log*
+.env.local
+.bin
+now.json
+package-lock.json
+.vscode/settings.json

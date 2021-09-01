@@ -1,0 +1,125 @@
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+
+.contact
+{
+    &_container
+    {
+        position: relative;
+        padding: 0 0 48px;
+    }
+
+    &_form,
+    &_widget,
+    &_map
+    {
+        width: 100%;
+        position: relative;
+    }
+
+    &_map
+    {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &_form
+    {
+        margin: 0 0 42px;
+    }
+
+    &_widget
+    {
+        margin-bottom: 58px;
+
+        img
+        {
+            margin: 0;
+            padding: 0;
+            border: none;
+            max-width: 100%;
+        }
+
+        video,
+        iframe
+        {
+            min-width: 100%;
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+
+    &_label,
+    &_info
+    {
+        position: relative;
+    }
+
+    &_info
+    {
+        color: $color_secondary;
+
+        strong,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6
+        {
+            color: $color_gray_text;
+        }
+
+        a
+        {
+            color: inherit;
+
+            &:hover
+            {
+                text-decoration: underline;
+            }
+        }
+
+        &__top
+        {
+            margin-top: 42px;
+            
+            & > h1,
+            & > h2,
+            & > h3,
+            & > h4,
+            & > h5,
+            & > h6
+            {
+                margin: 0 0 4px;
+                font-family: "roboto-medium";
+                font-style: normal;
+                font-size: 20px;
+                line-height: 23px;
+
+                color: $color_gray_text;
+            }
+
+            & + div
+            {
+                padding-top: 28px;
+            }
+        }
+    }
+
+    &_buttonContainer
+    {
+        position: relative;
+
+        button
+        {
+            font-family: "roboto-medium";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+
+
+}

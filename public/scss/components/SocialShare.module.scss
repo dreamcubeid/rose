@@ -1,0 +1,21 @@
+.socialShare
+{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &_item
+  {
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 28px;
+
+    span
+    {
+      margin-top: 5px;
+    }
+  }
+}

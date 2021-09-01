@@ -1,0 +1,463 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+@import "../components/Form.module.scss";
+@import "./Account.module.scss";
+
+.orderReview
+{
+  margin: 4rem 0;
+
+  &_titleContainer
+  {
+    text-align: center;
+  }
+
+  &_title
+  {
+    font-family: "roboto-medium";
+    font-size: 18px;
+  }
+
+  &_subtitle
+  {
+    font-size: 11px;
+    color: $color_text;
+  }
+
+  &_orderInfo
+  {
+    display: block;
+    width: 380px;
+    background: $color_blue_light;
+    padding: 20px;
+    margin: 0 auto 20px;
+  }
+
+  &_orderInfoLine
+  {
+    display: flex;
+    align-items: center;
+
+    p
+    {
+      margin: 0;
+
+      &:first-child
+      {
+        min-width: 125px;
+      }
+
+      &:nth-child(2)
+      {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  &_buyerInfo
+  {
+    display: block;
+    width: 380px;
+    margin: 40px auto;
+  }
+
+  &_buyerNameLabel
+  {
+    display: block;
+  }
+
+  &_buyerHide
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+
+    label
+    {
+      margin: 0;
+    }
+  }
+
+  &_reviewTab
+  {
+    display: flex;
+    align-items: center;
+    border-top: 7.5px solid $color_gray;
+    padding: 20px 0;
+
+    & > div
+    {
+      flex: 1;
+    }
+  }
+
+  &_tabItem
+  {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid $color_gray_low;
+    cursor: pointer;
+  }
+
+  &_activeTab
+  {
+    border-bottom: 3px solid $color_black;
+  }
+
+  &_tabLabel
+  {
+    margin: 0;
+  }
+
+  &_productInfo
+  {
+    display: flex;
+  }
+
+  &_productImage
+  {
+    flex: 1;
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    object-fit: cover;
+    border: 1px solid $color_gray;
+  }
+
+  &_productDetail
+  {
+    flex: auto;
+    margin: 0 20px;
+  }
+
+  &_productDetailName
+  {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  &_productDetailRating
+  {
+    margin: 0;
+  }
+
+  &_productButton
+  {
+    align-self: center;
+  }
+
+  &_itemPerPage
+  {
+    margin: 20px 0;
+  }
+
+  &_itemPerPageOptions
+  {
+    select
+    {
+      padding: 6px 12px;
+      border: 1px solid $color_gray_low;
+      border-radius: 4px;
+      width: max-content;
+      -webkit-user-select: none;
+      -moz-user-select: -moz-none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-appearance: none;
+      -moz-appearance: radio-container;
+      appearance: none;
+      padding-right: 35px;
+      background: url("../../images/arrow-down.svg") no-repeat;
+      background-position: right 10px top 50%;
+    }
+  }
+
+  &_form
+  {
+    margin: 20px 0 30px;
+
+    & > button
+    {
+      padding: 15px 50px;
+      font-size: 13px;
+      border: none;
+      color: $color_white;
+      background-color: $color_black;
+      cursor: pointer;
+
+      &:active,
+      &:focus
+      {
+        outline: 0;
+        box-shadow: none;
+      }
+
+      &:hover
+      {
+        color: $color_white;
+        background-color: $color_black;
+      }
+
+      &:disabled
+      {
+        opacity: 0.5;
+        cursor: unset;
+      }
+    }
+  }
+
+  &_formGroup
+  {
+    margin-bottom: 20px;
+
+    label
+    {
+      display: block;
+    }
+
+    textarea
+    {
+      width: 100%;
+      padding: 10px 1rem;
+      border: 1px solid $color_gray_primary;
+      border-radius: .25rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &_formLabel
+  {
+    display: block;
+  }
+
+  &_starContainer
+  {
+    width: max-content;
+  }
+
+  &_star
+  {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 30px;
+    margin: 2.5px;
+
+    &:first-child
+    {
+      margin-left: 0;
+    }
+
+    &:last-child
+    {
+      margin-right: 0;
+    }
+
+    span
+    {
+      color: $color_blue;
+    }
+  }
+
+  &_media
+  {
+    margin-bottom: 20px;
+  }
+
+  &_mediaImages
+  {
+    display: flex;
+    align-items: center;
+  }
+
+  &_mediaThumbnail
+  {
+    position: relative;
+    margin: 5px;
+
+    &:first-child
+    {
+      margin-left: 0;
+    }
+  }
+
+  &_mediaImage
+  {
+    width: 70px;
+    height: 70px;
+    max-width: 70px;
+    max-height: 70px;
+    object-fit: cover;
+    border: 1px solid $color_gray;
+  }
+
+  &_mediaRemove
+  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: max-content;
+    cursor: pointer;
+    background: rgba($color_white, 0.5);
+    padding: 2.5px 5px;
+    font-size: 10px;
+  }
+
+  &_mediaUpload
+  {
+    margin-top: 5px;
+  }
+
+  &_popup
+  {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba($color_black, 0.7);
+    transition: opacity 500ms;
+    opacity: 1;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_popupContent
+  {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+    background: $color_white;
+    border-radius: 4px;
+    position: relative;
+    transition: all .3s ease-in-out;
+  }
+
+  &_popupTitle
+  {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  &_popupDesc
+  {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  &_popupActionButton
+  {
+    & > button
+    {
+      padding: 10px 40px;
+      font-size: 13px;
+      border: none;
+      color: $color_white;
+      background-color: $color_black;
+      cursor: pointer;
+
+      &:active,
+      &:focus
+      {
+        outline: 0;
+        box-shadow: none;
+      }
+
+      &:hover
+      {
+        color: $color_white;
+        background-color: $color_black;
+      }
+
+      &:first-child
+      {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &_reviewCard
+  {
+    margin: 20px 0;
+  }
+
+  &_reviewCardtitleRating
+  {
+    font-size: 12px;
+    color: $color_gray_dark;
+  }
+
+  &_ratingContent
+  {
+    margin-right: 10px;
+
+    & > div
+    {
+      font-size: 30px;
+    }
+  }
+
+  &_ratingDesc
+  {
+    font-size: 15px;
+  }
+
+  &_titleDesc
+  {
+    font-size: 12px;
+    color: $color_gray_dark;
+    margin: 10px 0 0;
+  }
+
+  &_descContent
+  {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  &_titleImages
+  {
+    margin-bottom: 12px;
+  }
+
+  &_imageContent
+  {
+    display: flex;
+    align-items: center;
+  }
+
+  &_imageList
+  {
+    width: 90px;
+    height: 90px;
+    max-width: 90px;
+    max-height: 90px;
+    margin: 5px;
+    cursor: pointer;
+
+    img
+    {
+      width: 90px;
+      height: 90px;
+      max-width: 90px;
+      max-height: 90px;
+      object-fit: cover;
+      border: 1px solid $color_gray;
+    }
+  }
+}

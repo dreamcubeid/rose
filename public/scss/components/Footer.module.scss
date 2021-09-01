@@ -1,0 +1,97 @@
+@import "../base/colors.scss";
+@import "../components/Placeholder.module.scss";
+
+.widgetFooter
+{
+  background: $color_blue_light;
+  padding: 35px 0;
+
+  h1,h2,h3,h4,h5,h6
+  {
+    font-size: 11px;
+    font-family: 'roboto-black';
+    margin-bottom: 13px;
+  }
+
+  ul
+  {
+    padding: 0;
+    margin: 0;
+
+    li
+    {
+      list-style: none;
+      margin-bottom: 11px;
+      
+      a
+      {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.socialIcon
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_item
+  {
+    margin: 0 15px;
+
+    & > img
+    {
+      height: 17px;
+    }
+  }
+}
+
+.footer
+{
+  background: $color_blue;
+
+  &_line
+  {
+    border-top: 1px solid $color_divider;
+  }
+
+  &_bottom
+  {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: .5rem 0;
+    color: $color_white;
+
+    & > a
+    {
+      color: $color_white;
+    }
+
+    & img, video, iframe
+    {
+      display: none !important;
+    }
+
+    div, h1, h2, h3, h4, h5, h6, p
+    {
+      text-align: center !important;
+      font-size: 13px !important;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &_bottomWidget
+  {
+    text-align: center;
+    font-size: 11px;
+
+    div, h1, h2, h3, h4, h5, h6, p
+    {
+      text-align: center;
+      font-size: 11px;
+    }
+  }
+}

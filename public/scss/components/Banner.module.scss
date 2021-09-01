@@ -1,0 +1,33 @@
+.bannerCarousel
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: calc((9 / 16) * 100%) 0 0;
+  position: relative;
+  overflow: hidden;
+  [class*="placeholder"],
+  [class*="BrainhubCarousel__container"]
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  &_header {
+    flex: 0 0 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &_link {
+    width: 100% !important;
+  }
+
+  &_image {
+    width: 100%;
+  }
+}

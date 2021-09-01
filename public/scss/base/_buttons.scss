@@ -1,0 +1,83 @@
+.btn
+{
+  border-radius: 4px;
+  font-family: 'roboto-medium';
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: none;
+
+  &:active,
+  &:focus
+  {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &_primary
+  {
+    color: $color_white !important;
+    background-color: $color_blue !important;
+    transition: all .3s;
+
+    &:hover{
+      color: $color_white !important;
+      background-color: $color_blue_dark !important;
+    }
+  }
+
+  &_secondary
+  {
+    color: $color_blue !important;
+    border: 1px solid $color_white;
+    transition: all .3s;
+
+    &:hover{
+      color: $color_blue !important;
+      background-color: $color_blue !important;
+    }
+  }
+
+  &_black
+  {
+    color: $color_white !important;
+    background-color: $color_black !important;
+
+    &:hover,
+    &:focus,
+    &:active{
+      color: $color_white;
+      background-color: $color_black;
+    }
+  }
+
+  &_blue
+  {
+    color: $color_blue !important;
+  }
+
+  &_full_width
+  {
+    width: 100%;
+  }
+
+  &_short
+  {
+    padding: .5rem 2rem;
+  }
+
+  &_long
+  {
+    padding: .75rem 4rem;
+
+    @media screen and (max-width: 440px){
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &_center
+  {
+    display: block;
+    margin: 0 auto;
+  }
+}

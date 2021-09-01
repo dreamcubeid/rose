@@ -1,0 +1,38 @@
+.widgetHomePage {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1rem;
+  margin: 0 1rem;
+
+  img,
+  video {
+    width: 100% !important;
+    height: auto;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+}
+
+.widgetItemHomePage {
+  width: 100% !important;
+
+  img,
+  video {
+    width: 100% !important;
+    height: auto;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .widgetHomePage {
+    grid-template-columns: repeat(1,1fr);
+  }
+}

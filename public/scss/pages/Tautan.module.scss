@@ -1,0 +1,81 @@
+@import "../base/colors.scss";
+@import "../components/Button.module.scss";
+
+.tautan
+{
+  text-align: center;
+  margin: 50px 0;
+
+  &_logo
+  {
+    height: 80px;
+  }
+
+  &_title
+  {
+    font-size: 22px;
+    font-family: "roboto-medium";
+  }
+
+  &_description
+  {
+    font-size: 14px;
+    margin-bottom: 100px;
+  }
+
+  &_linkSection
+  {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin: 16px 0;
+    padding: 13.5px;
+    background: $color_white;
+    border: 1px solid $color_blue;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 10px rgba($color_black, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover,
+    &:active
+    {
+      transition: 0.5s all ease;
+      background: $color_blue;
+
+      .tautan_labelText
+      {
+        & > p
+        {
+          color: $color_white !important;
+        }
+      }
+    }
+  }
+
+  &_labelText
+  {
+    flex: 1 0 auto;
+    
+    & > p
+    {
+      font-size: 14px;
+      text-align: left;
+      margin: 0;
+    }
+  }
+
+  &_labelImage
+  {
+    flex: 0 1 auto;
+    margin-right: 10px;
+
+    img
+    {
+      width: 21px;
+      height: 21px;
+      object-fit: cover;
+    }
+  }
+}

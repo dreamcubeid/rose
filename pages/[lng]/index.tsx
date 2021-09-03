@@ -1,5 +1,9 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+/* library package */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import Carousel from '@brainhubeu/react-carousel'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import {
   Banner,
   getBanner,
@@ -7,18 +11,18 @@ import {
   ProductCategory,
   useI18n,
   Widget
-} from "@sirclo/nexus";
-import Router from "next/router";
-import Layout from "components/Layout/Layout";
-import Placeholder from "components/Placeholder";
-import useWindowSize from "lib/useWindowSize";
-import { parseCookies } from "lib/parseCookies";
-import { useSizeBanner } from "lib/useSizeBanner";
-import { GRAPHQL_URI } from "lib/Constants";
-import Carousel from "@brainhubeu/react-carousel";
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
-import { useBrand } from "lib/useBrand";
-import styles from "public/scss/pages/Home.module.scss";
+} from '@sirclo/nexus'
+/* library template */
+import useWindowSize from 'lib/useWindowSize'
+import { parseCookies } from 'lib/parseCookies'
+import { useSizeBanner } from 'lib/useSizeBanner'
+import { GRAPHQL_URI } from 'lib/Constants'
+import { useBrand } from 'lib/useBrand'
+/* components */
+import Layout from 'components/Layout/Layout'
+import Placeholder from 'components/Placeholder'
+/* styles */
+import styles from 'public/scss/pages/Home.module.scss'
 
 const classesBanner = {
   imageContainerClassName: styles.bannerCarousel_header,
@@ -42,7 +46,7 @@ const classesProducts = {
   productPriceClassName: styles.product_labelPrice,
   salePriceClassName: styles.product_labelPrice__sale,
   priceClassName: styles.product_labelPrice__price
-};
+}
 
 const classesProductCategory = {
   parentCategoryClassName: styles.category_order,
@@ -71,10 +75,11 @@ const Home: FC<any> = ({
   brand,
   dataBanners
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const size = useWindowSize();
-  const [totalItemFeatured, setTotalItemFeatured] = useState(null);
-  const [totalItem, setTotalItem] = useState(null);
+  const i18n: any = useI18n()
+  const router: any = useRouter()
+  const size = useWindowSize()
+  const [totalItemFeatured, setTotalItemFeatured] = useState(null)
+  const [totalItem, setTotalItem] = useState(null)
 
   return (
     <Layout
@@ -182,7 +187,7 @@ const Home: FC<any> = ({
                   <div className="text-center mt-4">
                     <a
                       className={`btn ${styles.btn_secondary} ${styles.btn_long}`}
-                      onClick={() => Router.push(`/${lng}/products?tagname=featured`)}
+                      onClick={() => router.push(`/${lng}/products?tagname=featured`)}
                     >
                       {i18n.t("product.seeAll")}
                     </a>
@@ -267,7 +272,7 @@ const Home: FC<any> = ({
                   <div className="text-center mt-4">
                     <a
                       className={`btn ${styles.btn_secondary} ${styles.btn_long}`}
-                      onClick={() => Router.push(`/${lng}/products`)}
+                      onClick={() => router.push(`/${lng}/products`)}
                     >
                       {i18n.t("product.seeAll")}
                     </a>
@@ -279,8 +284,8 @@ const Home: FC<any> = ({
         </section>
       }
     </Layout >
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -288,33 +293,33 @@ export const getServerSideProps: GetServerSideProps = async ({
   params
 }: any) => {
 
-  const allowedUri: Array<string> = ['en', 'id', 'graphql', 'favicon.ico'];
+  const allowedUri: Array<string> = ['en', 'id', 'graphql', 'favicon.ico']
 
   if (allowedUri.indexOf(params.lng.toString()) == -1) {
-    const cookies = parseCookies(req);
+    const cookies = parseCookies(req)
 
     res.writeHead(307, {
       Location: cookies.ACTIVE_LNG ? '/' + cookies.ACTIVE_LNG + '/' + params.lng : '/id/' + params.lng
-    });
+    })
 
-    res.end();
+    res.end()
   }
 
   const { default: lngDict = {} } = await import(
     `locales/${params.lng}.json`
-  );
+  )
 
-  const brand = await useBrand(req);
-  const dataBanners = await getBanner(GRAPHQL_URI(req));
+  const brand = await useBrand(req)
+  const dataBanners = await getBanner(GRAPHQL_URI(req))
 
   return {
     props: {
       lng: params.lng,
       lngDict,
       brand: brand || "",
-      dataBanners,
+      dataBanners
     }
-  };
+  }
 }
 
-export default Home;
+export default Home

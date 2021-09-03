@@ -1,11 +1,13 @@
-import { getBrand } from "@sirclo/nexus";
-import { GRAPHQL_URI } from "components/Constants";
+/* library package */
+import { getBrand } from '@sirclo/nexus'
+/* library template */
+import { GRAPHQL_URI } from 'lib/Constants'
 
-const Manifest = () => <></>;
-export default Manifest;
+const Manifest = () => <></>
+export default Manifest
 
 export async function getServerSideProps({ req, res }) {
-  const data = await getBrand(GRAPHQL_URI(req));
+  const data = await getBrand(GRAPHQL_URI(req))
 
   const body = `
     {
@@ -24,14 +26,14 @@ export async function getServerSideProps({ req, res }) {
       "display": "standalone",
       "orientation": "portrait"
     }
-  `.trim();
+  `.trim()
 
   res.writeHead(200, {
     "Content-Length": Buffer.byteLength(body),
     "Content-Type": "application/json",
-  });
-  res.write(body);
-  res.end();
+  })
+  res.write(body)
+  res.end()
 
-  return { props: {} };
+  return { props: {} }
 }

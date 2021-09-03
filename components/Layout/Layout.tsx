@@ -1,25 +1,27 @@
-import { useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import { withBrand, Newsletter } from '@sirclo/nexus'
+/* library package */
+import { FC, useEffect } from 'react'
 import Head from 'next/head'
+import { ToastContainer, toast } from 'react-toastify'
+import { X as XIcon } from 'react-feather'
+import { withBrand, Newsletter } from '@sirclo/nexus'
+/* components */
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import SEO from '../SEO'
-import { X as XIcon } from 'react-feather'
-import PageNotFound from 'components/PageNotFound'
-import styleLayout from 'public/scss/components/Layout.module.scss'
+import PageNotFound from '../PageNotFound'
+/* styles */
 import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
 type LayoutPropType = {
-  lngDict: any;
-  i18n: any;
-  lng: string;
-  layoutClassName?: string;
-  withHeader?: boolean;
-  withFooter?: boolean;
-  withAllowed?: boolean | undefined;
-  [otherProp: string]: any;
-};
+  lngDict: any
+  i18n: any
+  lng: string
+  layoutClassName?: string
+  withHeader?: boolean
+  withFooter?: boolean
+  withAllowed?: boolean | undefined
+  [otherProp: string]: any
+}
 
 const classesNewsletterPopup = {
   containerClassName: styleNewsletter.newsletter_popupContainer,
@@ -30,7 +32,7 @@ const classesNewsletterPopup = {
   buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
 }
 
-const Layout: React.FC<LayoutPropType> = ({
+const Layout: FC<LayoutPropType> = ({
   lngDict,
   i18n,
   lng,
@@ -43,8 +45,8 @@ const Layout: React.FC<LayoutPropType> = ({
 }) => {
 
   useEffect(() => {
-    i18n?.locale(lng, lngDict);
-  }, [lng, lngDict]);
+    i18n?.locale(lng, lngDict)
+  }, [lng, lngDict])
 
   useEffect(() => {
     if (brand?.googleAdsWebsiteMetaToken) getToken()
@@ -98,7 +100,6 @@ const Layout: React.FC<LayoutPropType> = ({
         description={brand?.settings?.websiteDescription}
         image={brand?.logoURL}
       />
-      {/* <div className={styleLayout.layout}> */}
       {withHeader &&
         <Header lng={lng} />
       }
@@ -122,9 +123,8 @@ const Layout: React.FC<LayoutPropType> = ({
       {withFooter &&
         <Footer brand={brand} />
       }
-      {/* </div> */}
     </>
-  );
-};
+  )
+}
 
-export default withBrand(Layout);
+export default withBrand(Layout)

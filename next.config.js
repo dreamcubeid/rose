@@ -1,4 +1,4 @@
-const withPWA = require("next-pwa");
+const withPWA = require('next-pwa')
 
 module.exports = withPWA({
   target: "server",
@@ -16,7 +16,7 @@ module.exports = withPWA({
   headers: {
     "X-Frame-Options": "sameorigin",
   },
-  future: {
-    webpack5: true
-  }
-});
+  // future: {
+  //   webpack5: true
+  // }
+})

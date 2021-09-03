@@ -1,3 +1,47 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import './base/all.scss';
 @import 'uno.scss';
+@import './utils/variables.scss';
+@import './utils/_scrollbar.scss';
+
+html, body
+{
+  background-color: $color_rose_bg1;
+  @extend .scrollbar_main;
+  @extend .scrollbar_whiteTrack;
+}
+
+body
+{
+  @include fixedWidth(375px);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0 auto;
+
+  @media screen and (max-width: $breakpoint_max_sm)
+  {
+    @include fixedWidth(100%);
+  }
+}
+
+.spinner
+{
+  &_wrapper
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    background-color: $color_text_placeholder;
+  }
+}
+
+.spinner-border {
+  color: $color_rose;
+}

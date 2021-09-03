@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { withBrand, Newsletter } from "@sirclo/nexus";
-import Head from "next/head";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import SEO from "../SEO";
-import { X as XIcon } from "react-feather";
-import PageNotFound from "components/PageNotFound";
-import styles from "public/scss/components/Newsletter.module.scss";
+import { useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import { withBrand, Newsletter } from '@sirclo/nexus'
+import Head from 'next/head'
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
+import SEO from '../SEO'
+import { X as XIcon } from 'react-feather'
+import PageNotFound from 'components/PageNotFound'
+import styleLayout from 'public/scss/components/Layout.module.scss'
+import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
 type LayoutPropType = {
   lngDict: any;
@@ -21,12 +22,12 @@ type LayoutPropType = {
 };
 
 const classesNewsletterPopup = {
-  containerClassName: styles.newsletter_popupContainer,
-  closeButtonClassName: styles.newsletter_close,
-  formContainerClassName: styles.newsletter_form,
+  containerClassName: styleNewsletter.newsletter_popupContainer,
+  closeButtonClassName: styleNewsletter.newsletter_close,
+  formContainerClassName: styleNewsletter.newsletter_form,
   labelClassName: "d-none",
   inputClassName: "form-control",
-  buttonClassName: `btn mt-3 ${styles.btn_blue} ${styles.btn_center}`,
+  buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
 }
 
 const Layout: React.FC<LayoutPropType> = ({
@@ -97,6 +98,7 @@ const Layout: React.FC<LayoutPropType> = ({
         description={brand?.settings?.websiteDescription}
         image={brand?.logoURL}
       />
+      {/* <div className={styleLayout.layout}> */}
       {withHeader &&
         <Header lng={lng} />
       }
@@ -107,7 +109,7 @@ const Layout: React.FC<LayoutPropType> = ({
         }
       </main>
       <ToastContainer />
-      <div className={styles.newsletter_overlay}>
+      <div className={styleNewsletter.newsletter_overlay}>
         <Newsletter
           classes={classesNewsletterPopup}
           closeButton={<XIcon color="black" size="18" />}
@@ -120,6 +122,7 @@ const Layout: React.FC<LayoutPropType> = ({
       {withFooter &&
         <Footer brand={brand} />
       }
+      {/* </div> */}
     </>
   );
 };

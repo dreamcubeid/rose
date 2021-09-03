@@ -1,0 +1,429 @@
+/**
+ * Transition
+ * 
+ * Usage
+ * @include transition_raw(color .3s ease);
+ */
+
+@mixin transition_raw($args...)
+{
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+/**
+ * Transition
+ * 
+ * Usage
+ * @include transition(ease, 0.3s);
+ */
+
+@mixin transition($ease: ease, $duration: 0.3s)
+{
+    @include transition_raw(all $duration $ease);
+}
+
+/**
+ * Rem units
+ * Implementing CSS rem units with pixel fallback
+ * 
+ * Usage
+ * 
+ *  body
+ *  {
+ *      @include font-size(16);
+ *      @include line-height(28);
+ *  }
+ */
+
+@mixin fontSize($size, $base: 16)
+{
+    font-size: ($size + 0px); // fallback for old browsers
+    font-size: ($size / $base) * 1rem;
+}
+
+@mixin lineHeight($size, $base: 16)
+{
+    line-height: $size + 0px; // fallback for old browsers
+    line-height: ($size / $base) * 1rem;
+}
+
+/**
+ * Placeholder Color
+ */
+
+@mixin placeholderColor($color: #ddd)
+{
+    ::-webkit-input-placeholder 
+    {
+        color: $color;
+    }
+
+    ::-moz-placeholder
+    {
+        color: $color;
+    }
+
+    :-ms-input-placeholder
+    {
+        color: $color;
+    }
+
+    :-moz-placeholder 
+    {
+        color: $color;
+    }
+}
+
+/**
+ * (Bootstrap) Button variants
+ * Easily pump out default styles, as well as :hover, :focus, :active,
+ * and disabled options for all buttons
+ */
+
+@mixin button-variant($color, $background, $border, $switch: false)
+{
+    color: $color;
+    background-color: $background;
+    border-color: $border;
+    border: solid 1px $border;
+
+    @if $switch
+    {
+        &:focus,
+        &.focus
+        {
+            color: $background;
+            background-color: $color;
+            border-color: $background;
+        }
+    
+        &:hover
+        {
+            color: $background;
+            background-color: $color;
+            border-color: $background;
+        }
+    
+        &:active,
+        &.active,
+        .open > &.dropdown-toggle 
+        {
+            color: $background;
+            background-color: $color;
+            background-image: none;
+            border-color: $background;
+    
+            &:hover,
+            &:focus,
+            &.focus
+            {
+                color: $background;
+                background-color: $color;
+                border-color: $background;
+            }
+        }
+    }
+    @else
+    {
+
+        &:focus,
+        &.focus
+        {
+            color: $color;
+            background-color: darken($background, 10%);
+            border-color: darken($border, 25%);
+        }
+    
+        &:hover
+        {
+            color: $color;
+            background-color: darken($background, 10%);
+            border-color: darken($border, 12%);
+        }
+    
+        &:active,
+        &.active,
+        .open > &.dropdown-toggle 
+        {
+            color: $color;
+            background-color: darken($background, 10%);
+            background-image: none;
+            border-color: darken($border, 12%);
+    
+            &:hover,
+            &:focus,
+            &.focus
+            {
+                color: $color;
+                background-color: darken($background, 17%);
+                border-color: darken($border, 25%);
+            }
+        } 
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & 
+    {
+        &:hover,
+        &:focus,
+        &.focus 
+        {
+            background-color: $background;
+            border-color: $border;
+        }
+    }
+
+    .badge 
+    {
+        color: $background;
+        background-color: $color;
+    }
+}
+
+@mixin buttonVariant($color, $background, $border, $switch: false)
+{
+    @include button-variant($color, $background, $border, $switch);
+}
+  
+/**
+ * Button sizes
+ */
+
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+    line-height: $line-height;
+    border-radius: $border-radius;
+}
+
+@mixin buttonSize($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+    @include button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius);
+}
+
+/**
+ * Position
+ */
+
+@mixin position($position: relative, $top: auto, $right: auto, $bottom: auto, $left: auto, $base: 16)
+{
+    position: #{$position};
+
+    @if $top {
+        @if $top == auto {
+            top: $top;
+        } @else if is-percentage($top) {
+            top: $top;
+        } @else {
+            @if $top == 0 {
+                top: 0;
+            } @else {
+                top: $top;
+            }
+        }
+    }
+
+    @if $left {
+        @if $left == auto {
+            left: $left;
+        } @else if is-percentage($top) {
+            left: $left;
+        } @else {
+            @if $left == 0 {
+                left: 0;
+            } @else {
+                left: $left;
+            }
+        }
+    }
+
+    @if $bottom {
+        @if $bottom == auto {
+            bottom: $bottom;
+        } @else if is-percentage($top) {
+            bottom: $bottom;
+        } @else {
+            @if $bottom == 0 {
+                bottom: 0;
+            } @else {
+                bottom: $bottom
+            }
+        }
+    }
+
+    @if $right {
+        @if $right == auto {
+            right: $right;
+        } @else if is-percentage($top) {
+            right: $right;
+        } @else {
+            @if $right == 0 {
+                right: 0;
+            } @else {
+                right: $right;
+            }
+        }
+    }
+}
+
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto, $base: 16)
+{
+    @include position(absolute, $top, $right, $bottom, $left, $base);
+}
+
+@mixin fixed($top: auto, $right: auto, $bottom: auto, $left: auto, $base: 16)
+{
+    @include position(fixed, $top, $right, $bottom, $left, $base);
+}
+
+/**
+ * Flexbox
+ * DRY approach for flex-related stuff
+ * 
+ * Usage
+ * 
+ * @include flex();
+ * @include flex(column);
+ * @include flex(column, flex-start, center, true);
+ */
+
+@mixin flex($direction: row, $align: center, $justify: center, $wrap: false, $important: false)
+{
+    @if $important
+    {
+        display: flex !important;
+        flex-direction: #{$direction} !important;
+        align-items: #{$align} !important;
+        justify-content: #{$justify} !important;
+
+        @if $wrap 
+        {
+          flex-wrap: wrap !important;
+        }
+        @else
+        {
+          flex-wrap: nowrap !important;
+        }
+    }
+    @else
+    {
+        display: flex;
+        flex-direction: #{$direction};
+        align-items: #{$align};
+        justify-content: #{$justify};
+
+        @if $wrap 
+        {
+          flex-wrap: wrap;
+        }
+        @else
+        {
+          flex-wrap: nowrap;
+        }
+    }
+}
+
+/**
+ * Fixed Size
+ * Make an element size become fixed in oneliner
+ * 
+ * Usage
+ * 
+ * @include fixedSize(100%);
+ * @include fixedSize(48px);
+ * @include fixedSize(calc(100% - 30px));
+ * @include fixedSize(4rem);
+ * 
+ * Too lazy to write docs, those above also apply to fixedWidth() and fixedHeight()
+ */
+
+@mixin fixedWidth($size, $important: false)
+{
+    @if $important == true
+    {
+        min-width: #{$size} !important;
+        max-width: #{$size} !important;
+        width: #{$size} !important;
+    }
+    @else 
+    {
+        min-width: #{$size};
+        max-width: #{$size};
+        width: #{$size};
+    }
+}
+
+@mixin fixedHeight($size, $important: false)
+{
+    @if $important == true
+    {
+        min-height: #{$size} !important;
+        max-height: #{$size} !important;
+        height: #{$size} !important;
+    }
+    @else 
+    {
+        min-height: #{$size};
+        max-height: #{$size};
+        height: #{$size}; 
+    }
+}
+
+@mixin fixedSize($size, $important: false)
+{
+    @include fixedWidth($size, $important);
+    @include fixedHeight($size, $important);
+}
+
+/**
+ * Debug
+ * Incarnation of laziness to the moon 
+ * 
+ * Usage
+ * 
+ * @include debug(red);
+ * @include debug(blue);
+ */
+
+@mixin debug($color: red, $important: false)
+{
+    @if $important 
+    {
+        border: solid 1px $color !important;
+    } 
+    @else 
+    {
+        border: solid 1px $color;
+    }
+}
+
+/**
+ * Remove arrows from number input
+ * 
+ * Usage
+ * 
+ * input[type="number"]
+ * {
+ *     @include removeArrowsFromInput();
+ * }
+ */
+
+ @mixin removeArrowsFromInput()
+ {
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+    {
+        -webkit-appearance: none;
+    }
+
+    /* Firefox */
+    &[type="number"]
+    {
+        -moz-appearance: textfield;
+    }
+ }

@@ -1,0 +1,114 @@
+/**
+ * Font Faces - Lora Medium
+ * Font Faces - Inter Semi Bold
+ * Font Faces - Inter Regular
+ **/
+
+@font-face 
+{
+    src: local('Lora-Medium'), local('lora-medium'), url('#{$font_path}/Lora-Medium.ttf');
+    font-family: 'Lora-Medium';
+    font-weight: 700;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face 
+{
+    src: local('Inter-SemiBold'), local('inter-semibold'), url('#{$font_path}/Inter-SemiBold.ttf');
+    font-family: 'Inter';
+    font-weight: 600;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face 
+{
+    src: local('Inter-Regular'), local('inter-regular'), url('#{$font_path}/Inter-Regular.ttf');
+    font-family: 'Inter';
+    font-weight: 400;
+    font-style: normal;
+    font-display: fallback;
+}
+
+/**
+ * Typography-related Mixins
+ */
+
+@mixin fontPrimary($font-weight: 700)
+{   
+    font-family: 'Lora-Medium', sans-serif;
+    font-weight: $font-weight;
+    font-style: normal;
+}
+
+@mixin fontSecondary($font-weight: 400)
+{   
+    @if $font-weight > 400
+    {
+        $font-weight: 600;
+    }
+
+    @else
+    {
+        $font-weight: 400;
+    }
+
+    font-family: 'Inter', sans-serif;
+    font-weight: $font-weight;
+    font-style: normal;
+}
+
+
+/**
+ * Typography-related classes
+ */
+
+$headings: (
+    "1": 20,
+    "2": 18,
+    "3": 16,
+    "4": 15,
+    "5": 14,
+    "6": 12
+);
+
+@each $heading, $size in $headings
+{
+    /**
+     * Heading Texts
+     * 
+     * Usage:
+     * 
+     * @extend .typog_heading_1;
+     * ...
+     * @extend .typog_heading_6;
+     */
+    
+    .typog_heading_#{$heading}
+    {
+        @include fontPrimary(700);
+        @include fontSize($size);
+        @include lineHeight(($size * 150) / 100);
+    }
+}
+
+@mixin typography_builder($font_weight: 400, $font_size: 16, $line_height: 0)
+{
+    @include fontPrimary($font_weight);
+    @include fontSize($font_size);
+
+    @if $line_height == 0 
+    {
+        @include lineHeight(($font_size * 150) / 100);
+    }
+    @else
+    {
+        @include lineHeight($line_height);
+    }
+}
+
+@mixin typographyBuilder($font_weight: 400, $font_size: 16, $line_height: 0)
+{
+    @include typography_builder($font_weight, $font_size, $line_height);
+}

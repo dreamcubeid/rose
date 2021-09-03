@@ -1,4 +1,5 @@
-import globby from "globby";
+/* library package */
+import globby from 'globby'
 import {
   getProducts,
   getCategories,
@@ -6,8 +7,9 @@ import {
   getBlogs,
   getArticles,
   getAllowedActions,
-} from "@sirclo/nexus";
-import { GRAPHQL_URI } from "lib/Constants";
+} from '@sirclo/nexus'
+/* library template */
+import { GRAPHQL_URI } from 'lib/Constants'
 
 const Sitemap = () => <></>;
 export default Sitemap;

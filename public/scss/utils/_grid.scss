@@ -1,0 +1,35 @@
+.grid
+{
+  display: grid;
+}
+
+@mixin grid-($qty: 3)
+{
+  grid-template-columns: repeat($qty,minmax(0,1fr));
+} 
+
+@mixin gap-($qty: 16px)
+{
+  grid-gap: $qty;
+  gap: $qty;
+}
+
+@mixin gap-x-($qty: 16px)
+{
+  column-gap: $qty;
+}
+
+@mixin gap-y-($qty: 16px)
+{
+  row-gap: $qty;
+}
+
+@mixin row-span-($qty: 2)
+{
+  grid-row: span $qty / span $qty;
+}
+
+@mixin col-span-($qty: 2)
+{
+  grid-column: span $qty / span $qty;
+}

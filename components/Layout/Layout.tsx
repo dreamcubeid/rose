@@ -1,35 +1,38 @@
-import { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { withBrand, Newsletter } from "@sirclo/nexus";
-import Head from "next/head";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import SEO from "../SEO";
-import { X as XIcon } from "react-feather";
-import PageNotFound from "components/PageNotFound";
-import styles from "public/scss/components/Newsletter.module.scss";
+/* library package */
+import { FC, useEffect } from 'react'
+import Head from 'next/head'
+import { ToastContainer, toast } from 'react-toastify'
+import { X as XIcon } from 'react-feather'
+import { withBrand, Newsletter } from '@sirclo/nexus'
+/* components */
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
+import SEO from '../SEO'
+import PageNotFound from '../PageNotFound'
+/* styles */
+import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
 type LayoutPropType = {
-  lngDict: any;
-  i18n: any;
-  lng: string;
-  layoutClassName?: string;
-  withHeader?: boolean;
-  withFooter?: boolean;
-  withAllowed?: boolean | undefined;
-  [otherProp: string]: any;
-};
-
-const classesNewsletterPopup = {
-  containerClassName: styles.newsletter_popupContainer,
-  closeButtonClassName: styles.newsletter_close,
-  formContainerClassName: styles.newsletter_form,
-  labelClassName: "d-none",
-  inputClassName: "form-control",
-  buttonClassName: `btn mt-3 ${styles.btn_blue} ${styles.btn_center}`,
+  lngDict: any
+  i18n: any
+  lng: string
+  layoutClassName?: string
+  withHeader?: boolean
+  withFooter?: boolean
+  withAllowed?: boolean | undefined
+  [otherProp: string]: any
 }
 
-const Layout: React.FC<LayoutPropType> = ({
+const classesNewsletterPopup = {
+  containerClassName: styleNewsletter.newsletter_popupContainer,
+  closeButtonClassName: styleNewsletter.newsletter_close,
+  formContainerClassName: styleNewsletter.newsletter_form,
+  labelClassName: "d-none",
+  inputClassName: "form-control",
+  buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
+}
+
+const Layout: FC<LayoutPropType> = ({
   lngDict,
   i18n,
   lng,
@@ -42,8 +45,8 @@ const Layout: React.FC<LayoutPropType> = ({
 }) => {
 
   useEffect(() => {
-    i18n?.locale(lng, lngDict);
-  }, [lng, lngDict]);
+    i18n?.locale(lng, lngDict)
+  }, [lng, lngDict])
 
   useEffect(() => {
     if (brand?.googleAdsWebsiteMetaToken) getToken()
@@ -107,7 +110,7 @@ const Layout: React.FC<LayoutPropType> = ({
         }
       </main>
       <ToastContainer />
-      <div className={styles.newsletter_overlay}>
+      <div className={styleNewsletter.newsletter_overlay}>
         <Newsletter
           classes={classesNewsletterPopup}
           closeButton={<XIcon color="black" size="18" />}
@@ -121,7 +124,7 @@ const Layout: React.FC<LayoutPropType> = ({
         <Footer brand={brand} />
       }
     </>
-  );
-};
+  )
+}
 
-export default withBrand(Layout);
+export default withBrand(Layout)

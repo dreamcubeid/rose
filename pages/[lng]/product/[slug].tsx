@@ -1,26 +1,13 @@
+/* library package */
 import {
   FC,
   useState,
   useEffect
-} from "react";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
-import { toast } from "react-toastify";
-import dynamic from "next/dynamic";
-import Router from "next/router";
-import {
-  useI18n,
-  ProductDetail,
-  ProductReviews,
-  getProductDetail,
-  Products,
-  isProductRecommendationAllowed
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Placeholder from "components/Placeholder";
-import { GRAPHQL_URI } from "components/Constants";
-import useWindowSize from "lib/useWindowSize";
-import { useBrand } from "lib/useBrand";
+} from 'react'
+import dynamic from 'next/dynamic'
+import Router from 'next/router'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import { toast } from 'react-toastify'
 import {
   ChevronLeft,
   ChevronRight,
@@ -31,16 +18,30 @@ import {
   Share2,
   Bell,
   X as XIcon
-} from "react-feather";
-import styles from "public/scss/pages/ProductDetail.module.scss";
-import stylesEstimate from "public/scss/components/EstimateShipping.module.scss";
-
-const EmptyComponent = dynamic(
-  () => import("components/EmptyComponent/EmptyComponent")
-);
-const Popup = dynamic(() => import("components/Popup/Popup"));
-const PopupCart = dynamic(() => import("components/Popup/PopupCart"));
-const SocialShare = dynamic(() => import("components/SocialShare"));
+} from 'react-feather'
+import {
+  useI18n,
+  ProductDetail,
+  ProductReviews,
+  getProductDetail,
+  Products,
+  isProductRecommendationAllowed
+} from '@sirclo/nexus'
+/* library template */
+import useWindowSize from 'lib/useWindowSize'
+import { useBrand } from 'lib/useBrand'
+import { GRAPHQL_URI } from 'lib/Constants'
+/* components */
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Placeholder from 'components/Placeholder'
+const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
+const Popup = dynamic(() => import('components/Popup/Popup'))
+const PopupCart = dynamic(() => import('components/Popup/PopupCart'))
+const SocialShare = dynamic(() => import('components/SocialShare'))
+/* styles */
+import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
+import styles from 'public/scss/pages/ProductDetail.module.scss'
 
 const classesProductDetail = {
   productDetailParentDivClassName: styles.productdetail,
@@ -71,7 +72,7 @@ const classesProductDetail = {
   variantLabelClassName: styles.variantLabel,
   variantOptionsClassName: styles.variantOption,
   qtyBoxClassName: styles.productdetail_content_innerQty,
-  propertyFooterContainerClassname:  styles.productdetail_propertyFooterContainer,
+  propertyFooterContainerClassname: styles.productdetail_propertyFooterContainer,
   addToCartBtnClassName: `btn text-uppercase my-3 ${styles.btn_secondary} ${styles.btn_long} ${styles.btn_full_width}`,
   buyNowBtnClassName: `btn  text-uppercase ${styles.btn_long} ${styles.btn_primary} ${styles.btn_full_width}`,
   notifyMeClassName: styles.productdetail_notifyMe,
@@ -107,7 +108,7 @@ const classesProductDetail = {
   estimateShippingPopupProviderImgClassName: stylesEstimate.popup_providerImage,
   estimateShippingPopupProviderLabelClassName: stylesEstimate.popup_providerLabel,
   estimateShippingPopupProviderValueClassName: stylesEstimate.popup_providerValue,
-};
+}
 
 const classesProductReview = {
   reviewImageContainerClassName: styles.ratingReview_imageContainer,
@@ -169,13 +170,13 @@ const classesEmptyComponent = {
   emptyContainer: styles.productdetail_empty,
   emptyTitle: styles.productdetail_empty_title,
   emptyDesc: styles.productdetail_empty_desc,
-};
+}
 
 const classesPlaceholderProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
   placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
   placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_product__list}`,
-};
+}
 
 const classesPlaceholderRelateProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.productdetail_relatedProductItem}`,
@@ -189,32 +190,32 @@ const Product: FC<any> = ({
   brand,
   urlSite
 }) => {
-  const i18n: any = useI18n();
-  const size = useWindowSize();
+  const i18n: any = useI18n()
+  const size = useWindowSize()
 
-  const [productId, setProductId] = useState(null);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [showCart, setShowCart] = useState<boolean>(false);
-  const [showShare, setShowShare] = useState<boolean>(false);
-  const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false);
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false);
-  const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false);
-  const [totalAllReviews, setTotalAllReviews] = useState(null);
-  const [totalItems, setTotalItems] = useState(null);
+  const [productId, setProductId] = useState(null)
+  const [showPopup, setShowPopup] = useState<boolean>(false)
+  const [showCart, setShowCart] = useState<boolean>(false)
+  const [showShare, setShowShare] = useState<boolean>(false)
+  const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false)
+  const [totalAllReviews, setTotalAllReviews] = useState(null)
+  const [totalItems, setTotalItems] = useState(null)
 
   useEffect(() => {
-    if (showCart) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "unset";
-  }, [showCart]);
+    if (showCart) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = "unset"
+  }, [showCart])
 
-  const allowedProductRecommendation = isProductRecommendationAllowed();
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
-  const tooglePopup = () => setShowPopup(!showPopup);
-  const toogleCart = () => setShowCart(!showCart);
-  const toogleShare = () => setShowShare(!showShare);
+  const allowedProductRecommendation = isProductRecommendationAllowed()
+  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const tooglePopup = () => setShowPopup(!showPopup)
+  const toogleCart = () => setShowCart(!showCart)
+  const toogleShare = () => setShowShare(!showShare)
 
   // IS PROD VARIABLE
-  const IS_PROD = process.env.IS_PROD;
+  const IS_PROD = process.env.IS_PROD
 
   return (
     <Layout
@@ -244,8 +245,8 @@ const Product: FC<any> = ({
               <button
                 className={`btn ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} mb-3`}
                 onClick={() => {
-                  setShowPopup(false);
-                  setShowCart(true);
+                  setShowPopup(false)
+                  setShowCart(true)
                 }}
               >
                 {i18n.t("product.viewCart")}
@@ -316,8 +317,8 @@ const Product: FC<any> = ({
             <button
               className={`btn mt-3 ${styles.btn_secondary}`}
               onClick={() => {
-                setShowPopupNotify(false);
-                Router.push("/[lng]/products", `/${lng}/products`);
+                setShowPopupNotify(false)
+                Router.push("/[lng]/products", `/${lng}/products`)
               }}>
               {i18n.t("product.continueShopping")}
             </button>
@@ -371,7 +372,7 @@ const Product: FC<any> = ({
                 lazyLoadedImage={false}
                 classes={classesProductDetail}
                 getProductID={(id) => setProductId(id)}
-                ratingIcon={<span className="ratingStar">&#x2605;</span>}
+                ratingIcon={<span className="ratingStar">&#x2605</span>}
                 accordionIcon={<ChevronDown />}
                 enableArrow={size.width && size.width < 576 ? true : false}
                 enableDots={size.width && size.width < 576 ? true : false}
@@ -531,17 +532,17 @@ const Product: FC<any> = ({
         </div>
       }
     </Layout>
-  );
-};
+  )
+}
 
 export async function getServerSideProps({ req, params }) {
-  const { slug } = params;
-  const data = await getProductDetail(GRAPHQL_URI(req), slug);
-  const brand = await useBrand(req);
+  const { slug } = params
+  const data = await getProductDetail(GRAPHQL_URI(req), slug)
+  const brand = await useBrand(req)
 
-  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`);
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const urlSite = `https://${req.headers.host}/${params.lng}/product/${slug}`;
+  const urlSite = `https://${req.headers.host}/${params.lng}/product/${slug}`
 
   return {
     props: {
@@ -551,8 +552,8 @@ export async function getServerSideProps({ req, params }) {
       data: data || null,
       brand: brand || "",
       urlSite: urlSite,
-    },
-  };
+    }
+  }
 }
 
-export default Product;
+export default Product

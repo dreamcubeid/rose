@@ -1,25 +1,32 @@
-import { useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import { withBrand, Newsletter } from '@sirclo/nexus'
+/* library package */
+import {
+  FC,
+  useState,
+  useEffect
+} from 'react'
 import Head from 'next/head'
-import Header from '../Header/Header'
+import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify'
+import { X as XIcon } from 'react-feather'
+import { withBrand, Newsletter } from '@sirclo/nexus'
+/* components */
+import Header from '../Header'
 import Footer from '../Footer/Footer'
 import SEO from '../SEO'
-import { X as XIcon } from 'react-feather'
 import PageNotFound from 'components/PageNotFound'
-import styleLayout from 'public/scss/components/Layout.module.scss'
+/* styles */
 import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
 type LayoutPropType = {
-  lngDict: any;
-  i18n: any;
-  lng: string;
-  layoutClassName?: string;
-  withHeader?: boolean;
-  withFooter?: boolean;
-  withAllowed?: boolean | undefined;
-  [otherProp: string]: any;
-};
+  lngDict: any
+  i18n: any
+  lng: string
+  layoutClassName?: string
+  withHeader?: boolean
+  withFooter?: boolean
+  withAllowed?: boolean | undefined
+  [otherProp: string]: any
+}
 
 const classesNewsletterPopup = {
   containerClassName: styleNewsletter.newsletter_popupContainer,
@@ -30,7 +37,7 @@ const classesNewsletterPopup = {
   buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
 }
 
-const Layout: React.FC<LayoutPropType> = ({
+const Layout: FC<LayoutPropType> = ({
   lngDict,
   i18n,
   lng,
@@ -41,14 +48,40 @@ const Layout: React.FC<LayoutPropType> = ({
   brand,
   ...props
 }) => {
+  const router: any = useRouter()
+  const [isSticky, setSticky] = useState<boolean>(false)
+
+  const handleScroll = () => {
+    const offset = window.scrollY
+    setSticky(offset > 25)
+  }
 
   useEffect(() => {
-    i18n?.locale(lng, lngDict);
-  }, [lng, lngDict]);
+    i18n?.locale(lng, lngDict)
+  }, [lng, lngDict])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', () => handleScroll);
+    }
+  }, []);
 
   useEffect(() => {
     if (brand?.googleAdsWebsiteMetaToken) getToken()
   }, [brand])
+
+  const stickyMechanic = (pathname: string) => {
+    let className = 'transparent'
+    let stickyNavPathCategories = ['/[lng]', '/[lng]/lookbook/categories']
+    let stickyNavPathHome = ['/[lng]', '/[lng]']
+    let stickyActive = stickyNavPathCategories.includes(pathname) || stickyNavPathHome.includes(pathname)
+
+    if (!stickyActive) className = 'notSticky'
+    else if (isSticky && stickyActive) className = 'notSticky'
+
+    return className
+  }
 
   const getToken = (): string => {
     const googleAdsWebsiteMetaToken = brand?.googleAdsWebsiteMetaToken
@@ -98,9 +131,11 @@ const Layout: React.FC<LayoutPropType> = ({
         description={brand?.settings?.websiteDescription}
         image={brand?.logoURL}
       />
-      {/* <div className={styleLayout.layout}> */}
       {withHeader &&
-        <Header lng={lng} />
+        <Header
+          lng={lng}
+          stickyClass={stickyMechanic(router.pathname)}
+        />
       }
       <main className={layoutClassName}>
         {withAllowed ?
@@ -122,9 +157,8 @@ const Layout: React.FC<LayoutPropType> = ({
       {withFooter &&
         <Footer brand={brand} />
       }
-      {/* </div> */}
     </>
-  );
-};
+  )
+}
 
-export default withBrand(Layout);
+export default withBrand(Layout)

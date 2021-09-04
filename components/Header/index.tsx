@@ -1,28 +1,25 @@
+/* library package */
 import {
   FC,
   useState,
-  useEffect,
-  useRef
-} from "react";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+  useEffect
+} from 'react'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import {
-  Logo,
-  Widget,
-  useI18n
-} from "@sirclo/nexus";
-import Placeholder from "../Placeholder";
-import SideMenu from "../SideMenu/SideMenu";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
-import {
-  Menu,
-  ChevronDown,
-  ChevronUp,
-  X
-} from 'react-feather';
-import styles from "public/scss/components/Header.module.scss";
-
-const CollapsibleNav = dynamic(() => import("@sirclo/nexus").then((mod) => mod.CollapsibleNav));
+  FiX,
+  FiChevronDown,
+  FiChevronUp
+} from 'react-icons/fi'
+import { Logo, Widget } from '@sirclo/nexus'
+/* library template */
+import useWindowSize from 'lib/useWindowSize'
+/* components */
+import Placeholder from '../Placeholder'
+const CollapsibleNav = dynamic(() => import('@sirclo/nexus').then((mod) => mod.CollapsibleNav))
+/* styles */
+import styles from 'public/scss/components/Header.module.scss'
 
 const classesCollapsibleNav = {
   parentNavClassName: styles.menu,
@@ -32,7 +29,7 @@ const classesCollapsibleNav = {
   dropdownIconClassName: styles.icon_down,
   childNavClassName: styles.menu_sub,
   subChildNavClassName: styles.menu_sub
-};
+}
 
 const classesPlaceholderLogo = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_header__logo}`
@@ -47,95 +44,114 @@ const classesPlaceholderWidget = {
 }
 
 const Header: FC<any> = ({
-  lng,
   stickyClass
 }) => {
-  const i18n: any = useI18n();
-  const router = useRouter();
-  const [showAnnounce, setShowAnnounce] = useState<boolean>(true);
-  const [countWidgetAnnouncement, setCountWidgetAnnouncement] = useState(null);
-  const [openCart, setOpenCart] = useState<boolean>(false);
-  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
-
-  const cartOuterDiv = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (e) => {
-    if (cartOuterDiv.current.contains(e.target)) {
-      return;
-    }
-    setOpenCart(false);
-  };
+  const router = useRouter()
+  const size: any = useWindowSize()
+  const [openMenu, setOpenMenu] = useState<boolean>(false)
+  const [showAnnounce, setShowAnnounce] = useState<boolean>(true)
+  const [countWidgetAnnouncement, setCountWidgetAnnouncement] = useState(null)
 
   useEffect(() => {
-    setMobileMenu(false);
-  }, [router?.query]);
+    setOpenMenu(false)
+  }, [router.query])
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    if (openMenu) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'initial';
+  }, [openMenu])
+
+  const toogleMenu = () => {
+    setOpenMenu(!openMenu)
+  }
 
   return (
     <>
       {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
         <div className={styles.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
-          <span className={styles.announce__close}>
-            <X
-              className={styles.announce__close__icon}
-              onClick={() => setShowAnnounce(false)}
+          <span className={styles.announce_close}>
+            <FiX
+              color="#FFFFF"
+              onClick={() => {
+                setShowAnnounce(false)
+                setCountWidgetAnnouncement(0)
+              }}
             />
           </span>
           <Widget
             getItemCount={(itemCount: number) => setCountWidgetAnnouncement(itemCount)}
             pos="header-announcements"
-            widgetClassName={styles.announce__items}
+            widgetClassName={styles.announce_items}
             loadingComponent={<Placeholder classes={classesPlaceholderWidget} withTitle />}
           />
         </div>
       }
-      <header className={`${styles.header} ${(stickyClass !== "transparent" || mobileMenu) && styles.header__sticky}`} ref={cartOuterDiv}>
+      <header
+        className={`
+          ${styles.header} 
+          ${!showAnnounce && styles.header_top}
+          ${(stickyClass !== "transparent") && styles.header_scroll}
+        `}>
         <div
-          className={`${styles.header_item} ${styles.header_item__menuTrigger}`}
-          onClick={() => setMobileMenu(!mobileMenu)}
+          className={`
+            container ${styles.header_navbar} 
+            ${(stickyClass !== "transparent" || openMenu) && styles.header_sticky}`
+          }
         >
-          <div className={mobileMenu ? styles.icon_close__black : styles.icon_bar}></div>
-        </div>
-        <div className={`${styles.header_item} ${styles.header_item__brand}`}>
-          <LazyLoadComponent>
+          <LazyLoadComponent
+            placeholder={
+              <Placeholder classes={classesPlaceholderLogo} withImage={true} />
+            }
+          >
             <Logo
               imageClassName={styles.header_logo}
+              lazyLoadedImage={false}
               thumborSetting={{
-                height: 120,
-                format: 'webp',
-                quality: 85
+                width: size.width < 575 ? 200 : 400,
+                quality: 90
               }}
             />
           </LazyLoadComponent>
+          <div
+            className={styles.header_menuIcon}
+            onClick={toogleMenu}
+          >
+            {openMenu ?
+              <FiX size={20} /> :
+              <img
+                src={`/icons/${(stickyClass !== "transparent") ? "menu-black.svg" : "menu-white.svg"}`}
+                alt="menu"
+              />
+            }
+          </div>
         </div>
         <div
-          className={`${styles.header_item} ${styles.header_item__menuTrigger}`}
-          onClick={() => setMobileMenu(!mobileMenu)}
+          className={`
+            ${styles.header_menus} 
+            ${(countWidgetAnnouncement === 0) && styles.header_menusHeight} 
+            ${openMenu && styles.header_menusActive}`
+          }
         >
-          <div className={mobileMenu ? styles.icon_close__black : styles.icon_bar}></div>
+          {openMenu &&
+            <CollapsibleNav
+              dropdownIcon={<FiChevronDown />}
+              dropdownOpenIcon={<FiChevronUp />}
+              classes={classesCollapsibleNav}
+              loadingComponent={
+                <>
+                  <Placeholder
+                    classes={classesPlaceholderCollapsibleNav}
+                    withList={true}
+                    listMany={4}
+                  />
+                </>
+              }
+            />
+          }
         </div>
       </header>
-
-      <div className={`${styles.headerMobile} ${mobileMenu ? styles.headerMobile__active : ''}`}>
-        <CollapsibleNav
-          classes={classesCollapsibleNav}
-          dropdownIcon={<X />}
-          dropdownOpenIcon={<X />}
-          loadingComponent={
-            <div className={styles.headerMobile_loading}>
-              {i18n.t("global.loading")}&hellip;
-            </div>
-          }
-        />
-      </div>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

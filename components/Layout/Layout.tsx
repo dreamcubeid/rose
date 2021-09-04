@@ -53,7 +53,7 @@ const Layout: FC<LayoutPropType> = ({
 
   const handleScroll = () => {
     const offset = window.scrollY
-    setSticky(offset > 25)
+    setSticky(offset > 0)
   }
 
   useEffect(() => {
@@ -133,7 +133,6 @@ const Layout: FC<LayoutPropType> = ({
       />
       {withHeader &&
         <Header
-          lng={lng}
           stickyClass={stickyMechanic(router.pathname)}
         />
       }

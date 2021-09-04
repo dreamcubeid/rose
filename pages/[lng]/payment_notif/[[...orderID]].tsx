@@ -72,7 +72,7 @@ const PaymentConfirmationPage: FC<any> = ({
                 orderIDProps={orderID}
                 classes={classesPaymentConfirmation}
                 orderDetailIcon={{
-                  close: <ChevronUp/>,
+                  close: <ChevronUp />,
                   open: <ChevronDown />
                 }}
                 onErrorMsg={(msg) => toast.error(msg)}

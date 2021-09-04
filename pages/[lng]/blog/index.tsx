@@ -11,8 +11,8 @@ import {
 } from "@sirclo/nexus";
 import useWindowSize from "lib/useWindowSize";
 import { useBrand } from "lib/useBrand";
+import { GRAPHQL_URI } from "lib/Constants";
 import Layout from "components/Layout/Layout";
-import { GRAPHQL_URI } from "components/Constants";
 import styles from "public/scss/pages/Blog.module.scss";
 
 const EmptyComponent = dynamic(() => import("components/EmptyComponent/EmptyComponent"));

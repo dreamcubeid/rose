@@ -10,6 +10,11 @@
   height: 58px;
   z-index: 10;
 
+  @media screen and (max-width: $breakpoint_max_sm)
+  {
+    @include fixedWidth(100%, true);
+  }
+
   &_top
   {
     @include position(fixed, 0);
@@ -52,7 +57,7 @@
     padding: 0;
 
     @include position(absolute, -100vh, auto, auto, auto);
-    @include fixedWidth(375px);
+    @include fixedWidth(375px, true);
     @include fixedHeight(100vh);
     overflow-x: hidden;
     overflow-y: auto;
@@ -67,7 +72,7 @@
 
     @media screen and (max-width: $breakpoint_max_sm)
     {
-      @include fixedWidth(100%);
+      @include fixedWidth(100%, true);
     }
 
     &Height

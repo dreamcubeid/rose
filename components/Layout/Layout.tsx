@@ -65,7 +65,7 @@ const Layout: FC<LayoutPropType> = ({
     return () => {
       window.removeEventListener('scroll', () => handleScroll);
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (brand?.googleAdsWebsiteMetaToken) getToken()

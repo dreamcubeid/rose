@@ -19,28 +19,31 @@ import useWindowSize from 'lib/useWindowSize'
 import Placeholder from '../Placeholder'
 const CollapsibleNav = dynamic(() => import('@sirclo/nexus').then((mod) => mod.CollapsibleNav))
 /* styles */
-import styles from 'public/scss/components/Header.module.scss'
+import styleAnnouncement from 'public/scss/components/Announcement.module.scss'
+import styleHeader from 'public/scss/components/Header.module.scss'
+import styleNav from 'public/scss/components/Navigation.module.scss'
 
 const classesCollapsibleNav = {
-  parentNavClassName: styles.menu,
-  navItemClassName: styles.menu_item,
-  selectedNavClassName: styles.menu_itemSelected,
-  navValueClassName: styles.menu_item__value,
-  dropdownIconClassName: styles.icon_down,
-  childNavClassName: styles.menu_sub,
-  subChildNavClassName: styles.menu_sub
+  parentNavClassName: styleNav.menu,
+  navItemClassName: styleNav.menu_item,
+  selectedNavClassName: styleNav.menu_itemSelected,
+  navValueContainerClassName: styleNav.menu_itemValueContainer,
+  navValueClassName: styleNav.menu_itemValue,
+  dropdownIconClassName: styleNav.menu_icon,
+  childNavClassName: styleNav.menu_sub,
+  subChildNavClassName: styleNav.menu_sub
 }
 
 const classesPlaceholderLogo = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_header__logo}`
+  placeholderImage: `${styleHeader.placeholderItem} ${styleHeader.placeholderItem_headerLogo}`
 }
 
 const classesPlaceholderCollapsibleNav = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_header__navMobile}`
+  placeholderList: `${styleHeader.placeholderItem} ${styleHeader.placeholderItem_headerNavigation}`
 }
 
 const classesPlaceholderWidget = {
-  placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_header__widget}`
+  placeholderTitle: `${styleHeader.placeholderItem} ${styleHeader.placeholderItem_headerWidget}`
 }
 
 const Header: FC<any> = ({
@@ -68,8 +71,8 @@ const Header: FC<any> = ({
   return (
     <>
       {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
-        <div className={styles.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
-          <span className={styles.announce_close}>
+        <div className={styleAnnouncement.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
+          <span className={styleAnnouncement.announce_close}>
             <FiX
               color="#FFFFF"
               onClick={() => {
@@ -81,21 +84,21 @@ const Header: FC<any> = ({
           <Widget
             getItemCount={(itemCount: number) => setCountWidgetAnnouncement(itemCount)}
             pos="header-announcements"
-            widgetClassName={styles.announce_items}
+            widgetClassName={styleAnnouncement.announce_items}
             loadingComponent={<Placeholder classes={classesPlaceholderWidget} withTitle />}
           />
         </div>
       }
       <header
         className={`
-          ${styles.header} 
-          ${!showAnnounce && styles.header_top}
-          ${(stickyClass !== "transparent") && styles.header_scroll}
+          ${styleHeader.header} 
+          ${!showAnnounce && styleHeader.header_top}
+          ${(stickyClass !== "transparent") && styleHeader.header_scroll}
         `}>
         <div
           className={`
-            container ${styles.header_navbar} 
-            ${(stickyClass !== "transparent" || openMenu) && styles.header_sticky}`
+            container ${styleHeader.header_navbar} 
+            ${(stickyClass !== "transparent" || openMenu) && styleHeader.header_sticky}`
           }
         >
           <LazyLoadComponent
@@ -104,7 +107,7 @@ const Header: FC<any> = ({
             }
           >
             <Logo
-              imageClassName={styles.header_logo}
+              imageClassName={styleHeader.header_logo}
               lazyLoadedImage={false}
               thumborSetting={{
                 width: size.width < 575 ? 200 : 400,
@@ -113,7 +116,7 @@ const Header: FC<any> = ({
             />
           </LazyLoadComponent>
           <div
-            className={styles.header_menuIcon}
+            className={styleHeader.header_menuIcon}
             onClick={toogleMenu}
           >
             {openMenu ?
@@ -127,16 +130,19 @@ const Header: FC<any> = ({
         </div>
         <div
           className={`
-            ${styles.header_menus} 
-            ${(countWidgetAnnouncement === 0) && styles.header_menusHeight} 
-            ${openMenu && styles.header_menusActive}`
+            ${styleHeader.header_menus} 
+            ${(countWidgetAnnouncement === 0) && styleHeader.header_menusHeight} 
+            ${openMenu && styleHeader.header_menusActive}`
           }
         >
           {openMenu &&
             <CollapsibleNav
-              dropdownIcon={<FiChevronDown />}
-              dropdownOpenIcon={<FiChevronUp />}
-              classes={classesCollapsibleNav}
+              dropdownIcon={<FiChevronDown size={20} />}
+              dropdownOpenIcon={<FiChevronUp size={20} />}
+              classes={{
+                ...classesCollapsibleNav,
+                parentNavClassName: showAnnounce ? styleNav.menu : `${styleNav.menu} ${styleNav.menu_withoutWidget}`
+              }}
               loadingComponent={
                 <>
                   <Placeholder

@@ -1,0 +1,112 @@
+@import '../utils/variables';
+
+.menu
+{
+  @include fixedWidth(100%);
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - 32px - 58px);
+  overflow-y: auto;
+
+  &_withoutWidget
+  {
+    height: calc(100vh - 58px);
+  }
+
+  &_item
+  {
+    @include flex(column, center, center);
+    list-style: none;
+    padding: 1rem 0;
+    text-transform: capitalize;
+    border-bottom: 1px solid $color_grey;
+
+    &:first-child
+    {
+      border-top: 1px solid $color_grey;
+    }
+
+    &ValueContainer
+    {
+      @include fixedWidth(100%);
+      @include typographyBuilder(primary, 500, 20, 32);
+      position: relative;
+      color: $color_text_primary;
+      padding: 0 43px;
+      text-align: center;
+
+      span
+      {
+        @include absolute(50%, 35px);
+        transform: translate(-50%,-50%);
+        padding: 0;
+      }
+    }
+
+    &Value
+    {
+      color: $color_text_primary !important;
+      
+      &:hover
+      {
+        text-decoration: none;
+      }
+    }
+
+    li
+    {
+      border: none;
+
+      &:first-child
+      {
+        border: none;
+      }
+    }
+  }
+
+  &_icon
+  {
+    float: right;
+    cursor: pointer;
+  
+    &__svg
+    {
+      height: 1em;
+    }
+  }
+
+  &_itemSelected
+  {
+    color: $color_rose;
+
+    a
+    {
+      color: $color_rose;
+    }
+  }
+
+  &_sub
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    color: $color_text_primary;
+    padding: 0;
+    text-align: center;
+
+    ul
+    {
+      padding-left: 24px;
+    }
+
+    li
+    {
+      padding: 15px 0 0 0;
+
+      span
+      {
+        @include typographyBuilder(secondary, 400, 14, 24);
+        text-align: left;
+      }
+    }
+  }
+}

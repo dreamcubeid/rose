@@ -1,0 +1,40 @@
+@import '../utils/variables';
+
+.announce
+{
+  @include flex(row, center, center);
+  position: relative;
+  height: 32px;
+  background-color: $color_rose;
+
+  &_items
+  {
+    @include typographyBuilder(secondary, 400, 12, 15);
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: $color_white;
+    padding: 0;
+    
+    &:empty
+    {
+      display: none;
+    }
+  }
+
+  &_close
+  {
+    @include absolute(50%, 5px);
+    transform: translate(-50%, -50%);
+    color: $color_white;
+
+    @media screen and (max-width: $breakpoint_max_sm)
+    {
+      right: 0;
+    }
+
+    &:hover
+    {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,14 +1,19 @@
 /* library package */
-import { FC, useEffect } from 'react'
+import {
+  FC,
+  useState,
+  useEffect
+} from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import { X as XIcon } from 'react-feather'
 import { withBrand, Newsletter } from '@sirclo/nexus'
 /* components */
-import Header from '../Header/Header'
+import Header from '../Header'
 import Footer from '../Footer/Footer'
 import SEO from '../SEO'
-import PageNotFound from '../PageNotFound'
+import PageNotFound from 'components/PageNotFound'
 /* styles */
 import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
@@ -43,14 +48,40 @@ const Layout: FC<LayoutPropType> = ({
   brand,
   ...props
 }) => {
+  const router: any = useRouter()
+  const [isSticky, setSticky] = useState<boolean>(false)
+
+  const handleScroll = () => {
+    const offset = window.scrollY
+    setSticky(offset > 0)
+  }
 
   useEffect(() => {
     i18n?.locale(lng, lngDict)
   }, [lng, lngDict])
 
   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', () => handleScroll);
+    }
+  }, [])
+
+  useEffect(() => {
     if (brand?.googleAdsWebsiteMetaToken) getToken()
   }, [brand])
+
+  const stickyMechanic = (pathname: string) => {
+    let className = 'transparent'
+    let stickyNavPathCategories = ['/[lng]', '/[lng]/lookbook/categories']
+    let stickyNavPathHome = ['/[lng]', '/[lng]']
+    let stickyActive = stickyNavPathCategories.includes(pathname) || stickyNavPathHome.includes(pathname)
+
+    if (!stickyActive) className = 'notSticky'
+    else if (isSticky && stickyActive) className = 'notSticky'
+
+    return className
+  }
 
   const getToken = (): string => {
     const googleAdsWebsiteMetaToken = brand?.googleAdsWebsiteMetaToken
@@ -101,7 +132,9 @@ const Layout: FC<LayoutPropType> = ({
         image={brand?.logoURL}
       />
       {withHeader &&
-        <Header lng={lng} />
+        <Header
+          stickyClass={stickyMechanic(router.pathname)}
+        />
       }
       <main className={layoutClassName}>
         {withAllowed ?

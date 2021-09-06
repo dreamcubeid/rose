@@ -5,6 +5,8 @@
 {
   border-radius: 50px;
   @include typographyBuilder(secondary,500,14,24);
+  @include fixedWidth(100%);
+  padding: 12px;
   border: none;
 
   &:active,&:focus
@@ -47,32 +49,6 @@
       background-color: $color_white !important;
       border: 1px solid $color_grey !important;
     }
-  }
-
-  &_full_width
-  {
-    width: 100%;
-  }
-
-  &_short
-  {
-    padding: .5rem 2rem;
-  }
-
-  &_long
-  {
-    padding: .75rem 4rem;
-
-    @media screen and (max-width: 440px){
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  }
-
-  &_center
-  {
-    display: block;
-    margin: 0 auto;
   }
 
 }

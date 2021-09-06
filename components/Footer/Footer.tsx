@@ -1,90 +1,88 @@
+/* library package */
 import { FC } from 'react'
-import dynamic from 'next/dynamic'
-import { isCopyrightAllowed, Widget, SocialMediaIcons } from '@sirclo/nexus'
-import useWindowSize from 'lib/useWindowSize'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import {
+	RiHomeFill,
+	RiSearchLine,
+	RiShoppingBag2Line,
+	RiUser3Line,
+} from 'react-icons/ri'
+import { PrivateComponent, useI18n } from '@sirclo/nexus'
+/* styles */
 import styles from 'public/scss/components/Footer.module.scss'
 
-const Placeholder = dynamic(() => import('components/Placeholder'))
-
-const socialMediaIcons = {
-	facebook: <img src="/images/facebook.svg" alt="facebook" />,
-	twitter: <img src="/images/twitter.svg" alt="twitter" />,
-	instagram: <img src="/images/instagram.svg" alt="instagram" />,
-	youtube: <img src="/images/youtube.svg" alt="youtube" />,
-	tiktok: <img src="/images/tiktok.svg" alt="tiktok" />,
-}
-
-const classesMediaSocial = {
-	socialMediaIconContainer: styles.socialIcon,
-	socialMediaIcon: styles.socialIcon_item,
-}
-
-const classesPlaceholderWidget = {
-	placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_widgetFooterMenu}`,
-}
-
-const Footer: FC<any> = ({ brand }) => {
-	const size: any = useWindowSize()
-	const allowedCopyright = isCopyrightAllowed()
+const Footer: FC<any> = () => {
+	const i18n: any = useI18n()
+	const {
+		route,
+		query: { lng },
+	} = useRouter()
 
 	return (
 		<>
-			<div className={styles.widgetFooter}>
-				<div className="container">
-					<div className="row">
-						<div className="col-12 col-lg-8 offset-lg-2">
-							<Widget
-								pos="footer-1"
-								containerClassName="row"
-								widgetClassName="col-12 col-lg-4"
-								loadingComponent={
-									<div className="row">
-										<div className="col-12">
-											<Placeholder
-												classes={classesPlaceholderWidget}
-												withList
-												listMany={4}
-											/>
-										</div>
-									</div>
-								}
-								thumborSetting={{
-									width: size.width < 768 ? 576 : 1200,
-									format: 'webp',
-									quality: 85,
-								}}
-							/>
-							<hr className={styles.footer_line} />
-							<SocialMediaIcons
-								socialMediaIcons={socialMediaIcons}
-								classes={classesMediaSocial}
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
 			<footer className={styles.footer}>
-				<div className={`container ${styles.footer_bottom} uppercase`}>
-					{allowedCopyright ? (
-						<>
-							{brand?.settings?.websiteTitle || ''}
-							{brand?.settings?.websiteTitle && allowedCopyright && ` - `}
-							POWERED BY&nbsp;
-							<a href="https://store.sirclo.com" target="_blank">
-								SIRCLO
-							</a>
-						</>
-					) : (
-						<Widget
-							pos="copyright-and-policy"
-							thumborSetting={{
-								width: 1,
-								format: 'webp',
-								quality: 5,
-							}}
-						/>
-					)}
-				</div>
+				<nav className={`${styles.footer_nav}`}>
+					<Link href="/[lng]" as={`/${lng}`}>
+						<a {...(route == '/[lng]' && { className: styles.active })}>
+							<div>
+								<RiHomeFill />
+								<span>{i18n.t('footer.home')}</span>
+								<hr />
+							</div>
+						</a>
+					</Link>
+					<Link href="/">
+						<a>
+							<div>
+								<RiSearchLine />
+								<span>{i18n.t('footer.search')}</span>
+								<hr />
+							</div>
+						</a>
+					</Link>
+					<Link href="/[lng]/cart" as={`/${lng}/cart`}>
+						<a {...(route == '/[lng]/cart' && { className: styles.active })}>
+							<div>
+								<RiShoppingBag2Line />
+								<span>{i18n.t('footer.cart')}</span>
+								<hr />
+							</div>
+						</a>
+					</Link>
+					<PrivateComponent
+						Auth={
+							<Link href="/[lng]/account" as={`/${lng}/account`}>
+								<a
+									{...(route == '/[lng]/account' && {
+										className: styles.active,
+									})}
+								>
+									<div>
+										<RiUser3Line />
+										<span>{i18n.t('footer.account')}</span>
+										<hr />
+									</div>
+								</a>
+							</Link>
+						}
+						NoAuth={
+							<Link href="/[lng]/login" as={`/${lng}/login`}>
+								<a
+									{...(route == '/[lng]/account' && {
+										className: styles.active,
+									})}
+								>
+									<div>
+										<RiUser3Line />
+										<span>{i18n.t('footer.login')}</span>
+										<hr />
+									</div>
+								</a>
+							</Link>
+						}
+					/>
+				</nav>
 			</footer>
 		</>
 	)

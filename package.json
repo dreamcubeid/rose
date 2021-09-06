@@ -33,7 +33,8 @@
     "singleQuote": true,
     "useTabs": true,
     "tabWidth": 2,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "printWidth": 100
   },
   "devDependencies": {
     "@babel/preset-react": "^7.10.1",

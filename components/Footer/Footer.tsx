@@ -5,8 +5,11 @@ import { useRouter } from 'next/router'
 import {
 	RiHomeFill,
 	RiSearchLine,
+	RiSearchFill,
 	RiShoppingBag2Line,
+	RiShoppingBag2Fill,
 	RiUser3Line,
+	RiUser3Fill,
 } from 'react-icons/ri'
 import { PrivateComponent, useI18n } from '@sirclo/nexus'
 /* styles */
@@ -35,7 +38,7 @@ const Footer: FC<any> = () => {
 					<Link href="/">
 						<a>
 							<div>
-								<RiSearchLine />
+								{route == '/[lng]' ? <RiSearchFill /> : <RiSearchLine />}
 								<span>{i18n.t('footer.search')}</span>
 								<hr />
 							</div>
@@ -44,7 +47,7 @@ const Footer: FC<any> = () => {
 					<Link href="/[lng]/cart" as={`/${lng}/cart`}>
 						<a {...(route == '/[lng]/cart' && { className: styles.active })}>
 							<div>
-								<RiShoppingBag2Line />
+								{route == '/[lng]/cart' ? <RiShoppingBag2Fill /> : <RiShoppingBag2Line />}
 								<span>{i18n.t('footer.cart')}</span>
 								<hr />
 							</div>
@@ -59,7 +62,7 @@ const Footer: FC<any> = () => {
 									})}
 								>
 									<div>
-										<RiUser3Line />
+										{route == '/[lng]/account' ? <RiUser3Fill /> : <RiUser3Line />}
 										<span>{i18n.t('footer.account')}</span>
 										<hr />
 									</div>
@@ -69,12 +72,12 @@ const Footer: FC<any> = () => {
 						NoAuth={
 							<Link href="/[lng]/login" as={`/${lng}/login`}>
 								<a
-									{...(route == '/[lng]/account' && {
+									{...(route == '/[lng]/login' && {
 										className: styles.active,
 									})}
 								>
 									<div>
-										<RiUser3Line />
+										{route == '/[lng]/login' ? <RiUser3Fill /> : <RiUser3Line />}
 										<span>{i18n.t('footer.login')}</span>
 										<hr />
 									</div>

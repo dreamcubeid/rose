@@ -1,0 +1,15 @@
+@import "../utils/variables"; 
+
+.emptyContainer
+{
+  width: 100%;
+  @include flex(column);
+  padding: 80px 0;
+  & > p
+  {
+    @include typographyBuilder(secondary,400,14,24);
+    color: $color_text_inactive;
+    padding-top: 14px;
+    padding-bottom: 88px; 
+  }
+}

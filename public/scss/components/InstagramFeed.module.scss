@@ -1,0 +1,42 @@
+@import '../utils/variables';
+
+.instagramFeed
+{
+  margin: 24px 0;
+
+  &_container
+  {
+    position: relative;
+  }
+
+  &_image
+  {
+    @include fixedWidth(100%);
+  }
+
+  &_button
+  {
+    @include absolute(auto, 0, 0, 0);
+
+    button
+    {
+      @include fixedWidth(100%);
+      background: rgba($color_white, 0.8);
+      border: none;
+      text-align: left;
+      padding: 12px;
+
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      text-transform: capitalize;
+
+      &:active,
+      &:focus
+      {
+        border: none;
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+@import '../utils/variables';
+
+.widget
+{
+  &_services
+  {
+    @include flex(row, center, flex-start);
+    white-space: nowrap;
+    overflow-x: scroll;
+    background: $color_rose_bg2;
+    padding: 16px;
+
+    &Container
+    {
+      @include flex(row, center, flex-start);
+      white-space: nowrap;
+      overflow-x: scroll;
+      @extend .scrollbar_none;
+    }
+
+    &Item
+    {
+      margin: 0 24px;
+
+      &:first-child
+      {
+        margin-left: 0;
+      }
+
+      &:last-child
+      {
+        margin-right: 0;
+      }
+
+      & > div
+      {
+        @include flex(row, center, flex-start);
+
+        & > img
+        {
+          @include fixedWidth(32px);
+          @include fixedHeight(32px);
+          object-fit: cover;
+          margin-right: 12px;
+        }
+
+        & > div
+        {
+          h1,h2,h3,h4,h5,h6
+          {
+            @include typographyBuilder(secondary, 500, 12, 16);
+            color: $color_text_primary;
+            margin: 0;
+          }
+
+          p
+          {
+            @include typographyBuilder(secondary, 400, 10, 16);
+            color: $color_text_secondary;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &_banner
+  {
+    &Item
+    {
+      margin: 8px 0;
+
+      &:first-child
+      {
+        margin-top: 0;
+      }
+
+      &:last-child
+      {
+        margin-bottom: 0;
+      }
+
+      img,
+      video,
+      iframe
+      {
+        width: 100% !important;
+      }
+    }
+  }
+}

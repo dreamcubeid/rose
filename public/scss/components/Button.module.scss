@@ -2,13 +2,22 @@
 
 .btn
 {
-  border-radius: 50px;
+  $this: &;
+
+  @include flex(row, center, center);
   @include typographyBuilder(secondary,500,14,24);
   @include fixedWidth(100%);
+  @include transition();
+  text-decoration: none;
+  text-align: center;
+  margin: 0;
   padding: 12px;
   border: none;
+  border-radius: 50px;
+  cursor: pointer;
 
-  &:active,&:focus
+  &:active,
+  &:focus
   {
     outline: 0;
     box-shadow: none;
@@ -18,36 +27,43 @@
   {
     color: $color_white !important;
     background-color: $color_rose !important;
-    transition: all .3s;
-    &:hover:enabled
+    border: none !important;
+
+    &:hover
     {
       color: $color_white !important;
       background-color: $color_text_primary !important;
+      border: none !important;
     }
+
     &:disabled
     {
       color: $color_white !important;
       background-color: $color_grey !important;
       border: none !important;
+      cursor: initial;
     }
   }
 
   &_secondary
   {
     color: $color_rose !important;
+    background: $color_white !important;
     border: 1px solid $color_rose !important;
-    transition: all .3s;
-    &:hover:enabled
+
+    &:hover
     {
       color: $color_text_primary !important;
+      background-color: $color_white !important;
       border: 1px solid $color_text_primary !important;
     }
+
     &:disabled
     {
       color: $color_grey !important;
       background-color: $color_white !important;
       border: 1px solid $color_grey !important;
+      cursor: initial;
     }
   }
-
 }

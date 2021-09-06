@@ -47,6 +47,8 @@ const classesPlaceholderWidget = {
 }
 
 const Header: FC<any> = ({
+  withAnnouncement,
+  headerTitle,
   stickyClass
 }) => {
   const router = useRouter()
@@ -60,17 +62,15 @@ const Header: FC<any> = ({
   }, [router.query])
 
   useEffect(() => {
-    if (openMenu) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'initial';
+    if (openMenu) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'initial'
   }, [openMenu])
 
-  const toogleMenu = () => {
-    setOpenMenu(!openMenu)
-  }
+  const toogleMenu = () => setOpenMenu(!openMenu)
 
   return (
     <>
-      {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
+      {((countWidgetAnnouncement === null || countWidgetAnnouncement > 0) && withAnnouncement) &&
         <div className={styleAnnouncement.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
           <span className={styleAnnouncement.announce_close}>
             <FiX
@@ -92,7 +92,7 @@ const Header: FC<any> = ({
       <header
         className={`
           ${styleHeader.header} 
-          ${!showAnnounce && styleHeader.header_top}
+          ${(!showAnnounce || !withAnnouncement) && styleHeader.header_top}
           ${(stickyClass !== "transparent") && styleHeader.header_scroll}
         `}>
         <div
@@ -101,20 +101,25 @@ const Header: FC<any> = ({
             ${(stickyClass !== "transparent" || openMenu) && styleHeader.header_sticky}`
           }
         >
-          <LazyLoadComponent
-            placeholder={
-              <Placeholder classes={classesPlaceholderLogo} withImage={true} />
-            }
-          >
-            <Logo
-              imageClassName={styleHeader.header_logo}
-              lazyLoadedImage={false}
-              thumborSetting={{
-                width: size.width < 575 ? 200 : 400,
-                quality: 90
-              }}
-            />
-          </LazyLoadComponent>
+          {headerTitle ?
+            <h3 className={styleHeader.header_title}>
+              {headerTitle}
+            </h3> :
+            <LazyLoadComponent
+              placeholder={
+                <Placeholder classes={classesPlaceholderLogo} withImage={true} />
+              }
+            >
+              <Logo
+                imageClassName={styleHeader.header_logo}
+                lazyLoadedImage={false}
+                thumborSetting={{
+                  width: size.width < 575 ? 200 : 400,
+                  quality: 90
+                }}
+              />
+            </LazyLoadComponent>
+          }
           <div
             className={styleHeader.header_menuIcon}
             onClick={toogleMenu}

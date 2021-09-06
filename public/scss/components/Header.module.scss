@@ -37,11 +37,25 @@
   {
     background-color: $color_white;
     border-bottom: 1px solid $color_border;
+
+    .header_logo
+    {
+      filter: invert(0);
+    }
+  }
+
+  &_title
+  {
+    @include typographyBuilder(primary, 500, 20, 32);
+    margin: 0;
   }
 
   &_logo
   {
-    height: 40px;
+    height: 20px;
+
+    @include transition();
+    filter: invert(1);
   }
 
   &_menuIcon

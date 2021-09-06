@@ -22,7 +22,9 @@ type LayoutPropType = {
   i18n: any
   lng: string
   layoutClassName?: string
+  withAnnouncement?: boolean
   withHeader?: boolean
+  headerTitle?: string
   withFooter?: boolean
   withAllowed?: boolean | undefined
   [otherProp: string]: any
@@ -42,7 +44,9 @@ const Layout: FC<LayoutPropType> = ({
   i18n,
   lng,
   layoutClassName = "",
+  withAnnouncement = false,
   withHeader = true,
+  headerTitle,
   withFooter = true,
   withAllowed = true,
   brand,
@@ -133,6 +137,8 @@ const Layout: FC<LayoutPropType> = ({
       />
       {withHeader &&
         <Header
+          withAnnouncement={withAnnouncement}
+          headerTitle={headerTitle}
           stickyClass={stickyMechanic(router.pathname)}
         />
       }
@@ -140,6 +146,9 @@ const Layout: FC<LayoutPropType> = ({
         {withAllowed ?
           props.children :
           <PageNotFound i18n={i18n} />
+        }
+        {withFooter &&
+          <Footer brand={brand} />
         }
       </main>
       <ToastContainer />
@@ -153,9 +162,6 @@ const Layout: FC<LayoutPropType> = ({
           onError={() => toast.error(i18n.t("newsletter.submitError"))}
         />
       </div>
-      {withFooter &&
-        <Footer brand={brand} />
-      }
     </>
   )
 }

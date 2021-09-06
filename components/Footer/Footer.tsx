@@ -1,14 +1,14 @@
 /* library package */
 import { FC } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import {
 	RiHomeFill,
 	RiSearchLine,
 	RiShoppingBag2Line,
 	RiUser3Line,
 } from 'react-icons/ri'
-import Link from 'next/link'
 import { PrivateComponent, useI18n } from '@sirclo/nexus'
-import { useRouter } from 'next/router'
 /* styles */
 import styles from 'public/scss/components/Footer.module.scss'
 
@@ -75,7 +75,7 @@ const Footer: FC<any> = () => {
 								>
 									<div>
 										<RiUser3Line />
-										<span>{i18n.t('footer.account')}</span>
+										<span>{i18n.t('footer.login')}</span>
 										<hr />
 									</div>
 								</a>

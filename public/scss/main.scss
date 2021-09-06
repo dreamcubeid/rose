@@ -16,11 +16,40 @@ body
   padding: 0;
   margin: 0 auto;
   background-color: $color_white;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
   padding-bottom: 82px;
 
   @media screen and (max-width: $breakpoint_max_sm)
   {
     @include fixedWidth(100%);
+  }
+}
+
+.BrainhubCarousel
+{
+  &__container
+  {
+    position: relative;
+  }
+
+  &__dots
+  {
+    @include absolute(auto, 0, 10px, 0);
+    z-index: 1;
+  }
+
+  &__dot
+  {
+    margin: 2px !important;
+    padding: 0 !important;
+
+    &::before
+    {
+      width: 20px !important;
+      height: 3px !important;
+      border-radius: 0 !important;
+      background: rgba($color_white, 0.5) !important;
+    }
   }
 }
 

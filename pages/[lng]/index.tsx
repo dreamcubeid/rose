@@ -70,7 +70,6 @@ const Home: FC<any> = ({
       lngDict={lngDict}
       brand={brand}
       withAnnouncement={true}
-      headerTitle="Page"
     >
       <div className={styleBanner.bannerCarousel}>
         <BannerComponent

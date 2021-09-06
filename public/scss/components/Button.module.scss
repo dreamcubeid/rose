@@ -4,7 +4,7 @@
 .btn
 {
   border-radius: 50px;
-  @include typographyBuilder(primary,500,14,24);
+  @include typographyBuilder(secondary,500,14,24);
   border: none;
 
   &:active,&:focus

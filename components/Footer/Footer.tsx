@@ -47,11 +47,7 @@ const Footer: FC<any> = () => {
 					<Link href="/[lng]/cart" as={`/${lng}/cart`}>
 						<a {...(route == '/[lng]/cart' && { className: styles.active })}>
 							<div>
-								{route == '/[lng]/cart' ? (
-									<RiShoppingBag2Fill />
-								) : (
-									<RiShoppingBag2Line />
-								)}
+								{route == '/[lng]/cart' ? <RiShoppingBag2Fill /> : <RiShoppingBag2Line />}
 								<span>{i18n.t('footer.cart')}</span>
 								<hr />
 							</div>
@@ -66,11 +62,7 @@ const Footer: FC<any> = () => {
 									})}
 								>
 									<div>
-										{route == '/[lng]/account' ? (
-											<RiUser3Fill />
-										) : (
-											<RiUser3Line />
-										)}
+										{route == '/[lng]/account' ? <RiUser3Fill /> : <RiUser3Line />}
 										<span>{i18n.t('footer.account')}</span>
 										<hr />
 									</div>
@@ -85,11 +77,7 @@ const Footer: FC<any> = () => {
 									})}
 								>
 									<div>
-										{route == '/[lng]/login' ? (
-											<RiUser3Fill />
-										) : (
-											<RiUser3Line />
-										)}
+										{route == '/[lng]/login' ? <RiUser3Fill /> : <RiUser3Line />}
 										<span>{i18n.t('footer.login')}</span>
 										<hr />
 									</div>

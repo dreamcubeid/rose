@@ -41,6 +41,7 @@
       color: $color_white !important;
       background-color: $color_grey !important;
       border: none !important;
+      cursor: initial;
     }
   }
 
@@ -62,6 +63,7 @@
       color: $color_grey !important;
       background-color: $color_white !important;
       border: 1px solid $color_grey !important;
+      cursor: initial;
     }
   }
 }

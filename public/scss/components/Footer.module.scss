@@ -1,97 +1,63 @@
 @import "../base/colors.scss";
-@import "../components/Placeholder.module.scss";
-
-.widgetFooter
-{
-  background: $color_blue_light;
-  padding: 35px 0;
-
-  h1,h2,h3,h4,h5,h6
-  {
-    font-size: 11px;
-    font-family: 'roboto-black';
-    margin-bottom: 13px;
-  }
-
-  ul
-  {
-    padding: 0;
-    margin: 0;
-
-    li
-    {
-      list-style: none;
-      margin-bottom: 11px;
-      
-      a
-      {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
-.socialIcon
-{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &_item
-  {
-    margin: 0 15px;
-
-    & > img
-    {
-      height: 17px;
-    }
-  }
-}
+@import "../utils/variables";
 
 .footer
 {
-  background: $color_blue;
-
-  &_line
+  @include fixed(auto,auto,24px,auto);
+  padding: 0 18px;
+  max-height: 58px;
+  height: 100%;
+  width: 100%;
+  &_nav
   {
-    border-top: 1px solid $color_divider;
+    @include flex(row, center, space-evenly);
+    background: $color_white;
+    border-radius: 56px;
+    box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    width: 100%;
+    max-width: 340px;
   }
-
-  &_bottom
+  a 
   {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: .5rem 0;
-    color: $color_white;
-
-    & > a
+    height: 100%;
+    @include flex(column, center, end);
+    text-decoration: none;
+    & > div
     {
-      color: $color_white;
+      @include flex(column);
+      @include typographyBuilder(secondary,400,10,12.1);
+      & > svg
+      {
+        width: 13.5px;
+        height: 14.05px;
+      }
+      & > span 
+      {
+        margin-top: 6.25px;
+        margin-bottom: 12px;
+      }
+      & > hr 
+      {
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        border: 2px solid $color_rose;
+        width: 100%;
+      }
     }
-
-    & img, video, iframe
+    &:hover 
     {
-      display: none !important;
-    }
-
-    div, h1, h2, h3, h4, h5, h6, p
-    {
-      text-align: center !important;
-      font-size: 13px !important;
-      margin-bottom: 0 !important;
+      color: $color_rose;
     }
   }
+}
 
-  &_bottomWidget
+.active
+{
+  color: $color_rose !important;
+  hr 
   {
-    text-align: center;
-    font-size: 11px;
-
-    div, h1, h2, h3, h4, h5, h6, p
-    {
-      text-align: center;
-      font-size: 11px;
-    }
+    opacity: 100 !important;
   }
 }

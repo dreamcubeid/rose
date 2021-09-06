@@ -133,6 +133,10 @@
     "errorTitle": "Page Not Found"
   },
   "footer": {
+    "home": "Homepage",
+    "search": "Search",
+    "cart": "Cart",
+    "account": "Account",
     "newsletter": "Stay in touch",
     "newsletterDesc": "Stay updated for new items & special offer"
   },

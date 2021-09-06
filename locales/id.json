@@ -132,6 +132,10 @@
     "2900067": "Gagal mendapatkan harga"
   },
   "footer": {
+    "home": "Beranda",
+    "search": "Pencarian",
+    "cart": "Keranjang",
+    "account": "Akun",
     "newsletter": "Tetap berlangganan",
     "newsletterDesc": "Tetap update untuk item baru & penawaran khusus"
   },

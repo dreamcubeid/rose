@@ -17,6 +17,11 @@
     height: 100%;
     width: 100%;
     max-width: 340px;
+
+    @media screen and (max-width: $breakpoint_max_sm)
+    {
+      max-width: 100%;
+    }
   }
   a 
   {

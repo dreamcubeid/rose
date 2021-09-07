@@ -88,4 +88,33 @@
       }
     }
   }
+
+  &_footer
+  {
+    @include flex(row, center, flex-start);
+    white-space: nowrap;
+    overflow-x: scroll;
+    background: $color_rose_bg2;
+    padding: 16px 0 106px;
+
+    &Brand
+    {
+      @include flex(row, center, flex-start);
+      white-space: nowrap;
+      overflow-x: scroll;
+      @extend .scrollbar_none;
+  
+      &Item
+      {
+        margin: 0 12px;
+  
+        img,
+        video,
+        iframe
+        {
+          height: 25px !important;
+        }
+      }
+    }
+  }
 }

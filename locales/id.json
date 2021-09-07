@@ -181,7 +181,11 @@
   },
   "home": {
     "close": "Tutup",
-    "loading": "Mohon Menunggu"
+    "loading": "Mohon Menunggu",
+    "featureProduct": "Produk Unggulan",
+    "newProduct": "Terbaru",
+    "ourProduct": "Produk Kami",
+    "preOrder": "Pre-order"
   },
   "instagram": {
     "cta": "ikuti kami di instagram"
@@ -318,7 +322,7 @@
     "titleCheckYoutOrder": "Periksa Nomor Pesanan",
     "descCheckYoutOrder": "Untuk konfirmasi pembayaran, silahkan masukkan email dan nomor pesanan Anda.",
     "orderId": "Nomor Pesanan",
-    "placeholderOrderId":  "Nomor Pesanan",
+    "placeholderOrderId": "Nomor Pesanan",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
     "checkOrder": "Periksa Pesanan",

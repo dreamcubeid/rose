@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import { RiQuestionFill } from 'react-icons/ri'
 import {
   getBanner,
   Products,
@@ -17,7 +18,9 @@ import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'
 import BannerComponent from 'components/Banner'
+import ProductTitle from 'components/ProductTitle'
 import Instafeed from 'components/Instafeed'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Placeholder from 'components/Placeholder'
 /* styles */
 import styleBanner from 'public/scss/components/Banner.module.scss'
@@ -61,7 +64,34 @@ const Home: FC<any> = ({
   const i18n: any = useI18n()
   const router: any = useRouter()
   const size = useWindowSize()
-  const [totalItem, setTotalItem] = useState(null)
+  const [tagname, setTagname] = useState<string>('')
+  const [totalItem, setTotalItem] = useState({
+    ourproduct: null,
+    featured: null,
+    newarrival: null,
+    preorder: null
+  })
+
+  const handleChangeTagname = (tag: string) => setTagname(tag)
+
+  const getTotalItem = (total: number) => {
+    switch (tagname) {
+      case '':
+        setTotalItem({ ...totalItem, ourproduct: total })
+        break
+      case 'featured':
+        setTotalItem({ ...totalItem, featured: total })
+        break
+      case 'new-arrivals':
+        setTotalItem({ ...totalItem, newarrival: total })
+        break
+      case 'preorder':
+        setTotalItem({ ...totalItem, preorder: total })
+        break
+      default:
+        break
+    }
+  }
 
   return (
     <Layout
@@ -92,46 +122,57 @@ const Home: FC<any> = ({
           }}
         />
       </div>
-      {(totalItem > 0 || totalItem === null) &&
-        <div className={styleProduct.product_container}>
-          <div className="container">
-            <div className={styleProduct.product_containerItem}>
-              <LazyLoadComponent>
-                <Products
-                  itemPerPage={8}
-                  classes={classesProducts}
-                  pathPrefix="product"
-                  lazyLoadedImage={false}
-                  getPageInfo={(pageInfo) => setTotalItem(pageInfo.totalItems)}
-                  thumborSetting={{
-                    width: size.width < 768 ? 512 : 800,
-                    format: "webp",
-                    quality: 85
-                  }}
-                  loadingComponent={
-                    <div className="row">
-                      <div className="col-6">
-                        <Placeholder classes={classesPlaceholderProduct} withImage />
-                      </div>
-                      <div className="col-6">
-                        <Placeholder classes={classesPlaceholderProduct} withImage />
-                      </div>
-                    </div>
-                  }
-                />
-              </LazyLoadComponent>
-            </div>
-            <div className="text-center mt-4">
-              <button
-                className={`${styleButton.btn} ${styleButton.btn_secondary}`}
-                onClick={() => router.push(`/${lng}/products`)}
-              >
-                {i18n.t("product.seeAll")}
-              </button>
-            </div>
+      <div className={styleProduct.product_container}>
+        <div className={`${styleProduct.product_containerItem} ${styleProduct.product_containerTitle}`}>
+          <ProductTitle
+            i18n={i18n}
+            styleProduct={styleProduct}
+            handleChangeTagname={handleChangeTagname}
+            tagnameActive={tagname}
+            totalProducts={totalItem}
+          />
+        </div>
+        <div className="container">
+          <div className={styleProduct.product_containerItem}>
+            <LazyLoadComponent>
+              <Products
+                tagName={tagname}
+                itemPerPage={8}
+                classes={classesProducts}
+                pathPrefix="product"
+                lazyLoadedImage={false}
+                getPageInfo={(pageInfo) => getTotalItem(pageInfo.totalItems)}
+                emptyStateComponent={
+                  <EmptyComponent
+                    icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+                    title={i18n.t("product.isEmpty")}
+                  />
+                }
+                thumborSetting={{
+                  width: size.width < 768 ? 512 : 800,
+                  format: "webp",
+                  quality: 85
+                }}
+                loadingComponent={
+                  <>
+                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
+                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
+                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
+                  </>
+                }
+              />
+            </LazyLoadComponent>
+          </div>
+          <div className="text-center mt-4">
+            <button
+              className={`${styleButton.btn} ${styleButton.btn_secondary}`}
+              onClick={() => router.push(`/${lng}/products`)}
+            >
+              {i18n.t("product.seeAll")}
+            </button>
           </div>
         </div>
-      }
+      </div>
       <div className="container">
         <Widget
           pos="main-content-2"
@@ -162,6 +203,25 @@ const Home: FC<any> = ({
           </LazyLoadComponent>
         </div>
       }
+      <div className={styleWidget.widget_footer}>
+        <Widget
+          pos="footer-1"
+          containerClassName={styleWidget.widget_footerBrand}
+          widgetClassName={styleWidget.widget_footerBrandItem}
+          loadingComponent={
+            <>
+              <div className="col-12">
+                <Placeholder classes={classesPlaceholderWidgetService} withImage />
+              </div>
+            </>
+          }
+          thumborSetting={{
+            width: size.width < 768 ? 250 : 300,
+            format: "webp",
+            quality: 85
+          }}
+        />
+      </div>
     </Layout >
   )
 }

@@ -62,7 +62,7 @@
   {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     text-align: center;
   }
 
@@ -70,8 +70,7 @@
   {
     @include typographyBuilder(secondary, 600, 10, 16);
     width: fit-content;
-    border-bottom-right-radius: 5px;
-    padding: 4px 8px;
+    padding: 3px 8px;
     display: table-cell;
     vertical-align: middle;
     text-transform: uppercase;

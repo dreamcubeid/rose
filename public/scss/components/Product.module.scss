@@ -4,7 +4,7 @@
 {
   &_container
   {
-    margin: 24px 0;
+    margin: 5px 0 24px;
 
     &Item
     {
@@ -13,12 +13,39 @@
       overflow-x: scroll;
       @extend .scrollbar_none;
     }
+
+    &Title
+    {
+      border-bottom: 1px solid $color_border;
+      margin-bottom: 24px;
+    }
+  }
+
+  &_homeTitle
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_inactive;
+    padding: 12px 0;
+    margin: 0 15px;
+    cursor: pointer;
+
+    &:hover
+    {
+      color: $color_text_primary;
+    }
+
+    &Active
+    {
+      color: $color_text_primary;
+      border-bottom: 2px solid $color_rose;
+    }
   }
 
   &_item
   {
     position: relative;
     margin: 0 8px;
+    width: min-content;
 
     &:first-child
     {
@@ -35,7 +62,7 @@
   {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     text-align: center;
   }
 
@@ -43,16 +70,15 @@
   {
     @include typographyBuilder(secondary, 600, 10, 16);
     width: fit-content;
-    border-bottom-right-radius: 5px;
-    padding: 4px 8px;
+    padding: 3px 8px;
     display: table-cell;
     vertical-align: middle;
     text-transform: uppercase;
 
     &__outofstock
     {
-      background: $color_text_inactive;
-      color: $color_text_primary;
+      background: $color_text_secondary;
+      color: $color_white;
     }
 
     &__sale
@@ -69,20 +95,20 @@
 
     &__comingsoon
     {
-      background: $color_success;
+      background: $color_warning;
       color: $color_white;
     }
 
     &__new
     {
-      background: $color_rose;
+      background: $color_success;
       color: $color_white;
     }
 
     &__preorder
     {
-      background: $color_warning;
-      color: $color_text_primary;
+      background: $color_rose;
+      color: $color_white;
     }
   }
 
@@ -123,8 +149,9 @@
 
     &__sale
     {
+      @include fontSize(12);
       display: block;
-      color: $color_rose;
+      color: $color_text_placeholder;
       text-decoration: line-through;
     }
 

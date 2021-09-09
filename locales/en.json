@@ -54,7 +54,6 @@
     "youHave": "You have",
     "cantFindYourOrder": "Can't find your order?",
     "searchHere": "Search here"
-
   },
   "article": {
     "categories": "Help"
@@ -182,7 +181,11 @@
   },
   "home": {
     "close": "Close",
-    "loading": "Please Wait"
+    "loading": "Please Wait",
+    "featureProduct": "Feature Product",
+    "newProduct": "New",
+    "ourProduct": "Our Product",
+    "preOrder": "Pre-order"
   },
   "instagram": {
     "cta": "follow us on instagram"
@@ -319,7 +322,7 @@
     "titleCheckYoutOrder": "Check Order ID",
     "descCheckYoutOrder": "To confirm payment, please enter your email and order ID.",
     "orderId": "Order ID",
-    "placeholderOrderId":  "Order ID",
+    "placeholderOrderId": "Order ID",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
     "checkOrder": "Check Order",

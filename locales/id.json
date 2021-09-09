@@ -85,10 +85,11 @@
     "price": "Harga",
     "quantity": "Kuantitas",
     "shopNow": "Belanja Sekarang",
+    "shopMore": "+ Belanja Lagi",
     "title": "Keranjang",
     "unknownSKU": "SKU tidak diketahui",
     "unpublishedProduct": "Produk tidak diterbitkan",
-    "writeNoteToSeller": "Tulis catatan untuk penjual"
+    "writeNoteToSeller": "Catatan untuk penjual"
   },
   "categories": {
     "categories": "Kategori"

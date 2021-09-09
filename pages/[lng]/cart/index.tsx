@@ -62,7 +62,7 @@ const Cart: FC<any> = ({
 				<div className={styleCart.cart_header}>
 					<div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t('cart.item')}`}</div>
 					<div>
-						<Link href="/">+ Belanja lagi</Link>
+						<Link href={`/${lng}/products`}>{i18n.t('cart.shopMore')}</Link>
 					</div>
 				</div>
 				{invalidMsg && (

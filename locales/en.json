@@ -85,10 +85,11 @@
     "price": "Price",
     "quantity": "Quantity",
     "shopNow": "Shop Now",
+    "shopMore": "+ Buy More",
     "title": "Cart",
     "unknownSKU": "Unknown SKU",
     "unpublishedProduct": "Unpublish Product",
-    "writeNoteToSeller": "Write Note To Seller"
+    "writeNoteToSeller": "Note To Seller"
   },
   "categories": {
     "categories": "Categories"

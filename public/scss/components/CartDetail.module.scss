@@ -7,13 +7,13 @@
     @include flex(row,center,space-between);
     padding: 20px 18px 0 18px;
 
-    :first-child
+    & :first-child
     {
       color: $color_text_primary;
       @include typographyBuilder(secondary,500,14,24);
     }
 
-    :last-child 
+    & :last-child 
     {
       color: $color_rose;
       @include typographyBuilder(secondary,400,14,24);
@@ -131,7 +131,7 @@
     grid-row: 2 / span 3;
     grid-column: 2 / span 2;
 
-    :first-child:before
+    & :first-child:before
     {
       @include typographyBuilder(secondary,400,10,16);
       color: $color_text_secondary;
@@ -166,13 +166,13 @@
     padding: 2px 5px;
     grid-template-columns: 70% 30%;
 
-    :last-child 
+    & :last-child 
     {
       grid-row: 1;
       background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00Ljk5OTk5IDIuODI4TDIuMTcxOTkgNS42NTdMMC43NTY5ODkgNC4yNDNMNC45OTk5OSAwTDkuMjQyOTkgNC4yNDNMNy44Mjc5OSA1LjY1N0w0Ljk5OTk5IDIuODI4WiIgZmlsbD0iIzQ0NDQ0NCIvPgo8L3N2Zz4K)
     }
 
-    :first-child 
+    & :first-child 
     {
       background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00Ljk5OTk5IDZMMC43NTY5ODkgMS43NTdMMi4xNzE5OSAwLjM0M0w0Ljk5OTk5IDMuMTcyTDcuODI3OTkgMC4zNDNMOS4yNDI5OSAxLjc1N0w0Ljk5OTk5IDZaIiBmaWxsPSIjNDQ0NDQ0Ii8+Cjwvc3ZnPgo=)
     }

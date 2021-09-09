@@ -77,6 +77,7 @@
     "errorSKUTitle": "Sorry, the order cannot be processed",
     "invalidItems": "List of invalid products: ",
     "isEmpty": "You haven't added items yet",
+    "prefixItem": "There are",
     "item": "Item",
     "limitStock": "Cannot exceed the available stock",
     "noteToSeller": "Note to Seller",

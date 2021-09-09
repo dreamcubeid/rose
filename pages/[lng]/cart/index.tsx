@@ -1,19 +1,19 @@
 /* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { parseCookies } from 'lib/parseCookies'
 import Router from 'next/router'
+import Link from 'next/link'
 import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
-import Link from 'next/link'
 import { CartDetails, useI18n } from '@sirclo/nexus'
 /* library template */
+import { parseCookies } from 'lib/parseCookies'
 import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
-
+/* styles */
 import styleCart from 'public/scss/components/CartDetail.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
@@ -60,7 +60,7 @@ const Cart: FC<any> = ({
 		>
 			<section className={styleCart.cart}>
 				<div className={styleCart.cart_header}>
-					<div>{`Terdapat ${SKUs.length} barang`}</div>
+					<div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t('cart.item')}`}</div>
 					<div>
 						<Link href="/">+ Belanja lagi</Link>
 					</div>

@@ -19,7 +19,6 @@ const useInfiniteScroll = (pageInfo: any, itemClass: string) => {
   }
 
   useEffect(() => {
-    console.log(currPage)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   })

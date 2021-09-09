@@ -1,50 +1,28 @@
-@import "../base/colors.scss";
+@import "../utils/variables";
 
 .breadcrumbs
 {
-  padding-bottom: 1rem;
-  white-space: nowrap;
-  overflow-x: auto;
+  @include typographyBuilder(secondary,400,10,16);
+  @include flex(row,start,start);
+}
 
-  &_class 
+.breadcrumb
+{
+  cursor: pointer;
+
+  & > a {
+    color: $color_text_primary;
+    text-decoration: none;
+  }
+
+  &_separator
   {
-    position: relative;
-    font-family: "roboto-medium";
-    font-size: 11px;
-    letter-spacing: 0.75px;
-    color: $color_gray_semi_dark;
-    margin-right: 2rem;
-    cursor: pointer;
-
-    &:last-child
-    {
-      margin-right: 0;
-    }
-
-    &_number
-    {
-      position: absolute;
-      left: 0;
-      width: 19px;
-      height: 19px;
-      line-height: 19px;
-      text-align: center;
-      color: white;
-      background: $color_gray_semi_dark;
-      border-radius: 50%;
-    }
-
-    &_label
-    {
-      margin-left: 2rem;
-    }
+    padding: 0 4px;
   }
 
-  &_activeClass {
-    color: $color_blue;
-  }
-
-  &_activeNumber {
-    background: $color_blue;
+  &_last
+  {
+    cursor: text;
+    color: $color_text_inactive;
   }
 }

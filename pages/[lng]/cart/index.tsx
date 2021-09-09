@@ -17,6 +17,7 @@ import Loader from 'components/Loader/Loader'
 import styleCart from 'public/scss/components/CartDetail.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 
 const classesCartDetails = {
 	className: styleCart.cart,
@@ -58,7 +59,12 @@ const Cart: FC<any> = ({
 			withCart={false}
 			withFooter={true}
 		>
-			<section className={styleCart.cart}>
+			<div className={styleCart.cart}>
+				<div className={styleCart.cart_breadcrumb}>
+					<Breadcrumb
+						steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.cart') }]}
+					/>
+				</div>
 				<div className={styleCart.cart_header}>
 					<div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t('cart.item')}`}</div>
 					<div>
@@ -112,7 +118,7 @@ const Cart: FC<any> = ({
 						}
 					/>
 				</div>
-			</section>
+			</div>
 		</Layout>
 	)
 }

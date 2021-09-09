@@ -70,6 +70,10 @@
     "recentPost": "Postingan Terbaru",
     "title": "Blog"
   },
+  "breadcrumb": {
+    "home": "Beranda",
+    "cart": "Keranjang"
+  },
   "cart": {
     "amount": "Jumlah",
     "closeOrderProduct": "Produk pesanan sudah ditutup",

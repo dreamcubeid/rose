@@ -70,6 +70,10 @@
     "recentPost": "Recent Post",
     "title": "Blogs"
   },
+  "breadcrumb": {
+    "home": "Home",
+    "cart": "Cart"
+  },
   "cart": {
     "amount": "Amount",
     "closeOrderProduct": "Close Order Product",

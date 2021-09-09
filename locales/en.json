@@ -419,6 +419,13 @@
     "writeReview": "Write Review",
     "yourReview": "Your Review"
   },
+  "products": {
+    "customize": "Customize",
+    "item": "item",
+    "seeAllProduct": "See all products",
+    "show": "Showing",
+    "title": "All Products"
+  },
   "register": {
     "address": "Address",
     "addressPlaceholder": "Input your address",

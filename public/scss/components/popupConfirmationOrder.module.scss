@@ -108,7 +108,6 @@
 {
   @extend .btn;
   @extend .btn_secondary;
-  @extend .btn_long;
   margin-top: 8px;
 
   &:hover
@@ -122,5 +121,4 @@
 {
   @extend .btn;
   @extend .btn_primary;
-  @extend .btn_long;
 }

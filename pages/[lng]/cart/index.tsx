@@ -91,7 +91,7 @@ const Cart: FC<any> = ({
 						onErrorMsg={(e) => console.log(e)}
 						onInvalidMsg={(msg) => setInvalidMsg(msg)}
 						thumborSetting={{
-							width: 72,
+							width: 150,
 							format: 'webp',
 							quality: 85,
 						}}
@@ -125,14 +125,6 @@ const Cart: FC<any> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
 	const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
-
-	if (process.env.IS_PROD !== 'false') {
-		const cookies = parseCookies(req)
-		res.writeHead(307, {
-			Location: `/${cookies.ACTIVE_LNG || 'id'}`,
-		})
-		res.end()
-	}
 
 	const brand = await useBrand(req)
 

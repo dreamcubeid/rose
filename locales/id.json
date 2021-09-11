@@ -419,6 +419,13 @@
     "writeReview": "Tulis Ulasan",
     "yourReview": "Ulasan Anda"
   },
+  "products": {
+    "customize": "Sesuaikan",
+    "item": "barang",
+    "seeAllProduct": "Lihat semua produk",
+    "show": "Menampilkan",
+    "title": "Semua Produk"
+  },
   "register": {
     "address": "Alamat",
     "addressPlaceholder": "Masukan alamat anda",

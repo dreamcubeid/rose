@@ -66,6 +66,11 @@
     text-align: center;
   }
 
+  &_stickerGrid
+  {
+    right: 15px
+  }
+
   &_stickerLabel
   {
     @include typographyBuilder(secondary, 600, 10, 16);
@@ -159,6 +164,16 @@
     {
       display: block;
       color: $color_error;
+    }
+  }
+
+  &_itemContainer
+  {
+    margin-bottom: 32px;
+
+    &Image
+    {
+      width: 100%;
     }
   }
 }

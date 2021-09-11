@@ -1,32 +1,35 @@
-@import "../base/colors";
-@import "../components/Button.module.scss";
-@import "../components/Product.module.scss";
-@import "../components/Placeholder.module.scss";
-@import "../components/ProductCategory.module.scss";
-@import "../components/Form.module.scss";
+@import '../base/colors';
+@import '../utils/variables';
 
 .products
 {
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-  min-height: 60vh;
-
-  @media screen and (max-width: 575px) {
-    margin-top: 1rem;
-    min-height: 65vh;
-  }
+  min-height: 100vh;
+  padding-bottom: 106px;
 
   &_header
   {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 1rem;
+    @include flex(row, center, space-between);
+    margin-bottom: 24px;
 
-    h3
+    &TotalItem
     {
-      font-family: "roboto-medium";
-      font-size: 24px;
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin: 0;
+    }
+
+    &Customize
+    {
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_rose;
+      cursor: pointer;
+
+      img
+      {
+        width: 12px;
+        margin-right: 10px;
+      }
     }
   }
 

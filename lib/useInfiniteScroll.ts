@@ -5,12 +5,12 @@ const useInfiniteScroll = (pageInfo: any, itemClass: string) => {
   const totalPage = Math.ceil(pageInfo.totalItems / pageInfo.itemPerPage)
 
   const handleScroll = () => {
-    const lastTestimonial = document.querySelector(
+    const lastProduct = document.querySelector(
       `.${itemClass}:last-child`
     ) as HTMLElement
 
-    if (lastTestimonial) {
-      const lastTestimonialOffset = lastTestimonial.offsetTop + lastTestimonial.clientHeight
+    if (lastProduct) {
+      const lastTestimonialOffset = lastProduct.offsetTop + lastProduct.clientHeight
       const pageOffset = window.pageYOffset + window.innerHeight
 
       if (pageOffset > lastTestimonialOffset && currPage < totalPage - 1)
@@ -23,7 +23,7 @@ const useInfiniteScroll = (pageInfo: any, itemClass: string) => {
     return () => window.removeEventListener("scroll", handleScroll)
   })
 
-  return { currPage }
+  return { currPage, setCurrPage }
 }
 
 export default useInfiniteScroll

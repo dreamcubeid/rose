@@ -29,6 +29,7 @@ import useWindowSize from 'lib/useWindowSize'
 /* components */
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 const Popup = dynamic(() => import('components/Popup'))
 /* styles */
@@ -146,7 +147,9 @@ const ProductsPage: FC<any> = ({
     >
       <SEO title={i18n.t("product.products")} />
       <div className="container mt-5 pt-4 pb-3">
-        <span>Beranda / Semua Product</span>
+        <Breadcrumb
+          steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('products.title') }]}
+        />
       </div>
       <div className="container">
         <div className={styleProducts.products_header}>

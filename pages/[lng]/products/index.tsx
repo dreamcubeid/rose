@@ -7,12 +7,19 @@ import {
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { RiQuestionFill } from 'react-icons/ri'
+import {
+  RiQuestionFill,
+  RiCloseLine
+} from 'react-icons/ri'
+import {
+  FaChevronDown
+} from 'react-icons/fa'
 import {
   Products,
   ProductFilter,
   ProductCategory,
   useI18n,
+  ProductSort,
 } from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
@@ -23,10 +30,12 @@ import useWindowSize from 'lib/useWindowSize'
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
-const Popup = dynamic(() => import('components/Popup/Popup'))
+const Popup = dynamic(() => import('components/Popup'))
 /* styles */
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleProduct from 'public/scss/components/Product.module.scss'
+import styleSort from 'public/scss/components/Sort.module.scss'
+import styleFilter from 'public/scss/components/Filter.module.scss'
 import styleProducts from 'public/scss/pages/Products.module.scss'
 import Loader from 'components/Loader/Loader'
 
@@ -49,36 +58,44 @@ const classesProducts = {
 }
 
 const classesProductSort = {
-  sortClassName: `form-group ${styleProducts.sirclo_form_select}`,
-  sortOptionsClassName: `form-control ${styleProducts.sirclo_form_input}`,
+  sortClassName: styleSort.sort,
+  sortOptionsClassName: styleSort.sort_options,
+  sortOptionClassName: styleSort.sort_optionItem,
+  sortOptionButtonClassName: styleSort.sort_optionButton
 }
 
-const classesProductFilterSort = {
-  filterClassName: styleProducts.products_filter,
-  filterNameClassName: styleProducts.products_filterName,
-  filterOptionPriceClassName: styleProducts.products_filterPrice,
-  filterPriceLabelClassName: styleProducts.products_filterPriceLabel,
-  filterPriceInputClassName: styleProducts.products_filterPriceInput,
-  filterOptionClassName: styleProducts.products_filterOption,
-  filterColorLabelClassName: styleProducts.products_filterOptionLabel,
-  filterLabelClassName: styleProducts.products_filterOptionLabel,
-  filterCheckboxClassName: styleProducts.products_filterOptionCheckbox,
-  filterSliderClassName: styleProducts.products_filterSlider,
-  filterSliderRailClassName: styleProducts.products_filterSliderRail,
-  filterSliderHandleClassName: styleProducts.products_filterSliderHandle,
-  filterSliderTrackClassName: styleProducts.products_filterSliderTrack,
-  filterSliderTooltipClassName: styleProducts.products_filterSliderTooltip,
-  filterSliderTooltipContainerClassName: styleProducts.products_filterSliderTooltipContainer,
-  filterSliderTooltipTextClassName: styleProducts.products_filterSliderTooltipText,
+const classesProductFilter = {
+  filtersClassName: 'w-100',
+  filterClassName: styleFilter.filter,
+  filterNameClassName: styleFilter.filter_name,
+  filterOptionPriceClassName: styleFilter.filter_price,
+  filterPriceLabelClassName: styleFilter.filter_priceLabel,
+  filterPriceInputClassName: styleFilter.filter_priceInput,
+  filterOptionClassName: styleFilter.filter_option,
+  filterColorLabelClassName: styleFilter.filter_optionLabel,
+  filterLabelClassName: styleFilter.filter_optionLabel,
+  filterInputClassName: styleFilter.filter_optionColorInput,
+  filterColorPreviewClassName: styleFilter.filter_optionColorPreview,
+  filterColorInputClassName: styleFilter.filter_optionColorInput,
+  filterCheckboxClassName: styleFilter.filter_optionCheckbox,
+  filterSliderClassName: styleFilter.filter_slider,
+  filterSliderRailClassName: styleFilter.filter_sliderRail,
+  filterSliderHandleClassName: styleFilter.filter_sliderHandle,
+  filterSliderTrackClassName: styleFilter.filter_sliderTrack,
+  filterSliderTooltipClassName: styleFilter.filter_sliderTooltip,
+  filterSliderTooltipContainerClassName: styleFilter.filter_sliderTooltipContainer,
+  filterSliderTooltipTextClassName: styleFilter.filter_sliderTooltipText,
 }
 
 const classesProductCategory = {
-  parentCategoryClassName: styleProducts.category_order,
+  parentCategoryClassName: styleProducts.category,
   categoryItemClassName: styleProducts.category_list,
-  categoryValueClassName: styleProducts.category_list_link,
-  categoryNameClassName: styleProducts.category_list_item,
-  categoryNumberClassName: "ml-1",
-  dropdownIconClassName: "d-none",
+  categoryValueContainerClassName: styleProducts.category_listContainer,
+  categoryValueClassName: styleProducts.category_listLink,
+  categoryNameClassName: styleProducts.category_listItem,
+  categoryNumberClassName: styleProducts.category_listTotalNumber,
+  dropdownIconClassName: styleProducts.category_listIcon,
+  childCategoryClassName: styleProducts.category
 }
 
 const ProductsPage: FC<any> = ({
@@ -93,7 +110,7 @@ const ProductsPage: FC<any> = ({
   const categories: string = useQuery("categories")
   const tagname: string | string[] = router.query.tagname || null
 
-  const [openSort, setOpenSort] = useState<boolean>(false)
+  const [openCustomize, setOpenCustomize] = useState<boolean>(false)
   const [sort, setSort] = useState(null)
   const [filterProduct, setFilterProduct] = useState({})
 
@@ -109,8 +126,15 @@ const ProductsPage: FC<any> = ({
     setCurrPage(0)
   }, [filterProduct, categories, tagname, sort])
 
-  const toogleSort = () => setOpenSort(!openSort)
-  const handleFilter = (selectedFilter: any) => setFilterProduct(selectedFilter)
+  useEffect(() => {
+    setOpenCustomize(false)
+  }, [categories])
+
+  const toogleCustomize = () => setOpenCustomize(!openCustomize)
+  const handleFilter = (selectedFilter: any) => {
+    setFilterProduct(selectedFilter)
+    setOpenCustomize(false)
+  }
 
   return (
     <Layout
@@ -129,7 +153,10 @@ const ProductsPage: FC<any> = ({
           <h6 className={styleProducts.products_headerTotalItem}>
             {i18n.t("products.show")} {pageInfo.totalItems} {i18n.t("products.item")}
           </h6>
-          <div className={styleProducts.products_headerCustomize}>
+          <div
+            className={styleProducts.products_headerCustomize}
+            onClick={() => toogleCustomize()}
+          >
             <img src="/icons/filter.svg" alt="customize" />
             {i18n.t("products.customize")}
           </div>
@@ -189,36 +216,51 @@ const ProductsPage: FC<any> = ({
           }
         </div>
       </div>
-      {openSort && (
-        <Popup
-          withHeader
-          setPopup={toogleSort}
-          popupTitle={i18n.t("product.adjust")}
-        >
-          <div className={styleProducts.products_sortLabel}>
-            {i18n.t("product.sort")}
-          </div>
-          <ProductCategory
-            classes={classesProductCategory}
-            showCategoryNumber={false}
-          />
-          <ProductFilter
-            withSort
-            sortType="dropdown"
-            sortClasses={classesProductSort}
-            classes={classesProductFilterSort}
-            withPriceMinimumSlider
-            withPriceValueLabel
-            withPriceInput
-            withTooltip
-            handleFilter={handleFilter}
-            handleSort={(selectedSort: any) => {
-              setSort(selectedSort)
-              setOpenSort(false)
-            }}
-          />
-        </Popup>
-      )}
+      <Popup
+        title={i18n.t("product.filter")}
+        visibleState={openCustomize}
+        setVisibleState={setOpenCustomize}
+        withCloseButton
+        iconClose={<RiCloseLine size={24} />}
+        withButtonLeft={{
+          icon: <img src="/icons/refresh.svg" alt="refresh" />,
+          onClick: () => {
+            router.replace(`/${lng}/products`)
+          }
+        }}
+      >
+        {openCustomize &&
+          <>
+            <div className={styleProducts.products_sortLabel}>
+              {i18n.t("products.sort")}
+            </div>
+            <ProductSort
+              classes={classesProductSort}
+              type="list"
+              handleSort={(selectedSort: any) => {
+                setSort(selectedSort)
+                setOpenCustomize(false)
+              }}
+            />
+            <div className={styleProducts.products_sortLabel}>
+              {i18n.t("products.category")}
+            </div>
+            <ProductCategory
+              classes={classesProductCategory}
+              showCategoryNumber
+              dropdownIcon={<FaChevronDown size={14} />}
+            />
+            <ProductFilter
+              classes={classesProductFilter}
+              withPriceMinimumSlider
+              withPriceValueLabel
+              withPriceInput
+              withTooltip
+              handleFilter={handleFilter}
+            />
+          </>
+        }
+      </Popup>
     </Layout>
   )
 }

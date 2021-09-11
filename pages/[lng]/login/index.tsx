@@ -25,7 +25,7 @@ const loginClasses = {
 	inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
 	passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
 	buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
-	footerClassName: `${styleButton.btn} ${styleButton.btn_secondary} ${styleLogin.login_footer}`,
+	signUpText: `${styleButton.btn} ${styleButton.btn_secondary} ${styleLogin.login_signUp}`,
 	forgotPasswordClass: styleLogin.login_forgotContainer,
 }
 

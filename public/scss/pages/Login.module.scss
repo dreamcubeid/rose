@@ -79,15 +79,11 @@
     }
   }
 
-  &_footer 
+  &_signUp 
   {
     margin: 12px 0 0 0 !important;
-
-    & > a 
-    {
-      text-decoration: none;
-      color: $color_rose;
-    }
+    text-decoration: none !important;
+    color: $color_rose;
   }
 
   &_separator

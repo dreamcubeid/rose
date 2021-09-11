@@ -55,8 +55,8 @@ const LoginPage: FC<any> = ({
 						classes={loginClasses}
 						onCompletedMsg={(msg) => toast.success(msg)}
 						onErrorMsg={(msg) => toast.error(msg)}
-						passwordViewIcon={<RiEye2Line />}
-						passwordHideIcon={<RiEyeCloseLine />}
+						passwordViewIcon={<RiEyeCloseLine />}
+						passwordHideIcon={<RiEye2Line />}
 						loadingComponent={<Loader color="text-light" />}
 					/>
 					{(hasGoogleAuth || hasFacebookAuth) && (

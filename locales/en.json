@@ -72,7 +72,8 @@
   },
   "breadcrumb": {
     "home": "Home",
-    "cart": "Cart"
+    "cart": "Cart",
+    "login": "Account"
   },
   "cart": {
     "amount": "Amount",
@@ -200,22 +201,23 @@
     "loading": "Loading"
   },
   "login": {
-    "clickHere": "Click here",
-    "dontHaveAccount": "Don't have any account yet?",
+    "title": "Login",
+    "clickHere": "Forgot your password",
+    "forgetPassword": "",
+    "dontHaveAccount": "",
+    "register": "Register",
     "email": "Email",
     "failed": "Failed to login, check your email and password",
-    "forgetPassword": "Forgot your password?",
     "insertEmail": "Insert Your Email",
     "insertPassword": "Insert Your Password",
     "login": "Login",
     "password": "Password",
-    "register": "Register",
     "sso": "with Google",
     "success": "Login success",
-    "title": "Login",
     "toRegister": "Sign Up",
     "verifyLoginAttempt": "Please verify that you are human!",
-    "welcome": "Welcome back. Log in using your e-email and password."
+    "welcome": "Welcome back. Log in using your e-email and password.",
+    "or": "or login with"
   },
   "lookbook": {
     "errorButton": "Return to Home Page",

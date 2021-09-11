@@ -7,7 +7,6 @@ import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
 import { CartDetails, useI18n } from '@sirclo/nexus'
 /* library template */
-import { parseCookies } from 'lib/parseCookies'
 import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'

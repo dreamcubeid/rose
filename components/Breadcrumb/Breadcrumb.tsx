@@ -1,56 +1,47 @@
-import React, { FC } from 'react';
-import Link from 'next/link';
-import { useI18n } from '@sirclo/nexus';
-import styles from "public/scss/components/Breadcrumbs.module.scss";
+import React, { FC } from 'react'
+import Link, { LinkProps } from 'next/link'
+/* styles */
+import styles from 'public/scss/components/Breadcrumbs.module.scss'
+
+type BreadcrumbsPropsType = {
+	steps: { label: string; href?: LinkProps }[]
+	separator?: '/'
+}
 
 type BreadcrumbPropsType = {
-  currentStep: number;
+	label: string
+	href?: string | any
+	className?: string
+	disable?: boolean
+}
+
+const Breadcrumbs: FC<BreadcrumbsPropsType> = ({ steps, separator = '/' }) => {
+	if (!steps.length) return null
+
+	if (steps.length === 1)
+		return (
+			<>
+				<div className={styles.breadcrumb_separator}>{separator}</div>
+				<Breadcrumb {...steps[0]} className={styles.breadcrumb_last} disable />
+				<Breadcrumbs steps={steps.slice(1)} />
+			</>
+		)
+
+	return (
+		<div className={styles.breadcrumbs}>
+			<Breadcrumb {...steps[0]} />
+			<Breadcrumbs steps={steps.slice(1)} />
+		</div>
+	)
 }
 
 const Breadcrumb: FC<BreadcrumbPropsType> = ({
-  currentStep
+	label,
+	href = '/',
+	className = styles.breadcrumb,
+	disable = false,
 }) => {
-  const i18n: any = useI18n();
-  const steps = [{
-    text: i18n.t('placeOrder.userInformation'),
-    route: '/place_order'
-  }, {
-    text: i18n.t('shipping.shippingMethod'),
-    route: '/shipping_method'
-  }, {
-    text: i18n.t('payment.title'),
-    route: '/payment_method'
-  },
-  ];
-  return (
-    <div className={styles.breadcrumbs}>
-      {
-        steps.map((step, index) => (
-          <React.Fragment key={index}>
-            <Link
-              href={`/[lng]${step.route}`} as={`/${i18n.activeLocale}${step.route}`}
-            >
-              <span
-                className={`
-                  ${styles.breadcrumbs_class} 
-                  ${index == currentStep - 1 ? styles.breadcrumbs_activeClass : ''}
-                `}
-              >
-                <span
-                  className={`
-                    ${styles.breadcrumbs_class_number} 
-                    ${index == currentStep - 1 ? styles.breadcrumbs_activeNumber : ''}
-                  `}
-                >
-                  {index + 1}
-                </span>
-                <span className={styles.breadcrumbs_class_label}>{step.text}</span>
-              </span>
-            </Link>
-          </React.Fragment>))
-      }
-    </div>
-  )
+	return <div className={className}>{disable ? label : <Link href={href}>{label}</Link>}</div>
 }
 
-export default Breadcrumb;
+export default Breadcrumbs

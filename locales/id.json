@@ -70,6 +70,10 @@
     "recentPost": "Postingan Terbaru",
     "title": "Blog"
   },
+  "breadcrumb": {
+    "home": "Beranda",
+    "cart": "Keranjang"
+  },
   "cart": {
     "amount": "Jumlah",
     "closeOrderProduct": "Produk pesanan sudah ditutup",
@@ -77,6 +81,7 @@
     "errorSKUTitle": "Mohon maaf, pesanan belum dapat diproses",
     "invalidItems": "Daftar produk yang tidak valid: ",
     "isEmpty": "Anda belum menambahkan barang",
+    "prefixItem": "Terdapat",
     "item": "Barang",
     "limitStock": "Tidak bisa melebihi stok yang tersedia",
     "noteToSeller": "Catatan untuk penjual",
@@ -84,10 +89,11 @@
     "price": "Harga",
     "quantity": "Kuantitas",
     "shopNow": "Belanja Sekarang",
+    "shopMore": "+ Belanja Lagi",
     "title": "Keranjang",
     "unknownSKU": "SKU tidak diketahui",
     "unpublishedProduct": "Produk tidak diterbitkan",
-    "writeNoteToSeller": "Tulis catatan untuk penjual"
+    "writeNoteToSeller": "Catatan untuk penjual"
   },
   "categories": {
     "categories": "Kategori"

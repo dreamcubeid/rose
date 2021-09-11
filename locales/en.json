@@ -70,6 +70,10 @@
     "recentPost": "Recent Post",
     "title": "Blogs"
   },
+  "breadcrumb": {
+    "home": "Home",
+    "cart": "Cart"
+  },
   "cart": {
     "amount": "Amount",
     "closeOrderProduct": "Close Order Product",
@@ -77,6 +81,7 @@
     "errorSKUTitle": "Sorry, the order cannot be processed",
     "invalidItems": "List of invalid products: ",
     "isEmpty": "You haven't added items yet",
+    "prefixItem": "There are",
     "item": "Item",
     "limitStock": "Cannot exceed the available stock",
     "noteToSeller": "Note to Seller",
@@ -84,10 +89,11 @@
     "price": "Price",
     "quantity": "Quantity",
     "shopNow": "Shop Now",
+    "shopMore": "+ Buy More",
     "title": "Cart",
     "unknownSKU": "Unknown SKU",
     "unpublishedProduct": "Unpublish Product",
-    "writeNoteToSeller": "Write Note To Seller"
+    "writeNoteToSeller": "Note To Seller"
   },
   "categories": {
     "categories": "Categories"

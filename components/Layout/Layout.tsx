@@ -76,7 +76,8 @@ const Layout: FC<LayoutPropType> = ({
     let stickyNavPathCategories = ['/[lng]', '/[lng]/lookbook/categories']
     let stickyNavPathHome = ['/[lng]', '/[lng]']
     let stickyActive =
-      stickyNavPathCategories.includes(pathname) || stickyNavPathHome.includes(pathname)
+      stickyNavPathCategories.includes(pathname) ||
+      stickyNavPathHome.includes(pathname)
 
     if (!stickyActive) className = 'notSticky'
     else if (isSticky && stickyActive) className = 'notSticky'
@@ -86,7 +87,10 @@ const Layout: FC<LayoutPropType> = ({
 
   const getToken = (): string => {
     const googleAdsWebsiteMetaToken = brand?.googleAdsWebsiteMetaToken
-    const token: string = googleAdsWebsiteMetaToken.replace(/.*content="([^"]*)".*/, '$1')
+    const token: string = googleAdsWebsiteMetaToken.replace(
+      /.*content="([^"]*)".*/,
+      '$1'
+    )
     return token
   }
 
@@ -100,11 +104,30 @@ const Layout: FC<LayoutPropType> = ({
         {brand?.googleAdsWebsiteMetaToken && (
           <meta name="google-site-verification" content={getToken()} />
         )}
-        <link rel="shortcut icon" href={brand?.settings?.faviconURL} type="image/x-icon" />
+        <link
+          rel="shortcut icon"
+          href={brand?.settings?.faviconURL}
+          type="image/x-icon"
+        />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="preload" href="webfonts/Roboto-Regular.ttf" as="font" crossOrigin="anonymous" />
-        <link rel="preload" href="webfonts/Roboto-Black.ttf" as="font" crossOrigin="anonymous" />
-        <link rel="preload" href="webfonts/Roboto-Medium.ttf" as="font" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="webfonts/Roboto-Regular.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="webfonts/Roboto-Black.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="webfonts/Roboto-Medium.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://thumbor.sirclocdn.com" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
       </Head>

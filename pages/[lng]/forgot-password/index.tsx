@@ -34,7 +34,9 @@ const ForgotPassword: FC<any> = ({
         <div className="container">
           <div className="row">
             <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
-              <div className={`${styles.login_item} ${styles.login_item__title}`}>
+              <div
+                className={`${styles.login_item} ${styles.login_item__title}`}
+              >
                 <h3>{i18n.t('resetPassword.title')}</h3>
                 <span>{i18n.t('resetPassword.enterEmailBody')}</span>
               </div>
@@ -51,7 +53,11 @@ const ForgotPassword: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

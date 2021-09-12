@@ -32,8 +32,15 @@ export const getServerSideProps = async ({ req, res, params }: any) => {
   const location = `/${lng}` + req.url
 
   if (allowedUri.indexOf(params.param) == -1) {
-    if (res && typeof res.writeHead === 'function' && typeof res.end === 'function') {
-      if (params.param && (params.param.includes('id') || params.param.includes('en'))) {
+    if (
+      res &&
+      typeof res.writeHead === 'function' &&
+      typeof res.end === 'function'
+    ) {
+      if (
+        params.param &&
+        (params.param.includes('id') || params.param.includes('en'))
+      ) {
         const statusCode = '404'
         return {
           props: { statusCode }

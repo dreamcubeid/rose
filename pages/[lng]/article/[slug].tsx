@@ -40,7 +40,9 @@ const ArticleDetail: FC<any> = ({
                 containerClassName={styles.article}
                 slug={slug as string}
                 getTitle={setTitle}
-                loadingComponent={<Placeholder classes={classesPlaceholderArticle} withImage />}
+                loadingComponent={
+                  <Placeholder classes={classesPlaceholderArticle} withImage />
+                }
               />
             </div>
             <div className="col-12 col-md-3">
@@ -53,7 +55,10 @@ const ArticleDetail: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

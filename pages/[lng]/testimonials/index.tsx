@@ -70,7 +70,13 @@ const TestimonialsPage: FC<any> = ({
   const toogleShowAdd = () => setShowAdd(!showAdd)
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAllowed={testimonialAllowed}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      withAllowed={testimonialAllowed}
+    >
       <div className={`${styles.testimonials} container`}>
         <div className={styles.testimonials_header}>
           <h4>{i18n.t('testimonial.title')}</h4>
@@ -84,14 +90,19 @@ const TestimonialsPage: FC<any> = ({
                 <strong>{totalItem}</strong>
                 {i18n.t('testimonial.weHave2')}
               </p>
-              <button className={styles.testimonials_qtyAddButton} onClick={toogleShowAdd}>
+              <button
+                className={styles.testimonials_qtyAddButton}
+                onClick={toogleShowAdd}
+              >
                 {i18n.t('testimonial.add')}
               </button>
             </div>
             <div className={styles.testimonials_list}>
               <Testimonials
                 itemPerPage={5}
-                getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+                getPageInfo={(pageInfo: any) =>
+                  setTotalItems(pageInfo.totalItems)
+                }
                 withImage
                 classes={classesTestimonials}
                 callPagination
@@ -128,17 +139,25 @@ const TestimonialsPage: FC<any> = ({
           </div>
         )}
         {showAdd && testimonialFormAllowed && (
-          <Popup withHeader setPopup={toogleShowAdd} popupTitle={i18n.t('testimonial.add')}>
+          <Popup
+            withHeader
+            setPopup={toogleShowAdd}
+            popupTitle={i18n.t('testimonial.add')}
+          >
             <TestimonialForm
               classes={classesTestimonalsForm}
               uploadIcon={i18n.t('testimonial.inputImage')}
-              onUploadImageCompleted={() => toast.success(i18n.t('testimonial.successUpload'))}
+              onUploadImageCompleted={() =>
+                toast.success(i18n.t('testimonial.successUpload'))
+              }
               onUploadImageError={(error: any) => toast.error(error)}
               onCreateTestimonialCompleted={(_) => {
                 setShowAdd(false)
                 toast.success(i18n.t('testimonial.createSuccess'))
               }}
-              onCreateTestimonialError={(_) => toast.error(i18n.t('testimonial.createError'))}
+              onCreateTestimonialError={(_) =>
+                toast.error(i18n.t('testimonial.createError'))
+              }
               withVerification={true}
               isVerified={isVerified}
               verificationComponent={
@@ -155,7 +174,10 @@ const TestimonialsPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

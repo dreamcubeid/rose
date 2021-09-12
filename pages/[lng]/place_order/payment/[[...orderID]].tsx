@@ -53,7 +53,9 @@ const PaymentStatus: FC<any> = ({
           <div className={styles.paymentStatus}>
             <div className={styles.paymentStatus_inner}>
               <div className={styles.paymentStatus_heading}>
-                <h6 className={styles.paymentStatus_title}>{paymentStatus?.title}</h6>
+                <h6 className={styles.paymentStatus_title}>
+                  {paymentStatus?.title}
+                </h6>
                 {status === 'failed' ? (
                   <XCircle className="ml-2" color="#F44444" />
                 ) : (
@@ -62,7 +64,9 @@ const PaymentStatus: FC<any> = ({
               </div>
               {!['orderNotFound', ''].includes(status) && (
                 <div className={styles.paymentStatus_content}>
-                  <p className={styles.paymentStatus_contentDesc}>{paymentStatus?.contentDesc}</p>
+                  <p className={styles.paymentStatus_contentDesc}>
+                    {paymentStatus?.contentDesc}
+                  </p>
                 </div>
               )}
               <div className={styles.paymentStatus_action}>
@@ -71,12 +75,16 @@ const PaymentStatus: FC<any> = ({
                     <button
                       className={`
                         ${styles.btn} ${
-                        status !== 'orderNotFound' ? styles.btn_paymentNotif : styles.btn_primary
+                        status !== 'orderNotFound'
+                          ? styles.btn_paymentNotif
+                          : styles.btn_primary
                       } 
                         ${styles.btn_long} ${styles.btn_full_width} 
                         text-uppercase
                       `}
-                      onClick={() => router.push('/[lng]/products', `/${lng}/products`)}
+                      onClick={() =>
+                        router.push('/[lng]/products', `/${lng}/products`)
+                      }
                     >
                       {i18n.t('paymentStatus.continueShopping')}
                     </button>
@@ -107,7 +115,10 @@ const PaymentStatus: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

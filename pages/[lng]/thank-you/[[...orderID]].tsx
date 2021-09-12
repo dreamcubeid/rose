@@ -29,7 +29,9 @@ const ThankYouPage: FC<any> = ({
         <div className="container">
           <div className={styles.thankyou_container}>
             <ThankYou
-              thankYouImageURL={<Check className={styles.thankyou_inner__icon} />}
+              thankYouImageURL={
+                <Check className={styles.thankyou_inner__icon} />
+              }
               classes={classesThankYouPage}
               withDelay
             />
@@ -40,7 +42,10 @@ const ThankYouPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

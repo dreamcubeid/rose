@@ -22,8 +22,10 @@ const classesBlogSingle = {
   authorInfoClassName: 'd-none',
   createdByClassName: `d-flex flex-row align-items-center justify-content-start flex-nowrap w-100`,
   createdByInnerClassName: `${styles.blog_detailMeta} d-flex flex-row align-items-center justify-content-start flex-wrap`,
-  authorClassName: 'd-flex flex-row align-items-center justify-content-start order-2',
-  dateClassName: 'd-flex flex-row align-items-center justify-content-start order-1',
+  authorClassName:
+    'd-flex flex-row align-items-center justify-content-start order-2',
+  dateClassName:
+    'd-flex flex-row align-items-center justify-content-start order-1',
   blogContentClassName: styles.blog_detailContent
 }
 
@@ -69,7 +71,9 @@ const BlogSlug: FC<any> = ({
               classes={classesBlogSingle}
               ID={slug.toString()}
               timeIcon={
-                <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}></div>
+                <div
+                  className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}
+                ></div>
               }
               authorIcon={
                 <div
@@ -98,23 +102,34 @@ const BlogSlug: FC<any> = ({
             <div
               className={`${styles.lookbook_nav} ${styles.blog_detailNavigation} d-flex flex-row align-items-center justify-content-between`}
             >
-              <button onClick={() => router.back()}>{i18n.t('global.back')}</button>
-              <button onClick={() => toggleShare()} className={styles.blog_detailShare}>
+              <button onClick={() => router.back()}>
+                {i18n.t('global.back')}
+              </button>
+              <button
+                onClick={() => toggleShare()}
+                className={styles.blog_detailShare}
+              >
                 {i18n.t('product.share')}
               </button>
             </div>
 
             {(totalCategories > 0 || totalCategories === null) && (
               <>
-                <h2 className={styles.blog_titleSide}>{i18n.t('blog.categories')}</h2>
+                <h2 className={styles.blog_titleSide}>
+                  {i18n.t('blog.categories')}
+                </h2>
                 <BlogCategories
                   classes={classesBlogCategories}
-                  getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
+                  getCategoriesCount={(categoriesCount) =>
+                    setTotalCategories(categoriesCount)
+                  }
                 />
               </>
             )}
 
-            <h2 className={styles.blog_titleSide}>{i18n.t('blog.recentPost')}</h2>
+            <h2 className={styles.blog_titleSide}>
+              {i18n.t('blog.recentPost')}
+            </h2>
 
             <BlogRecent
               classes={classesBlogRecent}
@@ -154,7 +169,10 @@ const BlogSlug: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req
+}) => {
   const { slug } = params
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 

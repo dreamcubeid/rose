@@ -13,9 +13,16 @@ export class CriticalCssHead extends Head {
     const { nonce } = this.props
     const isCss = (file: string): boolean => /\.css$/.test(file)
     const renderCss = (file: string) => (
-      <InlineStyle key={file} file={file} nonce={nonce} assetPrefix={assetPrefix} />
+      <InlineStyle
+        key={file}
+        file={file}
+        nonce={nonce}
+        assetPrefix={assetPrefix}
+      />
     )
-    return allFiles && allFiles.length > 0 ? allFiles.filter(isCss).map(renderCss) : null
+    return allFiles && allFiles.length > 0
+      ? allFiles.filter(isCss).map(renderCss)
+      : null
   }
 
   getPreloadDynamicChunks() {

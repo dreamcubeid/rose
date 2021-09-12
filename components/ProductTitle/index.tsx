@@ -57,7 +57,10 @@ const ProductTitle: FC<any> = ({
             <div
               className={`
               ${styleProduct.product_homeTitle}
-              ${tagnameActive === el.tagname && styleProduct.product_homeTitleActive}
+              ${
+                tagnameActive === el.tagname &&
+                styleProduct.product_homeTitleActive
+              }
             `}
               onClick={() => handleChangeTagname(el.tagname)}
               key={idx}

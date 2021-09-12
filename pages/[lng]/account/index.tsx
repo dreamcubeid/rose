@@ -103,31 +103,47 @@ const classesAccount = {
   datePickerInputClassName: 'date-picker__input',
   datePickerCalendarClassName: 'date-picker__calendar',
   //popupConfirmationOrder
-  popupConfirmationOrderContainerClassName: stylesPopupConfirmationOrder.container,
+  popupConfirmationOrderContainerClassName:
+    stylesPopupConfirmationOrder.container,
   popupConfirmationOrderContentClassName: stylesPopupConfirmationOrder.content,
   popupConfirmationOrderTitleClassName: stylesPopupConfirmationOrder.title,
   popupConfirmationOrderNoteClassName: stylesPopupConfirmationOrder.note,
-  popupConfirmationOrderDescriptionClassName: stylesPopupConfirmationOrder.description,
-  popupConfirmationOrderWrapButtonClassName: stylesPopupConfirmationOrder.wrapButton,
-  popupConfirmationOrderButtonConfirmClassName: stylesPopupConfirmationOrder.buttonNo,
-  popupConfirmationOrderButtonNoClassName: stylesPopupConfirmationOrder.buttonConfirm,
+  popupConfirmationOrderDescriptionClassName:
+    stylesPopupConfirmationOrder.description,
+  popupConfirmationOrderWrapButtonClassName:
+    stylesPopupConfirmationOrder.wrapButton,
+  popupConfirmationOrderButtonConfirmClassName:
+    stylesPopupConfirmationOrder.buttonNo,
+  popupConfirmationOrderButtonNoClassName:
+    stylesPopupConfirmationOrder.buttonConfirm,
   //order history info
   orderInfoContainerClassName: styles.membership_info_container,
   OrderInfoIconClassName: styles.membership_info_icon,
   orderInfoLabelClassName: styles.membership_info_label,
   OrderInfoSearchHereClassName: styles.membership_info_button,
   //popupCheckPaymentOrder
-  checkPaymentOrderContainerClassName: stylesPopupCheckPaymentOrder.checkOrder_overlay,
-  checkPaymentOrderContainerBodyClassName: stylesPopupCheckPaymentOrder.checkOrder_container,
-  checkPaymentOrderHeaderClassName: stylesPopupCheckPaymentOrder.checkOrder_header,
-  checkPaymentOrderTitleClassName: stylesPopupCheckPaymentOrder.checkOrder_title,
-  checkPaymentOrderDescriptionClassName: stylesPopupCheckPaymentOrder.checkOrder_description,
-  checkPaymentOrderContentClassName: stylesPopupCheckPaymentOrder.checkOrder_content,
-  checkPaymentOrderInputContentClassName: stylesPopupCheckPaymentOrder.checkOrder_inputContent,
-  checkPaymentOrderInputTitleClassName: stylesPopupCheckPaymentOrder.checkOrder_inputTitle,
-  checkPaymentOrderInputClassName: stylesPopupCheckPaymentOrder.checkOrder_input,
-  checkPaymentOrderCloseButtonClassName: stylesPopupCheckPaymentOrder.checkOrder_closeButton,
-  checkPaymentOrderSubmitButtonClassName: stylesPopupCheckPaymentOrder.checkOrder_submitButton
+  checkPaymentOrderContainerClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_overlay,
+  checkPaymentOrderContainerBodyClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_container,
+  checkPaymentOrderHeaderClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_header,
+  checkPaymentOrderTitleClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_title,
+  checkPaymentOrderDescriptionClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_description,
+  checkPaymentOrderContentClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_content,
+  checkPaymentOrderInputContentClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_inputContent,
+  checkPaymentOrderInputTitleClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_inputTitle,
+  checkPaymentOrderInputClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_input,
+  checkPaymentOrderCloseButtonClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_closeButton,
+  checkPaymentOrderSubmitButtonClassName:
+    stylesPopupCheckPaymentOrder.checkOrder_submitButton
 }
 
 const orderHistoryPaginationClasses = {
@@ -150,7 +166,9 @@ const AccountsPage: FC<any> = ({
   const onSuccessChPass = (msg: string) => toast.success(msg)
 
   const onSuccess = (msg: string, data: any) => {
-    setName(data?.upsertProfile[0]?.firstName + ' ' + data?.upsertProfile[0]?.lastName)
+    setName(
+      data?.upsertProfile[0]?.firstName + ' ' + data?.upsertProfile[0]?.lastName
+    )
     toast.success(msg)
   }
 
@@ -186,8 +204,12 @@ const AccountsPage: FC<any> = ({
           paymentHrefPrefix="payment_notif"
           passwordViewIcon={<Eye />}
           passwordHideIcon={<EyeOff />}
-          passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-          passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+          passwordFulfilledCriteriaIcon={
+            <CheckCircle color="green" size={16} />
+          }
+          passwordUnfulfilledCriteriaIcon={
+            <CheckCircle color="gray" size={16} />
+          }
           mapButtonCloseIcon={<XIcon />}
           mapCenterIcon={<Crosshair />}
           membershipPaginationClasses={orderHistoryPaginationClasses}
@@ -203,7 +225,11 @@ const AccountsPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

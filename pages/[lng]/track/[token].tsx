@@ -19,7 +19,9 @@ const TrackerPage = ({ order_token }) => {
   return (
     <ShipmentTracker
       token={order_token}
-      iconTracker={<img className="mr-2" src={'/images/motorcycle.svg'} alt="motorcycle" />}
+      iconTracker={
+        <img className="mr-2" src={'/images/motorcycle.svg'} alt="motorcycle" />
+      }
       classes={classesTrackerPage}
     />
   )

@@ -41,7 +41,11 @@ const Breadcrumb: FC<BreadcrumbPropsType> = ({
   className = styles.breadcrumb,
   disable = false
 }) => {
-  return <div className={className}>{disable ? label : <Link href={href}>{label}</Link>}</div>
+  return (
+    <div className={className}>
+      {disable ? label : <Link href={href}>{label}</Link>}
+    </div>
+  )
 }
 
 export default Breadcrumbs

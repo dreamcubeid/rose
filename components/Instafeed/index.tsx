@@ -48,7 +48,8 @@ const Instafeed: FC<InstafeedType> = ({
   const [instagramQuickView, setInstagramQuickView] = useState<boolean>(false)
   const [instagramMedia, setInstagramMedia] = useState<any>({})
 
-  const handleFollowButton = () => window.open(brand?.socmedSetting?.socmedLink?.instagram)
+  const handleFollowButton = () =>
+    window.open(brand?.socmedSetting?.socmedLink?.instagram)
 
   return (
     <>
@@ -61,7 +62,11 @@ const Instafeed: FC<InstafeedType> = ({
           withQuickview={withQuickview}
           loadingComponent={
             <div className={styles.instagramFeed_placeholderWrapper}>
-              <Placeholder classes={classesPlaceholderInstafeed} withList listMany={6} />
+              <Placeholder
+                classes={classesPlaceholderInstafeed}
+                withList
+                listMany={6}
+              />
             </div>
           }
           thumborSetting={{

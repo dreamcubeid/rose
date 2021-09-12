@@ -2,7 +2,12 @@ import { FC, useState, useEffect } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
 import Router from 'next/router'
-import { PlaceOrderForm, CartSummary, useI18n, PrivateRoute } from '@sirclo/nexus'
+import {
+  PlaceOrderForm,
+  CartSummary,
+  useI18n,
+  PrivateRoute
+} from '@sirclo/nexus'
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Footer from 'components/Footer/Footer'
@@ -157,7 +162,11 @@ type PrivateComponentPropsType = {
 }
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
-  <PrivateRoute page="place_order" loadingComponent={<LoaderPages />} redirectCart="products">
+  <PrivateRoute
+    page="place_order"
+    loadingComponent={<LoaderPages />}
+    redirectCart="products"
+  >
     {children}
   </PrivateRoute>
 )
@@ -171,14 +180,16 @@ const PlaceOrderPage: FC<any> = ({
   const size = useWindowSize()
 
   const [openOrderSummary, setOpenOrderSummary] = useState<boolean>(true)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] =
+    useState<boolean>(false)
 
   useEffect(() => {
     document.body.style.overflow = 'unset'
   }, [])
 
   const toogleOrderSummary = () => setOpenOrderSummary(!openOrderSummary)
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const toogleErrorAddToCart = () =>
+    setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   return (
     <PrivateRouteWrapper>
@@ -192,10 +203,19 @@ const PlaceOrderPage: FC<any> = ({
       >
         <SEO title="Place Order" />
         {showModalErrorAddToCart && (
-          <Popup withHeader setPopup={toogleErrorAddToCart} mobileFull={false} classPopopBody>
+          <Popup
+            withHeader
+            setPopup={toogleErrorAddToCart}
+            mobileFull={false}
+            classPopopBody
+          >
             <div className={styles.placeorder_popupError}>
-              <h3 className={styles.placeorder_popupErrorTitle}>{i18n.t('cart.errorSKUTitle')}</h3>
-              <p className={styles.placeorder_popupErrorDesc}>{i18n.t('cart.errorSKUDesc')} </p>
+              <h3 className={styles.placeorder_popupErrorTitle}>
+                {i18n.t('cart.errorSKUTitle')}
+              </h3>
+              <p className={styles.placeorder_popupErrorDesc}>
+                {i18n.t('cart.errorSKUDesc')}{' '}
+              </p>
             </div>
           </Popup>
         )}
@@ -209,7 +229,9 @@ const PlaceOrderPage: FC<any> = ({
                       <div className={styles.placeorder_heading}>
                         <div
                           className={styles.placeorder_headingIcon}
-                          onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                          onClick={() =>
+                            Router.push('/[lng]/products', `/${lng}/products`)
+                          }
                         >
                           <ArrowLeft color="black" />
                         </div>
@@ -248,7 +270,8 @@ const PlaceOrderPage: FC<any> = ({
                             cartProps={{
                               classes: classesCartDetails,
                               withoutQtyInput: false,
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
+                              onErrorMsg: () =>
+                                setShowModalErrorAddToCart(true),
                               thumborSetting: {
                                 width: 200,
                                 format: 'webp',
@@ -282,19 +305,43 @@ const PlaceOrderPage: FC<any> = ({
                               isAccordion: true,
                               page: 'place_order',
                               currency: 'IDR',
-                              submitButtonLabel: i18n.t('orderSummary.placeOrder'),
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
+                              submitButtonLabel: i18n.t(
+                                'orderSummary.placeOrder'
+                              ),
+                              onErrorMsg: () =>
+                                setShowModalErrorAddToCart(true),
                               onErrorMsgCoupon: (msg) => toast.error(msg),
                               loadingComponent: (
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
+                                <Placeholder
+                                  classes={classesPlaceholderCartPlaceorder}
+                                  withTitle
+                                />
                               ),
                               icons: {
-                                voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                                voucherApplied: (
-                                  <img src="/images/mdi_ticket-percent.svg" alt="icon" />
+                                voucher: (
+                                  <img
+                                    src="/images/mdi_ticket-percent.svg"
+                                    alt="icon"
+                                  />
                                 ),
-                                points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                                pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
+                                voucherApplied: (
+                                  <img
+                                    src="/images/mdi_ticket-percent.svg"
+                                    alt="icon"
+                                  />
+                                ),
+                                points: (
+                                  <img
+                                    src="/images/mdi_star-circle.svg"
+                                    alt="icon"
+                                  />
+                                ),
+                                pointsApplied: (
+                                  <img
+                                    src="/images/mdi_star-circle.svg"
+                                    alt="icon"
+                                  />
+                                ),
                                 close: <XIcon />,
                                 collapse: <ChevronUp />,
                                 expand: <ChevronDown />,
@@ -311,13 +358,21 @@ const PlaceOrderPage: FC<any> = ({
                         onErrorMsg={(msg) => toast.error(msg)}
                         passwordViewIcon={<Eye />}
                         passwordHideIcon={<EyeOff />}
-                        passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                        passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+                        passwordFulfilledCriteriaIcon={
+                          <CheckCircle color="green" size={16} />
+                        }
+                        passwordUnfulfilledCriteriaIcon={
+                          <CheckCircle color="gray" size={16} />
+                        }
                         datePickerCalendarIcon={<Calendar />}
                         mapButtonCloseIcon={<XIcon />}
                         mapCenterIcon={<Crosshair />}
                         loadingComponent={
-                          <Placeholder classes={classesPlaceholderForm} withList listMany={5} />
+                          <Placeholder
+                            classes={classesPlaceholderForm}
+                            withList
+                            listMany={5}
+                          />
                         }
                       />
                     </div>
@@ -382,22 +437,45 @@ const PlaceOrderPage: FC<any> = ({
                             isAccordion: true,
                             page: 'place_order',
                             currency: 'IDR',
-                            submitButtonLabel: i18n.t('orderSummary.placeOrder'),
+                            submitButtonLabel: i18n.t(
+                              'orderSummary.placeOrder'
+                            ),
                             continueShoppingRoute: 'products',
                             onErrorMsg: (msg) => toast.error(msg),
                             onErrorMsgCoupon: (msg) => toast.error(msg),
                             loadingComponent: (
                               <div className="px-3">
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
+                                <Placeholder
+                                  classes={classesPlaceholderCartPlaceorder}
+                                  withTitle
+                                />
                               </div>
                             ),
                             icons: {
-                              voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                              voucherApplied: (
-                                <img src="/images/mdi_ticket-percent.svg" alt="icon" />
+                              voucher: (
+                                <img
+                                  src="/images/mdi_ticket-percent.svg"
+                                  alt="icon"
+                                />
                               ),
-                              points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                              pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
+                              voucherApplied: (
+                                <img
+                                  src="/images/mdi_ticket-percent.svg"
+                                  alt="icon"
+                                />
+                              ),
+                              points: (
+                                <img
+                                  src="/images/mdi_star-circle.svg"
+                                  alt="icon"
+                                />
+                              ),
+                              pointsApplied: (
+                                <img
+                                  src="/images/mdi_star-circle.svg"
+                                  alt="icon"
+                                />
+                              ),
                               close: <XIcon />,
                               collapse: <ChevronUp />,
                               expand: <ChevronDown />,
@@ -418,7 +496,10 @@ const PlaceOrderPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

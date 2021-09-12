@@ -27,17 +27,26 @@ const Popup: FC<PopupPropsType> = ({
     <div className={styles.popup_overlay}>
       <div
         ref={cartOuterDiv}
-        className={mobileFull ? styles.popup_containerFull : styles.popup_container}
+        className={
+          mobileFull ? styles.popup_containerFull : styles.popup_container
+        }
       >
         {withHeader && (
           <div className={styles.popup_header}>
             <h6>{popupTitle}</h6>
-            <span className={styles.close_button} onClick={() => setPopup(false)}>
+            <span
+              className={styles.close_button}
+              onClick={() => setPopup(false)}
+            >
               <X className={styles.close_icon} />
             </span>
           </div>
         )}
-        <div className={`${styles.popup_body} ${classPopopBody ? styles.popup_bodyMaxHeight : ''}`}>
+        <div
+          className={`${styles.popup_body} ${
+            classPopopBody ? styles.popup_bodyMaxHeight : ''
+          }`}
+        >
           {children}
         </div>
       </div>

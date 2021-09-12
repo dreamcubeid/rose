@@ -20,8 +20,16 @@ const SEO = ({ title, description, keywords, image, url }: SEOProps) => (
     {description && (
       <>
         <meta name="description" content={description}></meta>
-        <meta property="og:description" content={description} key="ogdescription" />
-        <meta property="twitter:description" content={description} key="twitterdescription" />
+        <meta
+          property="og:description"
+          content={description}
+          key="ogdescription"
+        />
+        <meta
+          property="twitter:description"
+          content={description}
+          key="twitterdescription"
+        />
       </>
     )}
     {image && (

@@ -31,7 +31,9 @@ import { GRAPHQL_URI } from 'lib/Constants'
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Placeholder from 'components/Placeholder'
-const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
+const EmptyComponent = dynamic(
+  () => import('components/EmptyComponent/EmptyComponent')
+)
 const Popup = dynamic(() => import('components/Popup/Popup'))
 const PopupCart = dynamic(() => import('components/Popup/PopupCart'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
@@ -58,7 +60,8 @@ const classesProductDetail = {
   openOrderTimeClassName: styles.productdetail_openorder_container__time,
   countDownContainerClassName: styles.productdetail_openorder_countdown,
   countDownItemClassName: styles.productdetail_openorder_countdownItem,
-  countDownItemTextClassName: styles.productdetail_openorder_countdownItem__text,
+  countDownItemTextClassName:
+    styles.productdetail_openorder_countdownItem__text,
   openOrderTimeoutClassName: styles.productdetail_openorder_timeout,
   openOrderTimeoutDescClassName: styles.productdetail_openorder_timeout__desc,
   openOrderTimeoutBtnClassName: `btn text-uppercase mt-3 ${styles.btn_primary} ${styles.btn_long}`,
@@ -68,7 +71,8 @@ const classesProductDetail = {
   variantLabelClassName: styles.variantLabel,
   variantOptionsClassName: styles.variantOption,
   qtyBoxClassName: styles.productdetail_content_innerQty,
-  propertyFooterContainerClassname: styles.productdetail_propertyFooterContainer,
+  propertyFooterContainerClassname:
+    styles.productdetail_propertyFooterContainer,
   addToCartBtnClassName: `btn text-uppercase my-3 ${styles.btn_secondary} ${styles.btn_long} ${styles.btn_full_width}`,
   buyNowBtnClassName: `btn  text-uppercase ${styles.btn_long} ${styles.btn_primary} ${styles.btn_full_width}`,
   notifyMeClassName: styles.productdetail_notifyMe,
@@ -102,8 +106,10 @@ const classesProductDetail = {
   estimateShippingPopupProviderClassName: stylesEstimate.popup_provider,
   estimateShippingPopupLineProviderClassName: stylesEstimate.popup_providerLine,
   estimateShippingPopupProviderImgClassName: stylesEstimate.popup_providerImage,
-  estimateShippingPopupProviderLabelClassName: stylesEstimate.popup_providerLabel,
-  estimateShippingPopupProviderValueClassName: stylesEstimate.popup_providerValue
+  estimateShippingPopupProviderLabelClassName:
+    stylesEstimate.popup_providerLabel,
+  estimateShippingPopupProviderValueClassName:
+    stylesEstimate.popup_providerValue
 }
 
 const classesProductReview = {
@@ -187,8 +193,10 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
   const [showCart, setShowCart] = useState<boolean>(false)
   const [showShare, setShowShare] = useState<boolean>(false)
   const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
-  const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] =
+    useState<boolean>(false)
+  const [showModalErrorNotify, setShowModalErrorNotify] =
+    useState<boolean>(false)
   const [totalAllReviews, setTotalAllReviews] = useState(null)
   const [totalItems, setTotalItems] = useState(null)
 
@@ -198,7 +206,8 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
   }, [showCart])
 
   const allowedProductRecommendation = isProductRecommendationAllowed()
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const toogleErrorAddToCart = () =>
+    setShowModalErrorAddToCart(!showModalErrorAddToCart)
   const tooglePopup = () => setShowPopup(!showPopup)
   const toogleCart = () => setShowCart(!showCart)
   const toogleShare = () => setShowShare(!showShare)
@@ -237,19 +246,37 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
               </button>
             </div>
             <div>
-              <button className={`btn ${styles.btn_blue}`} onClick={() => setShowPopup(false)}>
+              <button
+                className={`btn ${styles.btn_blue}`}
+                onClick={() => setShowPopup(false)}
+              >
                 {i18n.t('product.continueShopping')}
               </button>
             </div>
           </div>
         </Popup>
       )}
-      {showCart && <PopupCart setPopup={toogleCart} popupTitle={i18n.t('cart.title')} lng={lng} />}
+      {showCart && (
+        <PopupCart
+          setPopup={toogleCart}
+          popupTitle={i18n.t('cart.title')}
+          lng={lng}
+        />
+      )}
       {showModalErrorAddToCart && (
-        <Popup withHeader setPopup={toogleErrorAddToCart} mobileFull={false} classPopopBody>
+        <Popup
+          withHeader
+          setPopup={toogleErrorAddToCart}
+          mobileFull={false}
+          classPopopBody
+        >
           <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>{i18n.t('cart.errorSKUTitle')}</h3>
-            <p className={styles.productdetail_popupErrorDesc}>{i18n.t('cart.errorSKUDesc')} </p>
+            <h3 className={styles.productdetail_popupErrorTitle}>
+              {i18n.t('cart.errorSKUTitle')}
+            </h3>
+            <p className={styles.productdetail_popupErrorDesc}>
+              {i18n.t('cart.errorSKUDesc')}{' '}
+            </p>
           </div>
         </Popup>
       )}
@@ -277,7 +304,9 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
             <h3 className={styles.productdetail_popupErrorTitle}>
               {i18n.t('product.notifyTitleSuccess')}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>{i18n.t('product.notifySuccess')}</p>
+            <p className={styles.productdetail_popupErrorDesc}>
+              {i18n.t('product.notifySuccess')}
+            </p>
             <button
               className={`btn mt-3 ${styles.btn_secondary}`}
               onClick={() => {
@@ -301,7 +330,9 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
             <h3 className={styles.productdetail_popupErrorTitle}>
               {i18n.t('product.notifyTitleFailed')}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>{i18n.t('product.notifyFailed')}</p>
+            <p className={styles.productdetail_popupErrorDesc}>
+              {i18n.t('product.notifyFailed')}
+            </p>
             <button
               className={`btn mt-3 ${styles.btn_secondary}`}
               onClick={() => setShowModalErrorNotify(false)}
@@ -321,7 +352,9 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                 button={
                   <button
                     className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
-                    onClick={() => Router.push(`/[lng]/products`, `/${lng}/products`)}
+                    onClick={() =>
+                      Router.push(`/[lng]/products`, `/${lng}/products`)
+                    }
                   >
                     {i18n.t('product.back')}
                   </button>
@@ -343,14 +376,22 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                 onError={() => setShowModalErrorAddToCart(true)}
                 onErrorMsg={(msg) => msg && toast.error(msg)}
                 withEstimateShipping={IS_PROD === 'false' ? true : false}
-                prevIcon={<span className={styles.productdetail_images_arrowPrev} />}
-                nextIcon={<span className={styles.productdetail_images_arrowNext} />}
+                prevIcon={
+                  <span className={styles.productdetail_images_arrowPrev} />
+                }
+                nextIcon={
+                  <span className={styles.productdetail_images_arrowNext} />
+                }
                 notifyIcon={<Bell color="white" />}
                 openOrderIconDate={
-                  <Calendar className={styles.productdetail_openorder_container__icon} />
+                  <Calendar
+                    className={styles.productdetail_openorder_container__icon}
+                  />
                 }
                 openOrderIconTime={
-                  <Clock className={styles.productdetail_openorder_container__icon} />
+                  <Clock
+                    className={styles.productdetail_openorder_container__icon}
+                  />
                 }
                 isButton={{
                   0: true,
@@ -378,11 +419,21 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                   <div className={styles.productdetail_placeholder}>
                     <div className="row">
                       <div className="col-12 col-md-6">
-                        <Placeholder classes={classesPlaceholderProduct} withImage />
+                        <Placeholder
+                          classes={classesPlaceholderProduct}
+                          withImage
+                        />
                       </div>
                       <div className="col-12 col-md-6">
-                        <Placeholder classes={classesPlaceholderProduct} withTitle />
-                        <Placeholder classes={classesPlaceholderProduct} withList listMany={3} />
+                        <Placeholder
+                          classes={classesPlaceholderProduct}
+                          withTitle
+                        />
+                        <Placeholder
+                          classes={classesPlaceholderProduct}
+                          withList
+                          listMany={3}
+                        />
                       </div>
                     </div>
                   </div>
@@ -407,7 +458,9 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                   productName={slug}
                   classes={classesProductReview}
                   reviewsPaginationClasses={classesPaginationProductReview}
-                  getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
+                  getTotalAllReviews={(totalItem: number) =>
+                    setTotalAllReviews(totalItem)
+                  }
                   itemPerPageOptions={[5, 10, 25, 50, 100]}
                   iconClose={<XIcon color="black" />}
                   iconLeft={<ChevronLeft color="black" />}
@@ -448,7 +501,9 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                     filter={{ openOrderScheduled: false, published: true }}
                     classes={classesProductRelate}
                     slug={slug}
-                    getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+                    getPageInfo={(pageInfo: any) =>
+                      setTotalItems(pageInfo.totalItems)
+                    }
                     itemPerPage={4}
                     isButton
                     fullPath={`product/{id}`}
@@ -456,9 +511,18 @@ const Product: FC<any> = ({ lng, lngDict, slug, data, brand, urlSite }) => {
                     lazyLoadedImage={false}
                     loadingComponent={
                       <>
-                        <Placeholder classes={classesPlaceholderRelateProduct} withImage />
-                        <Placeholder classes={classesPlaceholderRelateProduct} withImage />
-                        <Placeholder classes={classesPlaceholderRelateProduct} withImage />
+                        <Placeholder
+                          classes={classesPlaceholderRelateProduct}
+                          withImage
+                        />
+                        <Placeholder
+                          classes={classesPlaceholderRelateProduct}
+                          withImage
+                        />
+                        <Placeholder
+                          classes={classesPlaceholderRelateProduct}
+                          withImage
+                        />
                       </>
                     }
                     thumborSetting={{

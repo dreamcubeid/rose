@@ -9,7 +9,9 @@ import { Logo, Widget } from '@sirclo/nexus'
 import useWindowSize from 'lib/useWindowSize'
 /* components */
 import Placeholder from '../Placeholder'
-const CollapsibleNav = dynamic(() => import('@sirclo/nexus').then((mod) => mod.CollapsibleNav))
+const CollapsibleNav = dynamic(() =>
+  import('@sirclo/nexus').then((mod) => mod.CollapsibleNav)
+)
 /* styles */
 import styleAnnouncement from 'public/scss/components/Announcement.module.scss'
 import styleHeader from 'public/scss/components/Header.module.scss'
@@ -58,28 +60,33 @@ const Header: FC<any> = ({ withAnnouncement, headerTitle, stickyClass }) => {
 
   return (
     <>
-      {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) && withAnnouncement && (
-        <div
-          className={styleAnnouncement.announce}
-          style={{ display: showAnnounce ? 'flex' : 'none' }}
-        >
-          <span className={styleAnnouncement.announce_close}>
-            <FiX
-              color="#FFFFF"
-              onClick={() => {
-                setShowAnnounce(false)
-                setCountWidgetAnnouncement(0)
-              }}
+      {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) &&
+        withAnnouncement && (
+          <div
+            className={styleAnnouncement.announce}
+            style={{ display: showAnnounce ? 'flex' : 'none' }}
+          >
+            <span className={styleAnnouncement.announce_close}>
+              <FiX
+                color="#FFFFF"
+                onClick={() => {
+                  setShowAnnounce(false)
+                  setCountWidgetAnnouncement(0)
+                }}
+              />
+            </span>
+            <Widget
+              getItemCount={(itemCount: number) =>
+                setCountWidgetAnnouncement(itemCount)
+              }
+              pos="header-announcements"
+              widgetClassName={styleAnnouncement.announce_items}
+              loadingComponent={
+                <Placeholder classes={classesPlaceholderWidget} withTitle />
+              }
             />
-          </span>
-          <Widget
-            getItemCount={(itemCount: number) => setCountWidgetAnnouncement(itemCount)}
-            pos="header-announcements"
-            widgetClassName={styleAnnouncement.announce_items}
-            loadingComponent={<Placeholder classes={classesPlaceholderWidget} withTitle />}
-          />
-        </div>
-      )}
+          </div>
+        )}
       <header
         className={`
           ${styleHeader.header} 
@@ -90,13 +97,21 @@ const Header: FC<any> = ({ withAnnouncement, headerTitle, stickyClass }) => {
         <div
           className={`
             container ${styleHeader.header_navbar} 
-            ${(stickyClass !== 'transparent' || openMenu) && styleHeader.header_sticky}`}
+            ${
+              (stickyClass !== 'transparent' || openMenu) &&
+              styleHeader.header_sticky
+            }`}
         >
           {headerTitle ? (
             <h3 className={styleHeader.header_title}>{headerTitle}</h3>
           ) : (
             <LazyLoadComponent
-              placeholder={<Placeholder classes={classesPlaceholderLogo} withImage={true} />}
+              placeholder={
+                <Placeholder
+                  classes={classesPlaceholderLogo}
+                  withImage={true}
+                />
+              }
             >
               <Logo
                 imageClassName={styleHeader.header_logo}
@@ -114,7 +129,9 @@ const Header: FC<any> = ({ withAnnouncement, headerTitle, stickyClass }) => {
             ) : (
               <img
                 src={`/icons/${
-                  stickyClass !== 'transparent' ? 'menu-black.svg' : 'menu-white.svg'
+                  stickyClass !== 'transparent'
+                    ? 'menu-black.svg'
+                    : 'menu-white.svg'
                 }`}
                 alt="menu"
               />

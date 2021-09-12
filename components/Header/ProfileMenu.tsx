@@ -8,7 +8,9 @@ import { User, ShoppingCart, Search as IconSearch } from 'react-feather'
 const Popup = dynamic(() => import('../Popup/Popup'))
 const PopupCart = dynamic(() => import('../Popup/PopupCart'))
 const Search = dynamic(() => import('./Search'))
-const PrivateComponent = dynamic(() => import('@sirclo/nexus').then((mod) => mod.PrivateComponent))
+const PrivateComponent = dynamic(() =>
+  import('@sirclo/nexus').then((mod) => mod.PrivateComponent)
+)
 
 const ProfileMenu: FC<any> = ({ lng, size, totalQuantity, styles }) => {
   const router = useRouter()
@@ -35,7 +37,8 @@ const ProfileMenu: FC<any> = ({ lng, size, totalQuantity, styles }) => {
   const toogleSearch = () => setOpenSearch(!openSearch)
 
   const toogleCart = () => {
-    if (router.pathname !== '/[lng]/payment_notif/[[...orderID]]') setOpenCart(!openCart)
+    if (router.pathname !== '/[lng]/payment_notif/[[...orderID]]')
+      setOpenCart(!openCart)
   }
 
   const classesSearch = {
@@ -49,8 +52,15 @@ const ProfileMenu: FC<any> = ({ lng, size, totalQuantity, styles }) => {
 
   return (
     <div className={styles.navbar_profile_menu}>
-      <a className={styles.navbar_profile_menu__cart} onClick={(e) => e.preventDefault()} href="#">
-        <div className={`${styles.nav__icon} mr-2 mr-md-4`} onClick={toogleSearch}>
+      <a
+        className={styles.navbar_profile_menu__cart}
+        onClick={(e) => e.preventDefault()}
+        href="#"
+      >
+        <div
+          className={`${styles.nav__icon} mr-2 mr-md-4`}
+          onClick={toogleSearch}
+        >
           <IconSearch size={size.width < 575 ? 18 : 24} />
         </div>
       </a>
@@ -74,15 +84,28 @@ const ProfileMenu: FC<any> = ({ lng, size, totalQuantity, styles }) => {
           </div>
         }
       />
-      <a className={styles.navbar_profile_menu__cart} onClick={(e) => e.preventDefault()} href="#">
-        <div className={`${styles.nav__icon} ml-2 ml-md-4`} onClick={toogleCart}>
+      <a
+        className={styles.navbar_profile_menu__cart}
+        onClick={(e) => e.preventDefault()}
+        href="#"
+      >
+        <div
+          className={`${styles.nav__icon} ml-2 ml-md-4`}
+          onClick={toogleCart}
+        >
           <ShoppingCart size={size.width < 575 ? 18 : 24} />
           <span className={styles.badge_cart} onClick={toogleCart}>
             {totalQuantity}
           </span>
         </div>
       </a>
-      {openCart && <PopupCart setPopup={setOpenCart} popupTitle={i18n.t('cart.title')} lng={lng} />}
+      {openCart && (
+        <PopupCart
+          setPopup={setOpenCart}
+          popupTitle={i18n.t('cart.title')}
+          lng={lng}
+        />
+      )}
       {openSearch && (
         <Popup
           withHeader
@@ -91,7 +114,11 @@ const ProfileMenu: FC<any> = ({ lng, size, totalQuantity, styles }) => {
           classPopopBody
           popupTitle={i18n.t('header.searchProduct')}
         >
-          <Search classes={classesSearch} searchProduct={searchProduct} visibleState={openSearch} />
+          <Search
+            classes={classesSearch}
+            searchProduct={searchProduct}
+            visibleState={openSearch}
+          />
         </Popup>
       )}
     </div>

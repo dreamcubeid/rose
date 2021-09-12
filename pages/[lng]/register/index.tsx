@@ -53,7 +53,9 @@ const RegisterPage: FC<any> = ({
         <div className="container">
           <div className="row">
             <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
-              <div className={`${styles.login_item} ${styles.login_item__title} order-1`}>
+              <div
+                className={`${styles.login_item} ${styles.login_item__title} order-1`}
+              >
                 <h3>{i18n.t('register.newAccount')}</h3>
                 <span>{i18n.t('register.promo')}</span>
               </div>
@@ -63,11 +65,17 @@ const RegisterPage: FC<any> = ({
                 withHeaderLabel={true}
                 onErrorMsg={(msg) => toast.error(msg)}
                 onSuccessMsg={(msg) => toast.success(msg)}
-                redirectPage={() => Router.push(`/[lng]/login`, `/${lng}/login`)}
+                redirectPage={() =>
+                  Router.push(`/[lng]/login`, `/${lng}/login`)
+                }
                 passwordViewIcon={<Eye />}
                 passwordHideIcon={<EyeOff />}
-                passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+                passwordFulfilledCriteriaIcon={
+                  <CheckCircle color="green" size={16} />
+                }
+                passwordUnfulfilledCriteriaIcon={
+                  <CheckCircle color="gray" size={16} />
+                }
                 datePickerCalendarIcon={<Calendar />}
                 withVerification={true}
                 isVerified={isVerified}
@@ -81,10 +89,14 @@ const RegisterPage: FC<any> = ({
               />
 
               {(hasGoogleAuth || hasFacebookAuth) && (
-                <div className={`${styles.login_item} ${styles.login_item__sso} order-2`}>
+                <div
+                  className={`${styles.login_item} ${styles.login_item__sso} order-2`}
+                >
                   <SingleSignOn
                     className={styles.login_item__ssoButton}
-                    buttonText={`${i18n.t('login.register')} ${i18n.t('login.sso')}`}
+                    buttonText={`${i18n.t('login.register')} ${i18n.t(
+                      'login.sso'
+                    )}`}
                     loadingComponent={
                       <div className={`${styles.popup_overlay}`}>
                         <LoaderPages />
@@ -106,7 +118,11 @@ const RegisterPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

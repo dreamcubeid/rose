@@ -3,7 +3,13 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Router from 'next/router'
-import { CustomerDetail, ShippingMethods, CartSummary, useI18n, PrivateRoute } from '@sirclo/nexus'
+import {
+  CustomerDetail,
+  ShippingMethods,
+  CartSummary,
+  useI18n,
+  PrivateRoute
+} from '@sirclo/nexus'
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Footer from 'components/Footer/Footer'
@@ -162,7 +168,11 @@ type PrivateComponentPropsType = {
 }
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
-  <PrivateRoute page="shipping_method" loadingComponent={<LoaderPages />} redirectCart="products">
+  <PrivateRoute
+    page="shipping_method"
+    loadingComponent={<LoaderPages />}
+    redirectCart="products"
+  >
     {children}
   </PrivateRoute>
 )
@@ -176,10 +186,12 @@ const ShippingMethodPage: FC<any> = ({
   const size = useWindowSize()
 
   const [openOrderSummary, setOpenOrderSummary] = useState<boolean>(true)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] =
+    useState<boolean>(false)
 
   const toogleOrderSummary = () => setOpenOrderSummary(!openOrderSummary)
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const toogleErrorAddToCart = () =>
+    setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   const CustomerDetailHeader = ({ title }) => (
     <div className={styles.customer_infoHeader}>
@@ -188,7 +200,9 @@ const ShippingMethodPage: FC<any> = ({
         <Info color="#767676" size="18" />
       </div>
       <Link href="/[lng]/place_order" as={`/${lng}/place_order`}>
-        <a className={styles.customer_infoHeaderLink}>{i18n.t('shipping.change')}</a>
+        <a className={styles.customer_infoHeaderLink}>
+          {i18n.t('shipping.change')}
+        </a>
       </Link>
     </div>
   )
@@ -205,10 +219,19 @@ const ShippingMethodPage: FC<any> = ({
       >
         <SEO title="Shipping Method" />
         {showModalErrorAddToCart && (
-          <Popup withHeader setPopup={toogleErrorAddToCart} mobileFull={false} classPopopBody>
+          <Popup
+            withHeader
+            setPopup={toogleErrorAddToCart}
+            mobileFull={false}
+            classPopopBody
+          >
             <div className={styles.shipping_popupError}>
-              <h3 className={styles.shipping_popupErrorTitle}>{i18n.t('cart.errorSKUTitle')}</h3>
-              <p className={styles.shipping_popupErrorDesc}>{i18n.t('cart.errorSKUDesc')} </p>
+              <h3 className={styles.shipping_popupErrorTitle}>
+                {i18n.t('cart.errorSKUTitle')}
+              </h3>
+              <p className={styles.shipping_popupErrorDesc}>
+                {i18n.t('cart.errorSKUDesc')}{' '}
+              </p>
             </div>
           </Popup>
         )}
@@ -222,7 +245,9 @@ const ShippingMethodPage: FC<any> = ({
                       <div className={styles.shipping_heading}>
                         <div
                           className={styles.shipping_headingIcon}
-                          onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                          onClick={() =>
+                            Router.push('/[lng]/products', `/${lng}/products`)
+                          }
                         >
                           <ArrowLeft color="black" />
                         </div>
@@ -261,7 +286,8 @@ const ShippingMethodPage: FC<any> = ({
                             cartProps={{
                               classes: classesCartDetails,
                               withoutQtyInput: false,
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
+                              onErrorMsg: () =>
+                                setShowModalErrorAddToCart(true),
                               loadingComponent: (
                                 <div className="row">
                                   <div className="col-4 pr-0">
@@ -290,19 +316,43 @@ const ShippingMethodPage: FC<any> = ({
                               isAccordion: true,
                               page: 'shipping_method',
                               currency: 'IDR',
-                              submitButtonLabel: i18n.t('orderSummary.placeOrder'),
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
+                              submitButtonLabel: i18n.t(
+                                'orderSummary.placeOrder'
+                              ),
+                              onErrorMsg: () =>
+                                setShowModalErrorAddToCart(true),
                               onErrorMsgCoupon: (msg) => toast.error(msg),
                               loadingComponent: (
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
+                                <Placeholder
+                                  classes={classesPlaceholderCartPlaceorder}
+                                  withTitle
+                                />
                               ),
                               icons: {
-                                voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                                voucherApplied: (
-                                  <img src="/images/mdi_ticket-percent.svg" alt="icon" />
+                                voucher: (
+                                  <img
+                                    src="/images/mdi_ticket-percent.svg"
+                                    alt="icon"
+                                  />
                                 ),
-                                points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                                pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
+                                voucherApplied: (
+                                  <img
+                                    src="/images/mdi_ticket-percent.svg"
+                                    alt="icon"
+                                  />
+                                ),
+                                points: (
+                                  <img
+                                    src="/images/mdi_star-circle.svg"
+                                    alt="icon"
+                                  />
+                                ),
+                                pointsApplied: (
+                                  <img
+                                    src="/images/mdi_star-circle.svg"
+                                    alt="icon"
+                                  />
+                                ),
                                 close: <XIcon />,
                                 collapse: <ChevronUp />,
                                 expand: <ChevronDown />,
@@ -318,20 +368,30 @@ const ShippingMethodPage: FC<any> = ({
                         classes={classesCustomerDetail}
                         isBilling={true}
                         contactInfoHeader={
-                          <CustomerDetailHeader title={i18n.t('shipping.contactInfo')} />
+                          <CustomerDetailHeader
+                            title={i18n.t('shipping.contactInfo')}
+                          />
                         }
                         loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+                          <Placeholder
+                            classes={classesPlaceholderCustomerDetail}
+                            withImage
+                          />
                         }
                       />
                       <CustomerDetail
                         classes={classesCustomerDetail}
                         isBilling={false}
                         shippingInfoHeader={
-                          <CustomerDetailHeader title={i18n.t('shipping.shipTo')} />
+                          <CustomerDetailHeader
+                            title={i18n.t('shipping.shipTo')}
+                          />
                         }
                         loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+                          <Placeholder
+                            classes={classesPlaceholderCustomerDetail}
+                            withImage
+                          />
                         }
                       />
                       <div className={styles.shippingmethod}>
@@ -406,21 +466,44 @@ const ShippingMethodPage: FC<any> = ({
                             isAccordion: true,
                             page: 'shipping_method',
                             currency: 'IDR',
-                            submitButtonLabel: i18n.t('orderSummary.placeOrder'),
+                            submitButtonLabel: i18n.t(
+                              'orderSummary.placeOrder'
+                            ),
                             onErrorMsg: (msg) => toast.error(msg),
                             onErrorMsgCoupon: (msg) => toast.error(msg),
                             loadingComponent: (
                               <div className="px-3">
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
+                                <Placeholder
+                                  classes={classesPlaceholderCartPlaceorder}
+                                  withTitle
+                                />
                               </div>
                             ),
                             icons: {
-                              voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                              voucherApplied: (
-                                <img src="/images/mdi_ticket-percent.svg" alt="icon" />
+                              voucher: (
+                                <img
+                                  src="/images/mdi_ticket-percent.svg"
+                                  alt="icon"
+                                />
                               ),
-                              points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                              pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
+                              voucherApplied: (
+                                <img
+                                  src="/images/mdi_ticket-percent.svg"
+                                  alt="icon"
+                                />
+                              ),
+                              points: (
+                                <img
+                                  src="/images/mdi_star-circle.svg"
+                                  alt="icon"
+                                />
+                              ),
+                              pointsApplied: (
+                                <img
+                                  src="/images/mdi_star-circle.svg"
+                                  alt="icon"
+                                />
+                              ),
                               close: <XIcon />,
                               collapse: <ChevronUp />,
                               expand: <ChevronDown />,
@@ -441,7 +524,10 @@ const ShippingMethodPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

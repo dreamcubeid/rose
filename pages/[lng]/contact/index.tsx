@@ -35,17 +35,29 @@ const ContactPage: FC<any> = ({
   const allowedEnquiry = isEnquiryAllowed()
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAllowed={allowedEnquiry}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      withAllowed={allowedEnquiry}
+    >
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <div className={`${styles.contact_info} ${styles.contact_info__top}`}>
+            <div
+              className={`${styles.contact_info} ${styles.contact_info__top}`}
+            >
               <h1>{i18n.t('contact.title')}</h1>
               <Widget
                 pos="footer-3"
                 widgetClassName={styles.contact_info}
                 loadingComponent={
-                  <Placeholder classes={classesPlaceholderContact} withList listMany={5} />
+                  <Placeholder
+                    classes={classesPlaceholderContact}
+                    withList
+                    listMany={5}
+                  />
                 }
               />
             </div>
@@ -60,7 +72,11 @@ const ContactPage: FC<any> = ({
                   pos="footer-4"
                   widgetClassName={styles.contact_info}
                   loadingComponent={
-                    <Placeholder classes={classesPlaceholderContact} withList listMany={5} />
+                    <Placeholder
+                      classes={classesPlaceholderContact}
+                      withList
+                      listMany={5}
+                    />
                   }
                 />
               }
@@ -72,7 +88,10 @@ const ContactPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

@@ -33,11 +33,19 @@ const LookbookSinglePage: FC<any> = ({
   const [title, setTitle] = useState<string>('')
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAllowed={LookbookAllowed}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      withAllowed={LookbookAllowed}
+    >
       <div className={`${styles.lookbook_wrapper} container`}>
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <div className={`${styles.contact_info} ${styles.contact_info__top}`}>
+            <div
+              className={`${styles.contact_info} ${styles.contact_info__top}`}
+            >
               <h1>{title}</h1>
             </div>
 
@@ -47,7 +55,11 @@ const LookbookSinglePage: FC<any> = ({
               getTitle={setTitle}
               loadingComponent={
                 <div className="mt-3">
-                  <Placeholder classes={classesPlaceholderLookbook} withList listMany={5} />
+                  <Placeholder
+                    classes={classesPlaceholderLookbook}
+                    withList
+                    listMany={5}
+                  />
                 </div>
               }
               emptyStateComponent={
@@ -65,7 +77,9 @@ const LookbookSinglePage: FC<any> = ({
             <div
               className={`${styles.lookbook_nav} d-flex flex-row align-items-center justify-content-between`}
             >
-              <button onClick={() => router.back()}>{i18n.t('global.back')}</button>
+              <button onClick={() => router.back()}>
+                {i18n.t('global.back')}
+              </button>
             </div>
           </div>
         </div>
@@ -74,7 +88,10 @@ const LookbookSinglePage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

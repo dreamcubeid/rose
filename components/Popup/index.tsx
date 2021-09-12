@@ -38,7 +38,8 @@ const Popup: FC<PopupPropType> = ({
   const handleClose = () => withCloseBackground && setVisibleState(false)
 
   if (popupSize === 'fluid') customClassName += ` ${styles.popup__fluidHeight}`
-  else if (popupSize === 'full') customClassName += ` ${styles.popup__fullHeight}`
+  else if (popupSize === 'full')
+    customClassName += ` ${styles.popup__fullHeight}`
 
   return (
     <>
@@ -47,12 +48,17 @@ const Popup: FC<PopupPropType> = ({
           visibleState ? styles.popup__active : styles.popup__hidden
         }`}
       >
-        <div className={`${styles.popupBackground}`} onClick={handleClose}></div>
+        <div
+          className={`${styles.popupBackground}`}
+          onClick={handleClose}
+        ></div>
         <div className={`${styles.popupInner}`}>
           {withHeader && (
             <div className={styles.popupHeader}>
               {title && (
-                <div className={`${styles.popupHeader_item} ${styles.popupHeader_item__center}`}>
+                <div
+                  className={`${styles.popupHeader_item} ${styles.popupHeader_item__center}`}
+                >
                   {withButtonLeft && (
                     <button
                       className={styles.popupHeader_buttonLeft}
@@ -66,13 +72,19 @@ const Popup: FC<PopupPropType> = ({
               )}
 
               {withCloseButton && (
-                <div className={`${styles.popupHeader_item} ${styles.popupHeader_item__last}`}>
+                <div
+                  className={`${styles.popupHeader_item} ${styles.popupHeader_item__last}`}
+                >
                   <button
                     type="button"
                     className={`${styles.popupHeader_close}`}
                     onClick={handleClose}
                   >
-                    {iconClose && <div className={`${styles.popupHeader_icon}`}>{iconClose}</div>}
+                    {iconClose && (
+                      <div className={`${styles.popupHeader_icon}`}>
+                        {iconClose}
+                      </div>
+                    )}
                   </button>
                 </div>
               )}

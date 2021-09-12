@@ -7,7 +7,11 @@ type EmptyComponentPropsType = {
   button?: React.ReactNode
 }
 
-const EmptyComponent: FC<EmptyComponentPropsType> = ({ icon, title, button }) => {
+const EmptyComponent: FC<EmptyComponentPropsType> = ({
+  icon,
+  title,
+  button
+}) => {
   return (
     <div className={styles.emptyContainer}>
       {icon && icon}

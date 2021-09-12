@@ -50,7 +50,8 @@ const classesOrderReview = {
   popupConfirmationSubmitContentClassName: styles.orderReview_popupContent,
   popupConfirmationSubmitTitleClassName: styles.orderReview_popupTitle,
   popupConfirmationSubmitDescriptionClassName: styles.orderReview_popupDesc,
-  popupConfirmationSubmitWrapButtonClassName: styles.orderReview_popupActionButton,
+  popupConfirmationSubmitWrapButtonClassName:
+    styles.orderReview_popupActionButton,
   openReviewButtonClassName: `btn ${styles.btn_outerBlack}`,
   reviewCardContainerClassName: styles.orderReview_reviewCard,
   tileRatingClassName: styles.orderReview_reviewCardtitleRating,
@@ -113,7 +114,10 @@ const ReviewPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

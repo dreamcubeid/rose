@@ -15,7 +15,11 @@ export type SearchPropsType = {
   visibleState: boolean
 }
 
-const Search: FC<SearchPropsType> = ({ classes = {}, searchProduct, visibleState }) => {
+const Search: FC<SearchPropsType> = ({
+  classes = {},
+  searchProduct,
+  visibleState
+}) => {
   const i18n: any = useI18n()
   const [searchValue, setSearchValue] = useState<string>('')
   const inputRef = useRef(null)

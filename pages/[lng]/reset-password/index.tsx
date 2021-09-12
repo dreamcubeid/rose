@@ -47,8 +47,12 @@ const ResetPasswordPage: FC<any> = ({
                 onSuccessMsg={toast.success}
                 passwordViewIcon={<Eye />}
                 passwordHideIcon={<EyeOff />}
-                passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+                passwordFulfilledCriteriaIcon={
+                  <CheckCircle color="green" size={16} />
+                }
+                passwordUnfulfilledCriteriaIcon={
+                  <CheckCircle color="gray" size={16} />
+                }
                 loadingComponent={<Loader color="text-light" />}
               />
             </div>
@@ -59,7 +63,10 @@ const ResetPasswordPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

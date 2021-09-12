@@ -34,7 +34,9 @@ const BannerComponent: FC<any> = ({ data, size }) => (
         format: 'webp',
         quality: 90
       }}
-      loadingComponent={<Placeholder classes={classesPlaceholderBanner} withImage />}
+      loadingComponent={
+        <Placeholder classes={classesPlaceholderBanner} withImage />
+      }
     />
   </>
 )

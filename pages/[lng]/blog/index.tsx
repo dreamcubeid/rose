@@ -15,7 +15,9 @@ import { GRAPHQL_URI } from 'lib/Constants'
 import Layout from 'components/Layout/Layout'
 import styles from 'public/scss/pages/Blog.module.scss'
 
-const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
+const EmptyComponent = dynamic(
+  () => import('components/EmptyComponent/EmptyComponent')
+)
 const Placeholder = dynamic(() => import('components/Placeholder'))
 
 const classesBlogs = {
@@ -75,7 +77,13 @@ const Blog: FC<any> = ({
   const BlogAllowed = isBlogAllowed()
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAllowed={BlogAllowed}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      withAllowed={BlogAllowed}
+    >
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
@@ -87,7 +95,9 @@ const Blog: FC<any> = ({
                 backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${headerImage})`
               }}
             >
-              <h1 className={styles.blog_headerTitle}>{i18n.t('blog.title')}</h1>
+              <h1 className={styles.blog_headerTitle}>
+                {i18n.t('blog.title')}
+              </h1>
             </div>
             <Blogs
               classes={classesBlogs}
@@ -107,19 +117,28 @@ const Blog: FC<any> = ({
                 </>
               }
               emptyStateComponent={
-                <EmptyComponent classes={classesEmptyComponent} title={i18n.t('blog.isEmpty')} />
+                <EmptyComponent
+                  classes={classesEmptyComponent}
+                  title={i18n.t('blog.isEmpty')}
+                />
               }
             />
             {(totalCategories > 0 || totalCategories === null) && (
               <>
-                <h2 className={styles.blog_titleSide}>{i18n.t('blog.categories')}</h2>
+                <h2 className={styles.blog_titleSide}>
+                  {i18n.t('blog.categories')}
+                </h2>
                 <BlogCategories
                   classes={classesBlogCategories}
-                  getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
+                  getCategoriesCount={(categoriesCount) =>
+                    setTotalCategories(categoriesCount)
+                  }
                 />
               </>
             )}
-            <h2 className={styles.blog_titleSide}>{i18n.t('blog.recentPost')}</h2>
+            <h2 className={styles.blog_titleSide}>
+              {i18n.t('blog.recentPost')}
+            </h2>
             <BlogRecent
               classes={classesBlogRecent}
               limit={5}
@@ -144,7 +163,10 @@ const Blog: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

@@ -11,7 +11,10 @@ const Loader: FC<TypeLoader> = ({ color = 'text-dark', withText }) => {
 
   return (
     <>
-      <span className={`spinner-border spinner-border-sm ${color}`} role="status"></span>
+      <span
+        className={`spinner-border spinner-border-sm ${color}`}
+        role="status"
+      ></span>
       {withText && <span className="ml-2">{i18n.t('loader.loading')}</span>}
     </>
   )

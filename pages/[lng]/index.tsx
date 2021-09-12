@@ -89,7 +89,13 @@ const Home: FC<any> = ({
   }
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAnnouncement={true}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      withAnnouncement={true}
+    >
       <div className={styleBanner.bannerCarousel}>
         <BannerComponent data={dataBanners?.data} size={size} />
       </div>
@@ -98,7 +104,9 @@ const Home: FC<any> = ({
           pos="main-content-1"
           containerClassName={styleWidget.widget_servicesContainer}
           widgetClassName={styleWidget.widget_servicesItem}
-          loadingComponent={<Placeholder classes={classesPlaceholderWidgetService} withImage />}
+          loadingComponent={
+            <Placeholder classes={classesPlaceholderWidgetService} withImage />
+          }
           thumborSetting={{
             width: size.width < 768 ? 300 : 500,
             format: 'webp',
@@ -142,13 +150,22 @@ const Home: FC<any> = ({
                 loadingComponent={
                   <>
                     <div>
-                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                      <Placeholder
+                        classes={classesPlaceholderProduct}
+                        withImage
+                      />
                     </div>
                     <div>
-                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                      <Placeholder
+                        classes={classesPlaceholderProduct}
+                        withImage
+                      />
                     </div>
                     <div>
-                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                      <Placeholder
+                        classes={classesPlaceholderProduct}
+                        withImage
+                      />
                     </div>
                   </>
                 }
@@ -199,7 +216,10 @@ const Home: FC<any> = ({
           loadingComponent={
             <>
               <div className="col-12">
-                <Placeholder classes={classesPlaceholderWidgetService} withImage />
+                <Placeholder
+                  classes={classesPlaceholderWidgetService}
+                  withImage
+                />
               </div>
             </>
           }
@@ -214,7 +234,11 @@ const Home: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }: any) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params
+}: any) => {
   const allowedUri: Array<string> = ['en', 'id', 'graphql', 'favicon.ico']
 
   if (allowedUri.indexOf(params.lng.toString()) == -1) {

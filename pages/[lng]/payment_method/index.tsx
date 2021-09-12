@@ -126,14 +126,22 @@ const PaymentMethods: FC<any> = ({
         {withLogo && <Info color="#767676" size="18" />}
       </div>
       <Link href={`/[lng]/${linkTo}`} as={`/${lng}/${linkTo}`}>
-        <a className={styles.customer_infoHeaderLink}>{i18n.t('shipping.change')}</a>
+        <a className={styles.customer_infoHeaderLink}>
+          {i18n.t('shipping.change')}
+        </a>
       </Link>
     </div>
   )
 
   return (
     <PrivateRouteWrapper>
-      <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withHeader={false}>
+      <Layout
+        i18n={i18n}
+        lng={lng}
+        lngDict={lngDict}
+        brand={brand}
+        withHeader={false}
+      >
         <SEO title="Payment Method" />
         <div className={styles.payment}>
           <div className="row mx-0">
@@ -143,7 +151,9 @@ const PaymentMethods: FC<any> = ({
                   <div className={styles.payment_heading}>
                     <div
                       className={styles.payment_headingIcon}
-                      onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                      onClick={() =>
+                        Router.push('/[lng]/products', `/${lng}/products`)
+                      }
                     >
                       <ArrowLeft color="black" />
                     </div>
@@ -169,7 +179,10 @@ const PaymentMethods: FC<any> = ({
                           />
                         }
                         loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+                          <Placeholder
+                            classes={classesPlaceholderCustomerDetail}
+                            withImage
+                          />
                         }
                       />
                       <CustomerDetail
@@ -183,7 +196,10 @@ const PaymentMethods: FC<any> = ({
                           />
                         }
                         loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+                          <Placeholder
+                            classes={classesPlaceholderCustomerDetail}
+                            withImage
+                          />
                         }
                       />
                       {data?.shippingMethod && (
@@ -204,15 +220,21 @@ const PaymentMethods: FC<any> = ({
                         </>
                       )}
                       <div className={styles.payment_list}>
-                        <h3 className={styles.payment_listTitle}>{i18n.t('payment.title')}</h3>
+                        <h3 className={styles.payment_listTitle}>
+                          {i18n.t('payment.title')}
+                        </h3>
                         <ListPaymentMethod
                           classes={classesListPaymentMethod}
                           onErrorMsg={(msg) => toast.error(msg)}
                           onErrorMsgCoupon={(msg) => toast.error(msg)}
                           popupLoader={
                             <div className={styles.payment_popupProcessOverlay}>
-                              <div className={styles.payment_popupProcessContainer}>
-                                <div className={styles.payment_popupProcessInner}>
+                              <div
+                                className={styles.payment_popupProcessContainer}
+                              >
+                                <div
+                                  className={styles.payment_popupProcessInner}
+                                >
                                   <span
                                     className="spinner-border spinner-border-sm mr-3"
                                     role="status"
@@ -254,7 +276,10 @@ const PaymentMethods: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

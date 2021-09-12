@@ -24,8 +24,12 @@ export async function getServerSideProps({ req, res }) {
   const allArticles = await getArticles(GRAPHQL_URI(req))
   const articles = allArticles?.filter((item) => item.isActive === true)
 
-  const blogs = allowedActions['BLOG_VIEW'] ? await getBlogs(GRAPHQL_URI(req)) : []
-  const lookbooks = allowedActions['LOOKBOOK_VIEW'] ? await getLookbooks(GRAPHQL_URI(req)) : []
+  const blogs = allowedActions['BLOG_VIEW']
+    ? await getBlogs(GRAPHQL_URI(req))
+    : []
+  const lookbooks = allowedActions['LOOKBOOK_VIEW']
+    ? await getLookbooks(GRAPHQL_URI(req))
+    : []
 
   if (!allowedActions['BLOG_VIEW']) {
     pages = pages.filter((page) => page.includes('/blog'))

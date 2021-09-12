@@ -5,7 +5,13 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { RiQuestionFill, RiCloseLine } from 'react-icons/ri'
 import { FaChevronDown } from 'react-icons/fa'
-import { Products, ProductFilter, ProductCategory, useI18n, ProductSort } from '@sirclo/nexus'
+import {
+  Products,
+  ProductFilter,
+  ProductCategory,
+  useI18n,
+  ProductSort
+} from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 import useQuery from 'lib/useQuery'
@@ -69,7 +75,8 @@ const classesProductFilter = {
   filterSliderHandleClassName: styleFilter.filter_sliderHandle,
   filterSliderTrackClassName: styleFilter.filter_sliderTrack,
   filterSliderTooltipClassName: styleFilter.filter_sliderTooltip,
-  filterSliderTooltipContainerClassName: styleFilter.filter_sliderTooltipContainer,
+  filterSliderTooltipContainerClassName:
+    styleFilter.filter_sliderTooltipContainer,
   filterSliderTooltipTextClassName: styleFilter.filter_sliderTooltipText
 }
 
@@ -133,15 +140,22 @@ const ProductsPage: FC<any> = ({
       <SEO title={i18n.t('product.products')} />
       <div className="container mt-5 pt-4 pb-3">
         <Breadcrumb
-          steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('products.title') }]}
+          steps={[
+            { label: i18n.t('breadcrumb.home') },
+            { label: i18n.t('products.title') }
+          ]}
         />
       </div>
       <div className="container">
         <div className={styleProducts.products_header}>
           <h6 className={styleProducts.products_headerTotalItem}>
-            {i18n.t('products.show')} {pageInfo.totalItems} {i18n.t('products.item')}
+            {i18n.t('products.show')} {pageInfo.totalItems}{' '}
+            {i18n.t('products.item')}
           </h6>
-          <div className={styleProducts.products_headerCustomize} onClick={() => toogleCustomize()}>
+          <div
+            className={styleProducts.products_headerCustomize}
+            onClick={() => toogleCustomize()}
+          >
             <img src="/icons/filter.svg" alt="customize" />
             {i18n.t('products.customize')}
           </div>
@@ -213,7 +227,9 @@ const ProductsPage: FC<any> = ({
       >
         {openCustomize && (
           <>
-            <div className={styleProducts.products_sortLabel}>{i18n.t('products.sort')}</div>
+            <div className={styleProducts.products_sortLabel}>
+              {i18n.t('products.sort')}
+            </div>
             <ProductSort
               classes={classesProductSort}
               type="list"
@@ -222,7 +238,9 @@ const ProductsPage: FC<any> = ({
                 setOpenCustomize(false)
               }}
             />
-            <div className={styleProducts.products_sortLabel}>{i18n.t('products.category')}</div>
+            <div className={styleProducts.products_sortLabel}>
+              {i18n.t('products.category')}
+            </div>
             <ProductCategory
               classes={classesProductCategory}
               showCategoryNumber
@@ -243,7 +261,10 @@ const ProductsPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

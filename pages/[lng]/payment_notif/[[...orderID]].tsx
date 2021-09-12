@@ -29,10 +29,12 @@ const classesPaymentConfirmation = {
   detailItemImgClassName: styles.paymentConfirmation_detailItemImg,
   detailItemLabelClassName: styles.paymentConfirmation_detailItemLabel,
   detailItemPriceClassName: styles.paymentConfirmation_detailItemPrice,
-  detailPriceBreakdownClassName: styles.paymentConfirmation_detailPriceBreakdown,
+  detailPriceBreakdownClassName:
+    styles.paymentConfirmation_detailPriceBreakdown,
   detailFieldClassName: styles.paymentConfirmation_detailField,
   detailTotalFieldClassName: styles.paymentConfirmation_detailTotalField,
-  detailHeaderDropdownClassName: styles.paymentConfirmation_detailHeaderDropdown,
+  detailHeaderDropdownClassName:
+    styles.paymentConfirmation_detailHeaderDropdown,
   detailBodyDropdownClassName: styles.paymentConfirmation_detailBodyDropdown,
   labelClassName: styles.paymentConfirmation_label
 }
@@ -86,7 +88,10 @@ const PaymentConfirmationPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

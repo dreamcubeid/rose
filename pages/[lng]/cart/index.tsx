@@ -61,11 +61,16 @@ const Cart: FC<any> = ({
       <div className={styleCart.cart}>
         <div className={styleCart.cart_breadcrumb}>
           <Breadcrumb
-            steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.cart') }]}
+            steps={[
+              { label: i18n.t('breadcrumb.home') },
+              { label: i18n.t('breadcrumb.cart') }
+            ]}
           />
         </div>
         <div className={styleCart.cart_header}>
-          <div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t('cart.item')}`}</div>
+          <div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t(
+            'cart.item'
+          )}`}</div>
           <div>
             <Link href={`/${lng}/products`}>{i18n.t('cart.shopMore')}</Link>
           </div>
@@ -107,7 +112,9 @@ const Cart: FC<any> = ({
                   button={
                     <button
                       className={`${styleButton.btn} ${styleButton.btn_primary}`}
-                      onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                      onClick={() =>
+                        Router.push('/[lng]/products', `/${lng}/products`)
+                      }
                     >
                       {i18n.t('cart.shopNow')}
                     </button>
@@ -122,7 +129,10 @@ const Cart: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params
+}) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)

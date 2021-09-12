@@ -3,7 +3,13 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'public/scss/main.scss'
 
 import { useState, useEffect } from 'react'
-import { useApollo, ApolloProvider, PackageFeatureProvider, Widget, I18n } from '@sirclo/nexus'
+import {
+  useApollo,
+  ApolloProvider,
+  PackageFeatureProvider,
+  Widget,
+  I18n
+} from '@sirclo/nexus'
 import { PageTransition } from 'next-page-transitions'
 import MaintenanceMode from '@sirclo/nexus/lib/component/MaintenanceMode'
 
@@ -30,7 +36,11 @@ function MyApp({ Component, pageProps, router }) {
   }, [])
 
   return (
-    <PageTransition timeout={200} loadingDelay={100} classNames="page-transition">
+    <PageTransition
+      timeout={200}
+      loadingDelay={100}
+      classNames="page-transition"
+    >
       <ApolloProvider client={apolloClient} key={router.route}>
         <PackageFeatureProvider>
           <MaintenanceMode classes={classesMaintenance}>

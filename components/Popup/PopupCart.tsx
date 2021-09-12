@@ -1,7 +1,12 @@
 import { FC, useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Router from 'next/router'
-import { OrderSummary, CartDetails, isProductRecommendationAllowed, useI18n } from '@sirclo/nexus'
+import {
+  OrderSummary,
+  CartDetails,
+  isProductRecommendationAllowed,
+  useI18n
+} from '@sirclo/nexus'
 import EmptyComponent from '../EmptyComponent/EmptyComponent'
 import useOutsideClick from 'lib/useOutsideClick'
 import useWindowSize from 'lib/useWindowSize'
@@ -126,7 +131,8 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
   const size: any = useWindowSize()
 
   const cartOuterDiv = useRef<HTMLDivElement>(null)
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] =
+    useState<boolean>(false)
   const allowedProductRecommendation = isProductRecommendationAllowed()
   const [invalidMsg, setInvalidMsg] = useState<string>('')
   const [SKUs, setSKUs] = useState<Array<string>>(null)
@@ -134,17 +140,27 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
     totalItems: null
   })
 
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
+  const toogleErrorAddToCart = () =>
+    setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
   useOutsideClick(cartOuterDiv, () => setPopup(false))
 
   return (
     <>
       {showModalErrorAddToCart && (
-        <Popup withHeader setPopup={toogleErrorAddToCart} mobileFull={false} classPopopBody>
+        <Popup
+          withHeader
+          setPopup={toogleErrorAddToCart}
+          mobileFull={false}
+          classPopopBody
+        >
           <div className={styles.popup_popupError}>
-            <h3 className={styles.popup_popupErrorTitle}>{i18n.t('cart.errorSKUTitle')}</h3>
-            <p className={styles.popup_popupErrorDesc}>{i18n.t('cart.errorSKUDesc')} </p>
+            <h3 className={styles.popup_popupErrorTitle}>
+              {i18n.t('cart.errorSKUTitle')}
+            </h3>
+            <p className={styles.popup_popupErrorDesc}>
+              {i18n.t('cart.errorSKUDesc')}{' '}
+            </p>
           </div>
         </Popup>
       )}
@@ -152,12 +168,20 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
         <div ref={cartOuterDiv} className={styles.popup_containerFull}>
           <div className={styles.popup_header}>
             <h6>{popupTitle}</h6>
-            <span className={styles.close_button} onClick={() => setPopup(false)}>
+            <span
+              className={styles.close_button}
+              onClick={() => setPopup(false)}
+            >
               <X className={styles.close_icon} />
             </span>
           </div>
-          <div id="popupCart" className={`${styles.popup_body} ${styles.popup_bodyFull}`}>
-            {invalidMsg !== '' && <div className={styles.errorCart}>{invalidMsg}</div>}
+          <div
+            id="popupCart"
+            className={`${styles.popup_body} ${styles.popup_bodyFull}`}
+          >
+            {invalidMsg !== '' && (
+              <div className={styles.errorCart}>{invalidMsg}</div>
+            )}
             <CartDetails
               getSKU={(SKUs: any) => setSKUs(SKUs)}
               classes={classesCartDetails}
@@ -194,7 +218,9 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
                   button={
                     <button
                       className={`${styles.btn} ${styles.btn_primary} ${styles.btn_long} my-1`}
-                      onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                      onClick={() =>
+                        Router.push('/[lng]/products', `/${lng}/products`)
+                      }
                     >
                       {i18n.t('cart.shopNow')}
                     </button>
@@ -202,42 +228,52 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
                 />
               }
             />
-            {allowedProductRecommendation && pageInfo.totalItems !== 0 && SKUs !== null && (
-              <div className={`row ${styles.cart_crossSell}`}>
-                <div className={`col-12 ${styles.cart_crossSellHeader}`}>
-                  <h6 className={styles.cart_crossSellTitle}>{i18n.t('product.related')}</h6>
+            {allowedProductRecommendation &&
+              pageInfo.totalItems !== 0 &&
+              SKUs !== null && (
+                <div className={`row ${styles.cart_crossSell}`}>
+                  <div className={`col-12 ${styles.cart_crossSellHeader}`}>
+                    <h6 className={styles.cart_crossSellTitle}>
+                      {i18n.t('product.related')}
+                    </h6>
+                  </div>
+                  <Products
+                    SKUs={SKUs}
+                    classes={classesCrosselProducts}
+                    paginationClasses={paginationClasses}
+                    getCrossSellPageInfo={(pageInfo: any) =>
+                      setPageInfo({ totalItems: pageInfo.totalItems })
+                    }
+                    itemPerPage={2}
+                    pathPrefix="product"
+                    newPagination
+                    lazyLoadedImage={false}
+                    buttonPrev={<ArrowLeftCircle />}
+                    buttonNext={<ArrowRightCircle />}
+                    loadingComponent={
+                      <>
+                        <div className="col-6">
+                          <Placeholder
+                            classes={classesPlaceholderProduct}
+                            withImage={true}
+                          />
+                        </div>
+                        <div className="col-6">
+                          <Placeholder
+                            classes={classesPlaceholderProduct}
+                            withImage={true}
+                          />
+                        </div>
+                      </>
+                    }
+                    thumborSetting={{
+                      width: size.width < 768 ? 350 : 600,
+                      format: 'webp',
+                      quality: 85
+                    }}
+                  />
                 </div>
-                <Products
-                  SKUs={SKUs}
-                  classes={classesCrosselProducts}
-                  paginationClasses={paginationClasses}
-                  getCrossSellPageInfo={(pageInfo: any) =>
-                    setPageInfo({ totalItems: pageInfo.totalItems })
-                  }
-                  itemPerPage={2}
-                  pathPrefix="product"
-                  newPagination
-                  lazyLoadedImage={false}
-                  buttonPrev={<ArrowLeftCircle />}
-                  buttonNext={<ArrowRightCircle />}
-                  loadingComponent={
-                    <>
-                      <div className="col-6">
-                        <Placeholder classes={classesPlaceholderProduct} withImage={true} />
-                      </div>
-                      <div className="col-6">
-                        <Placeholder classes={classesPlaceholderProduct} withImage={true} />
-                      </div>
-                    </>
-                  }
-                  thumborSetting={{
-                    width: size.width < 768 ? 350 : 600,
-                    format: 'webp',
-                    quality: 85
-                  }}
-                />
-              </div>
-            )}
+              )}
           </div>
           <div className={styles.popup_footer}>
             <OrderSummary
@@ -250,19 +286,31 @@ const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
               onErrorMsg={() => setShowModalErrorAddToCart(true)}
               onErrorMsgCoupon={(msg) => toast.error(msg)}
               icons={{
-                voucher: <img src="/images/mdi_ticket-percent-black.svg" alt="icon" />,
-                points: <img src="/images/mdi_star-circle-black.svg" alt="icon" />,
+                voucher: (
+                  <img src="/images/mdi_ticket-percent-black.svg" alt="icon" />
+                ),
+                points: (
+                  <img src="/images/mdi_star-circle-black.svg" alt="icon" />
+                ),
                 close: <X />,
                 voucherRemoved: <X />,
-                voucherApplied: <img src="/images/mdi_ticket-percent-black.svg" alt="icon" />
+                voucherApplied: (
+                  <img src="/images/mdi_ticket-percent-black.svg" alt="icon" />
+                )
               }}
               loadingComponent={
                 <div className="row m-3 mb-0">
                   <div className="col-6 pl-0">
-                    <Placeholder classes={classesPlaceholderOrderSummary} withImage />
+                    <Placeholder
+                      classes={classesPlaceholderOrderSummary}
+                      withImage
+                    />
                   </div>
                   <div className="col-6 px-0">
-                    <Placeholder classes={classesPlaceholderOrderSummary} withImage />
+                    <Placeholder
+                      classes={classesPlaceholderOrderSummary}
+                      withImage
+                    />
                   </div>
                 </div>
               }

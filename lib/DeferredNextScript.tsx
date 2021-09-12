@@ -33,16 +33,22 @@ export class DeferredNextScript extends NextScript {
     })
   }
   getDynamicChunks(files: DocumentFiles) {
-    const { dynamicImports, assetPrefix, devOnlyCacheBusterQueryString } = this.context
+    const { dynamicImports, assetPrefix, devOnlyCacheBusterQueryString } =
+      this.context
 
     // @ts-ignore
     return dedupe(dynamicImports).map((bundle) => {
       let modernProps = {}
       if (process.env.__NEXT_MODERN_BUILD) {
-        modernProps = bundle.file.endsWith('.module.js') ? { type: 'module' } : { noModule: true }
+        modernProps = bundle.file.endsWith('.module.js')
+          ? { type: 'module' }
+          : { noModule: true }
       }
 
-      if (!bundle?.file?.endsWith('.js') || files?.allFiles?.includes(bundle.file)) {
+      if (
+        !bundle?.file?.endsWith('.js') ||
+        files?.allFiles?.includes(bundle.file)
+      ) {
         return null
       }
 
@@ -50,9 +56,13 @@ export class DeferredNextScript extends NextScript {
         <script
           defer={true}
           key={bundle.file}
-          src={`${assetPrefix}/_next/${encodeURI(bundle.file)}${devOnlyCacheBusterQueryString}`}
+          src={`${assetPrefix}/_next/${encodeURI(
+            bundle.file
+          )}${devOnlyCacheBusterQueryString}`}
           nonce={this.props.nonce}
-          crossOrigin={this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN}
+          crossOrigin={
+            this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN
+          }
           {...modernProps}
         />
       )

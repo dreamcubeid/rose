@@ -1,31 +1,21 @@
-import { FC, useState, useRef } from "react";
-import dynamic from "next/dynamic";
-import Router from "next/router";
-import {
-  OrderSummary,
-  CartDetails,
-  isProductRecommendationAllowed,
-  useI18n
-} from "@sirclo/nexus";
-import EmptyComponent from "../EmptyComponent/EmptyComponent";
-import useOutsideClick from "lib/useOutsideClick";
-import useWindowSize from "lib/useWindowSize";
-import {
-  X,
-  Trash,
-  ArrowLeftCircle,
-  ArrowRightCircle
-} from "react-feather";
-import { toast } from "react-toastify";
-import styles from "public/scss/components/Popup.module.scss";
+import { FC, useState, useRef } from 'react'
+import dynamic from 'next/dynamic'
+import Router from 'next/router'
+import { OrderSummary, CartDetails, isProductRecommendationAllowed, useI18n } from '@sirclo/nexus'
+import EmptyComponent from '../EmptyComponent/EmptyComponent'
+import useOutsideClick from 'lib/useOutsideClick'
+import useWindowSize from 'lib/useWindowSize'
+import { X, Trash, ArrowLeftCircle, ArrowRightCircle } from 'react-feather'
+import { toast } from 'react-toastify'
+import styles from 'public/scss/components/Popup.module.scss'
 
-const Popup = dynamic(() => import("components/Popup/Popup"));
-const Products = dynamic(() => import("@sirclo/nexus/lib/component/products"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
+const Popup = dynamic(() => import('components/Popup/Popup'))
+const Products = dynamic(() => import('@sirclo/nexus/lib/component/products'))
+const Placeholder = dynamic(() => import('components/Placeholder'))
 
 const classesCartDetails = {
   className: styles.cart,
-  cartHeaderClassName: "d-none",
+  cartHeaderClassName: 'd-none',
   itemClassName: styles.cartItem,
   itemImageClassName: styles.cartItem_image,
   itemTitleClassName: styles.cartItem_detail,
@@ -34,16 +24,16 @@ const classesCartDetails = {
   itemSalePriceClassName: styles.cartItem_priceSale,
   itemSalePriceWrapperClassName: styles.cartItem_priceSaleWrapper,
   itemDiscountNoteClassName: styles.cartItem_discNote,
-  itemRegularAmountClassName: "d-none",
-  headerQtyClassName: "d-none",
+  itemRegularAmountClassName: 'd-none',
+  headerQtyClassName: 'd-none',
   itemQtyClassName: styles.cartItem_qty,
   qtyBoxClassName: styles.cartItem_qtyBox,
   itemAmountClassName: styles.cartItem_price,
-  itemEditClassName: "d-none",
+  itemEditClassName: 'd-none',
   itemRemoveClassName: styles.cartItem_remove,
   cartFooterClassName: `${styles.cartFooter} ${styles.sirclo_form_row}`,
   cartFooterTitleClassName: styles.cartFooter_title,
-  cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`,
+  cartFooterTextareaClassName: `form-control ${styles.sirclo_form_input} ${styles.cartFooter_input} py-2`
 }
 
 const classesOrderSummary = {
@@ -60,7 +50,7 @@ const classesOrderSummary = {
   subTotalPriceClassName: styles.summarycart_subtotal__price,
   footerClassName: `col-6 ${styles.summarycart_footer} pl-0`,
   submitButtonClassName: `col-12 order-1 px-0 m-0 btn ${styles.btn_primary} ${styles.btn_long}`,
-  continueShoppingClassName: "d-none",
+  continueShoppingClassName: 'd-none',
   //Popup
   popupClassName: styles.summarycart_overlay,
   voucherContainerClassName: styles.summarycart_popup,
@@ -83,7 +73,7 @@ const classesOrderSummary = {
   voucherAppliedIconClassName: `${styles.sumamrycart_headerFeatures__icon} mr-2`,
   voucherAppliedTextClassName: styles.summarycart_headerFeatures__label,
   voucherButtonRemoveClassName: styles.summarycart_voucherRemove
-};
+}
 
 const classesCrosselProducts = {
   productContainerClassName: `col-6 mb-0 products_list ${styles.product}`,
@@ -100,12 +90,12 @@ const classesCrosselProducts = {
   productTitleClassName: styles.product_label__title,
   productPriceClassName: styles.product_labelPrice,
   salePriceClassName: styles.product_labelPrice__sale,
-  priceClassName: styles.product_labelPrice__price,
-};
+  priceClassName: styles.product_labelPrice__price
+}
 
 const classesPlaceholderProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__card}`,
-};
+  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__card}`
+}
 
 const classesEmptyComponent = {
   emptyContainer: styles.cart_empty,
@@ -114,7 +104,7 @@ const classesEmptyComponent = {
 
 const classesPlaceholderCart = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cart}`
-};
+}
 
 const classesPlaceholderOrderSummary = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__orderSummary}`
@@ -126,64 +116,48 @@ const paginationClasses = {
 }
 
 export type PopupPropsType = {
-  setPopup: any,
-  popupTitle: string,
-  lng: any,
+  setPopup: any
+  popupTitle: string
+  lng: any
 }
 
-const PopupCart: FC<PopupPropsType> = ({
-  setPopup,
-  popupTitle,
-  lng
-}) => {
-  const i18n: any = useI18n();
-  const size: any = useWindowSize();
+const PopupCart: FC<PopupPropsType> = ({ setPopup, popupTitle, lng }) => {
+  const i18n: any = useI18n()
+  const size: any = useWindowSize()
 
-  const cartOuterDiv = useRef<HTMLDivElement>(null);
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false);
-  const allowedProductRecommendation = isProductRecommendationAllowed();
-  const [invalidMsg, setInvalidMsg] = useState<string>("");
-  const [SKUs, setSKUs] = useState<Array<string>>(null);
+  const cartOuterDiv = useRef<HTMLDivElement>(null)
+  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
+  const allowedProductRecommendation = isProductRecommendationAllowed()
+  const [invalidMsg, setInvalidMsg] = useState<string>('')
+  const [SKUs, setSKUs] = useState<Array<string>>(null)
   const [pageInfo, setPageInfo] = useState({
-    totalItems: null,
+    totalItems: null
   })
 
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart);
+  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
 
-  useOutsideClick(cartOuterDiv, () => setPopup(false));
+  useOutsideClick(cartOuterDiv, () => setPopup(false))
 
   return (
     <>
-      {showModalErrorAddToCart &&
-        <Popup
-          withHeader
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-          classPopopBody
-        >
+      {showModalErrorAddToCart && (
+        <Popup withHeader setPopup={toogleErrorAddToCart} mobileFull={false} classPopopBody>
           <div className={styles.popup_popupError}>
-            <h3 className={styles.popup_popupErrorTitle}>{i18n.t("cart.errorSKUTitle")}</h3>
-            <p className={styles.popup_popupErrorDesc}>{i18n.t("cart.errorSKUDesc")} </p>
+            <h3 className={styles.popup_popupErrorTitle}>{i18n.t('cart.errorSKUTitle')}</h3>
+            <p className={styles.popup_popupErrorDesc}>{i18n.t('cart.errorSKUDesc')} </p>
           </div>
         </Popup>
-      }
+      )}
       <div className={styles.popup_overlay}>
         <div ref={cartOuterDiv} className={styles.popup_containerFull}>
           <div className={styles.popup_header}>
             <h6>{popupTitle}</h6>
-            <span
-              className={styles.close_button}
-              onClick={() => setPopup(false)}
-            >
+            <span className={styles.close_button} onClick={() => setPopup(false)}>
               <X className={styles.close_icon} />
             </span>
           </div>
           <div id="popupCart" className={`${styles.popup_body} ${styles.popup_bodyFull}`}>
-            {invalidMsg !== "" &&
-              <div className={styles.errorCart}>
-                {invalidMsg}
-              </div>
-            }
+            {invalidMsg !== '' && <div className={styles.errorCart}>{invalidMsg}</div>}
             <CartDetails
               getSKU={(SKUs: any) => setSKUs(SKUs)}
               classes={classesCartDetails}
@@ -194,8 +168,8 @@ const PopupCart: FC<PopupPropsType> = ({
               onInvalidMsg={(msg) => setInvalidMsg(msg)}
               thumborSetting={{
                 width: size.width < 768 ? 200 : 400,
-                format: "webp",
-                quality: 85,
+                format: 'webp',
+                quality: 85
               }}
               loadingComponent={
                 <div className="row">
@@ -216,29 +190,30 @@ const PopupCart: FC<PopupPropsType> = ({
               emptyCartPlaceHolder={
                 <EmptyComponent
                   classes={classesEmptyComponent}
-                  title={i18n.t("cart.isEmpty")}
+                  title={i18n.t('cart.isEmpty')}
                   button={
                     <button
                       className={`${styles.btn} ${styles.btn_primary} ${styles.btn_long} my-1`}
-                      onClick={() => Router.push(
-                        "/[lng]/products",
-                        `/${lng}/products`
-                      )}
-                    >{i18n.t("cart.shopNow")}</button>
+                      onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
+                    >
+                      {i18n.t('cart.shopNow')}
+                    </button>
                   }
                 />
               }
             />
-            {allowedProductRecommendation && pageInfo.totalItems !== 0 && SKUs !== null &&
+            {allowedProductRecommendation && pageInfo.totalItems !== 0 && SKUs !== null && (
               <div className={`row ${styles.cart_crossSell}`}>
                 <div className={`col-12 ${styles.cart_crossSellHeader}`}>
-                  <h6 className={styles.cart_crossSellTitle}>{i18n.t("product.related")}</h6>
+                  <h6 className={styles.cart_crossSellTitle}>{i18n.t('product.related')}</h6>
                 </div>
                 <Products
                   SKUs={SKUs}
                   classes={classesCrosselProducts}
                   paginationClasses={paginationClasses}
-                  getCrossSellPageInfo={(pageInfo: any) => setPageInfo({ totalItems: pageInfo.totalItems })}
+                  getCrossSellPageInfo={(pageInfo: any) =>
+                    setPageInfo({ totalItems: pageInfo.totalItems })
+                  }
                   itemPerPage={2}
                   pathPrefix="product"
                   newPagination
@@ -248,35 +223,29 @@ const PopupCart: FC<PopupPropsType> = ({
                   loadingComponent={
                     <>
                       <div className="col-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage={true}
-                        />
+                        <Placeholder classes={classesPlaceholderProduct} withImage={true} />
                       </div>
                       <div className="col-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage={true}
-                        />
+                        <Placeholder classes={classesPlaceholderProduct} withImage={true} />
                       </div>
                     </>
                   }
                   thumborSetting={{
                     width: size.width < 768 ? 350 : 600,
-                    format: "webp",
+                    format: 'webp',
                     quality: 85
                   }}
                 />
               </div>
-            }
+            )}
           </div>
           <div className={styles.popup_footer}>
             <OrderSummary
               classes={classesOrderSummary}
               currency="IDR"
-              submitButtonLabel={i18n.t("orderSummary.placeOrder")}
-              continueShoppingLabel={i18n.t("orderSummary.viewCart")}
-              page={"cart"}
+              submitButtonLabel={i18n.t('orderSummary.placeOrder')}
+              continueShoppingLabel={i18n.t('orderSummary.viewCart')}
+              page={'cart'}
               continueShoppingRoute="cart"
               onErrorMsg={() => setShowModalErrorAddToCart(true)}
               onErrorMsgCoupon={(msg) => toast.error(msg)}
@@ -305,4 +274,4 @@ const PopupCart: FC<PopupPropsType> = ({
   )
 }
 
-export default PopupCart;
+export default PopupCart

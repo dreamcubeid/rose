@@ -4,12 +4,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { RiQuestionFill } from 'react-icons/ri'
-import {
-  getBanner,
-  Products,
-  useI18n,
-  Widget
-} from '@sirclo/nexus'
+import { getBanner, Products, useI18n, Widget } from '@sirclo/nexus'
 /* library template */
 import useWindowSize from 'lib/useWindowSize'
 import { parseCookies } from 'lib/parseCookies'
@@ -48,11 +43,11 @@ const classesProducts = {
 }
 
 const classesPlaceholderProduct = {
-  placeholderImage: `${stylePlaceholder.placeholderItem} ${stylePlaceholder.placeholderItem_productCard}`,
+  placeholderImage: `${stylePlaceholder.placeholderItem} ${stylePlaceholder.placeholderItem_productCard}`
 }
 
 const classesPlaceholderWidgetService = {
-  placeholderImage: `${stylePlaceholder.placeholderItem} ${stylePlaceholder.placeholderItem_widgetService}`,
+  placeholderImage: `${stylePlaceholder.placeholderItem} ${stylePlaceholder.placeholderItem_widgetService}`
 }
 
 const Home: FC<any> = ({
@@ -94,36 +89,27 @@ const Home: FC<any> = ({
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-      withAnnouncement={true}
-    >
+    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withAnnouncement={true}>
       <div className={styleBanner.bannerCarousel}>
-        <BannerComponent
-          data={dataBanners?.data}
-          size={size}
-        />
+        <BannerComponent data={dataBanners?.data} size={size} />
       </div>
       <div className={styleWidget.widget_services}>
         <Widget
           pos="main-content-1"
           containerClassName={styleWidget.widget_servicesContainer}
           widgetClassName={styleWidget.widget_servicesItem}
-          loadingComponent={
-            <Placeholder classes={classesPlaceholderWidgetService} withImage />
-          }
+          loadingComponent={<Placeholder classes={classesPlaceholderWidgetService} withImage />}
           thumborSetting={{
             width: size.width < 768 ? 300 : 500,
-            format: "webp",
+            format: 'webp',
             quality: 85
           }}
         />
       </div>
       <div className={styleProduct.product_container}>
-        <div className={`${styleProduct.product_containerItem} ${styleProduct.product_containerTitle}`}>
+        <div
+          className={`${styleProduct.product_containerItem} ${styleProduct.product_containerTitle}`}
+        >
           <ProductTitle
             i18n={i18n}
             styleProduct={styleProduct}
@@ -145,19 +131,25 @@ const Home: FC<any> = ({
                 emptyStateComponent={
                   <EmptyComponent
                     icon={<RiQuestionFill color="#A8A8A8" size={20} />}
-                    title={i18n.t("product.isEmpty")}
+                    title={i18n.t('product.isEmpty')}
                   />
                 }
                 thumborSetting={{
                   width: size.width < 768 ? 512 : 800,
-                  format: "webp",
+                  format: 'webp',
                   quality: 85
                 }}
                 loadingComponent={
                   <>
-                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
-                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
-                    <div><Placeholder classes={classesPlaceholderProduct} withImage /></div>
+                    <div>
+                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                    </div>
+                    <div>
+                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                    </div>
+                    <div>
+                      <Placeholder classes={classesPlaceholderProduct} withImage />
+                    </div>
                   </>
                 }
               />
@@ -168,7 +160,7 @@ const Home: FC<any> = ({
               className={`${styleButton.btn} ${styleButton.btn_secondary}`}
               onClick={() => router.push(`/${lng}/products`)}
             >
-              {i18n.t("product.seeAll")}
+              {i18n.t('product.seeAll')}
             </button>
           </div>
         </div>
@@ -187,22 +179,18 @@ const Home: FC<any> = ({
           }
           thumborSetting={{
             width: size.width < 768 ? 576 : 900,
-            format: "webp",
+            format: 'webp',
             quality: 85
           }}
         />
       </div>
-      {brand?.socmedSetting?.instagramToken &&
+      {brand?.socmedSetting?.instagramToken && (
         <div className="container">
           <LazyLoadComponent>
-            <Instafeed
-              i18n={i18n}
-              brand={brand}
-              withFollowButton
-            />
+            <Instafeed i18n={i18n} brand={brand} withFollowButton />
           </LazyLoadComponent>
         </div>
-      }
+      )}
       <div className={styleWidget.widget_footer}>
         <Widget
           pos="footer-1"
@@ -217,36 +205,31 @@ const Home: FC<any> = ({
           }
           thumborSetting={{
             width: size.width < 768 ? 250 : 300,
-            format: "webp",
+            format: 'webp',
             quality: 85
           }}
         />
       </div>
-    </Layout >
+    </Layout>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  res,
-  params
-}: any) => {
-
+export const getServerSideProps: GetServerSideProps = async ({ req, res, params }: any) => {
   const allowedUri: Array<string> = ['en', 'id', 'graphql', 'favicon.ico']
 
   if (allowedUri.indexOf(params.lng.toString()) == -1) {
     const cookies = parseCookies(req)
 
     res.writeHead(307, {
-      Location: cookies.ACTIVE_LNG ? '/' + cookies.ACTIVE_LNG + '/' + params.lng : '/id/' + params.lng
+      Location: cookies.ACTIVE_LNG
+        ? '/' + cookies.ACTIVE_LNG + '/' + params.lng
+        : '/id/' + params.lng
     })
 
     res.end()
   }
 
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  )
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)
   const dataBanners = await getBanner(GRAPHQL_URI(req))
@@ -255,7 +238,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || "",
+      brand: brand || '',
       dataBanners
     }
   }

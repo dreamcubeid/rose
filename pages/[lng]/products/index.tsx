@@ -1,26 +1,11 @@
 /* library package */
-import {
-  FC,
-  useState,
-  useEffect
-} from 'react'
+import { FC, useState, useEffect } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import {
-  RiQuestionFill,
-  RiCloseLine
-} from 'react-icons/ri'
-import {
-  FaChevronDown
-} from 'react-icons/fa'
-import {
-  Products,
-  ProductFilter,
-  ProductCategory,
-  useI18n,
-  ProductSort,
-} from '@sirclo/nexus'
+import { RiQuestionFill, RiCloseLine } from 'react-icons/ri'
+import { FaChevronDown } from 'react-icons/fa'
+import { Products, ProductFilter, ProductCategory, useI18n, ProductSort } from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 import useQuery from 'lib/useQuery'
@@ -55,7 +40,7 @@ const classesProducts = {
   productTitleClassName: styleProduct.product_label__title,
   productPriceClassName: styleProduct.product_labelPrice,
   salePriceClassName: styleProduct.product_labelPrice__sale,
-  priceClassName: styleProduct.product_labelPrice__price,
+  priceClassName: styleProduct.product_labelPrice__price
 }
 
 const classesProductSort = {
@@ -85,7 +70,7 @@ const classesProductFilter = {
   filterSliderTrackClassName: styleFilter.filter_sliderTrack,
   filterSliderTooltipClassName: styleFilter.filter_sliderTooltip,
   filterSliderTooltipContainerClassName: styleFilter.filter_sliderTooltipContainer,
-  filterSliderTooltipTextClassName: styleFilter.filter_sliderTooltipText,
+  filterSliderTooltipTextClassName: styleFilter.filter_sliderTooltipText
 }
 
 const classesProductCategory = {
@@ -102,13 +87,13 @@ const classesProductCategory = {
 const ProductsPage: FC<any> = ({
   lng,
   lngDict,
-  brand,
+  brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
   const i18n: any = useI18n()
   const size = useWindowSize()
 
-  const categories: string = useQuery("categories")
+  const categories: string = useQuery('categories')
   const tagname: string | string[] = router.query.tagname || null
 
   const [openCustomize, setOpenCustomize] = useState<boolean>(false)
@@ -118,10 +103,10 @@ const ProductsPage: FC<any> = ({
   const [pageInfo, setPageInfo] = useState({
     pageNumber: 0,
     itemPerPage: 6,
-    totalItems: 0,
+    totalItems: 0
   })
 
-  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, "product_list")
+  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, 'product_list')
 
   useEffect(() => {
     setCurrPage(0)
@@ -143,9 +128,9 @@ const ProductsPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
-      headerTitle={i18n.t("products.title")}
+      headerTitle={i18n.t('products.title')}
     >
-      <SEO title={i18n.t("product.products")} />
+      <SEO title={i18n.t('product.products')} />
       <div className="container mt-5 pt-4 pb-3">
         <Breadcrumb
           steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('products.title') }]}
@@ -154,14 +139,11 @@ const ProductsPage: FC<any> = ({
       <div className="container">
         <div className={styleProducts.products_header}>
           <h6 className={styleProducts.products_headerTotalItem}>
-            {i18n.t("products.show")} {pageInfo.totalItems} {i18n.t("products.item")}
+            {i18n.t('products.show')} {pageInfo.totalItems} {i18n.t('products.item')}
           </h6>
-          <div
-            className={styleProducts.products_headerCustomize}
-            onClick={() => toogleCustomize()}
-          >
+          <div className={styleProducts.products_headerCustomize} onClick={() => toogleCustomize()}>
             <img src="/icons/filter.svg" alt="customize" />
-            {i18n.t("products.customize")}
+            {i18n.t('products.customize')}
           </div>
         </div>
       </div>
@@ -184,43 +166,40 @@ const ProductsPage: FC<any> = ({
               lazyLoadedImage={false}
               thumborSetting={{
                 width: size.width < 768 ? 512 : 800,
-                format: "webp",
-                quality: 85,
+                format: 'webp',
+                quality: 85
               }}
               emptyStateComponent={
                 <div className="col-12 my-3">
                   <EmptyComponent
                     icon={<RiQuestionFill color="#A8A8A8" size={20} />}
-                    title={i18n.t("product.isEmpty")}
+                    title={i18n.t('product.isEmpty')}
                   />
                 </div>
               }
               loadingComponent={
                 <div className="col-12">
                   <div className="d-flex justify-content-center align-center my-5">
-                    <Loader
-                      color="text-secondary"
-                      withText
-                    />
+                    <Loader color="text-secondary" withText />
                   </div>
                 </div>
               }
             />
           ))}
-          {(pageInfo.totalItems === 0) &&
+          {pageInfo.totalItems === 0 && (
             <div className="col-12">
               <button
                 className={`${styleButton.btn} ${styleButton.btn_secondary}`}
                 onClick={() => router.push(`/${lng}/products`)}
               >
-                {i18n.t("products.seeAllProduct")}
+                {i18n.t('products.seeAllProduct')}
               </button>
             </div>
-          }
+          )}
         </div>
       </div>
       <Popup
-        title={i18n.t("product.filter")}
+        title={i18n.t('product.filter')}
         visibleState={openCustomize}
         setVisibleState={setOpenCustomize}
         withCloseButton
@@ -232,11 +211,9 @@ const ProductsPage: FC<any> = ({
           }
         }}
       >
-        {openCustomize &&
+        {openCustomize && (
           <>
-            <div className={styleProducts.products_sortLabel}>
-              {i18n.t("products.sort")}
-            </div>
+            <div className={styleProducts.products_sortLabel}>{i18n.t('products.sort')}</div>
             <ProductSort
               classes={classesProductSort}
               type="list"
@@ -245,9 +222,7 @@ const ProductsPage: FC<any> = ({
                 setOpenCustomize(false)
               }}
             />
-            <div className={styleProducts.products_sortLabel}>
-              {i18n.t("products.category")}
-            </div>
+            <div className={styleProducts.products_sortLabel}>{i18n.t('products.category')}</div>
             <ProductCategory
               classes={classesProductCategory}
               showCategoryNumber
@@ -262,16 +237,13 @@ const ProductsPage: FC<any> = ({
               handleFilter={handleFilter}
             />
           </>
-        }
+        )}
       </Popup>
     </Layout>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  params,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)
@@ -280,7 +252,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || ""
+      brand: brand || ''
     }
   }
 }

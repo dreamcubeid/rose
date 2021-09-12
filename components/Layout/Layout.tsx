@@ -1,9 +1,5 @@
 /* library package */
-import {
-  FC,
-  useState,
-  useEffect
-} from 'react'
+import { FC, useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
@@ -34,16 +30,16 @@ const classesNewsletterPopup = {
   containerClassName: styleNewsletter.newsletter_popupContainer,
   closeButtonClassName: styleNewsletter.newsletter_close,
   formContainerClassName: styleNewsletter.newsletter_form,
-  labelClassName: "d-none",
-  inputClassName: "form-control",
-  buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
+  labelClassName: 'd-none',
+  inputClassName: 'form-control',
+  buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`
 }
 
 const Layout: FC<LayoutPropType> = ({
   lngDict,
   i18n,
   lng,
-  layoutClassName = "",
+  layoutClassName = '',
   withAnnouncement = false,
   withHeader = true,
   headerTitle,
@@ -65,9 +61,9 @@ const Layout: FC<LayoutPropType> = ({
   }, [lng, lngDict])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener('scroll', () => handleScroll);
+      window.removeEventListener('scroll', () => handleScroll)
     }
   }, [])
 
@@ -79,7 +75,8 @@ const Layout: FC<LayoutPropType> = ({
     let className = 'transparent'
     let stickyNavPathCategories = ['/[lng]', '/[lng]/lookbook/categories']
     let stickyNavPathHome = ['/[lng]', '/[lng]']
-    let stickyActive = stickyNavPathCategories.includes(pathname) || stickyNavPathHome.includes(pathname)
+    let stickyActive =
+      stickyNavPathCategories.includes(pathname) || stickyNavPathHome.includes(pathname)
 
     if (!stickyActive) className = 'notSticky'
     else if (isSticky && stickyActive) className = 'notSticky'
@@ -89,7 +86,7 @@ const Layout: FC<LayoutPropType> = ({
 
   const getToken = (): string => {
     const googleAdsWebsiteMetaToken = brand?.googleAdsWebsiteMetaToken
-    const token: string = googleAdsWebsiteMetaToken.replace(/.*content="([^"]*)".*/, "$1")
+    const token: string = googleAdsWebsiteMetaToken.replace(/.*content="([^"]*)".*/, '$1')
     return token
   }
 
@@ -100,33 +97,14 @@ const Layout: FC<LayoutPropType> = ({
           <meta name="robots" content="noindex, nofollow"></meta>
         )}
         <title>{brand?.settings?.websiteTitle}</title>
-        {brand?.googleAdsWebsiteMetaToken &&
+        {brand?.googleAdsWebsiteMetaToken && (
           <meta name="google-site-verification" content={getToken()} />
-        }
-        <link
-          rel="shortcut icon"
-          href={brand?.settings?.faviconURL}
-          type="image/x-icon"
-        />
+        )}
+        <link rel="shortcut icon" href={brand?.settings?.faviconURL} type="image/x-icon" />
         <link rel="manifest" href="/manifest.json" />
-        <link
-          rel="preload"
-          href="webfonts/Roboto-Regular.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="webfonts/Roboto-Black.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="webfonts/Roboto-Medium.ttf"
-          as="font"
-          crossOrigin="anonymous"
-        />
+        <link rel="preload" href="webfonts/Roboto-Regular.ttf" as="font" crossOrigin="anonymous" />
+        <link rel="preload" href="webfonts/Roboto-Black.ttf" as="font" crossOrigin="anonymous" />
+        <link rel="preload" href="webfonts/Roboto-Medium.ttf" as="font" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://thumbor.sirclocdn.com" />
         <link rel="preconnect" href="https://storage.googleapis.com" />
       </Head>
@@ -135,21 +113,16 @@ const Layout: FC<LayoutPropType> = ({
         description={brand?.settings?.websiteDescription}
         image={brand?.logoURL}
       />
-      {withHeader &&
+      {withHeader && (
         <Header
           withAnnouncement={withAnnouncement}
           headerTitle={headerTitle}
           stickyClass={stickyMechanic(router.pathname)}
         />
-      }
+      )}
       <main className={layoutClassName}>
-        {withAllowed ?
-          props.children :
-          <PageNotFound i18n={i18n} />
-        }
-        {withFooter &&
-          <Footer brand={brand} />
-        }
+        {withAllowed ? props.children : <PageNotFound i18n={i18n} />}
+        {withFooter && <Footer brand={brand} />}
       </main>
       <ToastContainer />
       <div className={styleNewsletter.newsletter_overlay}>
@@ -157,9 +130,9 @@ const Layout: FC<LayoutPropType> = ({
           classes={classesNewsletterPopup}
           closeButton={<XIcon color="black" size="18" />}
           withForm
-          buttonComponent={i18n.t("newsletter.subscribe")}
-          onComplete={() => toast.success(i18n.t("newsletter.submitSuccess"))}
-          onError={() => toast.error(i18n.t("newsletter.submitError"))}
+          buttonComponent={i18n.t('newsletter.subscribe')}
+          onComplete={() => toast.success(i18n.t('newsletter.submitSuccess'))}
+          onError={() => toast.error(i18n.t('newsletter.submitError'))}
         />
       </div>
     </>

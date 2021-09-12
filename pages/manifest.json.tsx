@@ -29,8 +29,8 @@ export async function getServerSideProps({ req, res }) {
   `.trim()
 
   res.writeHead(200, {
-    "Content-Length": Buffer.byteLength(body),
-    "Content-Type": "application/json",
+    'Content-Length': Buffer.byteLength(body),
+    'Content-Type': 'application/json'
   })
   res.write(body)
   res.end()

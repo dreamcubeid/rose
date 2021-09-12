@@ -4,18 +4,18 @@ type TypeProductTitleComponent = {
   i18n: any
   styleProduct: any
   handleChangeTagname: (msg: string) => void
-  tagnameActive: string,
+  tagnameActive: string
   totalProducts: {
-    ourproduct: number,
-    featured: number,
-    newarrival: number,
+    ourproduct: number
+    featured: number
+    newarrival: number
     preorder: number
   }
 }
 
 type TypeTitleProduct = {
   title: string
-  tagname: string,
+  tagname: string
   slug: string
 }
 
@@ -28,24 +28,24 @@ const ProductTitle: FC<any> = ({
 }: TypeProductTitleComponent) => {
   const titleProduct: TypeTitleProduct[] = [
     {
-      title: i18n.t("home.ourProduct"),
-      tagname: "",
-      slug: "ourproduct"
+      title: i18n.t('home.ourProduct'),
+      tagname: '',
+      slug: 'ourproduct'
     },
     {
-      title: i18n.t("home.featureProduct"),
-      tagname: "featured",
-      slug: "featured"
+      title: i18n.t('home.featureProduct'),
+      tagname: 'featured',
+      slug: 'featured'
     },
     {
-      title: i18n.t("home.newProduct"),
-      tagname: "new-arrivals",
-      slug: "newarrival"
+      title: i18n.t('home.newProduct'),
+      tagname: 'new-arrivals',
+      slug: 'newarrival'
     },
     {
-      title: i18n.t("home.preOrder"),
-      tagname: "preorder",
-      slug: "preorder"
+      title: i18n.t('home.preOrder'),
+      tagname: 'preorder',
+      slug: 'preorder'
     }
   ]
 
@@ -53,7 +53,7 @@ const ProductTitle: FC<any> = ({
     <>
       {titleProduct?.map((el, idx) => (
         <>
-          {(totalProducts[el.slug] === null || totalProducts[el.slug] > 0) &&
+          {(totalProducts[el.slug] === null || totalProducts[el.slug] > 0) && (
             <div
               className={`
               ${styleProduct.product_homeTitle}
@@ -64,7 +64,7 @@ const ProductTitle: FC<any> = ({
             >
               {el.title}
             </div>
-          }
+          )}
         </>
       ))}
     </>

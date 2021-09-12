@@ -1,16 +1,16 @@
-import { FC } from "react"
+import { FC } from 'react'
 
 export type PlaceholderPropsType = {
   classes?: {
-    placeholderImage?: string;
-    placeholderTitle?: string;
-    placeholderList?: string;
-  };
-  withImage?: boolean;
-  withTitle?: boolean;
-  withList?: boolean;
-  listMany?: number;
-};
+    placeholderImage?: string
+    placeholderTitle?: string
+    placeholderList?: string
+  }
+  withImage?: boolean
+  withTitle?: boolean
+  withList?: boolean
+  listMany?: number
+}
 
 const Placeholder: FC<PlaceholderPropsType> = ({
   classes = {},
@@ -20,10 +20,10 @@ const Placeholder: FC<PlaceholderPropsType> = ({
   listMany = 2
 }) => {
   const {
-    placeholderImage = "placeholder-placeholderImage",
-    placeholderTitle = "placeholder-placeholderTitle",
-    placeholderList = "placeholder-placeholderList"
-  } = classes;
+    placeholderImage = 'placeholder-placeholderImage',
+    placeholderTitle = 'placeholder-placeholderTitle',
+    placeholderList = 'placeholder-placeholderList'
+  } = classes
 
   const loopList = (length) => {
     let element = []
@@ -35,13 +35,11 @@ const Placeholder: FC<PlaceholderPropsType> = ({
 
   return (
     <>
-      {withImage && (
-        <div className={placeholderImage}></div>
-      )}
+      {withImage && <div className={placeholderImage}></div>}
       {withTitle && <div className={placeholderTitle}></div>}
       {withList && loopList(listMany)}
     </>
   )
 }
 
-export default Placeholder;
+export default Placeholder

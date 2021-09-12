@@ -6,7 +6,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "build:staging": "env-cmd -f .env.staging next build"
+    "build:staging": "env-cmd -f .env.staging next build",
+    "prettier:fix": "prettier --write ."
   },
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.14",
@@ -28,12 +29,10 @@
     "react-toastify": "^5.5.0",
     "sass": "^1.26.8"
   },
-  "prettier":{
+  "prettier": {
     "semi": false,
     "singleQuote": true,
-    "useTabs": true,
-    "tabWidth": 2,
-    "trailingComma": "all",
+    "trailingComma": "none",
     "printWidth": 100
   },
   "devDependencies": {

@@ -19,10 +19,7 @@ const classesPlaceholderBanner = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_banner}`
 }
 
-const BannerComponent: FC<any> = ({
-  data,
-  size,
-}) => (
+const BannerComponent: FC<any> = ({ data, size }) => (
   <>
     <Banner
       data={data}
@@ -34,12 +31,10 @@ const BannerComponent: FC<any> = ({
       classes={classesBanner}
       thumborSetting={{
         width: useSizeBanner(size.width),
-        format: "webp",
-        quality: 90,
+        format: 'webp',
+        quality: 90
       }}
-      loadingComponent={
-        <Placeholder classes={classesPlaceholderBanner} withImage />
-      }
+      loadingComponent={<Placeholder classes={classesPlaceholderBanner} withImage />}
     />
   </>
 )

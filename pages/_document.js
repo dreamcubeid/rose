@@ -1,9 +1,6 @@
-import 
-  Document, 
-  { Html, Main } 
-from 'next/document';
-import { CriticalCssHead } from "../components/CriticalCssHead";
-import { DeferredNextScript } from "../lib/DeferredNextScript";
+import Document, { Html, Main } from 'next/document'
+import { CriticalCssHead } from '../components/CriticalCssHead'
+import { DeferredNextScript } from '../lib/DeferredNextScript'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -12,17 +9,17 @@ class MyDocument extends Document {
     return { ...initialProps, language }
   }
 
-	render() {
-		return (
-			<Html lang={this.props.language}>
+  render() {
+    return (
+      <Html lang={this.props.language}>
         <CriticalCssHead />
-				<body>
-					<Main />
+        <body>
+          <Main />
           <DeferredNextScript />
-				</body>
-			</Html>
-		)
-	}
+        </body>
+      </Html>
+    )
+  }
 }
 
-export default MyDocument;
+export default MyDocument

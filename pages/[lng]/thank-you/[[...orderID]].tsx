@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { ThankYou, useI18n } from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import { useBrand } from "lib/useBrand";
-import { Check } from "react-feather";
-import styles from "public/scss/pages/ThankYou.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { ThankYou, useI18n } from '@sirclo/nexus'
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import { useBrand } from 'lib/useBrand'
+import { Check } from 'react-feather'
+import styles from 'public/scss/pages/ThankYou.module.scss'
 
 const classesThankYouPage = {
   thankYouClassName: styles.thankyou_inner,
@@ -20,16 +20,11 @@ const ThankYouPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
+  const i18n: any = useI18n()
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("thankYou.thanks")} />
+    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+      <SEO title={i18n.t('thankYou.thanks')} />
       <section>
         <div className="container">
           <div className={styles.thankyou_container}>
@@ -42,23 +37,21 @@ const ThankYouPage: FC<any> = ({
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || ""
+      brand: brand || ''
     }
-  };
+  }
 }
 
-export default ThankYouPage;
+export default ThankYouPage

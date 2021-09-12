@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { GiftCard, useI18n } from "@sirclo/nexus";
-import { useBrand } from "lib/useBrand";
-import Layout from "components/Layout/Layout";
-import styles from "public/scss/pages/GiftCard.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GiftCard, useI18n } from '@sirclo/nexus'
+import { useBrand } from 'lib/useBrand'
+import Layout from 'components/Layout/Layout'
+import styles from 'public/scss/pages/GiftCard.module.scss'
 
 const classesGiftCard = {
   containerClassName: `${styles.giftcard_item} ${styles.giftcard_item__form}`,
@@ -20,7 +20,6 @@ const GiftCardPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-
   const i18n: any = useI18n()
 
   return (
@@ -29,19 +28,17 @@ const GiftCardPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
-      titleHeader={i18n.t("giftCard.title")}
+      titleHeader={i18n.t('giftCard.title')}
     >
       <section className={styles.giftcard_wrapper}>
         <div className="container">
           <div className="row">
             <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
               <div className={styles.giftcard_header}>
-                <h1>{i18n.t("giftCard.title")}</h1>
-                <p>{i18n.t("giftCard.desc")}</p>
+                <h1>{i18n.t('giftCard.title')}</h1>
+                <p>{i18n.t('giftCard.desc')}</p>
               </div>
-              <GiftCard
-                classes={classesGiftCard}
-              />
+              <GiftCard classes={classesGiftCard} />
             </div>
           </div>
         </div>
@@ -50,15 +47,10 @@ const GiftCardPage: FC<any> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  req
-}) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  )
+export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
@@ -69,4 +61,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 }
 
-export default GiftCardPage;
+export default GiftCardPage

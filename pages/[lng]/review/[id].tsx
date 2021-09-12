@@ -1,17 +1,14 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
-import {
-  OrderReview,
-  useI18n,
-} from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import useWindowSize from "lib/useWindowSize";
-import SEO from "components/SEO";
-import { useBrand } from "lib/useBrand";
-import { toast } from "react-toastify";
-import { ChevronDown, ChevronUp } from "react-feather";
-import styles from "public/scss/pages/Review.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import { OrderReview, useI18n } from '@sirclo/nexus'
+import Layout from 'components/Layout/Layout'
+import useWindowSize from 'lib/useWindowSize'
+import SEO from 'components/SEO'
+import { useBrand } from 'lib/useBrand'
+import { toast } from 'react-toastify'
+import { ChevronDown, ChevronUp } from 'react-feather'
+import styles from 'public/scss/pages/Review.module.scss'
 
 const classesOrderReview = {
   titleContainerClassName: styles.orderReview_titleContainer,
@@ -64,12 +61,12 @@ const classesOrderReview = {
   titleImageClassName: styles.orderReview_titleImages,
   imageContentClassName: styles.orderReview_imageContent,
   imageListClassName: styles.orderReview_imageList
-};
+}
 
 const paginationClasses = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item,
+  itemClassName: styles.pagination_item
 }
 
 const ReviewPage: FC<any> = ({
@@ -77,10 +74,10 @@ const ReviewPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const router = useRouter();
-  const size = useWindowSize();
-  const { id } = router.query;
+  const i18n: any = useI18n()
+  const router = useRouter()
+  const size = useWindowSize()
+  const { id } = router.query
 
   const newClassesOrderReview = {
     ...classesOrderReview,
@@ -88,13 +85,8 @@ const ReviewPage: FC<any> = ({
   }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("orderReview.title")} />
+    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+      <SEO title={i18n.t('orderReview.title')} />
       <div className="container">
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
@@ -109,8 +101,8 @@ const ReviewPage: FC<any> = ({
                 onErrorMsg={(msg) => toast.error(msg)}
                 thumborSetting={{
                   width: size.width < 768 ? 375 : 500,
-                  format: "webp",
-                  quality: 85,
+                  format: 'webp',
+                  quality: 85
                 }}
               />
             </div>
@@ -118,23 +110,21 @@ const ReviewPage: FC<any> = ({
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
       brand: brand || ''
-    },
-  };
-};
+    }
+  }
+}
 
-export default ReviewPage;
+export default ReviewPage

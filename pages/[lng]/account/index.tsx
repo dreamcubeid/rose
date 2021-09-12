@@ -1,15 +1,11 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import {
-  Account,
-  useI18n,
-  useLogout
-} from "@sirclo/nexus";
-import { toast } from "react-toastify";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import { parseCookies } from "lib/parseCookies";
-import { useBrand } from "lib/useBrand";
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Account, useI18n, useLogout } from '@sirclo/nexus'
+import { toast } from 'react-toastify'
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import { parseCookies } from 'lib/parseCookies'
+import { useBrand } from 'lib/useBrand'
 import {
   X as XIcon,
   AlertCircle,
@@ -19,12 +15,12 @@ import {
   CheckCircle,
   Crosshair,
   ChevronDown
-} from "react-feather";
-import styles from "public/scss/pages/Account.module.scss";
-import stylesPopupConfirmationOrder from "public/scss/components/popupConfirmationOrder.module.scss";
-import stylesPopupCheckPaymentOrder from "public/scss/components/CheckPaymentOrder.module.scss";
+} from 'react-feather'
+import styles from 'public/scss/pages/Account.module.scss'
+import stylesPopupConfirmationOrder from 'public/scss/components/popupConfirmationOrder.module.scss'
+import stylesPopupCheckPaymentOrder from 'public/scss/components/CheckPaymentOrder.module.scss'
 
-const ACTIVE_CURRENCY = "IDR";
+const ACTIVE_CURRENCY = 'IDR'
 
 const classesAccount = {
   containerClassName: styles.account,
@@ -104,8 +100,8 @@ const classesAccount = {
   itemPerPageOptionsClassName: styles.membership_itemPerPageOptions,
   buttonContinueClassName: `btn ${styles.btn_primary} ${styles.btn_long}`,
   //datepicker
-  datePickerInputClassName: "date-picker__input",
-  datePickerCalendarClassName: "date-picker__calendar",
+  datePickerInputClassName: 'date-picker__input',
+  datePickerCalendarClassName: 'date-picker__calendar',
   //popupConfirmationOrder
   popupConfirmationOrderContainerClassName: stylesPopupConfirmationOrder.container,
   popupConfirmationOrderContentClassName: stylesPopupConfirmationOrder.content,
@@ -131,13 +127,13 @@ const classesAccount = {
   checkPaymentOrderInputTitleClassName: stylesPopupCheckPaymentOrder.checkOrder_inputTitle,
   checkPaymentOrderInputClassName: stylesPopupCheckPaymentOrder.checkOrder_input,
   checkPaymentOrderCloseButtonClassName: stylesPopupCheckPaymentOrder.checkOrder_closeButton,
-  checkPaymentOrderSubmitButtonClassName: stylesPopupCheckPaymentOrder.checkOrder_submitButton,
-};
+  checkPaymentOrderSubmitButtonClassName: stylesPopupCheckPaymentOrder.checkOrder_submitButton
+}
 
 const orderHistoryPaginationClasses = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item,
+  itemClassName: styles.pagination_item
 }
 
 const AccountsPage: FC<any> = ({
@@ -145,41 +141,34 @@ const AccountsPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const logout = useLogout('login');
+  const i18n: any = useI18n()
+  const logout = useLogout('login')
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>('')
 
-  const onError = (msg: string) => toast.error(msg);
-  const onSuccessChPass = (msg: string) => toast.success(msg);
+  const onError = (msg: string) => toast.error(msg)
+  const onSuccessChPass = (msg: string) => toast.success(msg)
 
   const onSuccess = (msg: string, data: any) => {
-    setName(data?.upsertProfile[0]?.firstName + " " + data?.upsertProfile[0]?.lastName);
-    toast.success(msg);
-  };
+    setName(data?.upsertProfile[0]?.firstName + ' ' + data?.upsertProfile[0]?.lastName)
+    toast.success(msg)
+  }
 
   const onFetchCompleted = (_: string, data: any) => {
-    const { firstName, lastName } = data?.members[0];
-    setName(`${firstName} ${lastName}`);
-  };
+    const { firstName, lastName } = data?.members[0]
+    setName(`${firstName} ${lastName}`)
+  }
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("account.myAccount")} />
+    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+      <SEO title={i18n.t('account.myAccount')} />
       <div className="container">
         <div className={styles.account_profile}>
           <h2 className={styles.account_profile_title}>
-            {i18n.t("account.hallo")}{", "}
-            <span>{name || "Guys"}</span>
-            <span
-              className={styles.account_profile__logout}
-              onClick={logout}
-            >
+            {i18n.t('account.hallo')}
+            {', '}
+            <span>{name || 'Guys'}</span>
+            <span className={styles.account_profile__logout} onClick={logout}>
               <LogOut color="red" />
             </span>
           </h2>
@@ -211,29 +200,23 @@ const AccountsPage: FC<any> = ({
         />
       </div>
     </Layout>
-  );
+  )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  res,
-  params
-}) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   if (res) {
-    const cookies = parseCookies(req);
-    const auth = cookies.AUTH_KEY;
+    const cookies = parseCookies(req)
+    const auth = cookies.AUTH_KEY
 
     if (!auth) {
       res.writeHead(301, {
-        Location: `/${cookies.ACTIVE_LNG || "id"}/login`,
-      });
-      res.end();
+        Location: `/${cookies.ACTIVE_LNG || 'id'}/login`
+      })
+      res.end()
     }
   }
 
@@ -241,9 +224,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || ""
+      brand: brand || ''
     }
-  };
+  }
 }
 
-export default AccountsPage;
+export default AccountsPage

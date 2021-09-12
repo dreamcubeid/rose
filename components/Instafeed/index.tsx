@@ -6,7 +6,9 @@ import { InstagramFeed } from '@sirclo/nexus'
 import useWindowSize from 'lib/useWindowSize'
 /* component */
 import Placeholder from 'components/Placeholder'
-const InstagramQuickView = dynamic(() => import('@sirclo/nexus').then((mod) => mod.InstagramQuickView))
+const InstagramQuickView = dynamic(() =>
+  import('@sirclo/nexus').then((mod) => mod.InstagramQuickView)
+)
 /* styles */
 import styles from 'public/scss/components/InstagramFeed.module.scss'
 
@@ -28,10 +30,10 @@ const classesPlaceholderInstafeed = {
 }
 
 type InstafeedType = {
-  i18n: any,
-  brand: any,
-  withQuickview?: boolean,
-  withFollowButton?: boolean,
+  i18n: any
+  brand: any
+  withQuickview?: boolean
+  withFollowButton?: boolean
   followButtonText?: string
 }
 
@@ -40,13 +42,13 @@ const Instafeed: FC<InstafeedType> = ({
   brand,
   withQuickview = false,
   withFollowButton = false,
-  followButtonText = i18n.t("instagram.cta")
+  followButtonText = i18n.t('instagram.cta')
 }) => {
   const size: any = useWindowSize()
   const [instagramQuickView, setInstagramQuickView] = useState<boolean>(false)
   const [instagramMedia, setInstagramMedia] = useState<any>({})
 
-  const handleFollowButton = () => window.open(brand?.socmedSetting?.socmedLink?.instagram);
+  const handleFollowButton = () => window.open(brand?.socmedSetting?.socmedLink?.instagram)
 
   return (
     <>
@@ -59,29 +61,25 @@ const Instafeed: FC<InstafeedType> = ({
           withQuickview={withQuickview}
           loadingComponent={
             <div className={styles.instagramFeed_placeholderWrapper}>
-              <Placeholder
-                classes={classesPlaceholderInstafeed}
-                withList
-                listMany={6}
-              />
+              <Placeholder classes={classesPlaceholderInstafeed} withList listMany={6} />
             </div>
           }
           thumborSetting={{
             width: size.width < 575 ? 250 : 400,
             format: 'webp',
-            quality: 85,
+            quality: 85
           }}
         />
 
-        {withFollowButton &&
+        {withFollowButton && (
           <div className={styles.instagramFeed_button}>
             <button type="button" onClick={handleFollowButton}>
               {followButtonText}
             </button>
           </div>
-        }
+        )}
 
-        {(instagramQuickView && instagramMedia) &&
+        {instagramQuickView && instagramMedia && (
           <InstagramQuickView
             classes={classesInstagramQuickView}
             showQuickView={setInstagramQuickView}
@@ -92,8 +90,7 @@ const Instafeed: FC<InstafeedType> = ({
               quality: 85
             }}
           />
-
-        }
+        )}
       </div>
     </>
   )

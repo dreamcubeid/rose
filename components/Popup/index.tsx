@@ -35,7 +35,6 @@ const Popup: FC<PopupPropType> = ({
   withButtonLeft,
   withHeader = true
 }) => {
-
   const handleClose = () => withCloseBackground && setVisibleState(false)
 
   if (popupSize === 'fluid') customClassName += ` ${styles.popup__fluidHeight}`
@@ -43,42 +42,44 @@ const Popup: FC<PopupPropType> = ({
 
   return (
     <>
-      <div className={`${styles.popup} ${customClassName} ${visibleState ? styles.popup__active : styles.popup__hidden}`}>
+      <div
+        className={`${styles.popup} ${customClassName} ${
+          visibleState ? styles.popup__active : styles.popup__hidden
+        }`}
+      >
         <div className={`${styles.popupBackground}`} onClick={handleClose}></div>
         <div className={`${styles.popupInner}`}>
-          {withHeader &&
+          {withHeader && (
             <div className={styles.popupHeader}>
-              {title &&
+              {title && (
                 <div className={`${styles.popupHeader_item} ${styles.popupHeader_item__center}`}>
-                  {withButtonLeft &&
-                    <button className={styles.popupHeader_buttonLeft} onClick={withButtonLeft.onClick}>
+                  {withButtonLeft && (
+                    <button
+                      className={styles.popupHeader_buttonLeft}
+                      onClick={withButtonLeft.onClick}
+                    >
                       {withButtonLeft.icon}
                     </button>
-                  }
-                  <p className={`${styles.popupHeader_title}`}>
-                    {title}
-                  </p>
+                  )}
+                  <p className={`${styles.popupHeader_title}`}>{title}</p>
                 </div>
-              }
+              )}
 
-              {withCloseButton &&
+              {withCloseButton && (
                 <div className={`${styles.popupHeader_item} ${styles.popupHeader_item__last}`}>
-                  <button type="button" className={`${styles.popupHeader_close}`} onClick={handleClose}>
-                    {iconClose &&
-                      <div className={`${styles.popupHeader_icon}`}>
-                        {iconClose}
-                      </div>
-                    }
+                  <button
+                    type="button"
+                    className={`${styles.popupHeader_close}`}
+                    onClick={handleClose}
+                  >
+                    {iconClose && <div className={`${styles.popupHeader_icon}`}>{iconClose}</div>}
                   </button>
                 </div>
-              }
+              )}
             </div>
-          }
+          )}
 
-          <div className={`${styles.popupBody}`}>
-            {children}
-          </div>
-
+          <div className={`${styles.popupBody}`}>{children}</div>
         </div>
       </div>
     </>

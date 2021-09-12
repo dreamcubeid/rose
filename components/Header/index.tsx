@@ -1,17 +1,9 @@
 /* library package */
-import {
-  FC,
-  useState,
-  useEffect
-} from 'react'
+import { FC, useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
-import {
-  FiX,
-  FiChevronDown,
-  FiChevronUp
-} from 'react-icons/fi'
+import { FiX, FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { Logo, Widget } from '@sirclo/nexus'
 /* library template */
 import useWindowSize from 'lib/useWindowSize'
@@ -46,11 +38,7 @@ const classesPlaceholderWidget = {
   placeholderTitle: `${styleHeader.placeholderItem} ${styleHeader.placeholderItem_headerWidget}`
 }
 
-const Header: FC<any> = ({
-  withAnnouncement,
-  headerTitle,
-  stickyClass
-}) => {
+const Header: FC<any> = ({ withAnnouncement, headerTitle, stickyClass }) => {
   const router = useRouter()
   const size: any = useWindowSize()
   const [openMenu, setOpenMenu] = useState<boolean>(false)
@@ -70,8 +58,11 @@ const Header: FC<any> = ({
 
   return (
     <>
-      {((countWidgetAnnouncement === null || countWidgetAnnouncement > 0) && withAnnouncement) &&
-        <div className={styleAnnouncement.announce} style={{ display: showAnnounce ? 'flex' : 'none' }}>
+      {(countWidgetAnnouncement === null || countWidgetAnnouncement > 0) && withAnnouncement && (
+        <div
+          className={styleAnnouncement.announce}
+          style={{ display: showAnnounce ? 'flex' : 'none' }}
+        >
           <span className={styleAnnouncement.announce_close}>
             <FiX
               color="#FFFFF"
@@ -88,27 +79,24 @@ const Header: FC<any> = ({
             loadingComponent={<Placeholder classes={classesPlaceholderWidget} withTitle />}
           />
         </div>
-      }
+      )}
       <header
         className={`
           ${styleHeader.header} 
           ${(!showAnnounce || !withAnnouncement) && styleHeader.header_top}
-          ${(stickyClass !== "transparent") && styleHeader.header_scroll}
-        `}>
+          ${stickyClass !== 'transparent' && styleHeader.header_scroll}
+        `}
+      >
         <div
           className={`
             container ${styleHeader.header_navbar} 
-            ${(stickyClass !== "transparent" || openMenu) && styleHeader.header_sticky}`
-          }
+            ${(stickyClass !== 'transparent' || openMenu) && styleHeader.header_sticky}`}
         >
-          {headerTitle ?
-            <h3 className={styleHeader.header_title}>
-              {headerTitle}
-            </h3> :
+          {headerTitle ? (
+            <h3 className={styleHeader.header_title}>{headerTitle}</h3>
+          ) : (
             <LazyLoadComponent
-              placeholder={
-                <Placeholder classes={classesPlaceholderLogo} withImage={true} />
-              }
+              placeholder={<Placeholder classes={classesPlaceholderLogo} withImage={true} />}
             >
               <Logo
                 imageClassName={styleHeader.header_logo}
@@ -119,34 +107,35 @@ const Header: FC<any> = ({
                 }}
               />
             </LazyLoadComponent>
-          }
-          <div
-            className={styleHeader.header_menuIcon}
-            onClick={toogleMenu}
-          >
-            {openMenu ?
-              <FiX size={20} /> :
+          )}
+          <div className={styleHeader.header_menuIcon} onClick={toogleMenu}>
+            {openMenu ? (
+              <FiX size={20} />
+            ) : (
               <img
-                src={`/icons/${(stickyClass !== "transparent") ? "menu-black.svg" : "menu-white.svg"}`}
+                src={`/icons/${
+                  stickyClass !== 'transparent' ? 'menu-black.svg' : 'menu-white.svg'
+                }`}
                 alt="menu"
               />
-            }
+            )}
           </div>
         </div>
         <div
           className={`
             ${styleHeader.header_menus} 
-            ${(countWidgetAnnouncement === 0) && styleHeader.header_menusHeight} 
-            ${openMenu && styleHeader.header_menusActive}`
-          }
+            ${countWidgetAnnouncement === 0 && styleHeader.header_menusHeight} 
+            ${openMenu && styleHeader.header_menusActive}`}
         >
-          {openMenu &&
+          {openMenu && (
             <CollapsibleNav
               dropdownIcon={<FiChevronDown size={20} />}
               dropdownOpenIcon={<FiChevronUp size={20} />}
               classes={{
                 ...classesCollapsibleNav,
-                parentNavClassName: showAnnounce ? styleNav.menu : `${styleNav.menu} ${styleNav.menu_withoutWidget}`
+                parentNavClassName: showAnnounce
+                  ? styleNav.menu
+                  : `${styleNav.menu} ${styleNav.menu_withoutWidget}`
               }}
               loadingComponent={
                 <>
@@ -158,7 +147,7 @@ const Header: FC<any> = ({
                 </>
               }
             />
-          }
+          )}
         </div>
       </header>
     </>

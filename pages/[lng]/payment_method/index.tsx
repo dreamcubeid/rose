@@ -1,37 +1,37 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import Router from "next/router";
-import dynamic from "next/dynamic";
+import Router from 'next/router'
+import dynamic from 'next/dynamic'
 import {
   CustomerDetail,
   ListPaymentMethod,
   PrivateRoute,
   useI18n,
   useShippingMethod
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
-import Loader from "components/Loader/Loader";
-import EmptyComponent from "components/EmptyComponent/EmptyComponent";
-import { useBrand } from "lib/useBrand";
-import { ArrowLeft, Info } from "react-feather";
-import { toast } from "react-toastify";
-import styles from "public/scss/pages/PaymentMethod.module.scss";
+} from '@sirclo/nexus'
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import Loader from 'components/Loader/Loader'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
+import { useBrand } from 'lib/useBrand'
+import { ArrowLeft, Info } from 'react-feather'
+import { toast } from 'react-toastify'
+import styles from 'public/scss/pages/PaymentMethod.module.scss'
 
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
+const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+const Placeholder = dynamic(() => import('components/Placeholder'))
 
 const classesCustomerDetail = {
   customerDetailBoxClass: styles.customer,
   addressContainerClassName: styles.customer_info,
   addressDetailClassName: styles.customer_infoPerson,
   addressValueClassName: styles.customer_infoPersonValue
-};
+}
 
 const classesListPaymentMethod = {
-  listPaymentDivClassName: "container",
+  listPaymentDivClassName: 'container',
   paymentItemEnabledClassName: `row ${styles.payment_listItemEnabled}`,
   paymentItemDisabledClassName: `row ${styles.payment_listItemDisabled}`,
   paymentTypeClassName: `align-self-center ${styles.payment_listItemPayment}`,
@@ -85,8 +85,8 @@ const classesListPaymentMethod = {
   pointsWarningClassName: styles.payment_pointsWarning,
   pointButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
   pointAppliedTextClassName: styles.payment_pointAppliedText,
-  pointButtonRemoveClassName: styles.payment_pointAppliedRemove,
-};
+  pointButtonRemoveClassName: styles.payment_pointAppliedRemove
+}
 
 const classesEmptyComponent = {
   emptyContainer: styles.payment_empty,
@@ -102,14 +102,11 @@ const classesPlaceholderPayment = {
 }
 
 type PrivateComponentPropsType = {
-  children: any;
-};
+  children: any
+}
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
-  <PrivateRoute
-    page="payment_method"
-    loadingComponent={<LoaderPages />}
-  >
+  <PrivateRoute page="payment_method" loadingComponent={<LoaderPages />}>
     {children}
   </PrivateRoute>
 )
@@ -119,32 +116,24 @@ const PaymentMethods: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const { data } = useShippingMethod();
+  const i18n: any = useI18n()
+  const { data } = useShippingMethod()
 
   const CustomerDetailHeader = ({ title, linkTo, withLogo = false }) => (
     <div className={styles.customer_infoHeader}>
       <div className={styles.customer_infoHeaderContainer}>
         <h3 className={styles.customer_infoHeaderTitle}>{title}</h3>
-        {withLogo &&
-          <Info color="#767676" size="18" />
-        }
+        {withLogo && <Info color="#767676" size="18" />}
       </div>
       <Link href={`/[lng]/${linkTo}`} as={`/${lng}/${linkTo}`}>
-        <a className={styles.customer_infoHeaderLink}>{i18n.t("shipping.change")}</a>
+        <a className={styles.customer_infoHeaderLink}>{i18n.t('shipping.change')}</a>
       </Link>
     </div>
   )
 
   return (
     <PrivateRouteWrapper>
-      <Layout
-        i18n={i18n}
-        lng={lng}
-        lngDict={lngDict}
-        brand={brand}
-        withHeader={false}
-      >
+      <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand} withHeader={false}>
         <SEO title="Payment Method" />
         <div className={styles.payment}>
           <div className="row mx-0">
@@ -154,11 +143,11 @@ const PaymentMethods: FC<any> = ({
                   <div className={styles.payment_heading}>
                     <div
                       className={styles.payment_headingIcon}
-                      onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
+                      onClick={() => Router.push('/[lng]/products', `/${lng}/products`)}
                     >
                       <ArrowLeft color="black" />
                     </div>
-                    <h6>{i18n.t("placeOrder.checkOrder")}</h6>
+                    <h6>{i18n.t('placeOrder.checkOrder')}</h6>
                   </div>
                 </div>
                 <hr className={styles.payment_line} />
@@ -174,7 +163,7 @@ const PaymentMethods: FC<any> = ({
                         isBilling={true}
                         contactInfoHeader={
                           <CustomerDetailHeader
-                            title={i18n.t("shipping.contactInfo")}
+                            title={i18n.t('shipping.contactInfo')}
                             linkTo="place_order"
                             withLogo
                           />
@@ -188,7 +177,7 @@ const PaymentMethods: FC<any> = ({
                         isBilling={false}
                         shippingInfoHeader={
                           <CustomerDetailHeader
-                            title={i18n.t("shipping.shipTo")}
+                            title={i18n.t('shipping.shipTo')}
                             linkTo="place_order"
                             withLogo
                           />
@@ -197,24 +186,25 @@ const PaymentMethods: FC<any> = ({
                           <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
                         }
                       />
-                      {data?.shippingMethod &&
+                      {data?.shippingMethod && (
                         <>
                           <CustomerDetailHeader
-                            title={i18n.t("account.shippingMethod")}
+                            title={i18n.t('account.shippingMethod')}
                             linkTo="shipping_method"
                           />
                           <div className={styles.payment_shipping}>
                             <h3 className={styles.payment_shippingTitle}>
-                              {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
+                              {data?.shippingMethod?.shippingProvider}&nbsp;
+                              {data?.shippingMethod?.shippingService}
                             </h3>
                             <h3 className={styles.payment_shippingCost}>
                               {data?.shippingMethod?.shippingCost}
                             </h3>
                           </div>
                         </>
-                      }
+                      )}
                       <div className={styles.payment_list}>
-                        <h3 className={styles.payment_listTitle}>{i18n.t("payment.title")}</h3>
+                        <h3 className={styles.payment_listTitle}>{i18n.t('payment.title')}</h3>
                         <ListPaymentMethod
                           classes={classesListPaymentMethod}
                           onErrorMsg={(msg) => toast.error(msg)}
@@ -223,8 +213,11 @@ const PaymentMethods: FC<any> = ({
                             <div className={styles.payment_popupProcessOverlay}>
                               <div className={styles.payment_popupProcessContainer}>
                                 <div className={styles.payment_popupProcessInner}>
-                                  <span className="spinner-border spinner-border-sm mr-3" role="status"></span>
-                                  <span>{i18n.t("payment.prepayment")}</span>
+                                  <span
+                                    className="spinner-border spinner-border-sm mr-3"
+                                    role="status"
+                                  ></span>
+                                  <span>{i18n.t('payment.prepayment')}</span>
                                 </div>
                               </div>
                             </div>
@@ -237,11 +230,15 @@ const PaymentMethods: FC<any> = ({
                           emptyState={
                             <EmptyComponent
                               classes={classesEmptyComponent}
-                              title={i18n.t("payment.isEmpty")}
+                              title={i18n.t('payment.isEmpty')}
                             />
                           }
                           loadingComponent={
-                            <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
+                            <Placeholder
+                              classes={classesPlaceholderPayment}
+                              withList
+                              listMany={3}
+                            />
                           }
                         />
                       </div>
@@ -254,23 +251,21 @@ const PaymentMethods: FC<any> = ({
         </div>
       </Layout>
     </PrivateRouteWrapper>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || ""
+      brand: brand || ''
     }
-  };
+  }
 }
 
-export default PaymentMethods;
+export default PaymentMethods

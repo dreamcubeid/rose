@@ -1,20 +1,14 @@
-import Head from "next/head";
+import Head from 'next/head'
 
 type SEOProps = {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  url?: string;
-};
+  title?: string
+  description?: string
+  keywords?: string
+  image?: string
+  url?: string
+}
 
-const SEO = ({
-  title,
-  description,
-  keywords,
-  image,
-  url
-}: SEOProps) => (
+const SEO = ({ title, description, keywords, image, url }: SEOProps) => (
   <Head>
     {title && (
       <>
@@ -46,6 +40,6 @@ const SEO = ({
     {keywords && <meta name="keyword" content={keywords}></meta>}
     <link rel="manifest" href="/manifest.json" />
   </Head>
-);
+)
 
-export default SEO;
+export default SEO

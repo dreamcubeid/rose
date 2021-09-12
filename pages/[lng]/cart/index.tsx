@@ -7,17 +7,16 @@ import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
 import { CartDetails, useI18n } from '@sirclo/nexus'
 /* library template */
-import { parseCookies } from 'lib/parseCookies'
 import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
 /* styles */
 import styleCart from 'public/scss/components/CartDetail.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
-import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 
 const classesCartDetails = {
 	className: styleCart.cart,
@@ -123,7 +122,10 @@ const Cart: FC<any> = ({
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+	req,
+	params
+}) => {
 	const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
 	const brand = await useBrand(req)

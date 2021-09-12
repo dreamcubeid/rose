@@ -426,10 +426,12 @@
     "yourReview": "Your Review"
   },
   "products": {
+    "category": "Categories",
     "customize": "Customize",
     "item": "item",
     "seeAllProduct": "See all products",
     "show": "Showing",
+    "sort": "Sort",
     "title": "All Products"
   },
   "register": {

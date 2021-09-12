@@ -426,10 +426,12 @@
     "yourReview": "Ulasan Anda"
   },
   "products": {
+    "category": "Kategori",
     "customize": "Sesuaikan",
     "item": "barang",
     "seeAllProduct": "Lihat semua produk",
     "show": "Menampilkan",
+    "sort": "Urutkan",
     "title": "Semua Produk"
   },
   "register": {

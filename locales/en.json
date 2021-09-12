@@ -73,7 +73,8 @@
   "breadcrumb": {
     "home": "Home",
     "cart": "Cart",
-    "login": "Account"
+    "login": "Login",
+    "Account": "Account"
   },
   "cart": {
     "amount": "Amount",

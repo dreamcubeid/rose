@@ -73,7 +73,8 @@
   "breadcrumb": {
     "home": "Beranda",
     "cart": "Keranjang",
-    "login": "Akun"
+    "login": "Masuk",
+    "Account": "Akun"
   },
   "cart": {
     "amount": "Jumlah",

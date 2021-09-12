@@ -44,7 +44,7 @@ const LoginPage: FC<any> = ({
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>
           <Breadcrumb
-            steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.login') }]}
+            steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.account') }]}
           />
         </div>
         <div className={styleLogin.login_header}>

@@ -72,7 +72,9 @@
   },
   "breadcrumb": {
     "home": "Beranda",
-    "cart": "Keranjang"
+    "cart": "Keranjang",
+    "login": "Masuk",
+    "account": "Akun"
   },
   "cart": {
     "amount": "Jumlah",
@@ -200,22 +202,23 @@
     "loading": "Menunggu"
   },
   "login": {
-    "clickHere": "Klik disini",
-    "dontHaveAccount": "Belum punya akun?",
+    "title": "Masuk",
+    "clickHere": "Lupa Kata Sandi",
+    "forgetPassword": "",
+    "dontHaveAccount": "",
+    "register": "Daftar",
     "email": "Email",
     "failed": "Gagal untuk login cek kembali email dan kata sandi anda",
-    "forgetPassword": "Lupa kata sandi?",
     "insertEmail": "Masukan Email Anda",
     "insertPassword": " Masukan Kata Sandi Anda",
     "login": "Masuk",
     "password": "Kata Sandi",
-    "register": "Daftar",
     "success": "Login berhasil",
     "sso": "dengan {SSO_PROVIDER}",
-    "title": "Masuk",
     "toRegister": "Daftar",
     "verifyLoginAttempt": "Mohon verifikasi bahwa anda adalah manusia!",
-    "welcome": "Selamat datang kembali. Masuk menggunakan email dan kata sandi Anda."
+    "welcome": "Selamat datang kembali. Masuk menggunakan email dan kata sandi Anda.",
+    "or": "atau masuk dengan"
   },
   "lookbook": {
     "errorButton": "Kembali ke Halaman Awal",

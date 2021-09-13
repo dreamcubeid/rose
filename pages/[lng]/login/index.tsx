@@ -1,31 +1,32 @@
-import { FC } from 'react';
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Eye, EyeOff } from "react-feather";
-import { toast } from "react-toastify";
-import {
-  Login,
-  useI18n,
-  SingleSignOn
-} from "@sirclo/nexus";
-import { parseCookies } from "lib/parseCookies";
-import redirectIfAuthenticated from "lib/redirectIfAuthenticated";
-import { useBrand } from "lib/useBrand";
-import { useGoogleAuth } from 'lib/useGoogleAuth';
-import { useFacebookAuth } from "lib/useFacebookAuth";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Loader from "components/Loader/Loader";
-import LoaderPages from 'components/Loader/LoaderPages';
-import styles from "public/scss/pages/Login.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { RiEyeCloseLine, RiEye2Line } from 'react-icons/ri'
+import { toast } from 'react-toastify'
+import { Login, useI18n, SingleSignOn } from '@sirclo/nexus'
+/* library template */
+import { parseCookies } from 'lib/parseCookies'
+import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
+import { useBrand } from 'lib/useBrand'
+import { useGoogleAuth } from 'lib/useGoogleAuth'
+import { useFacebookAuth } from 'lib/useFacebookAuth'
+/* components */
+import SEO from 'components/SEO'
+import Layout from 'components/Layout/Layout'
+import Loader from 'components/Loader/Loader'
+import LoaderPages from 'components/Loader/LoaderPages'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+/* styles */
+import styleLogin from 'public/scss/pages/Login.module.scss'
+import styleForm from 'public/scss/components/Form.module.scss'
+import styleButton from 'public/scss/components/Button.module.scss'
 
 const loginClasses = {
-  containerClassName: `${styles.login_item} ${styles.login_item__form} order-3`,
-  inputContainerClassName: styles.sirclo_form_row,
-  inputClassName: `form-control ${styles.sirclo_form_input}`,
-  buttonClassName: `btn ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} ${styles.btn_center} text-uppercase mt-4`,
-  footerClassName: `${styles.login_item} ${styles.login_item__link} text-center order-5`,
-  forgotPasswordClass: `${styles.login_item} ${styles.login_item__link} text-center order-4`,
-  forgotLinkClass: `${styles.login_forgotLink}`
+  containerClassName: styleLogin.login_containerForm,
+  inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
+  passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
+  buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
+  signUpText: `${styleButton.btn} ${styleButton.btn_secondary} ${styleLogin.login_signUp}`,
+  forgotPasswordClass: styleLogin.login_forgotContainer,
 }
 
 const LoginPage: FC<any> = ({
@@ -33,77 +34,68 @@ const LoginPage: FC<any> = ({
   lngDict,
   brand,
   hasGoogleAuth,
-  hasFacebookAuth
+  hasFacebookAuth,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
+  const i18n: any = useI18n()
 
   return (
-    <Layout
-      i18n={i18n}
-      lng={lng}
-      lngDict={lngDict}
-      brand={brand}
-    >
-      <SEO title={i18n.t("login.title")} />
-
-      <section className={styles.login_wrapper}>
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 d-flex flex-column align-items-start justify-content-start flex-nowrap">
-
-              <div className={`${styles.login_item} ${styles.login_item__title} order-1`}>
-                <h3>{i18n.t("login.title")}</h3>
-                <span>{i18n.t("login.welcome")}</span>
-              </div>
-
-              <Login
-                classes={loginClasses}
-                onCompletedMsg={(msg) => toast.success(msg)}
-                onErrorMsg={(msg) => toast.error(msg)}
-                passwordViewIcon={<Eye />}
-                passwordHideIcon={<EyeOff />}
-                loadingComponent={<Loader color="text-light" />}
-              />
-
-              {(hasGoogleAuth || hasFacebookAuth) &&
-                <div className={`${styles.login_item} ${styles.login_item__sso} order-2`}>
-                  <SingleSignOn
-                    className={styles.login_item__ssoButton}
-                    buttonText={`${i18n.t("login.login")} ${i18n.t("login.sso")}`}
-                    loadingComponent={
-                      <div className={`${styles.popup_overlay}`}>
-                        <LoaderPages />
-                      </div>
-                    }
-                  />
-                  <label className="d-flex flex-row align-items-center justify-content-center flex-nowrap w-100">
-                    <span className="d-flex flex-row align-items-center justify-content-start text-center">{i18n.t("testimonials.or")}</span>
-                  </label>
-                </div>
-              }
-            </div>
-          </div>
+    <Layout 
+      i18n={i18n} 
+      lng={lng} 
+      lngDict={lngDict} 
+      brand={brand}>
+      <SEO title={i18n.t('login.title')} />
+      <div className={styleLogin.login}>
+        <div className={styleLogin.login_breadcrumb}>
+          <Breadcrumb
+            steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.account') }]}
+          />
         </div>
-      </section>
+        <div className={styleLogin.login_header}>
+          <h3>{i18n.t('login.title')}</h3>
+        </div>
+        <div className={styleLogin.login_container}>
+          <Login
+            classes={loginClasses}
+            onCompletedMsg={(msg) => toast.success(msg)}
+            onErrorMsg={(msg) => toast.error(msg)}
+            passwordViewIcon={<RiEyeCloseLine />}
+            passwordHideIcon={<RiEye2Line />}
+            loadingComponent={<Loader color="text-light" />}
+          />
+          {(hasGoogleAuth || hasFacebookAuth) && (
+            <div>
+              <label className={styleLogin.login_separator}>
+                <span>{i18n.t('login.or')}</span>
+              </label>
+              <div className={styleLogin.login_containerAuth}>
+                <SingleSignOn
+                  className={styleLogin.login_containerAuth_item}
+                  buttonText={`${i18n.t('login.login')} ${i18n.t('login.sso')}`}
+                  loadingComponent={
+                    <div>
+                      <LoaderPages />
+                    </div>
+                  }
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </Layout>
-  );
-};
+  )
+}
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  res,
-  params
-}) => {
-  const { default: lngDict = {} } = await import(
-    `locales/${params.lng}.json`
-  );
+export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
-  const cookies = parseCookies(req);
-  const hasGoogleAuth = await useGoogleAuth(req);
-  const hasFacebookAuth = await useFacebookAuth(req);
-  redirectIfAuthenticated(res, cookies, 'account');
+  const cookies = parseCookies(req)
+  const hasGoogleAuth = await useGoogleAuth(req)
+  const hasFacebookAuth = await useFacebookAuth(req)
+  redirectIfAuthenticated(res, cookies, 'account')
 
   return {
     props: {
@@ -111,9 +103,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       lngDict,
       hasGoogleAuth,
       hasFacebookAuth,
-      brand: brand || ""
-    }
-  };
+      brand: brand || '',
+    },
+  }
 }
 
-export default LoginPage;
+export default LoginPage

@@ -223,5 +223,7 @@
 
 .cartFooter
 {
-  padding: 24px 18px 106px 18px;
+  margin: 0 18px;
+  padding: 24px 0;
+  border-bottom: 1px solid $color_border;
 }

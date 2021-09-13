@@ -1,19 +1,29 @@
 /* library package */
-import { FC, useState } from 'react'
+import {
+	FC,
+	useState,
+	useEffect
+} from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Router from 'next/router'
 import Link from 'next/link'
 import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
-import { CartDetails, useI18n } from '@sirclo/nexus'
+import {
+	useI18n,
+	CartDetails,
+	useCart
+} from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import OrderSummaryBox from 'components/OrderSummaryBox'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
 /* styles */
+import styeLayout from 'public/scss/components/Layout.module.scss'
 import styleCart from 'public/scss/components/CartDetail.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
@@ -45,8 +55,14 @@ const Cart: FC<any> = ({
 	brand,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const i18n: any = useI18n()
+	const { data: dataCart } = useCart()
+	const [totalQuantity, setTotalQuantity] = useState<number>(0)
 	const [invalidMsg, setInvalidMsg] = useState<string>('')
 	const [SKUs, setSKUs] = useState<[]>([])
+
+	useEffect(() => {
+		setTotalQuantity(dataCart?.totalItem);
+	}, [dataCart]);
 
 	return (
 		<Layout
@@ -55,8 +71,8 @@ const Cart: FC<any> = ({
 			lngDict={lngDict}
 			brand={brand}
 			headerTitle={i18n.t('cart.title')}
-			withCart={false}
-			withFooter={true}
+			withFooter={(totalQuantity > 0) ? false : true}
+			layoutClassName={styeLayout.layout_fullHeight}
 		>
 			<div className={styleCart.cart}>
 				<div className={styleCart.cart_breadcrumb}>
@@ -116,6 +132,13 @@ const Cart: FC<any> = ({
 							</div>
 						}
 					/>
+					{totalQuantity > 0 &&
+						<OrderSummaryBox
+							i18n={i18n}
+							page="cart"
+							withCartDetails={false}
+						/>
+					}
 				</div>
 			</div>
 		</Layout>

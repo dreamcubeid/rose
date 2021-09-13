@@ -32,7 +32,7 @@
 
   &_inputContainer
   {
-    width: 100%;
+    @include fixedWidth(100%);
     padding-bottom: 16px;
     & > label 
     {
@@ -88,7 +88,7 @@
 
   &_separator
   {
-    width: 100%; 
+    @include fixedWidth(100%);
     text-align: center; 
     border-bottom: 1px solid #E6E6E6; 
     line-height: 0.1em;
@@ -98,7 +98,7 @@
     { 
       @include typographyBuilder(secondary,400,12,16);
       line-height: unset;
-      background: #fff; 
+      background: $color_white; 
       padding:0 10px; 
     }
   }

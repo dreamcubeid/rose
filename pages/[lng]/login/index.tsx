@@ -39,7 +39,11 @@ const LoginPage: FC<any> = ({
   const i18n: any = useI18n()
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+    <Layout 
+      i18n={i18n} 
+      lng={lng} 
+      lngDict={lngDict} 
+      brand={brand}>
       <SEO title={i18n.t('login.title')} />
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>

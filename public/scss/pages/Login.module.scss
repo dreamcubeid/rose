@@ -2,6 +2,7 @@
 
 .login
 {
+  padding: 0 0 106px 0;
   &_breadcrumb
   {
     padding: 58px 18px 0 18px;
@@ -79,6 +80,18 @@
     }
   }
 
+  &_loginContainer
+  {
+    @include flex();
+    padding: 23.5px 0 35.5px 0;
+    @include typographyBuilder(secondary,500,14,24);
+    
+    & > a 
+    {
+      color: $color_rose;
+    }
+  }
+
   &_signUp 
   {
     margin: 12px 0 0 0 !important;
@@ -106,7 +119,6 @@
   &_containerAuth
   {
     @include flex(row,center,center);
-    padding: 0 0 106px 0;
 
     & > span 
     {

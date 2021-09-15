@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Link from 'next/link'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -81,6 +82,11 @@ const RegisterPage: FC<any> = ({
               />
             }
           />
+          <div className={styleLogin.login_loginContainer}>
+            <Link href="/[lng]/login" as={`/${lng}/login`}>
+              <a>{i18n.t('placeOrder.haveAnAccount')}</a>
+            </Link>
+          </div>
           {(hasGoogleAuth || hasFacebookAuth) && (
             <div>
               <label className={styleLogin.login_separator}>

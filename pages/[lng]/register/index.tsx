@@ -58,7 +58,8 @@ const RegisterPage: FC<any> = ({
       i18n={i18n} 
       lng={lng} 
       lngDict={lngDict} 
-      brand={brand}>
+      brand={brand}
+      >
       <SEO title={i18n.t('register.register')} />
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>

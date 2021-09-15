@@ -10,7 +10,8 @@ import { RiEyeCloseLine, RiEye2Line } from 'react-icons/ri'
 import { 
   Register, 
   useI18n, 
-  SingleSignOn } from '@sirclo/nexus'
+  SingleSignOn 
+} from '@sirclo/nexus'
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'

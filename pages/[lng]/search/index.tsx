@@ -173,7 +173,8 @@ const LoginPage: FC<any> = ({
       i18n={i18n} 
       lng={lng} 
       lngDict={lngDict} 
-      brand={brand}>
+      brand={brand}
+      >
       <div className={styleSearch.container}>
         <div className={styleSearch.container_search}>
           <form action="#" onSubmit={handleSubmit}>

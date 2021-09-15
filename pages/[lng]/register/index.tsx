@@ -5,8 +5,12 @@ import Link from 'next/link'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { Calendar, CheckCircle } from 'react-feather'
-import { RiEyeCloseLine, RiEye2Line } from 'react-icons/ri'
+import { 
+  RiEyeCloseLine, 
+  RiEye2Line, 
+  RiCheckboxCircleFill,
+  RiCheckboxCircleLine 
+} from 'react-icons/ri'
 import { 
   Register, 
   useI18n, 
@@ -35,8 +39,10 @@ const classesRegister = {
   headerLabelClassName: 'd-none',
   inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
   passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
-  passwordStrengthBarContainerClassName: 'd-none',
-  passwordCriteriaListClassName: `d-none`,
+  passwordStrengthBarContainerClassName: styleLogin.login_passwordStrengthBarContainer,
+  passwordStrengthBarClassName: styleLogin.login_passwordStrengthBar,
+  passwordCriteriaListClassName:styleLogin.login_criteriaList,
+  passwordStrengthLabelClassName: styleLogin.login_passwordStrengthLabel,
   labelRequiredClassName: 'd-none',
   verificationContainerClassName: 'mt-2 mb-4 p-0',
   buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
@@ -79,9 +85,9 @@ const RegisterPage: FC<any> = ({
             redirectPage={() => Router.push(`/[lng]/login`, `/${lng}/login`)}
             passwordViewIcon={<RiEyeCloseLine />}
             passwordHideIcon={<RiEye2Line />}
-            passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-            passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
-            datePickerCalendarIcon={<Calendar />}
+            passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
+            passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
+            datePickerCalendarIcon={<></>}
             withVerification={true}
             isVerified={isVerified}
             loadingComponent={<Loader color="text-light" />}

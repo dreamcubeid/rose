@@ -1,3 +1,4 @@
+/* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
@@ -6,7 +7,10 @@ import { toast } from 'react-toastify'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Calendar, CheckCircle } from 'react-feather'
 import { RiEyeCloseLine, RiEye2Line } from 'react-icons/ri'
-import { Register, useI18n, SingleSignOn } from '@sirclo/nexus'
+import { 
+  Register, 
+  useI18n, 
+  SingleSignOn } from '@sirclo/nexus'
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
@@ -49,7 +53,11 @@ const RegisterPage: FC<any> = ({
   const [isVerified, setIsVerified] = useState<boolean>(false)
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+    <Layout 
+      i18n={i18n} 
+      lng={lng} 
+      lngDict={lngDict} 
+      brand={brand}>
       <SEO title={i18n.t('register.register')} />
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>

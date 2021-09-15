@@ -1,8 +1,24 @@
-import { FC, useEffect, useRef, useState } from 'react'
+/* library package */
+import { 
+  FC, 
+  useEffect, 
+  useRef, 
+  useState 
+} from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
-import { ProductCategory, ProductFilter, Products, ProductSort, useI18n } from '@sirclo/nexus'
-import { RiCloseLine, RiQuestionFill, RiSearch2Line } from 'react-icons/ri'
+import { 
+  ProductCategory, 
+  ProductFilter, 
+  Products, 
+  ProductSort, 
+  useI18n 
+} from '@sirclo/nexus'
+import { 
+  RiCloseLine, 
+  RiQuestionFill, 
+  RiSearch2Line 
+} from 'react-icons/ri'
 import { FaChevronDown } from 'react-icons/fa'
 /* library template */
 import { useBrand } from 'lib/useBrand'
@@ -153,7 +169,11 @@ const LoginPage: FC<any> = ({
   }
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+    <Layout 
+      i18n={i18n} 
+      lng={lng} 
+      lngDict={lngDict} 
+      brand={brand}>
       <div className={styleSearch.container}>
         <div className={styleSearch.container_search}>
           <form action="#" onSubmit={handleSubmit}>

@@ -74,7 +74,8 @@
     "home": "Beranda",
     "cart": "Keranjang",
     "login": "Masuk",
-    "account": "Akun"
+    "account": "Akun",
+    "search": "Pencarian"
   },
   "cart": {
     "amount": "Jumlah",

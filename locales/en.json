@@ -74,7 +74,8 @@
     "home": "Home",
     "cart": "Cart",
     "login": "Login",
-    "account": "Account"
+    "account": "Account",
+    "search": "Search"
   },
   "cart": {
     "amount": "Amount",

@@ -35,10 +35,10 @@ const Footer: FC<any> = () => {
 							</div>
 						</a>
 					</Link>
-					<Link href="/">
-						<a>
+					<Link href="/[lng]/search" as={`/${lng}/search`}>
+						<a {...(route == '/[lng]/search' && { className: styles.active })}>
 							<div>
-								{route == '/[lng]' ? <RiSearchFill /> : <RiSearchLine />}
+								{route == '/[lng]/search' ? <RiSearchFill /> : <RiSearchLine />}
 								<span>{i18n.t('footer.search')}</span>
 								<hr />
 							</div>

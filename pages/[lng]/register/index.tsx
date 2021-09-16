@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import Router from 'next/router'
+import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { 
@@ -25,9 +26,9 @@ import { useFacebookAuth } from 'lib/useFacebookAuth'
 /* components */
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
-import Loader from 'components/Loader/Loader'
-import LoaderPages from 'components/Loader/LoaderPages'
 import Breadcrumbs from 'components/Breadcrumb/Breadcrumb'
+const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"))
+const Loader = dynamic(() => import("components/Loader/Loader"))
 /* styles */
 import styleLogin from 'public/scss/pages/Login.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
@@ -65,7 +66,7 @@ const RegisterPage: FC<any> = ({
       lng={lng} 
       lngDict={lngDict} 
       brand={brand}
-      >
+    >
       <SEO title={i18n.t('register.register')} />
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>

@@ -1,8 +1,13 @@
 import { FC } from 'react'
+import dynamic from 'next/dynamic'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { RiEyeCloseLine, RiEye2Line } from 'react-icons/ri'
 import { toast } from 'react-toastify'
-import { Login, useI18n, SingleSignOn } from '@sirclo/nexus'
+import { 
+  Login, 
+  useI18n, 
+  SingleSignOn 
+} from '@sirclo/nexus'
 /* library template */
 import { parseCookies } from 'lib/parseCookies'
 import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
@@ -12,8 +17,8 @@ import { useFacebookAuth } from 'lib/useFacebookAuth'
 /* components */
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
-import Loader from 'components/Loader/Loader'
-import LoaderPages from 'components/Loader/LoaderPages'
+const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"))
+const Loader = dynamic(() => import("components/Loader/Loader"))
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 /* styles */
 import styleLogin from 'public/scss/pages/Login.module.scss'
@@ -43,7 +48,8 @@ const LoginPage: FC<any> = ({
       i18n={i18n} 
       lng={lng} 
       lngDict={lngDict} 
-      brand={brand}>
+      brand={brand}
+    >
       <SEO title={i18n.t('login.title')} />
       <div className={styleLogin.login}>
         <div className={styleLogin.login_breadcrumb}>

@@ -47,7 +47,8 @@
         opacity: 0;
         margin: 0;
         padding: 0;
-        border: 2px solid $color_rose;
+        background: $color_rose;
+        height: 2px;
         width: 100%;
       }
     }

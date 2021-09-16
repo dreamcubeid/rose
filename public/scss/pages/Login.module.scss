@@ -2,6 +2,8 @@
 
 .login
 {
+  padding: 0 0 106px 0;
+  
   &_breadcrumb
   {
     padding: 58px 18px 0 18px;
@@ -66,6 +68,100 @@
     }
   }
 
+  &_passwordStrengthBarContainer
+  {
+    padding-bottom: 8px;
+  }
+
+  &_passwordStrengthBar
+  {
+    height: 0;
+    width: 100%;
+
+    &::after
+    {
+      content:"";
+      width: 1%;
+      height: 3px;
+      position: absolute;
+      right: 33%;
+      background-color: $color_white;
+    }
+
+    &::before
+    {
+      content:"";
+      position: absolute;
+      width: 1%;
+      height: 3px;
+      left: 33%;
+      background-color: $color_white;
+    }
+
+    &[class*="weak"]
+    {
+      background-image: linear-gradient(to right, $color_error 32%, $color_grey 0%);
+      height: 3px;
+
+      & + span
+      {
+        color: $color_error;
+      }
+    }
+
+    &[class*="medium"]
+    {
+      background-image: linear-gradient(to right, $color_warning 68%, $color_grey 0%);
+      height: 3px;
+
+      & + span
+      {
+        color:$color_warning;
+      }
+    }
+
+    &[class*="strong"]
+    {
+      background: $color_success;
+      height: 3px;
+
+      & + span
+      {
+        color:$color_success;
+      }
+    }
+    
+  }
+
+  &_passwordStrengthLabel
+  {
+    @include typographyBuilder(secondary,500,10,16);
+  }
+
+  &_criteriaList
+  {
+    list-style-type:none;
+    display: none;
+    margin: 0;
+    padding: 0 0 16px 0;
+
+    &[class*="show"]
+    {
+      display: grid !important;
+      grid-template-columns: 50% 50%;
+    }
+
+    & > li
+    {
+      @include typographyBuilder(secondary,400,10,16);
+
+      & > svg
+      {
+        margin-right: 7px;
+      }
+    }
+  }
+
   &_forgotContainer
   {
     @include flex();
@@ -74,6 +170,18 @@
     padding: 23.5px 0 35.5px 0;
     
     & > span > a 
+    {
+      color: $color_rose;
+    }
+  }
+
+  &_loginContainer
+  {
+    @include flex();
+    padding: 23.5px 0 35.5px 0;
+    @include typographyBuilder(secondary,500,14,24);
+    
+    & > a 
     {
       color: $color_rose;
     }
@@ -106,7 +214,6 @@
   &_containerAuth
   {
     @include flex(row,center,center);
-    padding: 0 0 106px 0;
 
     & > span 
     {

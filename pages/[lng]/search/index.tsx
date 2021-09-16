@@ -9,36 +9,28 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { 
   ProductCategory, 
-  ProductFilter, 
   Products, 
-  ProductSort, 
   useI18n 
 } from '@sirclo/nexus'
 import { 
-  RiCloseLine, 
   RiQuestionFill, 
   RiSearch2Line 
 } from 'react-icons/ri'
-import { FaChevronDown } from 'react-icons/fa'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 import useWindowSize from 'lib/useWindowSize'
-import useInfiniteScroll from 'lib/useInfiniteScroll'
 import useQuery from 'lib/useQuery'
 /* components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
-import Popup from 'components/Popup'
 /* style */
 import styleProducts from 'public/scss/pages/Products.module.scss'
 import styleProduct from 'public/scss/components/Product.module.scss'
 import styleSearch from 'public/scss/pages/Search.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
-import styleSort from 'public/scss/components/Sort.module.scss'
-import styleFilter from 'public/scss/components/Filter.module.scss'
 
 const classesProducts = {
   productContainerClassName: `col-6 product_list ${styleProduct.product_itemContainer}`,
@@ -70,47 +62,6 @@ const classesProductCategory = {
   childCategoryClassName: 'd-none',
 }
 
-const classesProductSort = {
-  sortClassName: styleSort.sort,
-  sortOptionsClassName: styleSort.sort_options,
-  sortOptionClassName: styleSort.sort_optionItem,
-  sortOptionButtonClassName: styleSort.sort_optionButton,
-}
-
-const classesProductFilter = {
-  filtersClassName: 'w-100',
-  filterClassName: styleFilter.filter,
-  filterNameClassName: styleFilter.filter_name,
-  filterOptionPriceClassName: styleFilter.filter_price,
-  filterPriceLabelClassName: styleFilter.filter_priceLabel,
-  filterPriceInputClassName: styleFilter.filter_priceInput,
-  filterOptionClassName: styleFilter.filter_option,
-  filterColorLabelClassName: styleFilter.filter_optionLabel,
-  filterLabelClassName: styleFilter.filter_optionLabel,
-  filterInputClassName: styleFilter.filter_optionColorInput,
-  filterColorPreviewClassName: styleFilter.filter_optionColorPreview,
-  filterColorInputClassName: styleFilter.filter_optionColorInput,
-  filterCheckboxClassName: styleFilter.filter_optionCheckbox,
-  filterSliderClassName: styleFilter.filter_slider,
-  filterSliderRailClassName: styleFilter.filter_sliderRail,
-  filterSliderHandleClassName: styleFilter.filter_sliderHandle,
-  filterSliderTrackClassName: styleFilter.filter_sliderTrack,
-  filterSliderTooltipClassName: styleFilter.filter_sliderTooltip,
-  filterSliderTooltipContainerClassName: styleFilter.filter_sliderTooltipContainer,
-  filterSliderTooltipTextClassName: styleFilter.filter_sliderTooltipText,
-}
-
-const classesProductCategoryFilter = {
-  parentCategoryClassName: styleProducts.category,
-  categoryItemClassName: styleProducts.category_list,
-  categoryValueContainerClassName: styleProducts.category_listContainer,
-  categoryValueClassName: styleProducts.category_listLink,
-  categoryNameClassName: styleProducts.category_listItem,
-  categoryNumberClassName: styleProducts.category_listTotalNumber,
-  dropdownIconClassName: styleProducts.category_listIcon,
-  childCategoryClassName: styleProducts.category,
-}
-
 const LoginPage: FC<any> = ({
   lng,
   lngDict,
@@ -127,36 +78,16 @@ const LoginPage: FC<any> = ({
   const [searchValue, setSearchValue] = useState<string>('')
   const inputRef = useRef(null)
 
-  const [openCustomize, setOpenCustomize] = useState<boolean>(false)
-  const [sort, setSort] = useState(null)
-  const [filterProduct, setFilterProduct] = useState({})
-
   const [pageInfo, setPageInfo] = useState({
     pageNumber: 0,
-    itemPerPage: 6,
+    itemPerPage: 4,
     totalItems: 0,
+    curPage: 0,
   })
-
-  const { currPage, setCurrPage } = useInfiniteScroll(pageInfo, 'product_list')
-
-  useEffect(() => {
-    setCurrPage(0)
-  }, [filterProduct, categories, tagname, sort])
-
-  useEffect(() => {
-    setOpenCustomize(false)
-  }, [categories])
 
   useEffect(() => {
     if (q) setSearchValue(q as string)
   }, [q])
-
-  const toogleCustomize = () => setOpenCustomize(!openCustomize)
-
-  const handleFilter = (selectedFilter: any) => {
-    setFilterProduct(selectedFilter)
-    setOpenCustomize(false)
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -229,18 +160,11 @@ const LoginPage: FC<any> = ({
                   <h6 className={styleProducts.products_headerTotalItem}>
                     {i18n.t('products.show')} {pageInfo.totalItems} {i18n.t('products.item')}
                   </h6>
-                  <div
-                    className={styleProducts.products_headerCustomize}
-                    onClick={() => toogleCustomize()}
-                  >
-                    <img src="/icons/filter.svg" alt="customize" />
-                    {i18n.t('products.customize')}
-                  </div>
                 </div>
               </div>
               <div className={`container ${styleProducts.products}`}>
                 <div className="row">
-                  {Array.from(Array(currPage + 1)).map((_, i) => (
+                  {Array.from(Array(0 + 1)).map((_, i) => (
                     <Products
                       key={i}
                       tagName={tagname}
@@ -248,8 +172,6 @@ const LoginPage: FC<any> = ({
                       itemPerPage={pageInfo.itemPerPage}
                       getPageInfo={setPageInfo as any}
                       collectionSlug={categories}
-                      sort={sort}
-                      filter={filterProduct}
                       withSeparatedVariant={true}
                       classes={classesProducts}
                       fullPath={`product/{id}`}
@@ -277,7 +199,6 @@ const LoginPage: FC<any> = ({
                       }
                     />
                   ))}
-                  {pageInfo.totalItems === 0 && (
                     <div className="col-12">
                       <button
                         className={`${styleButton.btn} ${styleButton.btn_secondary}`}
@@ -286,54 +207,12 @@ const LoginPage: FC<any> = ({
                         {i18n.t('products.seeAllProduct')}
                       </button>
                     </div>
-                  )}
                 </div>
               </div>
             </>
           )}
         </div>
       </div>
-      <Popup
-        title={i18n.t('product.filter')}
-        visibleState={openCustomize}
-        setVisibleState={setOpenCustomize}
-        withCloseButton
-        iconClose={<RiCloseLine size={24} />}
-        withButtonLeft={{
-          icon: <img src="/icons/refresh.svg" alt="refresh" />,
-          onClick: () => {
-            router.replace(`/${lng}/products`)
-          },
-        }}
-      >
-        {openCustomize && (
-          <>
-            <div className={styleProducts.products_sortLabel}>{i18n.t('products.sort')}</div>
-            <ProductSort
-              classes={classesProductSort}
-              type="list"
-              handleSort={(selectedSort: any) => {
-                setSort(selectedSort)
-                setOpenCustomize(false)
-              }}
-            />
-            <div className={styleProducts.products_sortLabel}>{i18n.t('products.category')}</div>
-            <ProductCategory
-              classes={classesProductCategoryFilter}
-              showCategoryNumber
-              dropdownIcon={<FaChevronDown size={14} />}
-            />
-            <ProductFilter
-              classes={classesProductFilter}
-              withPriceMinimumSlider
-              withPriceValueLabel
-              withPriceInput
-              withTooltip
-              handleFilter={handleFilter}
-            />
-          </>
-        )}
-      </Popup>
     </Layout>
   )
 }

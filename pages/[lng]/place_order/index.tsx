@@ -1,24 +1,12 @@
+/* library package */
 import {
   FC,
   useState,
   useEffect
-} from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import dynamic from "next/dynamic";
-import Router from "next/router";
-import {
-  PlaceOrderForm,
-  CartSummary,
-  useI18n,
-  PrivateRoute
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Footer from "components/Footer/Footer";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
-import EmptyComponent from "components/EmptyComponent/EmptyComponent";
-import useWindowSize from "lib/useWindowSize";
-import { useBrand } from "lib/useBrand";
+} from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import dynamic from 'next/dynamic'
+import Router from 'next/router'
 import {
   ArrowLeft,
   ShoppingCart,
@@ -30,13 +18,27 @@ import {
   Eye,
   EyeOff,
   Crosshair
-} from "react-feather";
-import { toast } from "react-toastify";
-import styles from "public/scss/pages/Placeorder.module.scss";
-
-const Popup = dynamic(() => import("components/Popup/Popup"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
+} from 'react-feather'
+import { toast } from 'react-toastify'
+import {
+  PlaceOrderForm,
+  CartSummary,
+  useI18n,
+  PrivateRoute
+} from '@sirclo/nexus'
+/* library template */
+import useWindowSize from 'lib/useWindowSize'
+import { useBrand } from 'lib/useBrand'
+/* components */
+import Layout from 'components/Layout/Layout'
+import Footer from 'components/Footer/Footer'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
+import OrderSummaryBox from 'components/OrderSummaryBox'
+const Popup = dynamic(() => import('components/Popup/Popup'))
+const Placeholder = dynamic(() => import('components/Placeholder'))
+const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+/* styles */
+import styles from 'public/scss/pages/Placeorder.module.scss'
 
 const placeOrderClasses = {
   placeOrderClassName: styles.placeorder,
@@ -200,10 +202,10 @@ const PlaceOrderPage: FC<any> = ({
         lng={lng}
         lngDict={lngDict}
         brand={brand}
-        withHeader={false}
+        headerTitle={i18n.t('placeOrder.checkOrder')}
         withFooter={false}
+        layoutClassName="layout_fullHeight"
       >
-        <SEO title="Place Order" />
         {showModalErrorAddToCart &&
           <Popup
             withHeader
@@ -217,201 +219,32 @@ const PlaceOrderPage: FC<any> = ({
             </div>
           </Popup>
         }
-        <div id="summaryCart" className={styles.placeorder}>
-          <div className="row mx-0">
-            <div className="col-12 col-md-6 col-lg-7 p-0">
-              <div className={styles.placeorder_container}>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12 col-md-12 col-lg-10 offset-lg-2 p-0">
-                      <div className={styles.placeorder_heading}>
-                        <div
-                          className={styles.placeorder_headingIcon}
-                          onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
-                        >
-                          <ArrowLeft color="black" />
-                        </div>
-                        <h6>{i18n.t("placeOrder.checkOrder")}</h6>
-                      </div>
-                      <hr className={styles.placeorder_line} />
-                      <div className={styles.placeorder_steps}>
-                        <Breadcrumb currentStep={1} />
-                      </div>
-                      <hr className={`${styles.placeorder_lineSecond}`} />
-                    </div>
-                    {size.width < 576 &&
-                      <div className={styles.ordersummary_collapse}>
-                        <div
-                          className={styles.ordersummary_collapseHeading}
-                          onClick={toogleOrderSummary}
-                        >
-                          <div className={styles.ordersummary_collapseTitle}>
-                            <ShoppingCart color="white" />
-                            <h6>{i18n.t("placeOrder.orderSummary")}</h6>
-                          </div>
-                          {openOrderSummary ?
-                            <ChevronUp color="white" /> :
-                            <ChevronDown color="white" />
-                          }
-                        </div>
-                        <div
-                          className={openOrderSummary ?
-                            styles.ordersummary_collapseBody :
-                            styles.ordersummary_collapseBodyClose
-                          }
-                        >
-                          <CartSummary
-                            cartProps={{
-                              classes: classesCartDetails,
-                              withoutQtyInput: false,
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
-                              thumborSetting: {
-                                width: 200,
-                                format: "webp",
-                                quality: 85,
-                              },
-                              loadingComponent: (
-                                <div className="row">
-                                  <div className="col-4 pr-0">
-                                    <Placeholder classes={classesPlaceholderCartPlaceorder} withImage />
-                                  </div>
-                                  <div className="col-8">
-                                    <Placeholder classes={classesPlaceholderCartPlaceorder} withImage />
-                                  </div>
-                                </div>
-                              ),
-                              emptyCartPlaceHolder: (
-                                <EmptyComponent
-                                  classes={classesEmptyComponent}
-                                  title={i18n.t("cart.isEmpty")}
-                                />
-                              )
-                            }}
-                            orderSummaryProps={{
-                              classes: classesOrderSummary,
-                              isAccordion: true,
-                              page: "place_order",
-                              currency: "IDR",
-                              submitButtonLabel: i18n.t("orderSummary.placeOrder"),
-                              onErrorMsg: () => setShowModalErrorAddToCart(true),
-                              onErrorMsgCoupon: (msg) => toast.error(msg),
-                              loadingComponent: (
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
-                              ),
-                              icons: {
-                                voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                                voucherApplied: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                                points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                                pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                                close: <XIcon />,
-                                collapse: <ChevronUp />,
-                                expand: <ChevronDown />,
-                                voucherRemoved: <XIcon />
-                              }
-                            }}
-                          />
-                        </div>
-                      </div>
-                    }
-                    <div className="col-12 col-md-12 col-lg-8 offset-lg-2 mt-4">
-                      <PlaceOrderForm
-                        classes={placeOrderClasses}
-                        onErrorMsg={(msg) => toast.error(msg)}
-                        passwordViewIcon={<Eye />}
-                        passwordHideIcon={<EyeOff />}
-                        passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-                        passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
-                        datePickerCalendarIcon={<Calendar />}
-                        mapButtonCloseIcon={<XIcon />}
-                        mapCenterIcon={<Crosshair />}
-                        loadingComponent={
-                          <Placeholder classes={classesPlaceholderForm} withList listMany={5} />
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Footer brand={brand} />
-            </div>
-            {size.width > 575 &&
-              <div className="col-12 col-md-6 col-lg-5 p-0">
-                <div className={styles.ordersummary}>
-                  <div className={styles.ordersummary_heading}>
-                    <ShoppingCart color="white" />
-                    <h6>{i18n.t("placeOrder.orderSummary")}</h6>
-                  </div>
-                  <hr className={styles.ordersummary_line} />
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-12 col-md-12 col-lg-8">
-                        <CartSummary
-                          cartProps={{
-                            currency: "IDR",
-                            classes: classesCartDetails,
-                            itemRedirectPathPrefix: "/product",
-                            withoutQtyInput: false,
-                            onErrorMsg: (msg) => toast.error(msg),
-                            loadingComponent: (
-                              <div className="p-3">
-                                <div className="row">
-                                  <div className="col-4 pr-0">
-                                    <Placeholder classes={classesPlaceholderCartPlaceorder} withImage />
-                                  </div>
-                                  <div className="col-8">
-                                    <Placeholder classes={classesPlaceholderCartPlaceorder} withImage />
-                                  </div>
-                                </div>
-                              </div>
-                            ),
-                            thumborSetting: {
-                              width: 250,
-                              format: "webp",
-                              quality: 85,
-                            },
-                            emptyCartPlaceHolder: (
-                              <EmptyComponent
-                                classes={classesEmptyComponent}
-                                title={i18n.t("cart.isEmpty")}
-                              />
-                            ),
-                          }}
-                          orderSummaryProps={{
-                            classes: {
-                              ...classesOrderSummary,
-                              submitButtonClassName: `btn ${styles.btn_white} ${styles.btn_long} ${styles.btn_full_width} mt-3`
-                            },
-                            isAccordion: true,
-                            page: "place_order",
-                            currency: "IDR",
-                            submitButtonLabel: i18n.t("orderSummary.placeOrder"),
-                            continueShoppingRoute: "products",
-                            onErrorMsg: (msg) => toast.error(msg),
-                            onErrorMsgCoupon: (msg) => toast.error(msg),
-                            loadingComponent: (
-                              <div className="px-3">
-                                <Placeholder classes={classesPlaceholderCartPlaceorder} withTitle />
-                              </div>
-                            ),
-                            icons: {
-                              voucher: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                              voucherApplied: <img src="/images/mdi_ticket-percent.svg" alt="icon" />,
-                              points: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                              pointsApplied: <img src="/images/mdi_star-circle.svg" alt="icon" />,
-                              close: <XIcon />,
-                              collapse: <ChevronUp />,
-                              expand: <ChevronDown />,
-                              voucherRemoved: <XIcon />
-                            },
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            }
+        <div className={styles.ordersummary}>
+          <div className={styles.ordersummary_heading}>
+            <ShoppingCart color="white" />
+            <h6>{i18n.t("placeOrder.orderSummary")}</h6>
           </div>
+          <hr className={styles.ordersummary_line} />
+          <PlaceOrderForm
+            classes={placeOrderClasses}
+            onErrorMsg={(msg) => toast.error(msg)}
+            passwordViewIcon={<Eye />}
+            passwordHideIcon={<EyeOff />}
+            passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
+            passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+            datePickerCalendarIcon={<Calendar />}
+            mapButtonCloseIcon={<XIcon />}
+            mapCenterIcon={<Crosshair />}
+            loadingComponent={
+              <Placeholder classes={classesPlaceholderForm} withList listMany={5} />
+            }
+          />
+          <hr className={styles.ordersummary_line} />
+          <OrderSummaryBox
+            i18n={i18n}
+            page="place_order"
+            withCartDetails={false}
+          />
         </div>
       </Layout>
     </PrivateRouteWrapper>

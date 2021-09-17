@@ -24,9 +24,13 @@ body
   }
 }
 
-h1
+.layout
 {
-  margin-top: 0;
+  &_fullHeight
+  {
+    min-height: 100vh;
+    height: auto;
+  }
 }
 
 .BrainhubCarousel

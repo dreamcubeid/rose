@@ -9,10 +9,13 @@ import Router from 'next/router'
 import Link from 'next/link'
 import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import {
 	useI18n,
 	CartDetails,
-	useCart
+	useCart,
+	Products,
+	isProductRecommendationAllowed
 } from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
@@ -23,10 +26,10 @@ import OrderSummaryBox from 'components/OrderSummaryBox'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
 /* styles */
-import styeLayout from 'public/scss/components/Layout.module.scss'
 import styleCart from 'public/scss/components/CartDetail.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
+import styleProduct from 'public/scss/components/Product.module.scss'
 
 const classesCartDetails = {
 	className: styleCart.cart,
@@ -49,6 +52,29 @@ const classesCartDetails = {
 	cartFooterTitleClassName: 'd-none',
 }
 
+const classesCrosselProducts = {
+	productContainerClassName: `col-6 ${styleProduct.product_itemContainer}`,
+	stickerContainerClassName: `${styleProduct.product_sticker} ${styleProduct.product_stickerGrid}`,
+	outOfStockLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__outofstock}`,
+	saleLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__sale}`,
+	comingSoonLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__comingsoon}`,
+	openOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__openorder}`,
+	preOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__preorder}`,
+	newLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__new}`,
+	productImageContainerClassName: styleProduct.product_link,
+	productImageClassName: styleProduct.product_itemContainerImage,
+	productLabelContainerClassName: styleProduct.product_label,
+	productTitleClassName: styleProduct.product_label__title,
+	productPriceClassName: styleProduct.product_labelPrice,
+	salePriceClassName: styleProduct.product_labelPrice__sale,
+	priceClassName: styleProduct.product_labelPrice__price,
+}
+
+const paginationClasses = {
+	pagingClassName: styleCart.crossSell_pagination,
+	itemClassName: styleCart.crossSell_paginationItem
+}
+
 const Cart: FC<any> = ({
 	lng,
 	lngDict,
@@ -56,13 +82,17 @@ const Cart: FC<any> = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const i18n: any = useI18n()
 	const { data: dataCart } = useCart()
+	const allowedProductRecommendation = isProductRecommendationAllowed()
 	const [totalQuantity, setTotalQuantity] = useState<number>(0)
 	const [invalidMsg, setInvalidMsg] = useState<string>('')
-	const [SKUs, setSKUs] = useState<[]>([])
+	const [SKUs, setSKUs] = useState<Array<string>>(null)
+	const [pageInfo, setPageInfo] = useState({
+		totalItems: null,
+	})
 
 	useEffect(() => {
-		setTotalQuantity(dataCart?.totalItem);
-	}, [dataCart]);
+		setTotalQuantity(dataCart?.totalItem)
+	}, [dataCart])
 
 	return (
 		<Layout
@@ -72,7 +102,7 @@ const Cart: FC<any> = ({
 			brand={brand}
 			headerTitle={i18n.t('cart.title')}
 			withFooter={(totalQuantity > 0) ? false : true}
-			layoutClassName={styeLayout.layout_fullHeight}
+			layoutClassName="layout_fullHeight"
 		>
 			<div className={styleCart.cart}>
 				<div className={styleCart.cart_breadcrumb}>
@@ -81,7 +111,7 @@ const Cart: FC<any> = ({
 					/>
 				</div>
 				<div className={styleCart.cart_header}>
-					<div>{`${i18n.t('cart.prefixItem')} ${SKUs.length} ${i18n.t('cart.item')}`}</div>
+					<div>{`${i18n.t('cart.prefixItem')} ${dataCart?.totalItem} ${i18n.t('cart.item')}`}</div>
 					<div>
 						<Link href={`/${lng}/products`}>{i18n.t('cart.shopMore')}</Link>
 					</div>
@@ -137,7 +167,44 @@ const Cart: FC<any> = ({
 							i18n={i18n}
 							page="cart"
 							withCartDetails={false}
+							totalCrossSell={pageInfo.totalItems}
 						/>
+					}
+					{allowedProductRecommendation && pageInfo.totalItems !== 0 && SKUs !== null &&
+						<div className={`row ${styleCart.crossSell}`}>
+							<div className="col-12">
+								<h6 className={styleCart.crossSell_title}>
+									{i18n.t("product.related")}
+								</h6>
+							</div>
+							<Products
+								SKUs={SKUs}
+								classes={classesCrosselProducts}
+								paginationClasses={paginationClasses}
+								getCrossSellPageInfo={(pageInfo: any) => setPageInfo({ totalItems: pageInfo.totalItems })}
+								itemPerPage={2}
+								pathPrefix="product"
+								newPagination
+								lazyLoadedImage={false}
+								buttonPrev={<FaArrowLeft size={14} />}
+								buttonNext={<FaArrowRight size={14} />}
+								thumborSetting={{
+									width: 800,
+									format: "webp",
+									quality: 85,
+								}}
+								loadingComponent={
+									<div className="col-12">
+										<div className="d-flex justify-content-center align-center my-5">
+											<Loader
+												color="text-secondary"
+												withText
+											/>
+										</div>
+									</div>
+								}
+							/>
+						</div>
 					}
 				</div>
 			</div>

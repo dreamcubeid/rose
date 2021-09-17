@@ -1,7 +1,7 @@
 /* library package */
 import { FC, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
-import { FaCheckCircle } from 'react-icons/fa'
 import {
   FiChevronDown,
   FiChevronUp,
@@ -13,8 +13,8 @@ import {
 } from '@sirclo/nexus'
 /* components */
 import Placeholder from 'components/Placeholder'
-import Popup from 'components/Popup'
 import Loader from 'components/Loader/Loader'
+const Popup = dynamic(() => import('components/Popup'))
 /* styles */
 import styles from 'public/scss/components/OrderSummaryBox.module.scss'
 
@@ -27,7 +27,6 @@ const classesOrderSummary = {
   subTotalClassName: styles.orderSummary_subTotal,
   expandButtonClassName: styles.orderSummary_button__expand,
   expandedDivClassName: styles.orderSummary_expanded,
-
   /* pop up */
   popupClassName: styles.orderSummary_popup,
   closeButtonClassName: styles.orderSummary_closeButton,
@@ -35,7 +34,6 @@ const classesOrderSummary = {
   voucherContainerClassName: styles.orderSummary_voucherContainer,
   voucherFormContainerClassName: styles.orderSummary_voucherFormContainer,
   voucherListClassName: styles.orderSummary_voucherList,
-
   /* voucher */
   voucherButtonClassName: styles.orderSummary_voucherButton,
   voucherIconClassName: styles.orderSummary_voucherIcon,
@@ -48,27 +46,27 @@ const classesOrderSummary = {
   voucherFooterClassName: styles.orderSummary_voucherFooter,
   voucherApplyButtonClassName: styles.orderSummary_voucherApplyButton,
   voucherDetailClassName: styles.orderSummary_voucherDetail,
-
   voucherButtonAppliedClassName: styles.orderSummary_voucherButtonApplied,
   voucherAppliedIconClassName: styles.orderSummary_voucherAppliedIcon,
   voucherAppliedTextClassName: styles.orderSummary_voucherAppliedText,
-
+  voucherButtonRemoveClassName: styles.orderSummary_voucherButtonRemove,
   /* point */
   pointsButtonClassName: styles.orderSummary_voucherButton,
   pointsIconClassName: styles.orderSummary_voucherIcon,
   pointsTextClassName: styles.orderSummary_voucherText,
   pointsContainerClassName: styles.orderSummary_pointsContainer,
-  changePointsClassName: 'd-none',
+  changePointsClassName: styles.orderSummary_pointsChange,
   numberOfPointsClassName: styles.orderSummary_numberOfPoints,
+  pointLabelClassName: 'd-none',
   pointsFormContainerClassName: styles.orderSummary_pointsFormContainer,
   pointsWarningClassName: styles.orderSummary_pointsWarning,
   pointsFormClassName: styles.orderSummary_pointsForm,
-  pointLabelClassName: 'd-none',
   totalPointsClassName: styles.orderSummary_totalPoints,
   pointValueClassName: styles.orderSummary_pointValue,
   pointsSubmitButtonClassName: styles.orderSummary_pointsSubmitButton,
   pointsInsufficientClassName: styles.orderSummary_pointsInsufficient,
-  voucherButtonRemoveClassName: styles.orderSummary_voucherButtonRemove,
+  pointsButtonAppliedClassName: styles.orderSummary_voucherButtonApplied,
+  pointsAppliedTextClassName: styles.orderSummary_voucherAppliedText,
   pointButtonRemoveClassName: styles.orderSummary_voucherButtonRemove,
 }
 
@@ -111,13 +109,17 @@ type iProps = {
   | "payment_method"
   withCartDetails?: boolean
   withOrderSummary?: boolean
+  titleSubmit?: string
+  totalCrossSell?: number
 }
 
 const OrderSummaryComponent: FC<iProps> = ({
   i18n,
   page,
   withCartDetails = true,
-  withOrderSummary = true
+  withOrderSummary = true,
+  titleSubmit = i18n.t("orderSummary.placeOrder"),
+  totalCrossSell = 0
 }) => {
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
 
@@ -141,7 +143,7 @@ const OrderSummaryComponent: FC<iProps> = ({
               <Placeholder
                 classes={classesCartPlaceholder}
                 withList
-                listMany={3}
+                listMany={1}
               />
             }
           />
@@ -152,8 +154,11 @@ const OrderSummaryComponent: FC<iProps> = ({
           <OrderSummary
             page={page}
             currency="IDR"
-            classes={classesOrderSummary}
-            submitButtonLabel={i18n.t("orderSummary.placeOrder")}
+            classes={{
+              ...classesOrderSummary,
+              containerClassName: `${styles.orderSummary} ${totalCrossSell === 0 && styles.orderSummary_extras}`
+            }}
+            submitButtonLabel={titleSubmit}
             continueShoppingLabel={i18n.t("orderSummary.continueShopping")}
             onErrorMsg={() => setShowModalErrorAddToCart(!showModalErrorAddToCart)}
             onErrorMsgCoupon={(msg) => toast.error(msg)}
@@ -164,8 +169,9 @@ const OrderSummaryComponent: FC<iProps> = ({
               voucher: <img src="/icons/voucher.svg" alt="voucher" />,
               points: <img src="/icons/point.svg" alt="voucher" />,
               close: <FiX size={24} color="#444444" />,
-              voucherApplied: <FaCheckCircle color="#998060" />,
-              voucherRemoved: <FiX color="#CC4534" />,
+              voucherApplied: <img src="/icons/voucher.svg" alt="voucher" />,
+              voucherRemoved: <FiX color="#CC4534" size={16} />,
+              pointsApplied: <img src="/icons/point.svg" alt="voucher" />,
               expand: <FiChevronUp />,
               collapse: <FiChevronDown />,
             }}

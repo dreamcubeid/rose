@@ -1,10 +1,5 @@
 /* library package */
-import { 
-  FC, 
-  useEffect, 
-  useRef, 
-  useState 
-} from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { 
@@ -12,10 +7,7 @@ import {
   Products, 
   useI18n 
 } from '@sirclo/nexus'
-import { 
-  RiQuestionFill, 
-  RiSearch2Line 
-} from 'react-icons/ri'
+import { RiQuestionFill, RiSearch2Line } from 'react-icons/ri'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 import useWindowSize from 'lib/useWindowSize'
@@ -80,7 +72,7 @@ const LoginPage: FC<any> = ({
 
   const [pageInfo, setPageInfo] = useState({
     pageNumber: 0,
-    itemPerPage: 4,
+    itemPerPage: 8,
     totalItems: 0,
     curPage: 0,
   })
@@ -105,7 +97,7 @@ const LoginPage: FC<any> = ({
       lng={lng} 
       lngDict={lngDict} 
       brand={brand}
-      >
+    >
       <div className={styleSearch.container}>
         <div className={styleSearch.container_search}>
           <form action="#" onSubmit={handleSubmit}>
@@ -164,49 +156,49 @@ const LoginPage: FC<any> = ({
               </div>
               <div className={`container ${styleProducts.products}`}>
                 <div className="row">
-                  {Array.from(Array(0 + 1)).map((_, i) => (
-                    <Products
-                      key={i}
-                      tagName={tagname}
-                      pageNumber={i}
-                      itemPerPage={pageInfo.itemPerPage}
-                      getPageInfo={setPageInfo as any}
-                      collectionSlug={categories}
-                      withSeparatedVariant={true}
-                      classes={classesProducts}
-                      fullPath={`product/{id}`}
-                      pathPrefix={`product`}
-                      lazyLoadedImage={false}
-                      thumborSetting={{
-                        width: size.width < 768 ? 512 : 800,
-                        format: 'webp',
-                        quality: 85,
-                      }}
-                      emptyStateComponent={
-                        <div className="col-12 my-3">
-                          <EmptyComponent
-                            icon={<RiQuestionFill color="#A8A8A8" size={20} />}
-                            title={i18n.t('product.isEmpty')}
-                          />
+                  <Products
+                    tagName={tagname}
+                    pageNumber={pageInfo.pageNumber}
+                    itemPerPage={pageInfo.itemPerPage}
+                    getPageInfo={setPageInfo as any}
+                    collectionSlug={categories}
+                    withSeparatedVariant={true}
+                    classes={classesProducts}
+                    fullPath={`product/{id}`}
+                    pathPrefix={`product`}
+                    lazyLoadedImage={false}
+                    thumborSetting={{
+                      width: size.width < 768 ? 512 : 800,
+                      format: 'webp',
+                      quality: 85,
+                    }}
+                    emptyStateComponent={
+                      <div className="col-12 my-3">
+                        <EmptyComponent
+                          icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+                          title={i18n.t('product.isEmpty')}
+                        />
+                      </div>
+                    }
+                    loadingComponent={
+                      <div className="col-12">
+                        <div className="d-flex justify-content-center align-center my-5">
+                          <Loader color="text-secondary" withText />
                         </div>
-                      }
-                      loadingComponent={
-                        <div className="col-12">
-                          <div className="d-flex justify-content-center align-center my-5">
-                            <Loader color="text-secondary" withText />
-                          </div>
-                        </div>
-                      }
-                    />
-                  ))}
-                    <div className="col-12">
-                      <button
-                        className={`${styleButton.btn} ${styleButton.btn_secondary}`}
-                        onClick={() => router.push(`/${lng}/products`)}
-                      >
-                        {i18n.t('products.seeAllProduct')}
-                      </button>
-                    </div>
+                      </div>
+                    }
+                  />
+                  <div className="col-12">
+                    <button
+                      className={`${styleButton.btn} ${styleButton.btn_secondary}`}
+                      onClick={() => router.push({
+                        pathname:`/${lng}/products`,
+                        query:{ q }
+                      })}
+                    >
+                      {i18n.t('products.seeAllProduct')}
+                    </button>
+                  </div>
                 </div>
               </div>
             </>

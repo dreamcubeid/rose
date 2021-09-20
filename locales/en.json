@@ -75,7 +75,8 @@
     "cart": "Cart",
     "login": "Login",
     "account": "Account",
-    "search": "Search"
+    "search": "Search",
+    "lookbook":"Lookbook"
   },
   "cart": {
     "amount": "Amount",
@@ -228,7 +229,8 @@
     "isEmpty": "Lookbook is empty",
     "seeCollection": "See Collection",
     "seeMore": "See More",
-    "title": "Lookbook"
+    "title": "Lookbook",
+    "back": "Back"
   },
   "membership": {
     "exchangePoints": "Redeem your Point",

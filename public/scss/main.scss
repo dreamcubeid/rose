@@ -24,6 +24,15 @@ body
   }
 }
 
+.layout
+{
+  &_fullHeight
+  {
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
 .BrainhubCarousel
 {
   &__container

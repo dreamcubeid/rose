@@ -279,7 +279,8 @@
     "allEmpty": "Semua kolom tidak boleh kosong",
     "billingEmpty": "Semua kolom di alamat penagihan tidak boleh kosong",
     "discountBundle": "Paket Diskon",
-    "placeOrder": "Buat Pesanan",
+    "pay": "Bayar",
+    "placeOrder": "Beli",
     "pointsApplied": "Point digunakan",
     "pointsLeft": "Point tersisa",
     "shipping": "Biaya pengiriman",
@@ -289,7 +290,8 @@
     "useVoucher": "Gunakan voucher",
     "usePoints": "Gunakan poin",
     "viewCart": "Liat Keranjang",
-    "voucherApplied": "Voucher digunakan"
+    "voucherApplied": "Voucher digunakan",
+    "yourCart": "Keranjang anda"
   },
   "pageHeader": {
     "back": "Kembali"

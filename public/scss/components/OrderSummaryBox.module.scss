@@ -1,0 +1,706 @@
+@import '../utils/variables';
+@import './Form.module.scss';
+@import './Button.module.scss';
+@import './Popup.module.scss';
+@import './CartDetail.module.scss';
+
+.orderSummary
+{
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    &_extras
+    {
+        padding-bottom: 224px;
+    }
+
+    &_placeholder
+    {
+        margin: 10px 0 0;
+    }
+
+    &_popup
+    {
+        @include flex(row, flex-end, center);
+        @include fixed(0, 0, 0, 0);
+        @include fixedHeight(100vh);
+        @include fixedWidth(375px, true);
+        margin: auto auto 0 !important;
+        z-index: 20;
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(100%, true);
+        }
+
+        &Background
+        {
+            @include flex();
+            @include fixed(0, 0, 0, 0);
+            @include fixedWidth(375px);
+            @include fixedHeight(100vh);
+            @include transition();
+            margin: auto auto 0 !important;
+            background-color: rgba($color_black, 0.8);
+
+            @media screen and (max-width: $breakpoint_max_sm)
+            {
+                @include fixedWidth(100%, true);
+            }
+        }
+    }
+
+    &_wrapper
+    {
+        @include fixedWidth(375px, true);
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: 0 0 0 transparent;
+        margin: 0 auto 0 !important;
+        padding-bottom: 180px;
+
+        & [class*="_popupBody"]
+        {
+            padding-bottom: 44px !important;
+        }
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(100%, true);
+        }
+    }
+
+    &_subTotal
+    {
+        padding: 0 20px;
+        position: relative;
+        background: $color_white;
+        box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 56px;
+        padding: 20px;
+        margin: auto auto 0 !important;
+        z-index: 10;
+
+        @include fixed(auto, 0, 24px, 0);
+        @include fixedWidth(345px, true);
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(calc(100% - 30px), true);
+        }
+
+        & > div
+        {
+            @include typographyBuilder(secondary, 500, 14, 24);
+            @include truncate(1);
+            color: $color_text_primary;
+
+            &:first-of-type,
+            &:first-child
+            {
+                @include typographyBuilder(secondary, 400, 10, 16);
+                color: $color_text_secondary;
+            }
+        }
+    }
+
+    &_footer
+    {
+        margin: auto auto 0 !important;
+
+        @include fixed(auto, 0, 24px, 0);
+        @include fixedWidth(345px, true);
+        @include flex(row, center, flex-end);
+        border: none;
+        background-color: transparent;
+        height: 80px;
+        margin: 0;
+        padding: 16px 20px;
+        z-index: 10;
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(calc(100% - 30px), true);
+        }
+    }
+
+    &_button
+    {
+        &__continueShopping
+        {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        &__submit
+        {
+            @include transition();
+            @extend .btn;
+            @extend .btn_primary;
+            @include typographyBuilder(secondary, 400, 14, 18);
+            @include fixedWidth(calc((100% - (32px + 40px)) / 2));
+            @include textOverflow();
+            margin: 0;
+        }
+
+        &__expand
+        {
+            
+            @include fixed(auto, 0, 50px, 0);
+            @include transition();
+            @include flex();
+            @include typographyBuilder(secondary, 500, 14, 18);
+            
+            cursor: pointer;
+            margin: auto auto 0 !important;
+            width: 28px;
+            height: 28px;
+            margin: 0;
+            z-index: 11;
+            padding: 0;
+            border-radius: 6px;
+
+            svg
+            {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &_expanded
+    {
+        box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.05);
+        background-color: $color_white;
+        border-bottom: none;
+        border-radius: 2px 2px 0 0;
+        position: relative;
+        margin: 0;
+        padding: 20px 20px 60px;
+        margin: auto auto 0 !important;
+        z-index: 10;
+
+        @include fixed(auto, 0, 60px, 0);
+        @include fixedWidth(345px, true);
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(calc(100% - 30px), true);
+        }
+
+        & > div
+        {
+            @include flex(row, center, space-between);
+            position: relative;
+            margin: 0 auto 12px;
+            padding: 0;
+
+            &:last-child,
+            &:last-of-type,
+            &:only-child,
+            &:only-of-type
+            {
+                margin-bottom: 0;
+            }
+
+            span
+            {
+                @include typographyBuilder(secondary, 400, 14, 18);
+                display: block;
+                position: relative;
+            }
+        }
+    }
+
+    &_header
+    {
+        margin: 24px 0;
+    }
+
+    /* Voucher */
+    &_voucherButton
+    {
+        @include fixedHeight(60px);
+        @include flex(row, center, flex-start);
+        padding: 0 24px;
+        border: 1px solid $color_border;
+        background: $color_white;
+        border-radius: 37px;
+        cursor: pointer;
+
+        &:hover
+        {
+            opacity: .8;
+        }
+
+        &::after
+        {
+            content: "";
+            @include position(absolute, auto, 16px, auto, auto)
+        }
+    }
+    
+    &_voucherIcon
+    {
+        svg
+        {
+            color: $color_yellow;
+        }
+
+        &[class*="end"]
+        {
+            @include position(absolute, auto, 12px, auto, auto);
+            @include flex(row, center, center);
+            @include fixedHeight(40px);
+            @include fixedWidth(40px);
+            background: $color_rose_bg2;
+            border-radius: 50%;
+        }
+    }
+
+    &_voucherText
+    {
+        @include typographyBuilder(secondary, 400, 14, 24);
+        color: $color_text_placeholder;
+        margin-left: 12px;
+    }
+    
+    &_voucherContainer
+    {
+        @include fixed(0, 0, 0, 0);
+        @include fixedWidth(375px);
+        @include fixedHeight(80%);
+        @include transition();
+        margin: auto auto 0 !important;
+        padding: 16px;
+        background-color: $color_white;
+        border-radius: 4px 4px 0px 0px;
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(100%, true);
+        }
+    }
+    
+    &_voucherFormContainer
+    {
+        position: relative;
+        margin-top: 50px;
+        padding: 9px 12px;
+        background: $color_white;
+        border: 1px solid $color_border;
+        border-radius: 37px;
+    }
+    
+    &_voucherList
+    {
+        overflow-y: auto;
+        max-height: 400px;
+        margin-top: 24px;
+        background: $color_white;
+    }
+
+    &_closeButton
+    {
+        @include position(absolute, 14px, 14px, auto, auto);
+        background: transparent;
+        padding: 0;
+        border: none;
+
+        &:active,
+        &:focus
+        {
+            outline: 0;
+            box-shadow: none;
+        }
+    }
+
+    &_voucherForm
+    {
+        @include fixedWidth(100%);
+        @include flex(row, center, space-between);
+    }
+    
+    &_voucherInput
+    {
+        @include fixedWidth(60%);
+        @include typographyBuilder(secondary, 400, 14, 24);
+        color: $color_text_primary;
+        border: none;
+        padding: 17px;
+        margin: 0 5px;
+        background: transparent;
+
+        &:active,
+        &:focus
+        {
+            outline: 0;
+            box-shadow: none;
+        }
+    }
+    
+    &_voucherSubmitButton
+    {
+        @extend .btn;
+        @extend .btn_primary;
+        @include typographyBuilder(secondary, 400, 12, 18);
+        @include fixedWidth(30%);
+    }
+
+    &_voucherListHeader
+    {
+        @include typographyBuilder(secondary, 400, 14, 18);
+        margin-bottom: 24px;
+        color: $color_text_primary;
+        text-align: center;
+    }
+
+    &_voucher
+    {
+        display: flex;
+        align-items: center;
+        border: 1px solid $color_grey;
+        border-radius: 6px;
+        padding: 18px 15px;
+        margin-bottom: 10px;
+
+        p
+        {
+            margin-bottom: 0;
+        }
+    }
+
+    &_voucherDetail
+    {
+        & > p:first-child 
+        {
+            @include typographyBuilder(secondary, 500, 14, 18);
+            color: $color_black;
+            margin-bottom: 5px;
+
+            span {
+                margin-left: .5rem;
+            }
+        }
+
+        & > p:last-child 
+        {
+            @include typographyBuilder(secondary, 400, 12, 18);
+            color: $color_text_primary;
+            width: 90%;
+        }
+    }
+
+    &_voucherApplyButton
+    {
+        @extend .btn;
+        @extend .btn_primary;
+        @include typographyBuilder(secondary, 400, 12, 18);
+        padding: 10px 24px;
+    }
+
+    /* vouche applied */
+    &_voucherButtonApplied
+    {
+        position: relative;
+        @include fixedWidth(100%);
+        @include fixedHeight(60px);
+        @include flex(row, center, flex-start);
+        border: 1px solid $color_border;
+        border-radius: 37px;
+        padding: 17px;
+        margin-bottom: 12px;
+        background: $color_white;
+        cursor: pointer;
+    }
+
+    &_voucherAppliedIcon
+    {
+        svg
+        {
+            color: $color_green;
+        }
+    }
+
+    &_voucherAppliedText
+    {
+        color: $color_text_primary;
+        margin-left: 15px;
+    }
+
+    &_voucherButtonRemove
+    {
+        @include position(absolute, auto, 12px, auto, auto);
+        @include flex(row, center, center);
+        @include fixedHeight(40px);
+        @include fixedWidth(40px);
+        background: $color_rose_bg2;
+        border-radius: 50%;
+    }
+
+    /* point */
+    &_pointsContainer
+    {
+        @include position(relative);
+        @include fixedWidth(375px);
+        @include transition();
+        min-height: 0;
+        max-height: calc(100vh - 58px);
+        height: auto;
+        margin: auto auto 0 !important;
+        padding: 16px;
+        background-color: $color_white;
+        border-radius: 4px 4px 0px 0px;
+
+        @media screen and (max-width: $breakpoint_max_sm)
+        {
+            @include fixedWidth(100%, true);
+        }
+    }
+
+    &_pointsChange
+    {
+        @include fixedWidth(60px);
+        @include fixedHeight(60px);
+        @include typographyBuilder(secondary, 400, 24, 24);
+        color: $color_text_primary;
+        border: 1px solid $color_border;
+        border-radius: 37px;
+        background: transparent;
+
+        &:active,
+        &:focus
+        {
+            outline: 0;
+            box-shadow: none;
+        }
+
+        &[class*="increment"]
+        {
+            order: 3;
+        }
+
+        &[class*="decrement"]
+        {
+            order: 1;
+        }
+    }
+
+    &_pointsSubmitButton
+    {
+        @extend .btn;
+        @extend .btn_primary;
+        @include typographyBuilder(secondary, 400, 12, 18);
+        margin-top: 24px;
+    }
+
+    &_pointsButton
+    {
+        @include fixedHeight(60px);
+        @include flex(row, center, flex-start);
+        cursor: pointer;
+        border-bottom: 1px solid $color_grey;
+        padding: 0 16px;
+        background: $color_white;
+
+        &:hover
+        {
+            opacity: .8;
+        }
+
+        &::after
+        {
+            content: "";
+            @include position(absolute, auto, 16px, auto, auto)
+        }
+    }
+    
+    &_pointsIcon
+    {
+        svg
+        {
+            color: $color_yellow;
+        }
+    }
+
+    &_pointsText
+    {
+        color: $color_black;
+        margin-left: 15px;
+    }
+
+    &_pointsFormContainer
+    {
+        position: relative;
+        @include flex(column, center, center);
+    }
+
+    &_pointsForm
+    {
+        @include flex(row, center, center);
+        @include fixedWidth(100%);
+
+        input
+        {
+            @include fixedWidth(calc(100% - 140px));
+            @include typographyBuilder(secondary, 400, 14, 24);
+            color: $color_text_primary;
+            border: 1px solid $color_border;
+            border-radius: 37px;
+            padding: 17px;
+            margin: 0 5px;
+            background: transparent;
+            order: 2;
+
+            &:active,
+            &:focus
+            {
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
+    
+    &_numberOfPoints
+    {
+        padding: 16px 16px 11px 16px;
+    }
+    
+    &_pointsWarning
+    {
+        padding: 0 0 16px;
+
+        p
+        {
+            @include typographyBuilder(secondary, 400, 11, 16);
+            text-align: center;
+            color: $color_red;
+            margin: 8px 0 0 0;
+        }
+    }
+
+    &_totalPoints
+    {
+        @include flex(column, center, center);
+
+        img
+        {
+           width: 25px;
+           margin-bottom: 10px;
+        }
+    }
+
+    &_pointValue
+    {
+        @include typographyBuilder(secondary, 400, 14, 24);
+    }
+    
+    &_pointsInsufficient
+    {
+        @include typographyBuilder(secondary, 500, 14, 18);
+        position: absolute;
+        bottom: -30px;
+        color: $color_red;
+    }
+
+    &_qty
+    {
+        grid-column: 2/3;
+        grid-row: 3;
+        text-align: left;
+    }
+    
+    &_qtyBox
+    {
+        @include typographyBuilder(secondary, 400, 14, 18);
+        border: none;
+        width: 50px;
+        margin: 0;
+        height: 22px;
+        
+        &::before
+        {
+            content: "Qty:";
+        }
+    }
+
+    &_price
+    {
+        grid-row: 2/2;
+        grid-column: 2/2;
+    }
+
+    &_cartItem
+    {
+        &:first-child
+        {
+            padding-top: 8px;
+        }
+    }
+    
+    &_cartDetailsTitle
+    {
+        @include typographyBuilder(secondary, 500, 18, 23);
+        margin: 12px 0 8px 16px;
+    }
+
+    &_cartDetails
+    {
+        padding: 0 16px;
+        max-height: 300px;
+        overflow-y: auto;
+        @extend .scrollbar_main;
+    }
+
+    &_errorCartContainer
+    {
+        @include flex(row, center, center);
+        text-align: center;
+        width: 100%;
+
+        h4
+        {
+            @include typographyBuilder(secondary, 500, 20, 26);
+        }
+        
+        p
+        {
+            @include typographyBuilder(secondary, 400, 14, 18);
+        }
+        
+        button 
+        {
+            width: 238px;
+            margin: 0 auto;
+        }
+    }
+    
+    &_errorCartInner
+    {
+        width: 292px;
+    }
+}
+
+
+@media screen and (max-width: #{$breakpoint_max_sm})
+{
+    .orderSummary
+    {
+        &_popup,
+        &_footer,
+        &_expanded
+        {
+            min-width: 0 !important;
+            max-width: 100% !important;
+        }
+
+        &_wrapper
+        {
+            padding-bottom: 170px !important;
+            @include fixedWidth(100%, true);
+        }
+    }
+}
+

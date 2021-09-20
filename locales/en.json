@@ -279,7 +279,8 @@
     "allEmpty": "All field must not be empty",
     "billingEmpty": "All field on Billing Address Form must not be empty",
     "discountBundle": "Discount Bundle",
-    "placeOrder": "Place Order",
+    "pay": "Pay",
+    "placeOrder": "Checkout",
     "pointsApplied": "Points applied",
     "pointsLeft": "Points left",
     "shipping": "Shipping Cost",
@@ -289,7 +290,8 @@
     "usePoints": "Use point",
     "useVoucher": "Use voucher",
     "viewCart": "View Cart",
-    "voucherApplied": "Voucher applied"
+    "voucherApplied": "Voucher applied",
+    "yourCart": "Your Cart"
   },
   "pageHeader": {
     "back": "back"

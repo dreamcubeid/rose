@@ -5,13 +5,12 @@ import {
   useEffect
 } from 'react'
 import dynamic from 'next/dynamic'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { toast } from 'react-toastify'
 import {
   ChevronLeft,
   ChevronRight,
-  ChevronDown,
   Calendar,
   Clock,
   Check,
@@ -19,6 +18,13 @@ import {
   Bell,
   X as XIcon
 } from 'react-feather'
+import {
+  RiQuestionFill,
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiArrowDownSLine,
+  RiCloseLine
+} from 'react-icons/ri'
 import {
   useI18n,
   ProductDetail,
@@ -41,20 +47,32 @@ const PopupCart = dynamic(() => import('components/Popup/PopupCart'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 /* styles */
 import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
+import styleProduct from 'public/scss/components/ProductDetail.module.scss'
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 
 const classesProductDetail = {
-  productDetailParentDivClassName: styles.productdetail,
-  rowClassName: `row`,
-  imageRowClassName: `col-12 col-md-6 ${styles.productdetail_images}`,
-  arrowClassName: styles.productdetail_images_arrow,
-  dotClassName: styles.productdetail_images_dots,
-  mainImageClassName: `${styles.productdetail_images__image}`,
-  thumbnailImageClassName: styles.thumbnail_img,
-  propertyRowClassName: `col-12 col-md-6 ${styles.productdetail_content}`,
-  detailTitleClassName: styles.productdetail_content_title,
-  salePriceClassName: styles.productdetail_content_salePrice,
-  priceClassName: styles.productdetail_content_priceSale,
+  productDetailParentDivClassName: styleProduct.productDetail,
+  imageRowClassName: styleProduct.productDetail_images,
+  arrowClassName: styleProduct.productDetail_arrow,
+  mainImageClassName: styleProduct.productDetail_image,
+  propertyRowClassName: styleProduct.productDetail_content,
+  detailTitleStarClassName: styleProduct.productDetail_star,
+  detailTitleStarNumberClassName: styleProduct.productDetail_starNumber,
+  detailTitleClassName: styleProduct.productDetail_title,
+  salePriceClassName: styleProduct.productDetail_salePrice,
+  priceClassName: styleProduct.productDetail_priceSale,
+  variantContainerClassName: styleProduct.productDetail_containerVariant,
+  variantOptionsContainerClassName: styleProduct.productDetail_variant,
+  variantLabelClassName: styleProduct.productDetail_variantLabel,
+  variantOptionsClassName: styleProduct.productDetail_variantOption,
+  qtyBoxClassName: styleProduct.productDetail_innerQty,
+  propertyFooterContainerClassname: styleProduct.productDetail_footerProperty,
+  addToCartBtnClassName: `${styleProduct.btn} ${styleProduct.btn_primary}`,
+  buyNowBtnClassName: `${styleProduct.btn} ${styleProduct.btn_secondary} mt-2`,
+  descriptionClassName: styleProduct.productDetail_desc,
+  additionalInfoClassName: 'd-none',
+  accordionClassName: styleProduct.productDetail_descContainer,
+  // Open Order
   openOrderClassName: styles.productdetail_openorder,
   openOrderTitleClassName: styles.productdetail_openorder_title,
   openOrderContainerClassName: styles.productdetail_openorder_container,
@@ -66,15 +84,7 @@ const classesProductDetail = {
   openOrderTimeoutClassName: styles.productdetail_openorder_timeout,
   openOrderTimeoutDescClassName: styles.productdetail_openorder_timeout__desc,
   openOrderTimeoutBtnClassName: `btn text-uppercase mt-3 ${styles.btn_primary} ${styles.btn_long}`,
-  propertyInnerContainerClassName: styles.productdetail_content_inner,
-  variantContainerClassName: styles.productdetail_content_containerVariant,
-  variantOptionsContainerClassName: styles.productdetail_content_variant,
-  variantLabelClassName: styles.variantLabel,
-  variantOptionsClassName: styles.variantOption,
-  qtyBoxClassName: styles.productdetail_content_innerQty,
-  propertyFooterContainerClassname: styles.productdetail_propertyFooterContainer,
-  addToCartBtnClassName: `btn text-uppercase my-3 ${styles.btn_secondary} ${styles.btn_long} ${styles.btn_full_width}`,
-  buyNowBtnClassName: `btn  text-uppercase ${styles.btn_long} ${styles.btn_primary} ${styles.btn_full_width}`,
+  // Notify Me
   notifyMeClassName: styles.productdetail_notifyMe,
   notifyMeOptionsClassName: styles.productdetail_notifyMeOptions,
   notifyMeOptionClassName: styles.productdetail_notifyMeOption,
@@ -84,9 +94,6 @@ const classesProductDetail = {
   notifyMeLabelClassName: styles.productdetail_notifyMeLabel,
   notifyMeInputClassName: `form-control ${styles.sirclo_form_input}`,
   notifyMeSubmitClassName: `btn mt-3 ${styles.btn_primary} ${styles.btn_long} w-100`,
-  descriptionClassName: styles.productdetail_content_desc,
-  additionalInfoClassName: "d-none",
-  accordionClassName: styles.productdetail_content_desc_container,
   // Estimate Shipping
   estimateShippingWrapperClassName: stylesEstimate.wrapper,
   estimateShippingTitleClassName: stylesEstimate.title,
@@ -166,12 +173,6 @@ const classesPaginationProductReview = {
   itemClassName: styles.pagination_item
 }
 
-const classesEmptyComponent = {
-  emptyContainer: styles.productdetail_empty,
-  emptyTitle: styles.productdetail_empty_title,
-  emptyDesc: styles.productdetail_empty_desc,
-}
-
 const classesPlaceholderProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
   placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
@@ -191,6 +192,7 @@ const Product: FC<any> = ({
   urlSite
 }) => {
   const i18n: any = useI18n()
+  const router: any = useRouter()
   const size = useWindowSize()
 
   const [productId, setProductId] = useState(null)
@@ -204,8 +206,8 @@ const Product: FC<any> = ({
   const [totalItems, setTotalItems] = useState(null)
 
   useEffect(() => {
-    if (showCart) document.body.style.overflow = "hidden"
-    else document.body.style.overflow = "unset"
+    if (showCart) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'unset'
   }, [showCart])
 
   const allowedProductRecommendation = isProductRecommendationAllowed()
@@ -214,15 +216,13 @@ const Product: FC<any> = ({
   const toogleCart = () => setShowCart(!showCart)
   const toogleShare = () => setShowShare(!showShare)
 
-  // IS PROD VARIABLE
-  const IS_PROD = process.env.IS_PROD
-
   return (
     <Layout
       i18n={i18n}
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      layoutClassName="layout_fullHeight"
     >
       {data && (
         <SEO
@@ -232,6 +232,183 @@ const Product: FC<any> = ({
           image={data?.imageURLs || ""}
         />
       )}
+
+      {data === null ? (
+        <EmptyComponent
+          icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+          title={i18n.t("product.isEmpty")}
+          button={
+            <button
+              className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
+              onClick={() =>
+                router.push(`/[lng]/products`, `/${lng}/products`)
+              }
+            >
+              {i18n.t("product.back")}
+            </button>
+          }
+        />
+      ) : (
+        <ProductDetail
+          slug={slug}
+          withButtonBuyNow
+          lazyLoadedImage={false}
+          classes={classesProductDetail}
+          getProductID={(id) => setProductId(id)}
+          ratingIcon={<span className="ratingStar">&#x2605</span>}
+          accordionIcon={<RiArrowDownSLine color="#444444" size={18} />}
+          closeIcon={<RiCloseLine color="#444444" size={18} />}
+          estimateIconClose={<RiCloseLine color="#444444" size={25} />}
+          enableArrow
+          enableDots
+          activeDot={<div className={styleProduct.productDetail_imagesCustomDotsActive}></div>}
+          inactiveDot={<div className={styleProduct.productDetail_imagesCustomDots}></div>}
+          onComplete={() => setShowPopup(true)}
+          onCompleteMsg={() => setShowPopupNotify(true)}
+          onError={() => setShowModalErrorAddToCart(true)}
+          onErrorMsg={(msg) => msg && toast.error(msg)}
+          withEstimateShipping={true}
+          prevIcon={<RiArrowLeftSLine color="#444444" size={25} />}
+          nextIcon={<RiArrowRightSLine color="#444444" size={25} />}
+          notifyIcon={<Bell color="white" />}
+          openOrderIconDate={
+            <Calendar
+              className={styles.productdetail_openorder_container__icon}
+            />
+          }
+          openOrderIconTime={
+            <Clock
+              className={styles.productdetail_openorder_container__icon}
+            />
+          }
+          isButton={{
+            0: true,
+            1: true,
+          }}
+          thumborSetting={{
+            width: 800,
+            format: "webp",
+            quality: 85,
+          }}
+          customDetailComponent={
+            <>
+              <button
+                className={`btn text-uppercase mt-3 ${styles.btn_secondary}`}
+                onClick={toogleShare}
+              >
+                <div className={styles.productdetail_buttonShare}>
+                  <Share2 color="#2296CB" size={20} />
+                  <span>{i18n.t("product.share")}</span>
+                </div>
+              </button>
+            </>
+          }
+          loadingComponent={
+            <div className={styles.productdetail_placeholder}>
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <Placeholder
+                    classes={classesPlaceholderProduct}
+                    withImage
+                  />
+                </div>
+                <div className="col-12 col-md-6">
+                  <Placeholder
+                    classes={classesPlaceholderProduct}
+                    withTitle
+                  />
+                  <Placeholder
+                    classes={classesPlaceholderProduct}
+                    withList
+                    listMany={3}
+                  />
+                </div>
+              </div>
+            </div>
+          }
+        />
+      )}
+
+      {brand?.settings?.reviewsAndRatingEnabled &&
+        <div className={styles.ratingReview}>
+          <div className="container">
+            <h2 className={styles.ratingReview_titleSection}>
+              {i18n.t("product.ratingReviewTitle")}{" "}({totalAllReviews === null ? "..." : totalAllReviews})
+            </h2>
+            <ProductReviews
+              productID={productId}
+              productName={slug}
+              classes={classesProductReview}
+              reviewsPaginationClasses={classesPaginationProductReview}
+              getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
+              itemPerPageOptions={[5, 10, 25, 50, 100]}
+              iconClose={<XIcon color="black" />}
+              iconLeft={<ChevronLeft color="black" />}
+              iconRight={<ChevronRight color="black" />}
+              reviewsNextLabel={<ChevronRight color="black" />}
+              reviewsPrevLabel={<ChevronLeft color="black" />}
+              thumborSetting={{
+                width: size.width < 575 ? 350 : 500,
+                format: 'webp',
+                quality: 85,
+              }}
+              customEmptyComponentReviews={
+                <div className="col-12">
+                  <EmptyComponent
+                    icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+                    title={i18n.t("product.isEmpty")}
+                  />
+                </div>
+              }
+            />
+          </div>
+        </div>
+      }
+
+      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
+        <div className="container">
+          <div className={styles.productdetail_relatedProductHeader}>
+            <h6 className={styles.productdetail_relatedProductTitle}>{i18n.t("product.related")}</h6>
+          </div>
+          <div className={styles.productdetail_relatedProduct}>
+            <LazyLoadComponent>
+              <Products
+                filter={{ openOrderScheduled: false, published: true }}
+                classes={classesProductRelate}
+                slug={slug}
+                getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+                itemPerPage={4}
+                isButton
+                fullPath={`product/{id}`}
+                pathPrefix={`product`}
+                lazyLoadedImage={false}
+                thumborSetting={{
+                  width: size.width < 768 ? 350 : 600,
+                  format: "webp",
+                  quality: 85
+                }}
+                loadingComponent={
+                  <>
+                    <Placeholder
+                      classes={classesPlaceholderRelateProduct}
+                      withImage
+                    />
+                    <Placeholder
+                      classes={classesPlaceholderRelateProduct}
+                      withImage
+                    />
+                    <Placeholder
+                      classes={classesPlaceholderRelateProduct}
+                      withImage
+                    />
+                  </>
+                }
+              />
+            </LazyLoadComponent>
+          </div>
+        </div>
+      }
+
       {showPopup && (
         <Popup withHeader={false} setPopup={tooglePopup} mobileFull={false}>
           <div className={styles.productdetail_popup}>
@@ -263,6 +440,7 @@ const Product: FC<any> = ({
           </div>
         </Popup>
       )}
+
       {showCart && (
         <PopupCart
           setPopup={toogleCart}
@@ -270,6 +448,7 @@ const Product: FC<any> = ({
           lng={lng}
         />
       )}
+
       {showModalErrorAddToCart && (
         <Popup
           withHeader
@@ -287,6 +466,7 @@ const Product: FC<any> = ({
           </div>
         </Popup>
       )}
+
       {showShare && (
         <Popup
           withHeader
@@ -300,6 +480,7 @@ const Product: FC<any> = ({
           </div>
         </Popup>
       )}
+
       {showPopupNotify && (
         <Popup
           withHeader={false}
@@ -318,13 +499,14 @@ const Product: FC<any> = ({
               className={`btn mt-3 ${styles.btn_secondary}`}
               onClick={() => {
                 setShowPopupNotify(false)
-                Router.push("/[lng]/products", `/${lng}/products`)
+                router.push("/[lng]/products", `/${lng}/products`)
               }}>
               {i18n.t("product.continueShopping")}
             </button>
           </div>
         </Popup>
       )}
+
       {showModalErrorNotify && (
         <Popup
           withHeader={false}
@@ -347,190 +529,6 @@ const Product: FC<any> = ({
           </div>
         </Popup>
       )}
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
-            {data === null ? (
-              <EmptyComponent
-                classes={classesEmptyComponent}
-                title={i18n.t("product.isEmpty")}
-                button={
-                  <button
-                    className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
-                    onClick={() =>
-                      Router.push(`/[lng]/products`, `/${lng}/products`)
-                    }
-                  >
-                    {i18n.t("product.back")}
-                  </button>
-                }
-              />
-            ) : (
-              <ProductDetail
-                slug={slug}
-                withButtonBuyNow
-                lazyLoadedImage={false}
-                classes={classesProductDetail}
-                getProductID={(id) => setProductId(id)}
-                ratingIcon={<span className="ratingStar">&#x2605</span>}
-                accordionIcon={<ChevronDown />}
-                enableArrow={size.width && size.width < 576 ? true : false}
-                enableDots={size.width && size.width < 576 ? true : false}
-                onComplete={() => setShowPopup(true)}
-                onCompleteMsg={() => setShowPopupNotify(true)}
-                onError={() => setShowModalErrorAddToCart(true)}
-                onErrorMsg={(msg) => msg && toast.error(msg)}
-                withEstimateShipping={IS_PROD === "false" ? true : false}
-                prevIcon={<span className={styles.productdetail_images_arrowPrev} />}
-                nextIcon={<span className={styles.productdetail_images_arrowNext} />}
-                notifyIcon={<Bell color="white" />}
-                openOrderIconDate={
-                  <Calendar
-                    className={styles.productdetail_openorder_container__icon}
-                  />
-                }
-                openOrderIconTime={
-                  <Clock
-                    className={styles.productdetail_openorder_container__icon}
-                  />
-                }
-                isButton={{
-                  0: true,
-                  1: true,
-                }}
-                thumborSetting={{
-                  width: 800,
-                  format: "webp",
-                  quality: 85,
-                }}
-                customDetailComponent={
-                  <>
-                    <button
-                      className={`btn text-uppercase mt-3 ${styles.btn_secondary}`}
-                      onClick={toogleShare}
-                    >
-                      <div className={styles.productdetail_buttonShare}>
-                        <Share2 color="#2296CB" size={20} />
-                        <span>{i18n.t("product.share")}</span>
-                      </div>
-                    </button>
-                  </>
-                }
-                loadingComponent={
-                  <div className={styles.productdetail_placeholder}>
-                    <div className="row">
-                      <div className="col-12 col-md-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage
-                        />
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withTitle
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withList
-                          listMany={3}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                }
-              />
-            )}
-          </div>
-        </div>
-      </div>
-
-      {brand?.settings?.reviewsAndRatingEnabled &&
-        <div className={styles.ratingReview}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-lg-8 offset-lg-2">
-                <h2 className={styles.ratingReview_titleSection}>
-                  {i18n.t("product.ratingReviewTitle")}{" "}({totalAllReviews === null ? "..." : totalAllReviews})
-                </h2>
-                <ProductReviews
-                  productID={productId}
-                  productName={slug}
-                  classes={classesProductReview}
-                  reviewsPaginationClasses={classesPaginationProductReview}
-                  getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
-                  itemPerPageOptions={[5, 10, 25, 50, 100]}
-                  iconClose={<XIcon color="black" />}
-                  iconLeft={<ChevronLeft color="black" />}
-                  iconRight={<ChevronRight color="black" />}
-                  reviewsNextLabel={<ChevronRight color="black" />}
-                  reviewsPrevLabel={<ChevronLeft color="black" />}
-                  thumborSetting={{
-                    width: size.width < 575 ? 350 : 500,
-                    format: 'webp',
-                    quality: 85,
-                  }}
-                  customEmptyComponentReviews={
-                    <div className="col-12">
-                      <EmptyComponent
-                        classes={classesEmptyComponent}
-                        desc={i18n.t("product.isEmptyReview")}
-                      />
-                    </div>
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-lg-8 offset-lg-2">
-              <div className={styles.productdetail_relatedProductHeader}>
-                <h6 className={styles.productdetail_relatedProductTitle}>{i18n.t("product.related")}</h6>
-              </div>
-              <div className={styles.productdetail_relatedProduct}>
-                <LazyLoadComponent>
-                  <Products
-                    filter={{ openOrderScheduled: false, published: true }}
-                    classes={classesProductRelate}
-                    slug={slug}
-                    getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-                    itemPerPage={4}
-                    isButton
-                    fullPath={`product/{id}`}
-                    pathPrefix={`product`}
-                    lazyLoadedImage={false}
-                    loadingComponent={
-                      <>
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                      </>
-                    }
-                    thumborSetting={{
-                      width: size.width < 768 ? 350 : 600,
-                      format: "webp",
-                      quality: 85
-                    }}
-                  />
-                </LazyLoadComponent>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
     </Layout>
   )
 }

@@ -1,0 +1,283 @@
+@import '../utils/variables';
+@import '../components/Button.module.scss';
+
+.productDetail
+{
+  margin-top: 58px;
+
+  &_images
+  {
+    position: relative;
+    @include transition();
+
+    &CustomDots
+    {
+      content: "";
+      @include fixedWidth(22px);
+      @include fixedHeight(2px);
+      background: rgba($color_white, 0.5);
+    }
+
+    &CustomDotsActive
+    {
+      content: "";
+      @include fixedWidth(22px);
+      @include fixedHeight(2px);
+      background: $color_white;
+    }
+    
+    ul
+    {
+      @include absolute(auto, 0, 10px, 0);
+      @include flex(row, center, center, true);
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+
+      li
+      {
+        padding: 0 2px;
+        list-style-type: none;
+      }
+    }
+  }
+
+  &_image
+  {
+    @include fixedWidth(100%);
+    @include transition();
+  }
+
+  &_arrow
+  {
+    padding: 7.5px;
+    background: $color_white;
+    cursor: pointer;
+
+    &:first-child
+    {
+      @include absolute(42.5%, auto, auto, 0);
+    }
+
+    &:nth-child(3)
+    {
+      @include absolute(42.5%, 0, auto, auto);
+    }
+  }
+
+  &_content
+  {
+    padding: 24px 17.5px;
+
+    & > div
+    {
+      &:first-child
+      {
+        @include flex(row, center, center);
+      }
+    }
+
+    & > p
+    {
+      @include flex(row, center, center);
+      margin-bottom: 24px;
+
+      & > span
+      {
+        &:last-child
+        {
+          color: $color_error;
+        }
+      }
+    }
+  }
+
+  &_star
+  {
+    @include flex(row, center, center);
+    font-size: 16px !important;
+    color: $color_rose;
+    margin-right: 5px;
+  }
+
+  &_starNumber
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary;
+  }
+
+  &_title
+  {
+    @include typographyBuilder(primary, 500, 28, 40);
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  &_salePrice
+  {
+    @include typographyBuilder(secondary, 400, 18, 24);
+    color: $color_text_placeholder;
+    text-decoration: line-through;
+    margin-right: 12px;
+  }
+
+  &_priceSale
+  {
+    @include typographyBuilder(secondary, 400, 18, 24);
+    color: $color_rose;
+  }
+
+  &_containerVariant
+  {
+    border-top: 1px solid $color_border;
+  }
+
+  &_variant
+  {
+    padding: 24px 0;
+
+    &:first-child
+    {
+      padding-bottom: 0;
+    }
+  }
+
+  &_variantLabel
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    margin-bottom: 8px;
+    color: $color_text_primary;
+  }
+
+  &_variantOption
+  {
+    @include flex(row, center, flex-start, true);
+
+    span
+    {
+      @include flex(row, center, flex-start);
+      margin-right: 5px;
+
+      input
+      {
+        display: none;
+        
+        &:checked + label
+        {
+          border: 1px solid $color_rose;
+          background: $color_rose_bg2;
+          min-width: 40px;
+          width: max-content;
+        }
+
+        &:disabled + label
+        {
+          opacity: .5 !important;
+        }
+      }
+
+      label
+      {
+        border: 1px solid $color_border;
+        background: $color_white;
+        border-radius: 2px;
+        padding: 12px 16px;
+        min-width: 40px;
+        width: max-content;
+        height: 40px;
+        cursor: pointer;
+        text-align: center;
+        margin: 0;
+        @include typographyBuilder(secondary, 400, 12, 16);
+        @include flex(row, center, center);
+
+        &:hover
+        {
+          border-color: $color_rose;
+          background-color: $color_rose_bg2;
+        }
+      }
+    }
+  }
+
+  &_footerProperty
+  {
+    margin-bottom: 24px;
+  }
+
+  &_innerQty
+  {
+    @include fixedWidth(100%);
+    position: relative;
+    margin-bottom: 24px;
+
+    span
+    {
+      @include absolute(auto, auto, auto, auto);
+      @include fixedWidth(40px);
+      @include fixedHeight(48px);
+      @include typographyBuilder(secondary, 400, 14, 24);
+      @include lineHeight(48);
+      display: inline-block;
+      text-align: center;
+      color: $color_text_primary;
+      cursor: pointer;
+
+      &:last-child
+      {
+        right: 0;
+      }
+    }
+
+    input
+    {
+      @include fixedWidth(100%);
+      @include fixedHeight(48px);
+      @include typographyBuilder(secondary, 400, 14, 24);
+      border: 1px solid $color_border;
+      border-radius: 50px;
+      text-align: center;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
+    }
+  }
+
+  &_desc
+  {
+    padding: 24px 0;
+    border-top: 1px solid $color_border;
+    border-bottom: 1px solid $color_border;
+
+    &Container
+    {
+      @include flex(row, center, space-between);
+      padding-bottom: 1rem;
+      cursor: pointer;
+
+      & > p
+      {
+        @include typographyBuilder(secondary, 400, 12, 16);
+        color: $color_text_primary;
+        margin: 0;
+      }
+    }
+
+    & > [class*="collapse"],
+    & > [class*="collapsing"]
+    {
+      p
+      {
+        @include typographyBuilder(secondary, 400, 14, 24);
+        color: $color_text_secondary;
+      }
+    }
+  }
+}

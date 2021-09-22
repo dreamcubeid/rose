@@ -35,7 +35,7 @@
   &_inputContainer
   {
     @include fixedWidth(100%);
-    padding-bottom: 16px;
+    margin-bottom: 16px;
     & > label 
     {
       display: none;
@@ -265,5 +265,28 @@
        }
       }
     }
+  }
+
+  &_forgotPasswordDesc
+  {
+    padding: 0 17.5px;
+    @include typographyBuilder(secondary,400,14,24);
+  }
+}
+
+.forgotPassword
+{
+  padding: 0 17.5px;
+
+  &_successTitle
+  {
+    color: $color_rose;
+    padding: 0 0 24px 0;
+    @include typographyBuilder(primary,500,28,40);
+  }
+
+  &_successDesc
+  {
+    @include typographyBuilder(secondary,400,14,24);
   }
 }

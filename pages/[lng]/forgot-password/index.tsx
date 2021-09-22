@@ -1,15 +1,18 @@
+/* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ResetPassword, useI18n } from '@sirclo/nexus'
-import SEO from 'components/SEO'
-import Layout from 'components/Layout/Layout'
-import Loader from 'components/Loader/Loader'
+import { toast } from 'react-toastify'
+/* library template */
 import { parseCookies } from 'lib/parseCookies'
 import redirectIfAuthenticated from 'lib/redirectIfAuthenticated'
 import { useBrand } from 'lib/useBrand'
-import { toast } from 'react-toastify'
-import styleLogin from 'public/scss/pages/Login.module.scss'
+/* components */
+import Loader from 'components/Loader/Loader'
+import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+/* styles */
+import styleLogin from 'public/scss/pages/Login.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 

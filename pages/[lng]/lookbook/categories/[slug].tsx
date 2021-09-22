@@ -1,25 +1,52 @@
 /* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
 import { 
   isLookbookAllowed, 
   LookbookSingle, 
-  useI18n 
+  useI18n,
+  Products,
 } from '@sirclo/nexus'
+import { RiQuestionFill } from 'react-icons/ri'
 /* library template */
 import { useBrand } from 'lib/useBrand'
+import useWindowSize from 'lib/useWindowSize'
+import useQuery from 'lib/useQuery'
 /* components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
+import Loader from 'components/Loader/Loader'
 /* styles */
 import styleLookbook from 'public/scss/pages/Lookbook.module.scss'
 import stylePlaceHolder from 'public/scss/components/Placeholder.module.scss'
+import styleProduct from 'public/scss/components/Product.module.scss'
+import styleProducts from 'public/scss/pages/Products.module.scss'
 
 const classesLookbookSingle = {
   containerClassName: `w-100`,
   rowClassName: styleLookbook.lookbook_detail,
   imageClassName: 'd-none',
   thumbnailImageClassName: styleLookbook.lookbook_detail_img,
+}
+
+const classesProducts = {
+  productContainerClassName: `col-6 product_list ${styleProduct.product_itemContainer}`,
+  stickerContainerClassName: `${styleProduct.product_sticker} ${styleProduct.product_stickerGrid}`,
+  outOfStockLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__outofstock}`,
+  saleLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__sale}`,
+  comingSoonLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__comingsoon}`,
+  openOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__openorder}`,
+  preOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__preorder}`,
+  newLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__new}`,
+  productImageContainerClassName: styleProduct.product_link,
+  productImageClassName: styleProduct.product_itemContainerImage,
+  productLabelContainerClassName: styleProduct.product_label,
+  productTitleClassName: styleProduct.product_label__title,
+  productPriceClassName: styleProduct.product_labelPrice,
+  salePriceClassName: styleProduct.product_labelPrice__sale,
+  priceClassName: styleProduct.product_labelPrice__price,
 }
 
 const LookbookSinglePage: FC<any> = ({
@@ -29,9 +56,22 @@ const LookbookSinglePage: FC<any> = ({
   brand,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
+  const router = useRouter()
+  const size = useWindowSize()
   const LookbookAllowed = isLookbookAllowed()
 
   const [title, setTitle] = useState<string>('')
+
+
+  const categories: string = useQuery('categories')
+  const tagname: string | string[] = router.query.tagname || null
+
+  const [pageInfo, setPageInfo] = useState({
+    pageNumber: 0,
+    itemPerPage: 4,
+    totalItems: 0,
+    curPage: 0,
+  })
 
   return (
     <Layout 
@@ -85,6 +125,48 @@ const LookbookSinglePage: FC<any> = ({
             quality: 85,
           }}
         />
+        <div className={styleLookbook.lookbook_relatedProducts}>
+          {i18n.t("lookbook.relatedProducts")}
+        </div>
+        <div className={`container ${styleProducts.products}`}>
+          <div className="row">
+            <Products
+              tagName={tagname}
+              pageNumber={pageInfo.pageNumber}
+              itemPerPage={pageInfo.itemPerPage}
+              getPageInfo={setPageInfo as any}
+              collectionSlug={categories}
+              withSeparatedVariant={true}
+              classes={classesProducts}
+              fullPath={`product/{id}`}
+              pathPrefix={`product`}
+              lazyLoadedImage={false}
+              thumborSetting={{
+                width: size.width < 768 ? 512 : 800,
+                format: 'webp',
+                quality: 85,
+              }}
+              emptyStateComponent={
+                <div className="col-12 my-3">
+                  <EmptyComponent
+                    icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+                    title={i18n.t("product.isEmpty")}
+                  />
+                </div>
+              }
+              loadingComponent={
+                <div className="col-12">
+                  <div className="d-flex justify-content-center align-center my-5">
+                    <Loader
+                      color="text-secondary"
+                      withText
+                    />
+                  </div>
+                </div>
+              }
+            />
+          </div>
+        </div>
       </div>
     </Layout>
   )

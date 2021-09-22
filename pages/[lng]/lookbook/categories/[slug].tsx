@@ -8,12 +8,12 @@ import {
 } from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
-import useWindowSize from 'lib/useWindowSize'
 /* components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 /* styles */
 import styleLookbook from 'public/scss/pages/Lookbook.module.scss'
+import stylePlaceHolder from 'public/scss/components/Placeholder.module.scss'
 
 const classesLookbookSingle = {
   containerClassName: `w-100`,
@@ -29,7 +29,6 @@ const LookbookSinglePage: FC<any> = ({
   brand,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
-  const size = useWindowSize()
   const LookbookAllowed = isLookbookAllowed()
 
   const [title, setTitle] = useState<string>('')
@@ -58,20 +57,30 @@ const LookbookSinglePage: FC<any> = ({
             ]}
           />
         </div>
-
         <div className={styleLookbook.lookbook_detail_title}>
           <h1>{title}</h1>
         </div>
-
         <LookbookSingle
           classes={classesLookbookSingle}
           slug={slug}
           getTitle={setTitle}
-          loadingComponent={<></>}
-          emptyStateComponent={<></>}
+          loadingComponent={
+            <>
+              <div className={styleLookbook.lookbook_detail_img}>
+                <div
+                  className={`${stylePlaceHolder.placeholderItem} ${styleLookbook.lookbook_detail_img}`}
+                />
+              </div>
+              <div className={styleLookbook.lookbook_detail_img}>
+                <div
+                  className={`${stylePlaceHolder.placeholderItem} ${styleLookbook.lookbook_detail_img}`}
+                />
+              </div>
+            </>
+          }
           mode="thumbnail"
           thumborSetting={{
-            width: size.width < 768 ? 400 : 600,
+            width: 375,
             format: 'webp',
             quality: 85,
           }}

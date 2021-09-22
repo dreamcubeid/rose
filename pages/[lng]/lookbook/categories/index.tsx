@@ -16,6 +16,7 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 /* styles */
 import styleLookbook from 'public/scss/pages/Lookbook.module.scss'
+import stylePlaceHolder from 'public/scss/components/Placeholder.module.scss'
 
 const classesLookbook = {
   containerClassName: styleLookbook.lookbook_content,
@@ -53,7 +54,12 @@ const LookbookCategory: FC<any> = ({
           classes={classesLookbook}
           linkText={i18n.t('lookbook.seeCollection')}
           pathPrefix={`lookbook/categories`}
-          loadingComponent={<></>}
+          loadingComponent={
+            <>
+              <div className={stylePlaceHolder.placeholderItem} style={{ height: 375 }} />
+              <div className={stylePlaceHolder.placeholderItem} style={{ height: 375 }} />
+            </>
+          }
           emptyStateComponent={
             <div className={styleLookbook.lookbook_empty}>
               <EmptyComponent
@@ -67,7 +73,6 @@ const LookbookCategory: FC<any> = ({
               />
             </div>
           }
-          errorComponent={<></>}
           thumborSetting={{
             width: 375,
             format: 'webp',

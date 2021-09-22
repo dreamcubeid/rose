@@ -74,7 +74,7 @@ const LookbookCategory: FC<any> = ({
             </div>
           }
           thumborSetting={{
-            width: 375,
+            width: 600,
             format: 'webp',
             quality: 85,
           }}

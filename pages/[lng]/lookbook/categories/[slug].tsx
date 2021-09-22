@@ -80,7 +80,7 @@ const LookbookSinglePage: FC<any> = ({
           }
           mode="thumbnail"
           thumborSetting={{
-            width: 375,
+            width: 600,
             format: 'webp',
             quality: 85,
           }}

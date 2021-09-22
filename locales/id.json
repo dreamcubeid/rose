@@ -249,6 +249,10 @@
     "submitSuccess": "Success berlangganan",
     "subscribe": "Berlangganan"
   },
+  "notifyMe": {
+    "phoneInputPlaceholder": "Masukan nomor Whatsapp Anda",
+    "emailInputPlaceholder": "Masukan email Anda"
+  },
   "orderHistory": {
     "lineItemNeedReview": "Needs Review",
     "lineItemReviewed": "Reviewed",
@@ -392,7 +396,7 @@
     "next": "Selanjutnya",
     "noRelated": "Tidak ada product yang berkaitan",
     "notFound": "Produk tidak ditemukan!",
-    "notify": "Ingatkan saya melalui email:",
+    "notify": "Kabari saya nanti",
     "notifyError": "Terjadi kendala saat mengaktifkan pengingat untuk produk ini, coba kembali beberapa saat lagi.",
     "notifySuccess": "Terima kasih telah tertarik pada produk ini, kami akan kabari melalui kontak yang anda berikan jika produk telah tersedia.",
     "notifyTitleError": "Gagal memberi pemberitahuan",
@@ -415,13 +419,14 @@
     "reviewsPerPage": "Ulasan per halaman",
     "sale": "Sale",
     "seeAll": "Lihat Semua",
-    "share": "Bagikan",
+    "share": "Bagikan Produk",
     "shareProduct": "Bagikan Produk",
     "sort": "Urutkan",
-    "successAddToCart": "Barang sudah berhasil masuk keranjang",
+    "successAddToCart": "Sukses masuk keranjang!",
     "summary": "Ringkasan",
     "timeout": "Waktu Habis",
     "timeoutDescription": "Terima kasih telah tertarik dengan produk ini, silahkan klik tombol dibawah ini untuk mendapatkan produk menarik lainnya.",
+    "tryAgain": "Coba Lagi",
     "updateCart": "Perbaharui",
     "viewAllCourierOption": "Lihat Semua Opsi Kurir",
     "viewCart": "Lihat Keranjang",
@@ -535,14 +540,6 @@
     "subtitleShipTo": "*pesanan Anda akan dikirimkan",
     "track": "Lacak Pesanan",
     "trackDriver": "Lacak kurir"
-  },
-  "socialShare": {
-    "email": "Email",
-    "facebook": "Facebook",
-    "linkedin": "Linkedin",
-    "telegram": "Telegram",
-    "twitter": "Twitter",
-    "whatsapp": "Whatsapp"
   },
   "sort": {
     "aToZAscending": "Nama (A-Z)",

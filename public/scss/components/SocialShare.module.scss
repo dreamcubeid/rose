@@ -1,21 +1,22 @@
+@import '../utils/variables';
+
 .socialShare
 {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  @include flex(row, center, space-between, true);
+
+  &_title
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary;
+  }
+
+  &_logo
+  {
+    @include flex(row, center, flex-start);
+  }
 
   &_item
   {
-    width: calc(100% / 3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 28px;
-
-    span
-    {
-      margin-top: 5px;
-    }
+    padding: 7.5px;
   }
 }

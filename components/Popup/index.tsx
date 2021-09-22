@@ -20,6 +20,7 @@ type PopupPropType = {
   setVisibleState?: (param: boolean) => void
   withButtonLeft?: TWithButtonLeft
   withHeader?: boolean
+  outsideClose?: boolean
 }
 
 const Popup: FC<PopupPropType> = ({
@@ -33,7 +34,8 @@ const Popup: FC<PopupPropType> = ({
   visibleState = false,
   setVisibleState,
   withButtonLeft,
-  withHeader = true
+  withHeader = true,
+  outsideClose = true
 }) => {
 
   const handleClose = () => withCloseBackground && setVisibleState(false)
@@ -43,9 +45,16 @@ const Popup: FC<PopupPropType> = ({
 
   return (
     <>
-      <div className={`${styles.popup} ${customClassName} ${visibleState ? styles.popup__active : styles.popup__hidden}`}>
-        <div className={`${styles.popupBackground}`} onClick={handleClose}></div>
-        <div className={`${styles.popupInner}`}>
+      <div className={`
+        ${styles.popup} 
+        ${customClassName} 
+        ${visibleState ? styles.popup__active : styles.popup__hidden}
+      `}>
+        <div className={`${styles.popupBackground}`} onClick={outsideClose && handleClose}></div>
+        <div className={`
+          ${styles.popupInner} 
+          ${popupSize === 'normal' && styles.popupInner__normalHeight}`
+        }>
           {withHeader &&
             <div className={styles.popupHeader}>
               {title &&

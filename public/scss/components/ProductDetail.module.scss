@@ -259,7 +259,6 @@
     &Container
     {
       @include flex(row, center, space-between);
-      padding-bottom: 1rem;
       cursor: pointer;
 
       & > p
@@ -277,7 +276,126 @@
       {
         @include typographyBuilder(secondary, 400, 14, 24);
         color: $color_text_secondary;
+        padding-top: 20px;
+        margin-bottom: 0
       }
     }
+  }
+
+  &_popupTitle
+  {
+    @include fixedWidth(100%);
+    @include flex(row, center, center);
+    margin-bottom: 24px;
+
+    h3
+    {
+      @include typographyBuilder(secondary, 400, 20, 24);
+      margin-bottom: 0;
+      color: $color_text_primary;
+    }
+  }
+
+  &_popupContent
+  {
+    @include fixedWidth(100%);
+    padding: 12px;
+    background: $color_rose_bg2;
+    border-radius: 2px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &_popupDesc
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary;
+    margin-bottom: 0;
+  }
+
+  &_saveCartDetail
+  {
+    @include flex(row, center, flex-start);
+    @include fixedWidth(100%);
+    padding: 12px;
+    background: $color_rose_bg2;
+    border-radius: 2px;
+  }
+
+  &_saveCartImage
+  {
+    @include fixedWidth(64px);
+    @include fixedHeight(64px);
+    margin-right: 12px;
+    flex: 1 0 auto;
+  }
+
+  &_saveCartContent
+  {
+    flex: 0 1 auto;
+  }
+
+  &_saveCartDetailTitle
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-bottom: 4px;
+  }
+
+  &_saveCartDetailPrice
+  {
+    & > span
+    {
+      &:first-child
+      {
+        margin-right: 10px;
+      }
+
+      &:nth-child(2)
+      {
+        color: $color_error;
+      }
+    }
+  }
+
+  &_salePrice
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_placeholder;
+    text-decoration: line-through;
+  }
+
+  &_salePriceNormal
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_rose;
+  }
+
+  &_saveCartFooter
+  {
+    @include fixedWidth(100%);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-top: 24px;
+  }
+
+  &_socialShare
+  {
+    padding: 24px 0;
+  }
+}
+
+.upSell
+{
+  position: relative;
+  margin-top: 24px;
+  padding-top: 24px;
+  padding-bottom: 224px;
+  background: $color_rose_bg2;
+
+  &_title
+  {
+    @include typographyBuilder(primary, 500, 20, 32);
+    color: $color_text_primary;
   }
 }

@@ -6,16 +6,12 @@ import {
 } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import { toast } from 'react-toastify'
 import {
   ChevronLeft,
   ChevronRight,
   Calendar,
   Clock,
-  Check,
-  Share2,
-  Bell,
   X as XIcon
 } from 'react-feather'
 import {
@@ -37,17 +33,18 @@ import {
 import useWindowSize from 'lib/useWindowSize'
 import { useBrand } from 'lib/useBrand'
 import { GRAPHQL_URI } from 'lib/Constants'
+import { formatPrice } from 'lib/formatPrice'
 /* components */
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Placeholder from 'components/Placeholder'
 const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
-const Popup = dynamic(() => import('components/Popup/Popup'))
-const PopupCart = dynamic(() => import('components/Popup/PopupCart'))
+const Popup = dynamic(() => import('components/Popup'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 /* styles */
 import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
 import styleProduct from 'public/scss/components/ProductDetail.module.scss'
+import styleNotifyMe from 'public/scss/components/NotifyMe.module.scss'
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 
 const classesProductDetail = {
@@ -85,15 +82,14 @@ const classesProductDetail = {
   openOrderTimeoutDescClassName: styles.productdetail_openorder_timeout__desc,
   openOrderTimeoutBtnClassName: `btn text-uppercase mt-3 ${styles.btn_primary} ${styles.btn_long}`,
   // Notify Me
-  notifyMeClassName: styles.productdetail_notifyMe,
-  notifyMeOptionsClassName: styles.productdetail_notifyMeOptions,
-  notifyMeOptionClassName: styles.productdetail_notifyMeOption,
-  notifyMeRadioClassName: styles.productdetail_notifyMeRadio,
-  notifyMeRadioLabelClassName: styles.productdetail_notifyMeRadioLabel,
-  notifyMeInputWrapperClassName: styles.productdetail_notifyMeInputWrapper,
-  notifyMeLabelClassName: styles.productdetail_notifyMeLabel,
-  notifyMeInputClassName: `form-control ${styles.sirclo_form_input}`,
-  notifyMeSubmitClassName: `btn mt-3 ${styles.btn_primary} ${styles.btn_long} w-100`,
+  notifyMeClassName: styleNotifyMe.notifyMe,
+  notifyMeOptionsClassName: styleNotifyMe.notifyMe_options,
+  notifyMeOptionClassName: styleNotifyMe.notifyMe_option,
+  notifyMeRadioClassName: styleNotifyMe.notifyMe_radio,
+  notifyMeRadioLabelClassName: styleNotifyMe.notifyMe_radioLabel,
+  notifyMeInputWrapperClassName: styleNotifyMe.notifyMe_inputWrapper,
+  notifyMeInputClassName: styleNotifyMe.notifyMe_input,
+  notifyMeSubmitClassName: `${styleProduct.btn} ${styleProduct.btn_primary}`,
   // Estimate Shipping
   estimateShippingWrapperClassName: stylesEstimate.wrapper,
   estimateShippingTitleClassName: stylesEstimate.title,
@@ -150,21 +146,21 @@ const classesProductReview = {
 }
 
 const classesProductRelate = {
-  productContainerClassName: ` mb-0 products_list ${styles.product} ${styles.productdetail_relatedProductItem}`,
-  stickerContainerClassName: styles.product_sticker,
-  outOfStockLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__outofstock}`,
-  saleLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__sale}`,
-  comingSoonLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__comingsoon}`,
-  openOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__openorder}`,
-  preOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__preorder}`,
-  newLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__new}`,
-  productImageContainerClassName: styles.product_link,
-  productImageClassName: styles.product_link__image,
-  productLabelContainerClassName: styles.product_label,
-  productTitleClassName: styles.product_label__title,
-  productPriceClassName: styles.product_labelPrice,
-  salePriceClassName: styles.product_labelPrice__sale,
-  priceClassName: styles.product_labelPrice__price,
+  productContainerClassName: `col-6 ${styleProduct.product_itemContainer}`,
+  stickerContainerClassName: `${styleProduct.product_sticker} ${styleProduct.product_stickerGrid}`,
+  outOfStockLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__outofstock}`,
+  saleLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__sale}`,
+  comingSoonLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__comingsoon}`,
+  openOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__openorder}`,
+  preOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__preorder}`,
+  newLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__new}`,
+  productImageContainerClassName: styleProduct.product_link,
+  productImageClassName: styleProduct.product_itemContainerImage,
+  productLabelContainerClassName: styleProduct.product_label,
+  productTitleClassName: styleProduct.product_label__title,
+  productPriceClassName: styleProduct.product_labelPrice,
+  salePriceClassName: styleProduct.product_labelPrice__sale,
+  priceClassName: styleProduct.product_labelPrice__price,
 }
 
 const classesPaginationProductReview = {
@@ -194,11 +190,10 @@ const Product: FC<any> = ({
   const i18n: any = useI18n()
   const router: any = useRouter()
   const size = useWindowSize()
+  const allowedProductRecommendation = isProductRecommendationAllowed()
 
   const [productId, setProductId] = useState(null)
-  const [showPopup, setShowPopup] = useState<boolean>(false)
-  const [showCart, setShowCart] = useState<boolean>(false)
-  const [showShare, setShowShare] = useState<boolean>(false)
+  const [showSuccessAddToCart, setShowSuccessAddToCart] = useState<any>(null)
   const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false)
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false)
@@ -206,15 +201,9 @@ const Product: FC<any> = ({
   const [totalItems, setTotalItems] = useState(null)
 
   useEffect(() => {
-    if (showCart) document.body.style.overflow = 'hidden'
+    if (showSuccessAddToCart || showModalErrorAddToCart || showPopupNotify || showModalErrorNotify) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'unset'
-  }, [showCart])
-
-  const allowedProductRecommendation = isProductRecommendationAllowed()
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
-  const tooglePopup = () => setShowPopup(!showPopup)
-  const toogleCart = () => setShowCart(!showCart)
-  const toogleShare = () => setShowShare(!showShare)
+  }, [showSuccessAddToCart, showModalErrorAddToCart, showPopupNotify, showModalErrorNotify])
 
   return (
     <Layout
@@ -263,14 +252,13 @@ const Product: FC<any> = ({
           enableDots
           activeDot={<div className={styleProduct.productDetail_imagesCustomDotsActive}></div>}
           inactiveDot={<div className={styleProduct.productDetail_imagesCustomDots}></div>}
-          onComplete={() => setShowPopup(true)}
+          onComplete={(data: any) => setShowSuccessAddToCart(data?.saveCart?.lineItems[0])}
           onCompleteMsg={() => setShowPopupNotify(true)}
           onError={() => setShowModalErrorAddToCart(true)}
           onErrorMsg={(msg) => msg && toast.error(msg)}
           withEstimateShipping={true}
           prevIcon={<RiArrowLeftSLine color="#444444" size={25} />}
           nextIcon={<RiArrowRightSLine color="#444444" size={25} />}
-          notifyIcon={<Bell color="white" />}
           openOrderIconDate={
             <Calendar
               className={styles.productdetail_openorder_container__icon}
@@ -291,17 +279,12 @@ const Product: FC<any> = ({
             quality: 85,
           }}
           customDetailComponent={
-            <>
-              <button
-                className={`btn text-uppercase mt-3 ${styles.btn_secondary}`}
-                onClick={toogleShare}
-              >
-                <div className={styles.productdetail_buttonShare}>
-                  <Share2 color="#2296CB" size={20} />
-                  <span>{i18n.t("product.share")}</span>
-                </div>
-              </button>
-            </>
+            <div className={styleProduct.productDetail_socialShare}>
+              <SocialShare
+                urlSite={urlSite}
+                title={i18n.t("product.share")}
+              />
+            </div>
           }
           loadingComponent={
             <div className={styles.productdetail_placeholder}>
@@ -366,169 +349,172 @@ const Product: FC<any> = ({
       }
 
       {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className="container">
-          <div className={styles.productdetail_relatedProductHeader}>
-            <h6 className={styles.productdetail_relatedProductTitle}>{i18n.t("product.related")}</h6>
+        <div className={`row ${styleProduct.upSell}`}>
+          <div className="col-12">
+            <h6 className={styleProduct.upSell_title}>
+              {i18n.t("product.related")}
+            </h6>
           </div>
-          <div className={styles.productdetail_relatedProduct}>
-            <LazyLoadComponent>
-              <Products
-                filter={{ openOrderScheduled: false, published: true }}
-                classes={classesProductRelate}
-                slug={slug}
-                getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-                itemPerPage={4}
-                isButton
-                fullPath={`product/{id}`}
-                pathPrefix={`product`}
-                lazyLoadedImage={false}
-                thumborSetting={{
-                  width: size.width < 768 ? 350 : 600,
-                  format: "webp",
-                  quality: 85
-                }}
-                loadingComponent={
-                  <>
-                    <Placeholder
-                      classes={classesPlaceholderRelateProduct}
-                      withImage
-                    />
-                    <Placeholder
-                      classes={classesPlaceholderRelateProduct}
-                      withImage
-                    />
-                    <Placeholder
-                      classes={classesPlaceholderRelateProduct}
-                      withImage
-                    />
-                  </>
-                }
-              />
-            </LazyLoadComponent>
-          </div>
+          <Products
+            filter={{ openOrderScheduled: false, published: true }}
+            classes={classesProductRelate}
+            slug={slug}
+            getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+            itemPerPage={2}
+            isButton
+            fullPath={`product/{id}`}
+            pathPrefix='product'
+            lazyLoadedImage={false}
+            thumborSetting={{
+              width: size.width < 768 ? 350 : 600,
+              format: "webp",
+              quality: 85
+            }}
+            loadingComponent={
+              <>
+                <Placeholder
+                  classes={classesPlaceholderRelateProduct}
+                  withImage
+                />
+                <Placeholder
+                  classes={classesPlaceholderRelateProduct}
+                  withImage
+                />
+                <Placeholder
+                  classes={classesPlaceholderRelateProduct}
+                  withImage
+                />
+              </>
+            }
+          />
         </div>
       }
 
-      {showPopup && (
-        <Popup withHeader={false} setPopup={tooglePopup} mobileFull={false}>
-          <div className={styles.productdetail_popup}>
-            <div className={styles.productdetail_popup_content}>
-              <div className={styles.productdetail_popup_content__icon}>
-                <Check color="white" size={40} />
-              </div>
-              <h3>{i18n.t("product.successAddToCart")}</h3>
+      <Popup
+        withHeader={false}
+        visibleState={showSuccessAddToCart}
+        setVisibleState={setShowSuccessAddToCart}
+        outsideClose={false}
+      >
+        {showSuccessAddToCart &&
+          <>
+            <div className={styleProduct.productDetail_popupTitle}>
+              <h3>
+                {i18n.t("product.successAddToCart")}
+              </h3>
             </div>
-            <div>
+            <div className={styleProduct.productDetail_saveCartDetail}>
+              <img
+                src={showSuccessAddToCart?.imageURL}
+                className={styleProduct.productDetail_saveCartImage}
+              />
+              <div className={styleProduct.productDetail_saveCartContent}>
+                <h3 className={styleProduct.productDetail_saveCartDetailTitle}>
+                  {showSuccessAddToCart?.title}
+                </h3>
+                <div className={styleProduct.productDetail_saveCartDetailPrice}>
+                  {showSuccessAddToCart?.salePrice !== showSuccessAddToCart?.price &&
+                    <span className={styleProduct.productDetail_salePrice}>
+                      {formatPrice(showSuccessAddToCart?.price.value, "IDR")}
+                    </span>
+                  }
+                  <span className={styleProduct.productDetail_salePriceNormal}>
+                    {formatPrice(showSuccessAddToCart?.salePrice.value, "IDR")}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className={styleProduct.productDetail_saveCartFooter}>
               <button
-                className={`btn ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} mb-3`}
-                onClick={() => {
-                  setShowPopup(false)
-                  setShowCart(true)
-                }}
+                className={`${styleProduct.btn} ${styleProduct.btn_secondary} mr-2`}
+                onClick={() => setShowSuccessAddToCart(false)}
+              >
+                {i18n.t("product.continueShopping")}
+              </button>
+              <button
+                className={`${styleProduct.btn} ${styleProduct.btn_primary} ml-2`}
+                onClick={() => router.push("/[lng]/cart", `/${lng}/cart`)}
               >
                 {i18n.t("product.viewCart")}
               </button>
             </div>
-            <div>
-              <button
-                className={`btn ${styles.btn_blue}`}
-                onClick={() => setShowPopup(false)}
-              >
-                {i18n.t("product.continueShopping")}
-              </button>
-            </div>
-          </div>
-        </Popup>
-      )}
+          </>
+        }
+      </Popup>
 
-      {showCart && (
-        <PopupCart
-          setPopup={toogleCart}
-          popupTitle={i18n.t("cart.title")}
-          lng={lng}
-        />
-      )}
-
-      {showModalErrorAddToCart && (
-        <Popup
-          withHeader
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-          classPopopBody
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
-              {i18n.t("cart.errorSKUTitle")}
+      <Popup
+        withHeader={false}
+        visibleState={showModalErrorAddToCart}
+        setVisibleState={setShowModalErrorAddToCart}
+      >
+        <>
+          <div className={styleProduct.productDetail_popupTitle}>
+            <h3>
+              {i18n.t("product.successAddToCart")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
-              {i18n.t("cart.errorSKUDesc")}{" "}
+          </div>
+          <div className={styleProduct.productDetail_popupContent}>
+            <p className={styleProduct.productDetail_popupDesc}>
+              {i18n.t("cart.errorSKUDesc")}
             </p>
           </div>
-        </Popup>
-      )}
+        </>
+      </Popup>
 
-      {showShare && (
-        <Popup
-          withHeader
-          setPopup={toogleShare}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.shareProduct")}
-        >
-          <div className={styles.productdetail_share}>
-            <SocialShare i18n={i18n} urlSite={urlSite} />
-          </div>
-        </Popup>
-      )}
-
-      {showPopupNotify && (
-        <Popup
-          withHeader={false}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.notify")}
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
+      <Popup
+        withHeader={false}
+        visibleState={showPopupNotify}
+        setVisibleState={setShowPopupNotify}
+        outsideClose={false}
+      >
+        <>
+          <div className={styleProduct.productDetail_popupTitle}>
+            <h3>
               {i18n.t("product.notifyTitleSuccess")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
+          </div>
+          <div className={styleProduct.productDetail_popupContent}>
+            <p className={styleProduct.productDetail_popupDesc}>
               {i18n.t("product.notifySuccess")}
             </p>
-            <button
-              className={`btn mt-3 ${styles.btn_secondary}`}
-              onClick={() => {
-                setShowPopupNotify(false)
-                router.push("/[lng]/products", `/${lng}/products`)
-              }}>
-              {i18n.t("product.continueShopping")}
-            </button>
           </div>
-        </Popup>
-      )}
+          <button
+            className={`${styleProduct.btn} ${styleProduct.btn_primary}`}
+            onClick={() => {
+              setShowPopupNotify(false)
+              router.push("/[lng]/products", `/${lng}/products`)
+            }}
+          >
+            {i18n.t("product.continueShopping")}
+          </button>
+        </>
+      </Popup>
 
-      {showModalErrorNotify && (
-        <Popup
-          withHeader={false}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.notify")}
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
+      <Popup
+        withHeader={false}
+        visibleState={showModalErrorNotify}
+        setVisibleState={setShowModalErrorNotify}
+        outsideClose={false}
+      >
+        <>
+          <div className={styleProduct.productDetail_popupTitle}>
+            <h3>
               {i18n.t("product.notifyTitleFailed")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
+          </div>
+          <div className={styleProduct.productDetail_popupContent}>
+            <p className={styleProduct.productDetail_popupDesc}>
               {i18n.t("product.notifyFailed")}
             </p>
-            <button
-              className={`btn mt-3 ${styles.btn_secondary}`}
-              onClick={() => setShowModalErrorNotify(false)}>
-              {i18n.t("product.back")}
-            </button>
           </div>
-        </Popup>
-      )}
+          <button
+            className={`${styleProduct.btn} ${styleProduct.btn_primary}`}
+            onClick={() => setShowPopupNotify(false)}
+          >
+            {i18n.t("product.tryAgain")}
+          </button>
+        </>
+      </Popup>
     </Layout>
   )
 }

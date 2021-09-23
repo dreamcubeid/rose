@@ -75,7 +75,8 @@
     "cart": "Keranjang",
     "login": "Masuk",
     "account": "Akun",
-    "search": "Pencarian"
+    "search": "Pencarian",
+    "lookbook": "Lookbook"
   },
   "cart": {
     "amount": "Jumlah",
@@ -228,7 +229,9 @@
     "isEmpty": "Belum ada lookbook",
     "seeCollection": "Lihat Koleksi",
     "seeMore": "Lebih Banyak",
-    "title": "Lookbook"
+    "title": "Lookbook",
+    "back": "Kembali",
+    "relatedProducts": "Produk Terkait"
   },
   "membership": {
     "exchangePoints": "Tukar Poin Anda",

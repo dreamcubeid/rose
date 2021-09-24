@@ -272,13 +272,10 @@
     & > [class*="collapse"],
     & > [class*="collapsing"]
     {
-      p
-      {
-        @include typographyBuilder(secondary, 400, 14, 24);
-        color: $color_text_secondary;
-        padding-top: 20px;
-        margin-bottom: 0
-      }
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_secondary;
+      padding-top: 20px;
+      margin-bottom: 0
     }
   }
 
@@ -381,16 +378,34 @@
 
   &_socialShare
   {
-    padding: 24px 0;
+    padding: 24px 0 0;
   }
 }
+
+.ratingReview
+{
+  @include flex(row, center, space-between);
+  padding: 24px 0;
+  border-top: 1px solid $color_border;
+  cursor: pointer;
+
+  &_title
+  {
+    margin: 0;
+  }
+
+  &_extra
+  {
+    padding-bottom: 106px;
+  }
+}
+
 
 .upSell
 {
   position: relative;
-  margin-top: 24px;
   padding-top: 24px;
-  padding-bottom: 224px;
+  padding-bottom: 106px;
   background: $color_rose_bg2;
 
   &_title

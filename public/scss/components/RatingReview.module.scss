@@ -1,12 +1,38 @@
-@import "../base/colors";
-@import "../components/Button.module.scss";
+@import '../base/colors';
+@import '../utils/variables';
+@import '../components/Button.module.scss';
 
 .ratingReview
 {
-  border-top: 7.5px solid $color_gray;
-  border-bottom: 7.5px solid $color_gray;
-  margin-bottom: 32px;
-  padding: 32px;
+  @include transition();
+  display: none;
+
+  &_show
+  {
+    @include transition();
+    display: block;
+  }
+
+  &_extra
+  {
+    padding-bottom: 106px;
+  }
+
+  &_header
+  {
+    @include flex(row, center, flex-start);
+    padding: 14px;
+    background: $color_rose_bg2;
+    border-radius: 2px;
+
+    &Title
+    {
+      @include typographyBuilder(secondary, 400, 12, 16);
+      color: $color_text_primary;
+      margin-left: 10px;
+      margin-bottom: 0;
+    }
+  }
 
   &_titleSection
   {
@@ -16,43 +42,30 @@
 
   &_filters
   {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    margin: 22px 0;
-    overflow-x: auto;
+    @include flex(row, center, flex-start, true);
+    margin: 24px 0;
   }
 
   &_filter
   {
-    font-size: 14px;
-    border: 1px solid $color_gray;
-    border-radius: 4px;
-    padding: 6px 12px;
-    margin: 0 12px;
+    @include typographyBuilder(secondary, 400, 16, 24);
+    color: $color_text_primary;
+    border: 1px solid $color_border;
+    border-radius: 2px;
+    padding: 8px 12px;
+    margin: 0 8px 8px 0;
     cursor: pointer;
-
-    &:first-child
-    {
-      margin-left: 0;
-    }
-
-    &:last-child
-    {
-      margin-right: 0;
-    }
   }
 
   &_filterActive
   {
-    border-color: $color_blue;
-    background: $color_blue_light;
+    border-color: $color_rose;
+    background: $color_rose_bg2;
   }
 
   &_filterLabel
   {
-    display: flex;
-    align-items: center;
+    @include flex(row, center);
     width: max-content;
     margin: 0;
     cursor: pointer;
@@ -65,18 +78,22 @@
 
   &_filterIcon
   {
-    margin-left: 5px;
-    color: $color_orange;
+    margin-left: 4px;
+    color: $color_warning;
   }
 
   &_sort
   {
-    margin: 22px 0;
+    margin: 24px 0;
   }
 
   &_sortOptions
   {
-    width: max-content;
+    @include fixedWidth(100%);
+    @include fixedHeight(58px);
+    @include flex(row, center, flex-start);
+    border: 1px solid $color_border;
+    border-radius: 37px;
     -webkit-user-select: none;
     -moz-user-select: -moz-none;
     -ms-user-select: none;
@@ -84,21 +101,26 @@
     -webkit-appearance: none;
     -moz-appearance: radio-container;
     appearance: none;
-    padding-right: 35px;
-    background: url("../../images/arrow-down.svg") no-repeat;
-    background-position: right 10px top 50%;
+    padding-left: 24px;
+    padding-right: 58px;
+    background: url("../../icons/chevron-down.svg") no-repeat;
+    background-position: right 24px top 50%;
+    cursor: pointer;
 
     &:focus,
     &:active
     {
       outline: 0;
       box-shadow: none;
+      border: 1px solid $color_border;
     }
   }
 
   &_container
   {
-    margin: 22px 0;
+    margin: 24px 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $color_border;
   }
 
   &_starContainer
@@ -109,54 +131,70 @@
 
   &_desc
   {
-    margin: 22px 0;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    margin: 12px 0;
+    color: $color_text_primary;
   }
 
   &_imageContainer
   {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    @extend .scrollbar_main;
+    @include flex(row, center, flex-start);
+    padding-bottom: 12px;
+    overflow-x: auto;
   }
 
   &_image
   {
-    width: 80px;
-    height: 80px;
+    @include fixedWidth(100px);
+    @include fixedHeight(100px);
+    margin-right: 12px;
+    border-radius: 2px;
     cursor: pointer;
-    margin: 5px;
-    border-radius: 4px;
 
     img,
     video
     {
-      width: 80px;
-      height: 80px;
-      max-width: 80px;
-      max-height: 80px;
-      border: 1px solid $color_gray;
-      border-radius: 4px;
+      @include fixedWidth(100px);
+      @include fixedHeight(100px);
+      border: 1px solid $color_border;
+      border-radius: 2px;
       object-fit: cover;
     }
   }
 
   &_footer
   {
-    margin: 22px 0;
+    @include flex(row, center, flex-start, true);
+    margin: 12px 0 0;
+  }
+
+  &_author
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary;
+    text-transform: capitalize;
+  }
+
+  &_date
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_secondary;
+    margin-left: 4px;
   }
 
   &_itemPerPage
   {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    @include flex(row, center, flex-end);
   }
 
   &_itemPerPageLabel
   {
-    margin-right: 15px;
+    margin-right: 10px;
     p
     {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_secondary;
       margin: 0;
     }
   }
@@ -165,61 +203,76 @@
   {
     select
     {
-      padding: 6px 12px;
-      border: 1px solid $color_gray_semi_dark;
-      border-radius: 4px;
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(secondary, 400, 14, 24);
+      @include fixedHeight(58px);
+      width: max-content;
+      color: $color_text_primary;
+      border: 1px solid $color_border;
+      border-radius: 37px;
+      -webkit-user-select: none;
+      -moz-user-select: -moz-none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-appearance: none;
+      -moz-appearance: radio-container;
+      appearance: none;
+      padding-left: 24px;
+      padding-right: 36px;
+      background: url("../../icons/chevron-down.svg") no-repeat;
+      background-position: right 24px top 50%;
+      cursor: pointer;
+  
+      &:focus,
+      &:active
+      {
+        outline: 0;
+        box-shadow: none;
+        border: 1px solid $color_border;
+      }
     }
   }
 
   &_popupContainer
   {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include fixed(0, auto, auto, 0);
+    z-index: 30;
+
+    @include fixedWidth(100%);
+    @include fixedHeight(100%);
+    @include flex(row, center, center);
+    background-color: rgba($color_black, 0.8);
   }
 
   &_popupContent
   {
-    position: relative;
-    width: 330px;
-    background: $color_gray;
-    border-radius: 5px;
-    padding: 0 10px;
+    @include position(relative);
+    @include fixedWidth(330px);
+    background: $color_white;
+    border-radius: 2px;
+    padding: 12px;
   }
 
   &_popupPreview
   {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
+    @include flex(row, center, flex-start);
     overflow-x: auto;
-    margin: 10px 0 20px;
+    margin: 10px 0 0;
   }
 
   &_popupImage
   {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 300px;
+    @include position(relative);
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
+    @include fixedHeight(300px);
 
     img,
     video
     {
-      width: 330px;
-      height: 300px;
-      max-width: 330px;
-      max-height: 300px;
-      border: 1px solid $color_gray;
+      @include fixedWidth(100%);
+      @include fixedHeight(300px);
+      border: 1px solid $color_border;
       border-radius: 4px;
       object-fit: cover;
 
@@ -230,18 +283,13 @@
         box-shadow: none;
       }
     }
-
-    video
-    {
-      width: 310px !important;
-    }
   }
 
   &_popupImagePreview
   {
-    width: 60px;
-    height: 60px;
-    margin: 0 5px;
+    @include fixedWidth(64px);
+    @include fixedHeight(64px);
+    margin: 0 4px;
     cursor: pointer;
 
     &:first-child
@@ -252,12 +300,10 @@
     img,
     video
     {
-      width: 60px;
-      height: 60px;
-      max-width: 60px;
-      max-height: 60px;
-      border: 1px solid $color_gray_low;
-      border-radius: 4px;
+      @include fixedWidth(64px);
+      @include fixedHeight(64px);
+      border: 1px solid $color_border;
+      border-radius: 2px;
       object-fit: cover;
     }
   }
@@ -265,12 +311,10 @@
   &_popupLeftButton,
   &_popupRightButton
   {
-    position: absolute;
-    top: 45%;
-    left: 0;
-    background: rgba($color_white, .3);
+    @include absolute(45%, auto, auto, 0);
+    background: rgba($color_white, 0.75);
     border: none;
-    padding: .25rem;
+    padding: 6px 8px;
     cursor: pointer;
   }
 
@@ -282,7 +326,7 @@
 
   &_popupButtonClose
   {
-    padding: 15px 0;
+    margin-bottom: 10px;
     text-align: right;
 
     svg
@@ -294,74 +338,27 @@
 
 .pagination
 {
+  @include flex(row, center, center);
   margin: 0;
-  margin-top: 2rem;
+  margin-top: 24px;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &_item
   {
-    padding: .5rem;
-    margin: .25rem;
+    padding: 10px 15px;
+    margin: 5px;
     list-style: none;
+    color: $color_text_primary;
+    background: $color_white;
+    border: 1px solid $color_border;
     cursor: pointer;
   }
 
   &_active
   {
-    color: $color_blue;
-    background: $color_blue_light;
-    border: 1px solid $color_blue;
-    border-radius: 4px;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .ratingReview
-  {
-    padding: 32px 0;
-
-    &_filters
-    {
-      padding-bottom: 22px;
-    }
-
-    &_filter
-    {
-      margin: 0 5px;
-    }
-
-    &_popupContainer
-    {
-      width: 100vw;
-      height: 100vh;
-      padding: 0 20px;
-      -webkit-overflow-scrolling: auto;
-    }
-
-    &_popupContent
-    {
-      margin: 0 1rem;
-      width: 100%;
-      height: auto;
-    }
-
-    &_popupPreview
-    {
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-
-    &_popupImage
-    {
-      img,
-      video
-      {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
+    color: $color_white;
+    background: $color_rose;
+    border: 1px solid $color_rose;
+    border-radius: 2px;
   }
 }

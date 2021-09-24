@@ -19,7 +19,8 @@ import {
   RiArrowLeftSLine,
   RiArrowRightSLine,
   RiArrowDownSLine,
-  RiCloseLine
+  RiCloseLine,
+  RiChat1Line
 } from 'react-icons/ri'
 import {
   useI18n,
@@ -42,33 +43,35 @@ const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComp
 const Popup = dynamic(() => import('components/Popup'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 /* styles */
-import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
-import styleProduct from 'public/scss/components/ProductDetail.module.scss'
+import styleEstimate from 'public/scss/components/EstimateShipping.module.scss'
+import styleProductDetail from 'public/scss/components/ProductDetail.module.scss'
 import styleNotifyMe from 'public/scss/components/NotifyMe.module.scss'
+import styleProduct from 'public/scss/components/Product.module.scss'
+import styleRatingReview from 'public/scss/components/RatingReview.module.scss'
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 
 const classesProductDetail = {
-  productDetailParentDivClassName: styleProduct.productDetail,
-  imageRowClassName: styleProduct.productDetail_images,
-  arrowClassName: styleProduct.productDetail_arrow,
-  mainImageClassName: styleProduct.productDetail_image,
-  propertyRowClassName: styleProduct.productDetail_content,
-  detailTitleStarClassName: styleProduct.productDetail_star,
-  detailTitleStarNumberClassName: styleProduct.productDetail_starNumber,
-  detailTitleClassName: styleProduct.productDetail_title,
-  salePriceClassName: styleProduct.productDetail_salePrice,
-  priceClassName: styleProduct.productDetail_priceSale,
-  variantContainerClassName: styleProduct.productDetail_containerVariant,
-  variantOptionsContainerClassName: styleProduct.productDetail_variant,
-  variantLabelClassName: styleProduct.productDetail_variantLabel,
-  variantOptionsClassName: styleProduct.productDetail_variantOption,
-  qtyBoxClassName: styleProduct.productDetail_innerQty,
-  propertyFooterContainerClassname: styleProduct.productDetail_footerProperty,
-  addToCartBtnClassName: `${styleProduct.btn} ${styleProduct.btn_primary}`,
-  buyNowBtnClassName: `${styleProduct.btn} ${styleProduct.btn_secondary} mt-2`,
-  descriptionClassName: styleProduct.productDetail_desc,
+  productDetailParentDivClassName: styleProductDetail.productDetail,
+  imageRowClassName: styleProductDetail.productDetail_images,
+  arrowClassName: styleProductDetail.productDetail_arrow,
+  mainImageClassName: styleProductDetail.productDetail_image,
+  propertyRowClassName: styleProductDetail.productDetail_content,
+  detailTitleStarClassName: styleProductDetail.productDetail_star,
+  detailTitleStarNumberClassName: styleProductDetail.productDetail_starNumber,
+  detailTitleClassName: styleProductDetail.productDetail_title,
+  salePriceClassName: styleProductDetail.productDetail_salePrice,
+  priceClassName: styleProductDetail.productDetail_priceSale,
+  variantContainerClassName: styleProductDetail.productDetail_containerVariant,
+  variantOptionsContainerClassName: styleProductDetail.productDetail_variant,
+  variantLabelClassName: styleProductDetail.productDetail_variantLabel,
+  variantOptionsClassName: styleProductDetail.productDetail_variantOption,
+  qtyBoxClassName: styleProductDetail.productDetail_innerQty,
+  propertyFooterContainerClassname: styleProductDetail.productDetail_footerProperty,
+  addToCartBtnClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_primary}`,
+  buyNowBtnClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_secondary} mt-2`,
+  descriptionClassName: styleProductDetail.productDetail_desc,
   additionalInfoClassName: 'd-none',
-  accordionClassName: styleProduct.productDetail_descContainer,
+  accordionClassName: styleProductDetail.productDetail_descContainer,
   // Open Order
   openOrderClassName: styles.productdetail_openorder,
   openOrderTitleClassName: styles.productdetail_openorder_title,
@@ -89,60 +92,60 @@ const classesProductDetail = {
   notifyMeRadioLabelClassName: styleNotifyMe.notifyMe_radioLabel,
   notifyMeInputWrapperClassName: styleNotifyMe.notifyMe_inputWrapper,
   notifyMeInputClassName: styleNotifyMe.notifyMe_input,
-  notifyMeSubmitClassName: `${styleProduct.btn} ${styleProduct.btn_primary}`,
+  notifyMeSubmitClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_primary}`,
   // Estimate Shipping
-  estimateShippingWrapperClassName: stylesEstimate.wrapper,
-  estimateShippingTitleClassName: stylesEstimate.title,
-  estimateShippingDetailClassName: stylesEstimate.detail,
-  estimateShippingLogoClassName: stylesEstimate.detail_logo,
-  estimateShippingLogoImgClassName: stylesEstimate.detail_logoImage,
-  estimateShippingShowCourierClassName: stylesEstimate.detail_showCourier,
-  estimateShippingPopupContainerClassName: stylesEstimate.popup,
-  estimateShippingPopupContentClassName: stylesEstimate.popup_inner,
-  estimateShippingPopupHeaderClassName: stylesEstimate.popup_header,
-  estimateShippingPopupTitleClassName: stylesEstimate.popup_headerTitle,
-  estimateShippingPopupButtonCloseClassName: stylesEstimate.popup_headerClose,
-  estimateShippingPopupBodyClassName: stylesEstimate.popup_body,
-  estimateShippingPopupLineInfoClassName: stylesEstimate.popup_bodyLineInfo,
-  estimateShippingPopupLabelClassName: stylesEstimate.popup_bodyLabel,
-  estimateShippingPopupValueClassName: stylesEstimate.popup_bodyValue,
-  estimateShippingPopupProviderClassName: stylesEstimate.popup_provider,
-  estimateShippingPopupLineProviderClassName: stylesEstimate.popup_providerLine,
-  estimateShippingPopupProviderImgClassName: stylesEstimate.popup_providerImage,
-  estimateShippingPopupProviderLabelClassName: stylesEstimate.popup_providerLabel,
-  estimateShippingPopupProviderValueClassName: stylesEstimate.popup_providerValue,
+  estimateShippingWrapperClassName: styleEstimate.wrapper,
+  estimateShippingTitleClassName: styleEstimate.title,
+  estimateShippingDetailClassName: styleEstimate.detail,
+  estimateShippingLogoClassName: styleEstimate.detail_logo,
+  estimateShippingLogoImgClassName: styleEstimate.detail_logoImage,
+  estimateShippingShowCourierClassName: styleEstimate.detail_showCourier,
+  estimateShippingPopupContainerClassName: styleEstimate.popup,
+  estimateShippingPopupContentClassName: styleEstimate.popup_inner,
+  estimateShippingPopupHeaderClassName: styleEstimate.popup_header,
+  estimateShippingPopupTitleClassName: styleEstimate.popup_headerTitle,
+  estimateShippingPopupButtonCloseClassName: styleEstimate.popup_headerClose,
+  estimateShippingPopupBodyClassName: styleEstimate.popup_body,
+  estimateShippingPopupLineInfoClassName: styleEstimate.popup_bodyLineInfo,
+  estimateShippingPopupLabelClassName: styleEstimate.popup_bodyLabel,
+  estimateShippingPopupValueClassName: styleEstimate.popup_bodyValue,
+  estimateShippingPopupProviderClassName: styleEstimate.popup_provider,
+  estimateShippingPopupLineProviderClassName: styleEstimate.popup_providerLine,
+  estimateShippingPopupProviderImgClassName: styleEstimate.popup_providerImage,
+  estimateShippingPopupProviderLabelClassName: styleEstimate.popup_providerLabel,
+  estimateShippingPopupProviderValueClassName: styleEstimate.popup_providerValue,
 }
 
 const classesProductReview = {
-  reviewImageContainerClassName: styles.ratingReview_imageContainer,
-  reviewImageClassName: styles.ratingReview_image,
-  filtersClassName: styles.ratingReview_filters,
-  filterClassName: styles.ratingReview_filter,
-  activeFilterClassName: styles.ratingReview_filterActive,
-  filterLabelClassName: styles.ratingReview_filterLabel,
-  filterInputClassName: styles.ratingReview_filterInput,
-  filterIconClassName: styles.ratingReview_filterIcon,
-  sortClassName: styles.ratingReview_sort,
-  sortOptionsClassName: `form-control ${styles.ratingReview_sortOptions}`,
-  reviewListContainerClassName: styles.ratingReview_container,
-  reviewListStarContainerClassName: styles.ratingReview_starContainer,
-  reviewListDescriptionClassName: styles.ratingReview_desc,
-  reviewListImageContainerClassName: styles.ratingReview_imageContainer,
-  reviewListImageClassName: styles.ratingReview_image,
-  reviewListFooterClassName: styles.ratingReview_footer,
-  reviewListAuthorClassName: styles.ratingReview_author,
-  reviewListDateClassName: styles.ratingReview_date,
-  itemPerPageClassName: styles.ratingReview_itemPerPage,
-  itemPerPageLabelClassName: styles.ratingReview_itemPerPageLabel,
-  itemPerPageOptionsClassName: styles.ratingReview_itemPerPageOptions,
-  reviewPopupContainerClassName: styles.ratingReview_popupContainer,
-  reviewPopupContentClassName: styles.ratingReview_popupContent,
-  reviewPopupPreviewClassName: styles.ratingReview_popupPreview,
-  reviewPopupImagePreviewClassName: styles.ratingReview_popupImagePreview,
-  reviewPopupImagePopupClassName: styles.ratingReview_popupImage,
-  reviewPopupLeftButtonClassName: styles.ratingReview_popupLeftButton,
-  reviewPopupRightButtonClassName: styles.ratingReview_popupRightButton,
-  reviewPopupButtonCloseClassName: styles.ratingReview_popupButtonClose
+  reviewImageContainerClassName: styleRatingReview.ratingReview_imageContainer,
+  reviewImageClassName: styleRatingReview.ratingReview_image,
+  filtersClassName: styleRatingReview.ratingReview_filters,
+  filterClassName: styleRatingReview.ratingReview_filter,
+  activeFilterClassName: styleRatingReview.ratingReview_filterActive,
+  filterLabelClassName: styleRatingReview.ratingReview_filterLabel,
+  filterInputClassName: styleRatingReview.ratingReview_filterInput,
+  filterIconClassName: styleRatingReview.ratingReview_filterIcon,
+  sortClassName: styleRatingReview.ratingReview_sort,
+  sortOptionsClassName: `form-control ${styleRatingReview.ratingReview_sortOptions}`,
+  reviewListContainerClassName: styleRatingReview.ratingReview_container,
+  reviewListStarContainerClassName: styleRatingReview.ratingReview_starContainer,
+  reviewListDescriptionClassName: styleRatingReview.ratingReview_desc,
+  reviewListImageContainerClassName: styleRatingReview.ratingReview_imageContainer,
+  reviewListImageClassName: styleRatingReview.ratingReview_image,
+  reviewListFooterClassName: styleRatingReview.ratingReview_footer,
+  reviewListAuthorClassName: styleRatingReview.ratingReview_author,
+  reviewListDateClassName: styleRatingReview.ratingReview_date,
+  itemPerPageClassName: styleRatingReview.ratingReview_itemPerPage,
+  itemPerPageLabelClassName: styleRatingReview.ratingReview_itemPerPageLabel,
+  itemPerPageOptionsClassName: styleRatingReview.ratingReview_itemPerPageOptions,
+  reviewPopupContainerClassName: styleRatingReview.ratingReview_popupContainer,
+  reviewPopupContentClassName: styleRatingReview.ratingReview_popupContent,
+  reviewPopupPreviewClassName: styleRatingReview.ratingReview_popupPreview,
+  reviewPopupImagePreviewClassName: styleRatingReview.ratingReview_popupImagePreview,
+  reviewPopupImagePopupClassName: styleRatingReview.ratingReview_popupImage,
+  reviewPopupLeftButtonClassName: styleRatingReview.ratingReview_popupLeftButton,
+  reviewPopupRightButtonClassName: styleRatingReview.ratingReview_popupRightButton,
+  reviewPopupButtonCloseClassName: styleRatingReview.ratingReview_popupButtonClose
 }
 
 const classesProductRelate = {
@@ -197,6 +200,7 @@ const Product: FC<any> = ({
   const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false)
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false)
+  const [showRatingReview, setShowRatingReview] = useState<boolean>(false)
   const [totalAllReviews, setTotalAllReviews] = useState(null)
   const [totalItems, setTotalItems] = useState(null)
 
@@ -204,6 +208,19 @@ const Product: FC<any> = ({
     if (showSuccessAddToCart || showModalErrorAddToCart || showPopupNotify || showModalErrorNotify) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'unset'
   }, [showSuccessAddToCart, showModalErrorAddToCart, showPopupNotify, showModalErrorNotify])
+
+  useEffect(() => {
+    if (showRatingReview) {
+      const ratingReview = document.getElementById('ratingReview')
+      ratingReview.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest'
+      })
+    }
+  }, [showRatingReview])
+
+  const toggleRatingReview = () => setShowRatingReview(!showRatingReview)
 
   return (
     <Layout
@@ -250,8 +267,8 @@ const Product: FC<any> = ({
           estimateIconClose={<RiCloseLine color="#444444" size={25} />}
           enableArrow
           enableDots
-          activeDot={<div className={styleProduct.productDetail_imagesCustomDotsActive}></div>}
-          inactiveDot={<div className={styleProduct.productDetail_imagesCustomDots}></div>}
+          activeDot={<div className={styleProductDetail.productDetail_imagesCustomDotsActive}></div>}
+          inactiveDot={<div className={styleProductDetail.productDetail_imagesCustomDots}></div>}
           onComplete={(data: any) => setShowSuccessAddToCart(data?.saveCart?.lineItems[0])}
           onCompleteMsg={() => setShowPopupNotify(true)}
           onError={() => setShowModalErrorAddToCart(true)}
@@ -279,7 +296,7 @@ const Product: FC<any> = ({
             quality: 85,
           }}
           customDetailComponent={
-            <div className={styleProduct.productDetail_socialShare}>
+            <div className={styleProductDetail.productDetail_socialShare}>
               <SocialShare
                 urlSite={urlSite}
                 title={i18n.t("product.share")}
@@ -312,12 +329,37 @@ const Product: FC<any> = ({
         />
       )}
 
+      <div className="container">
+        <div
+          className={`
+            ${styleProductDetail.ratingReview}
+            ${!showRatingReview && styleProductDetail.ratingReview_extra}
+          `}
+          onClick={() => toggleRatingReview()}
+        >
+          <p className={styleProductDetail.ratingReview_title}>
+            {i18n.t("product.review")}
+          </p>
+          <RiArrowDownSLine color="#444444" size={18} />
+        </div>
+      </div>
+
       {brand?.settings?.reviewsAndRatingEnabled &&
-        <div className={styles.ratingReview}>
+        <div
+          id="ratingReview"
+          className={`
+            ${styleRatingReview.ratingReview}
+            ${showRatingReview && styleRatingReview.ratingReview_show}
+            ${(allowedProductRecommendation && totalItems === 0) && styleRatingReview.ratingReview_extra}
+          `}
+        >
           <div className="container">
-            <h2 className={styles.ratingReview_titleSection}>
-              {i18n.t("product.ratingReviewTitle")}{" "}({totalAllReviews === null ? "..." : totalAllReviews})
-            </h2>
+            <div className={styleRatingReview.ratingReview_header}>
+              <RiChat1Line color="#444444" size={18} />
+              <p className={styleRatingReview.ratingReview_headerTitle}>
+                {totalAllReviews === null ? "..." : totalAllReviews}{" "}{i18n.t("product.ratingReviewTitle")}
+              </p>
+            </div>
             <ProductReviews
               productID={productId}
               productName={slug}
@@ -349,44 +391,44 @@ const Product: FC<any> = ({
       }
 
       {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className={`row ${styleProduct.upSell}`}>
-          <div className="col-12">
-            <h6 className={styleProduct.upSell_title}>
-              {i18n.t("product.related")}
-            </h6>
+        <div className={`container ${styleProductDetail.upSell}`}>
+          <h6 className={styleProductDetail.upSell_title}>
+            {i18n.t("product.related")}
+          </h6>
+          <div className="row">
+            <Products
+              filter={{ openOrderScheduled: false, published: true }}
+              classes={classesProductRelate}
+              slug={slug}
+              getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+              itemPerPage={2}
+              isButton
+              fullPath={`product/{id}`}
+              pathPrefix='product'
+              lazyLoadedImage={false}
+              thumborSetting={{
+                width: size.width < 768 ? 350 : 600,
+                format: "webp",
+                quality: 85
+              }}
+              loadingComponent={
+                <>
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                </>
+              }
+            />
           </div>
-          <Products
-            filter={{ openOrderScheduled: false, published: true }}
-            classes={classesProductRelate}
-            slug={slug}
-            getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-            itemPerPage={2}
-            isButton
-            fullPath={`product/{id}`}
-            pathPrefix='product'
-            lazyLoadedImage={false}
-            thumborSetting={{
-              width: size.width < 768 ? 350 : 600,
-              format: "webp",
-              quality: 85
-            }}
-            loadingComponent={
-              <>
-                <Placeholder
-                  classes={classesPlaceholderRelateProduct}
-                  withImage
-                />
-                <Placeholder
-                  classes={classesPlaceholderRelateProduct}
-                  withImage
-                />
-                <Placeholder
-                  classes={classesPlaceholderRelateProduct}
-                  withImage
-                />
-              </>
-            }
-          />
         </div>
       }
 
@@ -398,41 +440,41 @@ const Product: FC<any> = ({
       >
         {showSuccessAddToCart &&
           <>
-            <div className={styleProduct.productDetail_popupTitle}>
+            <div className={styleProductDetail.productDetail_popupTitle}>
               <h3>
                 {i18n.t("product.successAddToCart")}
               </h3>
             </div>
-            <div className={styleProduct.productDetail_saveCartDetail}>
+            <div className={styleProductDetail.productDetail_saveCartDetail}>
               <img
                 src={showSuccessAddToCart?.imageURL}
-                className={styleProduct.productDetail_saveCartImage}
+                className={styleProductDetail.productDetail_saveCartImage}
               />
-              <div className={styleProduct.productDetail_saveCartContent}>
-                <h3 className={styleProduct.productDetail_saveCartDetailTitle}>
+              <div className={styleProductDetail.productDetail_saveCartContent}>
+                <h3 className={styleProductDetail.productDetail_saveCartDetailTitle}>
                   {showSuccessAddToCart?.title}
                 </h3>
-                <div className={styleProduct.productDetail_saveCartDetailPrice}>
+                <div className={styleProductDetail.productDetail_saveCartDetailPrice}>
                   {showSuccessAddToCart?.salePrice !== showSuccessAddToCart?.price &&
-                    <span className={styleProduct.productDetail_salePrice}>
+                    <span className={styleProductDetail.productDetail_salePrice}>
                       {formatPrice(showSuccessAddToCart?.price.value, "IDR")}
                     </span>
                   }
-                  <span className={styleProduct.productDetail_salePriceNormal}>
+                  <span className={styleProductDetail.productDetail_salePriceNormal}>
                     {formatPrice(showSuccessAddToCart?.salePrice.value, "IDR")}
                   </span>
                 </div>
               </div>
             </div>
-            <div className={styleProduct.productDetail_saveCartFooter}>
+            <div className={styleProductDetail.productDetail_saveCartFooter}>
               <button
-                className={`${styleProduct.btn} ${styleProduct.btn_secondary} mr-2`}
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_secondary} mr-2`}
                 onClick={() => setShowSuccessAddToCart(false)}
               >
                 {i18n.t("product.continueShopping")}
               </button>
               <button
-                className={`${styleProduct.btn} ${styleProduct.btn_primary} ml-2`}
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary} ml-2`}
                 onClick={() => router.push("/[lng]/cart", `/${lng}/cart`)}
               >
                 {i18n.t("product.viewCart")}
@@ -448,13 +490,13 @@ const Product: FC<any> = ({
         setVisibleState={setShowModalErrorAddToCart}
       >
         <>
-          <div className={styleProduct.productDetail_popupTitle}>
+          <div className={styleProductDetail.productDetail_popupTitle}>
             <h3>
               {i18n.t("product.successAddToCart")}
             </h3>
           </div>
-          <div className={styleProduct.productDetail_popupContent}>
-            <p className={styleProduct.productDetail_popupDesc}>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
               {i18n.t("cart.errorSKUDesc")}
             </p>
           </div>
@@ -468,18 +510,18 @@ const Product: FC<any> = ({
         outsideClose={false}
       >
         <>
-          <div className={styleProduct.productDetail_popupTitle}>
+          <div className={styleProductDetail.productDetail_popupTitle}>
             <h3>
               {i18n.t("product.notifyTitleSuccess")}
             </h3>
           </div>
-          <div className={styleProduct.productDetail_popupContent}>
-            <p className={styleProduct.productDetail_popupDesc}>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
               {i18n.t("product.notifySuccess")}
             </p>
           </div>
           <button
-            className={`${styleProduct.btn} ${styleProduct.btn_primary}`}
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
             onClick={() => {
               setShowPopupNotify(false)
               router.push("/[lng]/products", `/${lng}/products`)
@@ -497,18 +539,18 @@ const Product: FC<any> = ({
         outsideClose={false}
       >
         <>
-          <div className={styleProduct.productDetail_popupTitle}>
+          <div className={styleProductDetail.productDetail_popupTitle}>
             <h3>
               {i18n.t("product.notifyTitleFailed")}
             </h3>
           </div>
-          <div className={styleProduct.productDetail_popupContent}>
-            <p className={styleProduct.productDetail_popupDesc}>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
               {i18n.t("product.notifyFailed")}
             </p>
           </div>
           <button
-            className={`${styleProduct.btn} ${styleProduct.btn_primary}`}
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
             onClick={() => setShowPopupNotify(false)}
           >
             {i18n.t("product.tryAgain")}

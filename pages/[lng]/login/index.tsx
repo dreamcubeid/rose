@@ -1,3 +1,4 @@
+/* library package */
 import { FC } from 'react'
 import dynamic from 'next/dynamic'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'

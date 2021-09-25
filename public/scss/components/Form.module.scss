@@ -201,8 +201,23 @@
     }
   }
 
+  label
+  {
+    position: absolute;
+    z-index: 2;
+    color: $color_text_secondary;
+    padding: 9px 24px 0 24px;
+    @include typographyBuilder(secondary,500,10,16);
+
+    & ~ input, ~ div > input
+    {
+      padding: 16px 24px 0 24px;
+    }
+  }
+
   input
   {
+    position: relative;
     @include typographyBuilder(secondary,400,14,24);
     height: 58px;
     width: 100%;
@@ -210,6 +225,7 @@
     box-sizing: border-box;
     border-radius: 37px;
     padding: 0 24px;
+    color: $color_text_primary;
 
     &:focus
     {

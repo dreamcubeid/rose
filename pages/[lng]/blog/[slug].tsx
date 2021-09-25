@@ -13,19 +13,18 @@ const Popup = dynamic(() => import('components/Popup/Popup'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 
 const classesBlogSingle = {
-  // blogContainerClassName: styles.blog_detail,
-  // headerClassName: styles.blog_detailHeader,
-  // headerContentClassName: styles.blog_detailHeaderContent,
-  // headerDetailClassName: styles.blog_detailMetaWrapper,
-  // headerEndClassName: 'd-none',
-  // authorPicContainerClassName: 'd-none',
-  // authorPicClassName: 'd-none',
-  // authorInfoClassName: 'd-none',
+  blogContainerClassName: styleBlog.blog_detail,
+  headerClassName: styleBlog.blog_detail_header,
+  headerContentClassName: styleBlog.blog_detail_title,
+  headerEndClassName: 'd-none',
+  authorPicContainerClassName: 'd-none',
+  authorPicClassName: 'd-none',
+  authorInfoClassName: 'd-none',
   // createdByClassName: `d-flex flex-row align-items-center justify-content-start flex-nowrap w-100`,
-  // createdByInnerClassName: `${styles.blog_detailMeta} d-flex flex-row align-items-center justify-content-start flex-wrap`,
+  createdByInnerClassName: styleBlog.blog_detail_desc,
   // authorClassName: 'd-flex flex-row align-items-center justify-content-start order-2',
   // dateClassName: 'd-flex flex-row align-items-center justify-content-start order-1',
-  // blogContentClassName: styles.blog_detailContent,
+  blogContentClassName: styleBlog.blog_detail_content,
 }
 
 const classesBlogCategories = {
@@ -65,7 +64,7 @@ const BlogSlug: FC<any> = ({
   return (
     <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
       <div className={styleBlog.blog_container}>
-        <div className={styleBlog.lookbook_breadcrumb}>
+        <div className={styleBlog.blog_header}>
           <Breadcrumb
             steps={[
               { label: i18n.t('breadcrumb.home') },
@@ -81,7 +80,7 @@ const BlogSlug: FC<any> = ({
           />
         </div>
         <BlogSingle
-          // getTitle={setTitle}
+          getTitle={setTitle}
           classes={classesBlogSingle}
           ID={slug.toString()}
           // timeIcon={

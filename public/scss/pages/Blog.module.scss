@@ -45,6 +45,13 @@
     @include typographyBuilder(secondary,400,14,24);
     cursor: pointer;
 
+    &:hover
+    {
+      border-color: $color_rose;
+      background-color: $color_rose_bg2;
+
+    }
+
     & > a 
     {
       text-decoration: none;
@@ -123,7 +130,7 @@
       color: $color_text_primary;
     }
 
-    &_active
+    &_active,:hover
     {
       background-color: $color_rose;
       color: $color_white;
@@ -133,6 +140,45 @@
     :last-child
     {
       border: none;
+    }
+  }
+
+  &_detail
+  {
+
+    &_header
+    {
+      padding: 0 17px;
+      text-align: center;
+    }
+
+    &_title
+    {
+      @include typographyBuilder(primary,500,28,40); 
+      color: $color_rose;
+    }
+
+    &_desc
+    {
+      @include flex(row,center);
+      padding: 24px 0;
+      @include typographyBuilder(secondary,400,12,16); 
+      color: $color_text_secondary;
+    }
+
+    &_content
+    {
+      color: $color_text_primary;
+      @include typographyBuilder(secondary,400,14,24);
+      & > *
+      {
+        padding: 0 17px;
+      }
+
+      & > img
+      {
+        padding: 0;
+      }
     }
   }
 

@@ -69,7 +69,8 @@
     "postComment": "Post a comment",
     "recentPost": "Recent Post",
     "title": "Blogs",
-    "allBlog": "All Blogs"
+    "allBlog": "All Blogs",
+    "back": "Back to Blog List"
   },
   "breadcrumb": {
     "home": "Home",

@@ -1,8 +1,10 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { BlogSingle, BlogCategories, useI18n, BlogRecent } from '@sirclo/nexus'
+import { IoArrowBackOutline } from 'react-icons/io5'
+import { BlogSingle, useI18n, BlogRecent } from '@sirclo/nexus'
 import Layout from 'components/Layout/Layout'
 import { useBrand } from 'lib/useBrand'
 import styleBlog from 'public/scss/pages/Blog.module.scss'
@@ -38,12 +40,12 @@ const classesPlaceholderBlogs = {
 }
 
 const classesBlogRecent = {
-  // containerClassName: styles.blog_recent,
-  // blogRecentClassName: styles.blog_recentItem,
-  // imageClassName: styles.blog_recentItemImage,
-  // labelContainerClassName: styles.blog_recentItemContent,
-  // titleClassName: styles.blog_recentItemContentTitle,
-  // dateClassName: styles.blog_recentItemContentDate,
+  containerClassName: styleBlog.blog_items,
+  blogRecentClassName: styleBlog.blog_item,
+  imageClassName: styleBlog.blog_item_imageContainer,
+  labelContainerClassName: 'm-0',
+  titleClassName: styleBlog.blog_item_title,
+  dateClassName: styleBlog.blog_item_innerFooter,
 }
 
 const BlogSlug: FC<any> = ({
@@ -83,71 +85,39 @@ const BlogSlug: FC<any> = ({
           getTitle={setTitle}
           classes={classesBlogSingle}
           ID={slug.toString()}
-          // timeIcon={
-          //   <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}></div>
-          // }
-          // authorIcon={
-          //   <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__author}`}></div>
-          // }
+          timeIcon={','}
+          authorIcon={i18n.t('blog.by')}
           loadingComponent={<></>}
         />
+        <div className={styleBlog.blog_recent}>
+          <div className={styleBlog.blog_recent_title}>{i18n.t('blog.recentPost')}</div>
+          <BlogRecent
+            classes={classesBlogRecent}
+            limit={5}
+            linkPrefix="blog"
+            thumborSetting={{
+              width: 100,
+              format: 'webp',
+              quality: 85,
+            }}
+            loadingComponent={
+              <>
+                <Placeholder classes={classesPlaceholderBlogs} withImage />
+                <Placeholder classes={classesPlaceholderBlogs} withImage />
+                <Placeholder classes={classesPlaceholderBlogs} withImage />
+              </>
+            }
+          />
+          <div className={styleBlog.blog_footer}>
+            <Link href="/[lng]/blog" as={`/${lng}/blog`}>
+              <a>
+                <IoArrowBackOutline color="#998060" size={12} />
+                <span>{i18n.t('blog.back')}</span>
+              </a>
+            </Link>
+          </div>
+        </div>
       </div>
-      {/* 
-              <div className={`${styles.lookbook_nav} ${styles.blog_detailNavigation} d-flex flex-row align-items-center justify-content-between`}>
-                <button onClick={() => router.back()}>
-                  {i18n.t("global.back")}
-                </button>
-                <button onClick={() => toggleShare()} className={styles.blog_detailShare}>
-                  {i18n.t("product.share")}
-                </button>
-              </div>
-
-              {(totalCategories > 0 || totalCategories === null) &&
-                <>
-                  <h2 className={styles.blog_titleSide}>
-                    {i18n.t("blog.categories")}
-                  </h2>
-                  <BlogCategories
-                    classes={classesBlogCategories}
-                    getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
-                  />
-                </>
-              }
-              authorIcon={
-                <div
-                  className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__author}`}
-                ></div>
-              }
-              loadingComponent={
-                <div className="row">
-                  <div className="col-2">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </div>
-                  <div className="col-3">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </div>
-                  <div className="col-12 py-4">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </>
-                }
-              /> */}
-
-      {/* {showShare && (
-          <Popup
-            withHeader
-            setPopup={toggleShare}
-            mobileFull={false}
-            classPopopBody
-            popupTitle={i18n.t('product.shareProduct')}
-          >
-            <div className="">
-              <SocialShare urlSite={urlSite} />
-            </div>
-          </Popup>
-        )} */}
     </Layout>
   )
 }

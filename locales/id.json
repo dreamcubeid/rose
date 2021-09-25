@@ -69,7 +69,8 @@
     "postComment": "Kirimkan Komentar",
     "recentPost": "Postingan Terbaru",
     "title": "Blog",
-    "allBlog": "Semua Blog"
+    "allBlog": "Semua Blog",
+    "back": "Kembali Ke Daftar Blog"
   },
   "breadcrumb": {
     "home": "Beranda",

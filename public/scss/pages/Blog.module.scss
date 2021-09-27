@@ -203,6 +203,38 @@
         padding: 0;
         width: 100%;
       }
+
+      & > table
+      {
+        width: calc(100% - 34px);
+        margin: auto;
+        margin-top: 12px;
+        
+        & > tbody 
+        {
+          & > tr 
+          {
+            & > th 
+            {
+              height: 51px;
+              color: $color_white;
+              background-color: $color_rose;
+              padding: 13.5px 16px;
+              box-shadow: inset 0px -1px 0px $color_border;
+              @include typographyBuilder(secondary,500,14,24);
+            }
+
+            & > td 
+            {
+              height: 48px;
+              color:$color_text_primary;
+              padding: 13.5px 16px;
+              border-bottom: 1px solid $color_border;
+              @include typographyBuilder(secondary,400,14,24);
+            }
+          }
+        }
+      }
     }
   }
 

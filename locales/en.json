@@ -254,6 +254,10 @@
     "submitSuccess": "Success subscribe",
     "subscribe": "Subscribe"
   },
+  "notifyMe": {
+    "phoneInputPlaceholder": "Input your number Whatsapp",
+    "emailInputPlaceholder": "Input your Email"
+  },
   "orderHistory": {
     "lineItemDelivered": "Delivered",
     "lineItemNeedReview": "Needs Review",
@@ -372,7 +376,7 @@
     "addToCart": "Add To Cart",
     "additionalInfo": "Additional Info",
     "adjust": "Adjust",
-    "all": "All Products",
+    "all": "All",
     "back": "Back",
     "backToHome": "Back to Home",
     "buyNow": "Buy Now",
@@ -397,7 +401,7 @@
     "next": "Next",
     "noRelated": "No related products!",
     "notFound": "Product not found!",
-    "notify": "Notify Me by email:",
+    "notify": "Notify me later",
     "notifyError": "There was a problem activating reminders for this product, please try again later.",
     "notifySuccess": "Thank you for being interested in this product, we will notify you via the contact you provide when the product is available.",
     "notifyTitleError": "Failed to notify",
@@ -420,13 +424,14 @@
     "reviewsPerPage": "Reviews per page",
     "sale": "Sale",
     "seeAll": "See All",
-    "share": "Share",
+    "share": "Share Product",
     "shareProduct": "Share Product",
     "sort": "Sort",
-    "successAddToCart": "Item has successfully add to cart",
+    "successAddToCart": "Successfuly add to cart!",
     "summary": "Summary",
     "timeout": "Time Out",
     "timeoutDescription": "Thank you for being interested in this product, please click the button below to get other interesting products.",
+    "tryAgain": "Try Again",
     "updateCart": "Update",
     "viewAllCourierOption": "View All Courier Options",
     "viewCart": "View Cart",
@@ -540,14 +545,6 @@
     "track": "Track your order",
     "trackDriver": "Track Driver",
     "updatePinpoint": "Change Location Pin"
-  },
-  "socialShare": {
-    "email": "Email",
-    "facebook": "Facebook",
-    "linkedin": "Linkedin",
-    "telegram": "Telegram",
-    "twitter": "Twitter",
-    "whatsapp": "Whatsapp"
   },
   "sort": {
     "aToZAscending": "Name (Ascending)",

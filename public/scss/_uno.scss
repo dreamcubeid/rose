@@ -114,59 +114,6 @@ a:visited {
   } 
 }
 
-#size,
-#color
-{
-  span
-  {
-    display: flex;
-    margin: .5rem .5rem 0 0;
-    
-    input
-    {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-
-      &:checked + label
-      {
-        color: $color_blue;
-        border: 1px solid $color_blue;
-        background: $color_blue_light;
-        min-width: 50px;
-        max-width: 50px;
-        width: 50px;
-      }
-
-      &:disabled + label
-      {
-        opacity: .5 !important;
-      }
-    }
-
-    label
-    {
-      border: 1px solid $color_gray_primary;
-      border-radius: 3px;
-      padding: .5rem;
-      min-width: 50px;
-      width: 50px;
-      height: 42px;
-      cursor: pointer;
-      text-align: center;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover
-      {
-        background-color: $color_gray;
-      }
-    }
-  }
-}
-
 iframe
 {
   width: 100% !important;

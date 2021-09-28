@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.14",
-    "@sirclo/nexus": "2.1.0",
+    "@sirclo/nexus": "2.2.1",
     "bootstrap": "^4.5.0",
     "cookie": "^0.4.1",
     "env-cmd": "^10.1.0",
@@ -28,7 +28,7 @@
     "react-toastify": "^5.5.0",
     "sass": "^1.26.8"
   },
-  "prettier":{
+  "prettier": {
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all",

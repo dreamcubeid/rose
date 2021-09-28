@@ -5,7 +5,7 @@
   $this: &;
 
   @include flex(row, center, center);
-  @include typographyBuilder(secondary,500,14,24);
+  @include typographyBuilder(secondary, 400, 14, 24);
   @include fixedWidth(100%);
   @include transition();
   text-decoration: none;

@@ -108,6 +108,11 @@ $popup_color_header_border  : $color_grey;
       @include fixedHeight(100vh);
     }
 
+    &__normalHeight
+    {
+      @include fixedHeight(auto);
+    }
+
     @media screen and (min-width: #{$breakpoint_min_sm})
     {
       @include fixedWidth(375px);
@@ -209,26 +214,9 @@ $popup_color_header_border  : $color_grey;
   {
     @include flex(column, flex-start, flex-start);
     @include fixedSize(100%);
-    @extend .scrollbar_main;
     box-sizing: border-box;
     position: relative;
     padding: 18px;
-    margin-top: 15px;
-
-    overflow: auto;
-    overflow-x: hidden;
     overflow-y: auto;
-
-    &::after
-    {
-      content: "";
-      display: block;
-      position: relative;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      pointer-events: none;
-      @include fixedHeight(50px);
-    }
   }
 }

@@ -1,0 +1,95 @@
+@import '../utils/variables';
+@import '../components/Button.module.scss';
+
+.openOrder
+{
+  padding-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid $color_border;
+
+  &_title
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    margin-bottom: 8px;
+    color: $color_text_secondary;
+  }
+
+  &_container
+  {
+    @include fixedWidth(100%);
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    &Date,
+    &Time
+    {
+      @include flex(row, center, flex-start);
+      @include typographyBuilder(secondary, 400, 12, 16);
+      padding: 13px;
+      background: $color_rose_bg2;
+      color: $color_text_primary;
+    }
+
+    &Date
+    {
+      margin-right: 5px;
+    }
+  }
+
+  &_calendar,
+  &_clock
+  {
+    margin-right: 10px;
+  }
+
+  &_countdown
+  {
+    @include flex(row, center, center);
+    padding: 8px;
+    background: $color_rose_bg2;
+
+    & > div
+    {
+      @include position(relative);
+      @include flex(row, center, center);
+    }
+
+    & > span
+    {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin: 0 5px;
+    }
+  }
+
+  &_countdownItem
+  {
+    @include position(relative);
+    @include typographyBuilder(secondary, 500, 14, 24);
+    z-index: 2;
+    margin-right: 5px;
+    color: $color_error;
+
+    &Text
+    {
+      @include typographyBuilder(secondary, 500, 14, 24);
+      color: $color_text_primary;
+    }
+  }
+
+  &_timeout
+  {
+    @include typographyBuilder(secondary, 400, 16, 24);
+    text-align: center;
+    color: $color_error;
+    background: $color_rose_bg2;
+    margin-bottom: 12px;
+    padding: 8px;
+
+    &Desc
+    {
+      color: $color_text_primary;
+      margin-bottom: 24px;
+    }
+  }
+}

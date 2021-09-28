@@ -5,20 +5,20 @@ import {
   useEffect
 } from 'react'
 import dynamic from 'next/dynamic'
-import Router from 'next/router'
-import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  Calendar,
-  Clock,
-  Check,
-  Share2,
-  Bell,
-  X as XIcon
-} from 'react-feather'
+  FiCalendar,
+  FiClock
+} from 'react-icons/fi'
+import {
+  RiQuestionFill,
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiArrowDownSLine,
+  RiCloseLine,
+  RiChat1Line
+} from 'react-icons/ri'
 import {
   useI18n,
   ProductDetail,
@@ -31,149 +31,151 @@ import {
 import useWindowSize from 'lib/useWindowSize'
 import { useBrand } from 'lib/useBrand'
 import { GRAPHQL_URI } from 'lib/Constants'
+import { formatPrice } from 'lib/formatPrice'
 /* components */
 import SEO from 'components/SEO'
 import Layout from 'components/Layout/Layout'
 import Placeholder from 'components/Placeholder'
 const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
-const Popup = dynamic(() => import('components/Popup/Popup'))
-const PopupCart = dynamic(() => import('components/Popup/PopupCart'))
+const Popup = dynamic(() => import('components/Popup'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 /* styles */
-import stylesEstimate from 'public/scss/components/EstimateShipping.module.scss'
-import styles from 'public/scss/pages/ProductDetail.module.scss'
+import styleEstimate from 'public/scss/components/EstimateShipping.module.scss'
+import styleProductDetail from 'public/scss/components/ProductDetail.module.scss'
+import styleNotifyMe from 'public/scss/components/NotifyMe.module.scss'
+import styleProduct from 'public/scss/components/Product.module.scss'
+import styleOpenOrder from 'public/scss/components/OpenOrder.module.scss'
+import styleRatingReview from 'public/scss/components/RatingReview.module.scss'
 
 const classesProductDetail = {
-  productDetailParentDivClassName: styles.productdetail,
-  rowClassName: `row`,
-  imageRowClassName: `col-12 col-md-6 ${styles.productdetail_images}`,
-  arrowClassName: styles.productdetail_images_arrow,
-  dotClassName: styles.productdetail_images_dots,
-  mainImageClassName: `${styles.productdetail_images__image}`,
-  thumbnailImageClassName: styles.thumbnail_img,
-  propertyRowClassName: `col-12 col-md-6 ${styles.productdetail_content}`,
-  detailTitleClassName: styles.productdetail_content_title,
-  salePriceClassName: styles.productdetail_content_salePrice,
-  priceClassName: styles.productdetail_content_priceSale,
-  openOrderClassName: styles.productdetail_openorder,
-  openOrderTitleClassName: styles.productdetail_openorder_title,
-  openOrderContainerClassName: styles.productdetail_openorder_container,
-  openOrderDateClassName: styles.productdetail_openorder_container__date,
-  openOrderTimeClassName: styles.productdetail_openorder_container__time,
-  countDownContainerClassName: styles.productdetail_openorder_countdown,
-  countDownItemClassName: styles.productdetail_openorder_countdownItem,
-  countDownItemTextClassName: styles.productdetail_openorder_countdownItem__text,
-  openOrderTimeoutClassName: styles.productdetail_openorder_timeout,
-  openOrderTimeoutDescClassName: styles.productdetail_openorder_timeout__desc,
-  openOrderTimeoutBtnClassName: `btn text-uppercase mt-3 ${styles.btn_primary} ${styles.btn_long}`,
-  propertyInnerContainerClassName: styles.productdetail_content_inner,
-  variantContainerClassName: styles.productdetail_content_containerVariant,
-  variantOptionsContainerClassName: styles.productdetail_content_variant,
-  variantLabelClassName: styles.variantLabel,
-  variantOptionsClassName: styles.variantOption,
-  qtyBoxClassName: styles.productdetail_content_innerQty,
-  propertyFooterContainerClassname: styles.productdetail_propertyFooterContainer,
-  addToCartBtnClassName: `btn text-uppercase my-3 ${styles.btn_secondary} ${styles.btn_long} ${styles.btn_full_width}`,
-  buyNowBtnClassName: `btn  text-uppercase ${styles.btn_long} ${styles.btn_primary} ${styles.btn_full_width}`,
-  notifyMeClassName: styles.productdetail_notifyMe,
-  notifyMeOptionsClassName: styles.productdetail_notifyMeOptions,
-  notifyMeOptionClassName: styles.productdetail_notifyMeOption,
-  notifyMeRadioClassName: styles.productdetail_notifyMeRadio,
-  notifyMeRadioLabelClassName: styles.productdetail_notifyMeRadioLabel,
-  notifyMeInputWrapperClassName: styles.productdetail_notifyMeInputWrapper,
-  notifyMeLabelClassName: styles.productdetail_notifyMeLabel,
-  notifyMeInputClassName: `form-control ${styles.sirclo_form_input}`,
-  notifyMeSubmitClassName: `btn mt-3 ${styles.btn_primary} ${styles.btn_long} w-100`,
-  descriptionClassName: styles.productdetail_content_desc,
-  additionalInfoClassName: "d-none",
-  accordionClassName: styles.productdetail_content_desc_container,
+  productDetailParentDivClassName: styleProductDetail.productDetail,
+  imageRowClassName: styleProductDetail.productDetail_images,
+  arrowClassName: styleProductDetail.productDetail_arrow,
+  mainImageClassName: styleProductDetail.productDetail_image,
+  propertyRowClassName: styleProductDetail.productDetail_content,
+  detailTitleStarClassName: styleProductDetail.productDetail_star,
+  detailTitleStarNumberClassName: styleProductDetail.productDetail_starNumber,
+  detailTitleClassName: styleProductDetail.productDetail_title,
+  salePriceClassName: styleProductDetail.productDetail_salePrice,
+  priceClassName: styleProductDetail.productDetail_priceSale,
+  variantContainerClassName: styleProductDetail.productDetail_containerVariant,
+  variantOptionsContainerClassName: styleProductDetail.productDetail_variant,
+  variantLabelClassName: styleProductDetail.productDetail_variantLabel,
+  variantOptionsClassName: styleProductDetail.productDetail_variantOption,
+  qtyBoxClassName: styleProductDetail.productDetail_innerQty,
+  propertyFooterContainerClassname: styleProductDetail.productDetail_footerProperty,
+  addToCartBtnClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_primary}`,
+  buyNowBtnClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_secondary} mt-2`,
+  descriptionClassName: styleProductDetail.productDetail_desc,
+  additionalInfoClassName: 'd-none',
+  accordionClassName: styleProductDetail.productDetail_descContainer,
+  // Open Order
+  openOrderClassName: styleOpenOrder.openOrder,
+  openOrderTitleClassName: styleOpenOrder.openOrder_title,
+  openOrderContainerClassName: styleOpenOrder.openOrder_container,
+  openOrderDateClassName: styleOpenOrder.openOrder_containerDate,
+  openOrderTimeClassName: styleOpenOrder.openOrder_containerTime,
+  countDownContainerClassName: styleOpenOrder.openOrder_countdown,
+  countDownItemClassName: styleOpenOrder.openOrder_countdownItem,
+  countDownItemTextClassName: styleOpenOrder.openOrder_countdownItemText,
+  openOrderTimeoutClassName: styleOpenOrder.openOrder_timeout,
+  openOrderTimeoutDescClassName: styleOpenOrder.openOrder_timeoutDesc,
+  openOrderTimeoutBtnClassName: `${styleOpenOrder.btn} ${styleOpenOrder.btn_secondary}`,
+  // Notify Me
+  notifyMeClassName: styleNotifyMe.notifyMe,
+  notifyMeOptionsClassName: styleNotifyMe.notifyMe_options,
+  notifyMeOptionClassName: styleNotifyMe.notifyMe_option,
+  notifyMeRadioClassName: styleNotifyMe.notifyMe_radio,
+  notifyMeRadioLabelClassName: styleNotifyMe.notifyMe_radioLabel,
+  notifyMeInputWrapperClassName: styleNotifyMe.notifyMe_inputWrapper,
+  notifyMeInputClassName: styleNotifyMe.notifyMe_input,
+  notifyMeSubmitClassName: `${styleProductDetail.btn} ${styleProductDetail.btn_primary}`,
   // Estimate Shipping
-  estimateShippingWrapperClassName: stylesEstimate.wrapper,
-  estimateShippingTitleClassName: stylesEstimate.title,
-  estimateShippingDetailClassName: stylesEstimate.detail,
-  estimateShippingLogoClassName: stylesEstimate.detail_logo,
-  estimateShippingLogoImgClassName: stylesEstimate.detail_logoImage,
-  estimateShippingShowCourierClassName: stylesEstimate.detail_showCourier,
-  estimateShippingPopupContainerClassName: stylesEstimate.popup,
-  estimateShippingPopupContentClassName: stylesEstimate.popup_inner,
-  estimateShippingPopupHeaderClassName: stylesEstimate.popup_header,
-  estimateShippingPopupTitleClassName: stylesEstimate.popup_headerTitle,
-  estimateShippingPopupButtonCloseClassName: stylesEstimate.popup_headerClose,
-  estimateShippingPopupBodyClassName: stylesEstimate.popup_body,
-  estimateShippingPopupLineInfoClassName: stylesEstimate.popup_bodyLineInfo,
-  estimateShippingPopupLabelClassName: stylesEstimate.popup_bodyLabel,
-  estimateShippingPopupValueClassName: stylesEstimate.popup_bodyValue,
-  estimateShippingPopupProviderClassName: stylesEstimate.popup_provider,
-  estimateShippingPopupLineProviderClassName: stylesEstimate.popup_providerLine,
-  estimateShippingPopupProviderImgClassName: stylesEstimate.popup_providerImage,
-  estimateShippingPopupProviderLabelClassName: stylesEstimate.popup_providerLabel,
-  estimateShippingPopupProviderValueClassName: stylesEstimate.popup_providerValue,
+  estimateShippingWrapperClassName: styleEstimate.wrapper,
+  estimateShippingTitleClassName: styleEstimate.title,
+  estimateShippingDetailClassName: styleEstimate.detail,
+  estimateShippingLogoClassName: styleEstimate.detail_logo,
+  estimateShippingLogoImgClassName: styleEstimate.detail_logoImage,
+  estimateShippingShowCourierClassName: styleEstimate.detail_showCourier,
+  estimateShippingPopupContainerClassName: styleEstimate.popup,
+  estimateShippingPopupContentClassName: styleEstimate.popup_inner,
+  estimateShippingPopupHeaderClassName: styleEstimate.popup_header,
+  estimateShippingPopupTitleClassName: styleEstimate.popup_headerTitle,
+  estimateShippingPopupButtonCloseClassName: styleEstimate.popup_headerClose,
+  estimateShippingPopupBodyClassName: styleEstimate.popup_body,
+  estimateShippingPopupLineInfoClassName: styleEstimate.popup_bodyLineInfo,
+  estimateShippingPopupLabelClassName: styleEstimate.popup_bodyLabel,
+  estimateShippingPopupValueClassName: styleEstimate.popup_bodyValue,
+  estimateShippingPopupProviderClassName: styleEstimate.popup_provider,
+  estimateShippingPopupLineProviderClassName: styleEstimate.popup_providerLine,
+  estimateShippingPopupProviderImgClassName: styleEstimate.popup_providerImage,
+  estimateShippingPopupProviderLabelClassName: styleEstimate.popup_providerLabel,
+  estimateShippingPopupProviderValueClassName: styleEstimate.popup_providerValue,
 }
 
 const classesProductReview = {
-  reviewImageContainerClassName: styles.ratingReview_imageContainer,
-  reviewImageClassName: styles.ratingReview_image,
-  filtersClassName: styles.ratingReview_filters,
-  filterClassName: styles.ratingReview_filter,
-  activeFilterClassName: styles.ratingReview_filterActive,
-  filterLabelClassName: styles.ratingReview_filterLabel,
-  filterInputClassName: styles.ratingReview_filterInput,
-  filterIconClassName: styles.ratingReview_filterIcon,
-  sortClassName: styles.ratingReview_sort,
-  sortOptionsClassName: `form-control ${styles.ratingReview_sortOptions}`,
-  reviewListContainerClassName: styles.ratingReview_container,
-  reviewListStarContainerClassName: styles.ratingReview_starContainer,
-  reviewListDescriptionClassName: styles.ratingReview_desc,
-  reviewListImageContainerClassName: styles.ratingReview_imageContainer,
-  reviewListImageClassName: styles.ratingReview_image,
-  reviewListFooterClassName: styles.ratingReview_footer,
-  reviewListAuthorClassName: styles.ratingReview_author,
-  reviewListDateClassName: styles.ratingReview_date,
-  itemPerPageClassName: styles.ratingReview_itemPerPage,
-  itemPerPageLabelClassName: styles.ratingReview_itemPerPageLabel,
-  itemPerPageOptionsClassName: styles.ratingReview_itemPerPageOptions,
-  reviewPopupContainerClassName: styles.ratingReview_popupContainer,
-  reviewPopupContentClassName: styles.ratingReview_popupContent,
-  reviewPopupPreviewClassName: styles.ratingReview_popupPreview,
-  reviewPopupImagePreviewClassName: styles.ratingReview_popupImagePreview,
-  reviewPopupImagePopupClassName: styles.ratingReview_popupImage,
-  reviewPopupLeftButtonClassName: styles.ratingReview_popupLeftButton,
-  reviewPopupRightButtonClassName: styles.ratingReview_popupRightButton,
-  reviewPopupButtonCloseClassName: styles.ratingReview_popupButtonClose
+  reviewImageContainerClassName: styleRatingReview.ratingReview_imageContainer,
+  reviewImageClassName: styleRatingReview.ratingReview_image,
+  filtersClassName: styleRatingReview.ratingReview_filters,
+  filterClassName: styleRatingReview.ratingReview_filter,
+  activeFilterClassName: styleRatingReview.ratingReview_filterActive,
+  filterLabelClassName: styleRatingReview.ratingReview_filterLabel,
+  filterInputClassName: styleRatingReview.ratingReview_filterInput,
+  filterIconClassName: styleRatingReview.ratingReview_filterIcon,
+  sortClassName: styleRatingReview.ratingReview_sort,
+  sortOptionsClassName: `form-control ${styleRatingReview.ratingReview_sortOptions}`,
+  reviewListContainerClassName: styleRatingReview.ratingReview_container,
+  reviewListStarContainerClassName: styleRatingReview.ratingReview_starContainer,
+  reviewListDescriptionClassName: styleRatingReview.ratingReview_desc,
+  reviewListImageContainerClassName: styleRatingReview.ratingReview_imageContainer,
+  reviewListImageClassName: styleRatingReview.ratingReview_image,
+  reviewListFooterClassName: styleRatingReview.ratingReview_footer,
+  reviewListAuthorClassName: styleRatingReview.ratingReview_author,
+  reviewListDateClassName: styleRatingReview.ratingReview_date,
+  itemPerPageClassName: styleRatingReview.ratingReview_itemPerPage,
+  itemPerPageLabelClassName: styleRatingReview.ratingReview_itemPerPageLabel,
+  itemPerPageOptionsClassName: styleRatingReview.ratingReview_itemPerPageOptions,
+  reviewPopupContainerClassName: styleRatingReview.ratingReview_popupContainer,
+  reviewPopupContentClassName: styleRatingReview.ratingReview_popupContent,
+  reviewPopupPreviewClassName: styleRatingReview.ratingReview_popupPreview,
+  reviewPopupImagePreviewClassName: styleRatingReview.ratingReview_popupImagePreview,
+  reviewPopupImagePopupClassName: styleRatingReview.ratingReview_popupImage,
+  reviewPopupLeftButtonClassName: styleRatingReview.ratingReview_popupLeftButton,
+  reviewPopupRightButtonClassName: styleRatingReview.ratingReview_popupRightButton,
+  reviewPopupButtonCloseClassName: styleRatingReview.ratingReview_popupButtonClose
 }
 
 const classesProductRelate = {
-  productContainerClassName: ` mb-0 products_list ${styles.product} ${styles.productdetail_relatedProductItem}`,
-  stickerContainerClassName: styles.product_sticker,
-  outOfStockLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__outofstock}`,
-  saleLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__sale}`,
-  comingSoonLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__comingsoon}`,
-  openOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__openorder}`,
-  preOrderLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__preorder}`,
-  newLabelClassName: `${styles.product_stickerLabel} ${styles.product_stickerLabel__new}`,
-  productImageContainerClassName: styles.product_link,
-  productImageClassName: styles.product_link__image,
-  productLabelContainerClassName: styles.product_label,
-  productTitleClassName: styles.product_label__title,
-  productPriceClassName: styles.product_labelPrice,
-  salePriceClassName: styles.product_labelPrice__sale,
-  priceClassName: styles.product_labelPrice__price,
+  productContainerClassName: `col-6 ${styleProduct.product_itemContainer}`,
+  stickerContainerClassName: `${styleProduct.product_sticker} ${styleProduct.product_stickerGrid}`,
+  outOfStockLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__outofstock}`,
+  saleLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__sale}`,
+  comingSoonLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__comingsoon}`,
+  openOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__openorder}`,
+  preOrderLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__preorder}`,
+  newLabelClassName: `${styleProduct.product_stickerLabel} ${styleProduct.product_stickerLabel__new}`,
+  productImageContainerClassName: styleProduct.product_link,
+  productImageClassName: styleProduct.product_itemContainerImage,
+  productLabelContainerClassName: styleProduct.product_label,
+  productTitleClassName: styleProduct.product_label__title,
+  productPriceClassName: styleProduct.product_labelPrice,
+  salePriceClassName: styleProduct.product_labelPrice__sale,
+  priceClassName: styleProduct.product_labelPrice__price,
 }
 
 const classesPaginationProductReview = {
-  pagingClassName: styles.pagination,
-  activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item
+  pagingClassName: styleRatingReview.pagination,
+  activeClassName: styleRatingReview.pagination_active,
+  itemClassName: styleRatingReview.pagination_item
 }
 
 const classesPlaceholderProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
-  placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_product__list}`,
+  placeholderImage: `${styleProduct.placeholderItem} ${styleProduct.placeholderItem_product__cardDetail}`,
+  placeholderList: `${styleProduct.placeholderItem} ${styleProduct.placeholderItem_product__list}`,
 }
 
 const classesPlaceholderRelateProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.productdetail_relatedProductItem}`,
+  placeholderImage: `${styleProduct.placeholderItem} ${styleProduct.productdetail_relatedProductItem}`,
 }
 
 const Product: FC<any> = ({
@@ -185,31 +187,36 @@ const Product: FC<any> = ({
   urlSite
 }) => {
   const i18n: any = useI18n()
+  const router: any = useRouter()
   const size = useWindowSize()
+  const allowedProductRecommendation = isProductRecommendationAllowed()
 
   const [productId, setProductId] = useState(null)
-  const [showPopup, setShowPopup] = useState<boolean>(false)
-  const [showCart, setShowCart] = useState<boolean>(false)
-  const [showShare, setShowShare] = useState<boolean>(false)
+  const [showSuccessAddToCart, setShowSuccessAddToCart] = useState<any>(null)
   const [showPopupNotify, setShowPopupNotify] = useState<boolean>(false)
   const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
   const [showModalErrorNotify, setShowModalErrorNotify] = useState<boolean>(false)
+  const [showRatingReview, setShowRatingReview] = useState<boolean>(false)
   const [totalAllReviews, setTotalAllReviews] = useState(null)
   const [totalItems, setTotalItems] = useState(null)
 
   useEffect(() => {
-    if (showCart) document.body.style.overflow = "hidden"
-    else document.body.style.overflow = "unset"
-  }, [showCart])
+    if (showSuccessAddToCart || showModalErrorAddToCart || showPopupNotify || showModalErrorNotify) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = 'unset'
+  }, [showSuccessAddToCart, showModalErrorAddToCart, showPopupNotify, showModalErrorNotify])
 
-  const allowedProductRecommendation = isProductRecommendationAllowed()
-  const toogleErrorAddToCart = () => setShowModalErrorAddToCart(!showModalErrorAddToCart)
-  const tooglePopup = () => setShowPopup(!showPopup)
-  const toogleCart = () => setShowCart(!showCart)
-  const toogleShare = () => setShowShare(!showShare)
+  useEffect(() => {
+    if (showRatingReview) {
+      const ratingReview = document.getElementById('ratingReview')
+      ratingReview.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest'
+      })
+    }
+  }, [showRatingReview])
 
-  // IS PROD VARIABLE
-  const IS_PROD = process.env.IS_PROD
+  const toggleRatingReview = () => setShowRatingReview(!showRatingReview)
 
   return (
     <Layout
@@ -217,6 +224,7 @@ const Product: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      layoutClassName="layout_fullHeight"
     >
       {data && (
         <SEO
@@ -226,303 +234,326 @@ const Product: FC<any> = ({
           image={data?.imageURLs || ""}
         />
       )}
-      {showPopup && (
-        <Popup withHeader={false} setPopup={tooglePopup} mobileFull={false}>
-          <div className={styles.productdetail_popup}>
-            <div className={styles.productdetail_popup_content}>
-              <div className={styles.productdetail_popup_content__icon}>
-                <Check color="white" size={40} />
-              </div>
-              <h3>{i18n.t("product.successAddToCart")}</h3>
-            </div>
-            <div>
+
+      {(data?.published === false || data === null) ? (
+        <div className={styleProductDetail.productDetail_empty}>
+          <EmptyComponent
+            icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+            title={i18n.t("product.isEmpty")}
+            button={
               <button
-                className={`btn ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} mb-3`}
-                onClick={() => {
-                  setShowPopup(false)
-                  setShowCart(true)
-                }}
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary} mt-2`}
+                onClick={() =>
+                  router.push(`/[lng]/products`, `/${lng}/products`)
+                }
+              >
+                {i18n.t("product.back")}
+              </button>
+            }
+          />
+        </div>
+      ) : (
+        <ProductDetail
+          slug={slug}
+          withButtonBuyNow
+          lazyLoadedImage={false}
+          classes={classesProductDetail}
+          getProductID={(id) => setProductId(id)}
+          ratingIcon={<span className="ratingStar">&#x2605</span>}
+          accordionIcon={<RiArrowDownSLine color="#444444" size={18} />}
+          closeIcon={<RiCloseLine color="#444444" size={18} />}
+          estimateIconClose={<RiCloseLine color="#444444" size={25} />}
+          enableArrow
+          enableDots
+          activeDot={<div className={styleProductDetail.productDetail_imagesCustomDotsActive}></div>}
+          inactiveDot={<div className={styleProductDetail.productDetail_imagesCustomDots}></div>}
+          onComplete={(data: any) => setShowSuccessAddToCart(data?.saveCart?.lineItems[0])}
+          onCompleteMsg={() => setShowPopupNotify(true)}
+          onError={() => setShowModalErrorAddToCart(true)}
+          onErrorMsg={(msg) => msg && toast.error(msg)}
+          withEstimateShipping={true}
+          prevIcon={<RiArrowLeftSLine color="#444444" size={25} />}
+          nextIcon={<RiArrowRightSLine color="#444444" size={25} />}
+          openOrderIconDate={
+            <FiCalendar
+              size={15}
+              color="#998060"
+              className={styleOpenOrder.openOrder_calendar}
+            />
+          }
+          openOrderIconTime={
+            <FiClock
+              size={15}
+              color="#998060"
+              className={styleOpenOrder.openOrder_clock}
+            />
+          }
+          isButton={{
+            0: true,
+            1: true,
+          }}
+          thumborSetting={{
+            width: 800,
+            format: "webp",
+            quality: 85,
+          }}
+          customDetailComponent={
+            <div className={styleProductDetail.productDetail_socialShare}>
+              <SocialShare
+                urlSite={urlSite}
+                title={i18n.t("product.share")}
+              />
+            </div>
+          }
+          loadingComponent={
+            <div className={styleProductDetail.productDetail_loading}>
+              <Placeholder
+                classes={classesPlaceholderProduct}
+                withImage
+              />
+              <div className="container mt-3">
+                <Placeholder
+                  classes={classesPlaceholderProduct}
+                  withList
+                  listMany={3}
+                />
+              </div>
+            </div>
+          }
+        />
+      )}
+
+      {(data?.published !== false || data !== null) &&
+        <div className="container">
+          <div
+            className={`
+            ${styleProductDetail.ratingReview}
+            ${!showRatingReview && styleProductDetail.ratingReview_extra}
+            ${totalItems > 0 && styleProductDetail.ratingReview_extraRevert}
+          `}
+            onClick={() => toggleRatingReview()}
+          >
+            <p className={styleProductDetail.ratingReview_title}>
+              {i18n.t("product.review")}
+            </p>
+            <RiArrowDownSLine color="#444444" size={18} />
+          </div>
+        </div>
+      }
+
+      {brand?.settings?.reviewsAndRatingEnabled &&
+        <div
+          id="ratingReview"
+          className={`
+            ${styleRatingReview.ratingReview}
+            ${showRatingReview && styleRatingReview.ratingReview_show}
+            ${(allowedProductRecommendation && totalItems === 0) && styleRatingReview.ratingReview_extra}
+          `}
+        >
+          <div className="container">
+            <div className={styleRatingReview.ratingReview_header}>
+              <RiChat1Line color="#444444" size={18} />
+              <p className={styleRatingReview.ratingReview_headerTitle}>
+                {totalAllReviews === null ? "..." : totalAllReviews}{" "}{i18n.t("product.ratingReviewTitle")}
+              </p>
+            </div>
+            <ProductReviews
+              productID={productId}
+              productName={slug}
+              classes={classesProductReview}
+              reviewsPaginationClasses={classesPaginationProductReview}
+              getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
+              itemPerPageOptions={[5, 10, 25, 50, 100]}
+              iconClose={<RiCloseLine color="#444444" />}
+              iconLeft={<RiArrowLeftSLine color="#444444" />}
+              iconRight={<RiArrowRightSLine color="#444444" />}
+              reviewsPrevLabel={<RiArrowLeftSLine color="#444444" />}
+              reviewsNextLabel={<RiArrowRightSLine color="#444444" />}
+              thumborSetting={{
+                width: size.width < 575 ? 350 : 500,
+                format: 'webp',
+                quality: 85,
+              }}
+              customEmptyComponentReviews={
+                <div className="col-12">
+                  <EmptyComponent
+                    icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+                    title={i18n.t("product.isEmpty")}
+                  />
+                </div>
+              }
+            />
+          </div>
+        </div>
+      }
+
+      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
+        <div className={`container ${styleProductDetail.upSell}`}>
+          <h6 className={styleProductDetail.upSell_title}>
+            {i18n.t("product.related")}
+          </h6>
+          <div className="row">
+            <Products
+              filter={{ openOrderScheduled: false, published: true }}
+              classes={classesProductRelate}
+              slug={slug}
+              getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+              itemPerPage={2}
+              isButton
+              fullPath={`product/{id}`}
+              pathPrefix='product'
+              lazyLoadedImage={false}
+              thumborSetting={{
+                width: size.width < 768 ? 350 : 600,
+                format: "webp",
+                quality: 85
+              }}
+              loadingComponent={
+                <>
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                  <Placeholder
+                    classes={classesPlaceholderRelateProduct}
+                    withImage
+                  />
+                </>
+              }
+            />
+          </div>
+        </div>
+      }
+
+      <Popup
+        withHeader={false}
+        visibleState={showSuccessAddToCart}
+        setVisibleState={setShowSuccessAddToCart}
+        outsideClose={false}
+      >
+        {showSuccessAddToCart &&
+          <>
+            <div className={styleProductDetail.productDetail_popupTitle}>
+              <h3>
+                {i18n.t("product.successAddToCart")}
+              </h3>
+            </div>
+            <div className={styleProductDetail.productDetail_saveCartDetail}>
+              <img
+                src={showSuccessAddToCart?.imageURL}
+                className={styleProductDetail.productDetail_saveCartImage}
+              />
+              <div className={styleProductDetail.productDetail_saveCartContent}>
+                <h3 className={styleProductDetail.productDetail_saveCartDetailTitle}>
+                  {showSuccessAddToCart?.title}
+                </h3>
+                <div className={styleProductDetail.productDetail_saveCartDetailPrice}>
+                  {showSuccessAddToCart?.salePrice !== showSuccessAddToCart?.price &&
+                    <span className={styleProductDetail.productDetail_salePrice}>
+                      {formatPrice(showSuccessAddToCart?.price.value, "IDR")}
+                    </span>
+                  }
+                  <span className={styleProductDetail.productDetail_salePriceNormal}>
+                    {formatPrice(showSuccessAddToCart?.salePrice.value, "IDR")}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className={styleProductDetail.productDetail_saveCartFooter}>
+              <button
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_secondary} mr-2`}
+                onClick={() => setShowSuccessAddToCart(false)}
+              >
+                {i18n.t("product.continueShopping")}
+              </button>
+              <button
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary} ml-2`}
+                onClick={() => router.push("/[lng]/cart", `/${lng}/cart`)}
               >
                 {i18n.t("product.viewCart")}
               </button>
             </div>
-            <div>
-              <button
-                className={`btn ${styles.btn_blue}`}
-                onClick={() => setShowPopup(false)}
-              >
-                {i18n.t("product.continueShopping")}
-              </button>
-            </div>
-          </div>
-        </Popup>
-      )}
-      {showCart && (
-        <PopupCart
-          setPopup={toogleCart}
-          popupTitle={i18n.t("cart.title")}
-          lng={lng}
-        />
-      )}
-      {showModalErrorAddToCart && (
-        <Popup
-          withHeader
-          setPopup={toogleErrorAddToCart}
-          mobileFull={false}
-          classPopopBody
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
-              {i18n.t("cart.errorSKUTitle")}
+          </>
+        }
+      </Popup>
+
+      <Popup
+        withHeader={false}
+        visibleState={showModalErrorAddToCart}
+        setVisibleState={setShowModalErrorAddToCart}
+      >
+        <>
+          <div className={styleProductDetail.productDetail_popupTitle}>
+            <h3>
+              {i18n.t("product.successAddToCart")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
-              {i18n.t("cart.errorSKUDesc")}{" "}
+          </div>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
+              {i18n.t("cart.errorSKUDesc")}
             </p>
           </div>
-        </Popup>
-      )}
-      {showShare && (
-        <Popup
-          withHeader
-          setPopup={toogleShare}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.shareProduct")}
-        >
-          <div className={styles.productdetail_share}>
-            <SocialShare i18n={i18n} urlSite={urlSite} />
-          </div>
-        </Popup>
-      )}
-      {showPopupNotify && (
-        <Popup
-          withHeader={false}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.notify")}
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
+        </>
+      </Popup>
+
+      <Popup
+        withHeader={false}
+        visibleState={showPopupNotify}
+        setVisibleState={setShowPopupNotify}
+        outsideClose={false}
+      >
+        <>
+          <div className={styleProductDetail.productDetail_popupTitle}>
+            <h3>
               {i18n.t("product.notifyTitleSuccess")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
+          </div>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
               {i18n.t("product.notifySuccess")}
             </p>
-            <button
-              className={`btn mt-3 ${styles.btn_secondary}`}
-              onClick={() => {
-                setShowPopupNotify(false)
-                Router.push("/[lng]/products", `/${lng}/products`)
-              }}>
-              {i18n.t("product.continueShopping")}
-            </button>
           </div>
-        </Popup>
-      )}
-      {showModalErrorNotify && (
-        <Popup
-          withHeader={false}
-          mobileFull={false}
-          classPopopBody
-          popupTitle={i18n.t("product.notify")}
-        >
-          <div className={styles.productdetail_popupError}>
-            <h3 className={styles.productdetail_popupErrorTitle}>
+          <button
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
+            onClick={() => {
+              setShowPopupNotify(false)
+              router.push("/[lng]/products", `/${lng}/products`)
+            }}
+          >
+            {i18n.t("product.continueShopping")}
+          </button>
+        </>
+      </Popup>
+
+      <Popup
+        withHeader={false}
+        visibleState={showModalErrorNotify}
+        setVisibleState={setShowModalErrorNotify}
+        outsideClose={false}
+      >
+        <>
+          <div className={styleProductDetail.productDetail_popupTitle}>
+            <h3>
               {i18n.t("product.notifyTitleFailed")}
             </h3>
-            <p className={styles.productdetail_popupErrorDesc}>
+          </div>
+          <div className={styleProductDetail.productDetail_popupContent}>
+            <p className={styleProductDetail.productDetail_popupDesc}>
               {i18n.t("product.notifyFailed")}
             </p>
-            <button
-              className={`btn mt-3 ${styles.btn_secondary}`}
-              onClick={() => setShowModalErrorNotify(false)}>
-              {i18n.t("product.back")}
-            </button>
           </div>
-        </Popup>
-      )}
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
-            {data === null ? (
-              <EmptyComponent
-                title={i18n.t("product.isEmpty")}
-                button={
-                  <button
-                    className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
-                    onClick={() =>
-                      Router.push(`/[lng]/products`, `/${lng}/products`)
-                    }
-                  >
-                    {i18n.t("product.back")}
-                  </button>
-                }
-              />
-            ) : (
-              <ProductDetail
-                slug={slug}
-                withButtonBuyNow
-                lazyLoadedImage={false}
-                classes={classesProductDetail}
-                getProductID={(id) => setProductId(id)}
-                ratingIcon={<span className="ratingStar">&#x2605</span>}
-                accordionIcon={<ChevronDown />}
-                enableArrow={size.width && size.width < 576 ? true : false}
-                enableDots={size.width && size.width < 576 ? true : false}
-                onComplete={() => setShowPopup(true)}
-                onCompleteMsg={() => setShowPopupNotify(true)}
-                onError={() => setShowModalErrorAddToCart(true)}
-                onErrorMsg={(msg) => msg && toast.error(msg)}
-                withEstimateShipping={IS_PROD === "false" ? true : false}
-                prevIcon={<span className={styles.productdetail_images_arrowPrev} />}
-                nextIcon={<span className={styles.productdetail_images_arrowNext} />}
-                notifyIcon={<Bell color="white" />}
-                openOrderIconDate={
-                  <Calendar
-                    className={styles.productdetail_openorder_container__icon}
-                  />
-                }
-                openOrderIconTime={
-                  <Clock
-                    className={styles.productdetail_openorder_container__icon}
-                  />
-                }
-                isButton={{
-                  0: true,
-                  1: true,
-                }}
-                thumborSetting={{
-                  width: 800,
-                  format: "webp",
-                  quality: 85,
-                }}
-                customDetailComponent={
-                  <>
-                    <button
-                      className={`btn text-uppercase mt-3 ${styles.btn_secondary}`}
-                      onClick={toogleShare}
-                    >
-                      <div className={styles.productdetail_buttonShare}>
-                        <Share2 color="#2296CB" size={20} />
-                        <span>{i18n.t("product.share")}</span>
-                      </div>
-                    </button>
-                  </>
-                }
-                loadingComponent={
-                  <div className={styles.productdetail_placeholder}>
-                    <div className="row">
-                      <div className="col-12 col-md-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withImage
-                        />
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withTitle
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderProduct}
-                          withList
-                          listMany={3}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                }
-              />
-            )}
-          </div>
-        </div>
-      </div>
-
-      {brand?.settings?.reviewsAndRatingEnabled &&
-        <div className={styles.ratingReview}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-lg-8 offset-lg-2">
-                <h2 className={styles.ratingReview_titleSection}>
-                  {i18n.t("product.ratingReviewTitle")}{" "}({totalAllReviews === null ? "..." : totalAllReviews})
-                </h2>
-                <ProductReviews
-                  productID={productId}
-                  productName={slug}
-                  classes={classesProductReview}
-                  reviewsPaginationClasses={classesPaginationProductReview}
-                  getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
-                  itemPerPageOptions={[5, 10, 25, 50, 100]}
-                  iconClose={<XIcon color="black" />}
-                  iconLeft={<ChevronLeft color="black" />}
-                  iconRight={<ChevronRight color="black" />}
-                  reviewsNextLabel={<ChevronRight color="black" />}
-                  reviewsPrevLabel={<ChevronLeft color="black" />}
-                  thumborSetting={{
-                    width: size.width < 575 ? 350 : 500,
-                    format: 'webp',
-                    quality: 85,
-                  }}
-                  customEmptyComponentReviews={
-                    <div className="col-12">
-                      <EmptyComponent
-                        
-                      />
-                    </div>
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-lg-8 offset-lg-2">
-              <div className={styles.productdetail_relatedProductHeader}>
-                <h6 className={styles.productdetail_relatedProductTitle}>{i18n.t("product.related")}</h6>
-              </div>
-              <div className={styles.productdetail_relatedProduct}>
-                <LazyLoadComponent>
-                  <Products
-                    filter={{ openOrderScheduled: false, published: true }}
-                    classes={classesProductRelate}
-                    slug={slug}
-                    getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-                    itemPerPage={4}
-                    isButton
-                    fullPath={`product/{id}`}
-                    pathPrefix={`product`}
-                    lazyLoadedImage={false}
-                    loadingComponent={
-                      <>
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                        <Placeholder
-                          classes={classesPlaceholderRelateProduct}
-                          withImage
-                        />
-                      </>
-                    }
-                    thumborSetting={{
-                      width: size.width < 768 ? 350 : 600,
-                      format: "webp",
-                      quality: 85
-                    }}
-                  />
-                </LazyLoadComponent>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
+          <button
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
+            onClick={() => setShowPopupNotify(false)}
+          >
+            {i18n.t("product.tryAgain")}
+          </button>
+        </>
+      </Popup>
     </Layout>
   )
 }

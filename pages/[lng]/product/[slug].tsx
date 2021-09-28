@@ -235,7 +235,7 @@ const Product: FC<any> = ({
         />
       )}
 
-      {data?.published === false ? (
+      {(data?.published === false || data === null) ? (
         <div className={styleProductDetail.productDetail_empty}>
           <EmptyComponent
             icon={<RiQuestionFill color="#A8A8A8" size={20} />}
@@ -323,7 +323,7 @@ const Product: FC<any> = ({
         />
       )}
 
-      {data?.published !== false &&
+      {(data?.published !== false || data !== null) &&
         <div className="container">
           <div
             className={`

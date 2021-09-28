@@ -22,21 +22,8 @@ const classesBlogSingle = {
   authorPicContainerClassName: 'd-none',
   authorPicClassName: 'd-none',
   authorInfoClassName: 'd-none',
-  // createdByClassName: `d-flex flex-row align-items-center justify-content-start flex-nowrap w-100`,
   createdByInnerClassName: styleBlog.blog_detail_desc,
-  // authorClassName: 'd-flex flex-row align-items-center justify-content-start order-2',
-  // dateClassName: 'd-flex flex-row align-items-center justify-content-start order-1',
   blogContentClassName: styleBlog.blog_detail_content,
-}
-
-const classesBlogCategories = {
-  // containerClassName: styles.blog_category,
-  // categoryClassName: styles.blog_categoryItem,
-  // linkClassName: styles.blog_categoryLink,
-}
-
-const classesPlaceholderBlogs = {
-  // placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_blogsList}`,
 }
 
 const classesBlogRecent = {
@@ -56,12 +43,7 @@ const BlogSlug: FC<any> = ({
   urlSite,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
-  const [totalCategories, setTotalCategories] = useState(null)
-  const [showShare, setShowShare] = useState<boolean>(false)
-  const toggleShare = () => setShowShare(!showShare)
   const [title, setTitle] = useState<string>('')
-
-  const router = useRouter()
 
   return (
     <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
@@ -87,10 +69,15 @@ const BlogSlug: FC<any> = ({
           ID={slug.toString()}
           timeIcon={','}
           authorIcon={i18n.t('blog.by')}
-          loadingComponent={<></>}
+          loadingComponent={
+            <div className="w-100 text-center">
+              <span className="spinner-border" />
+            </div>
+          }
         />
         <div className={styleBlog.blog_recent}>
           <div className={styleBlog.blog_recent_title}>{i18n.t('blog.recentPost')}</div>
+
           <BlogRecent
             classes={classesBlogRecent}
             limit={5}
@@ -101,11 +88,9 @@ const BlogSlug: FC<any> = ({
               quality: 85,
             }}
             loadingComponent={
-              <>
-                <Placeholder classes={classesPlaceholderBlogs} withImage />
-                <Placeholder classes={classesPlaceholderBlogs} withImage />
-                <Placeholder classes={classesPlaceholderBlogs} withImage />
-              </>
+              <div className="w-100 text-center">
+                <span className="spinner-border" />
+              </div>
             }
           />
           <div className={styleBlog.blog_footer}>

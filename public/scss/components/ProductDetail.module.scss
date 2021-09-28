@@ -202,7 +202,7 @@
 
   &_footerProperty
   {
-    margin-bottom: 24px;
+    margin: 24px 0;
   }
 
   &_innerQty
@@ -379,6 +379,11 @@
   &_socialShare
   {
     padding: 24px 0 0;
+  }
+
+  &_empty
+  {
+    margin-top: 58px;
   }
 }
 

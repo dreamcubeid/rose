@@ -10,10 +10,12 @@ import { toast } from 'react-toastify'
 import {
   ChevronLeft,
   ChevronRight,
-  Calendar,
-  Clock,
   X as XIcon
 } from 'react-feather'
+import {
+  FiCalendar,
+  FiClock
+} from 'react-icons/fi'
 import {
   RiQuestionFill,
   RiArrowLeftSLine,
@@ -47,6 +49,7 @@ import styleEstimate from 'public/scss/components/EstimateShipping.module.scss'
 import styleProductDetail from 'public/scss/components/ProductDetail.module.scss'
 import styleNotifyMe from 'public/scss/components/NotifyMe.module.scss'
 import styleProduct from 'public/scss/components/Product.module.scss'
+import styleOpenOrder from 'public/scss/components/OpenOrder.module.scss'
 import styleRatingReview from 'public/scss/components/RatingReview.module.scss'
 import styles from 'public/scss/pages/ProductDetail.module.scss'
 
@@ -73,17 +76,17 @@ const classesProductDetail = {
   additionalInfoClassName: 'd-none',
   accordionClassName: styleProductDetail.productDetail_descContainer,
   // Open Order
-  openOrderClassName: styles.productdetail_openorder,
-  openOrderTitleClassName: styles.productdetail_openorder_title,
-  openOrderContainerClassName: styles.productdetail_openorder_container,
-  openOrderDateClassName: styles.productdetail_openorder_container__date,
-  openOrderTimeClassName: styles.productdetail_openorder_container__time,
-  countDownContainerClassName: styles.productdetail_openorder_countdown,
-  countDownItemClassName: styles.productdetail_openorder_countdownItem,
-  countDownItemTextClassName: styles.productdetail_openorder_countdownItem__text,
-  openOrderTimeoutClassName: styles.productdetail_openorder_timeout,
-  openOrderTimeoutDescClassName: styles.productdetail_openorder_timeout__desc,
-  openOrderTimeoutBtnClassName: `btn text-uppercase mt-3 ${styles.btn_primary} ${styles.btn_long}`,
+  openOrderClassName: styleOpenOrder.openOrder,
+  openOrderTitleClassName: styleOpenOrder.openOrder_title,
+  openOrderContainerClassName: styleOpenOrder.openOrder_container,
+  openOrderDateClassName: styleOpenOrder.openOrder_containerDate,
+  openOrderTimeClassName: styleOpenOrder.openOrder_containerTime,
+  countDownContainerClassName: styleOpenOrder.openOrder_countdown,
+  countDownItemClassName: styleOpenOrder.openOrder_countdownItem,
+  countDownItemTextClassName: styleOpenOrder.openOrder_countdownItemText,
+  openOrderTimeoutClassName: styleOpenOrder.openOrder_timeout,
+  openOrderTimeoutDescClassName: styleOpenOrder.openOrder_timeoutDesc,
+  openOrderTimeoutBtnClassName: `${styleOpenOrder.btn} ${styleOpenOrder.btn_secondary}`,
   // Notify Me
   notifyMeClassName: styleNotifyMe.notifyMe,
   notifyMeOptionsClassName: styleNotifyMe.notifyMe_options,
@@ -240,20 +243,22 @@ const Product: FC<any> = ({
       )}
 
       {data === null ? (
-        <EmptyComponent
-          icon={<RiQuestionFill color="#A8A8A8" size={20} />}
-          title={i18n.t("product.isEmpty")}
-          button={
-            <button
-              className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
-              onClick={() =>
-                router.push(`/[lng]/products`, `/${lng}/products`)
-              }
-            >
-              {i18n.t("product.back")}
-            </button>
-          }
-        />
+        <div className={styleProductDetail.productDetail_empty}>
+          <EmptyComponent
+            icon={<RiQuestionFill color="#A8A8A8" size={20} />}
+            title={i18n.t("product.isEmpty")}
+            button={
+              <button
+                className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
+                onClick={() =>
+                  router.push(`/[lng]/products`, `/${lng}/products`)
+                }
+              >
+                {i18n.t("product.back")}
+              </button>
+            }
+          />
+        </div>
       ) : (
         <ProductDetail
           slug={slug}
@@ -277,13 +282,17 @@ const Product: FC<any> = ({
           prevIcon={<RiArrowLeftSLine color="#444444" size={25} />}
           nextIcon={<RiArrowRightSLine color="#444444" size={25} />}
           openOrderIconDate={
-            <Calendar
-              className={styles.productdetail_openorder_container__icon}
+            <FiCalendar
+              size={15}
+              color="#998060"
+              className={styleOpenOrder.openOrder_calendar}
             />
           }
           openOrderIconTime={
-            <Clock
-              className={styles.productdetail_openorder_container__icon}
+            <FiClock
+              size={15}
+              color="#998060"
+              className={styleOpenOrder.openOrder_clock}
             />
           }
           isButton={{
@@ -304,45 +313,39 @@ const Product: FC<any> = ({
             </div>
           }
           loadingComponent={
-            <div className={styles.productdetail_placeholder}>
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <Placeholder
-                    classes={classesPlaceholderProduct}
-                    withImage
-                  />
-                </div>
-                <div className="col-12 col-md-6">
-                  <Placeholder
-                    classes={classesPlaceholderProduct}
-                    withTitle
-                  />
-                  <Placeholder
-                    classes={classesPlaceholderProduct}
-                    withList
-                    listMany={3}
-                  />
-                </div>
+            <div className={styleProductDetail.productDetail_loading}>
+              <Placeholder
+                classes={classesPlaceholderProduct}
+                withImage
+              />
+              <div className="container mt-3">
+                <Placeholder
+                  classes={classesPlaceholderProduct}
+                  withList
+                  listMany={3}
+                />
               </div>
             </div>
           }
         />
       )}
 
-      <div className="container">
-        <div
-          className={`
+      {data !== null &&
+        <div className="container">
+          <div
+            className={`
             ${styleProductDetail.ratingReview}
             ${!showRatingReview && styleProductDetail.ratingReview_extra}
           `}
-          onClick={() => toggleRatingReview()}
-        >
-          <p className={styleProductDetail.ratingReview_title}>
-            {i18n.t("product.review")}
-          </p>
-          <RiArrowDownSLine color="#444444" size={18} />
+            onClick={() => toggleRatingReview()}
+          >
+            <p className={styleProductDetail.ratingReview_title}>
+              {i18n.t("product.review")}
+            </p>
+            <RiArrowDownSLine color="#444444" size={18} />
+          </div>
         </div>
-      </div>
+      }
 
       {brand?.settings?.reviewsAndRatingEnabled &&
         <div

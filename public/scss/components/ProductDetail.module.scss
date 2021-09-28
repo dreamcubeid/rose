@@ -383,7 +383,10 @@
 
   &_empty
   {
-    margin-top: 58px;
+    @include flex(row, center, center);
+    @include fixedHeight(100vh);
+    padding: 15px;
+    padding-bottom: 106px;
   }
 }
 

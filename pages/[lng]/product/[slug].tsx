@@ -8,11 +8,6 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import {
-  ChevronLeft,
-  ChevronRight,
-  X as XIcon
-} from 'react-feather'
-import {
   FiCalendar,
   FiClock
 } from 'react-icons/fi'
@@ -51,7 +46,6 @@ import styleNotifyMe from 'public/scss/components/NotifyMe.module.scss'
 import styleProduct from 'public/scss/components/Product.module.scss'
 import styleOpenOrder from 'public/scss/components/OpenOrder.module.scss'
 import styleRatingReview from 'public/scss/components/RatingReview.module.scss'
-import styles from 'public/scss/pages/ProductDetail.module.scss'
 
 const classesProductDetail = {
   productDetailParentDivClassName: styleProductDetail.productDetail,
@@ -170,19 +164,18 @@ const classesProductRelate = {
 }
 
 const classesPaginationProductReview = {
-  pagingClassName: styles.pagination,
-  activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item
+  pagingClassName: styleRatingReview.pagination,
+  activeClassName: styleRatingReview.pagination_active,
+  itemClassName: styleRatingReview.pagination_item
 }
 
 const classesPlaceholderProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
-  placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_product__list}`,
+  placeholderImage: `${styleProduct.placeholderItem} ${styleProduct.placeholderItem_product__cardDetail}`,
+  placeholderList: `${styleProduct.placeholderItem} ${styleProduct.placeholderItem_product__list}`,
 }
 
 const classesPlaceholderRelateProduct = {
-  placeholderImage: `${styles.placeholderItem} ${styles.productdetail_relatedProductItem}`,
+  placeholderImage: `${styleProduct.placeholderItem} ${styleProduct.productdetail_relatedProductItem}`,
 }
 
 const Product: FC<any> = ({
@@ -242,14 +235,14 @@ const Product: FC<any> = ({
         />
       )}
 
-      {data === null ? (
+      {data?.published === false ? (
         <div className={styleProductDetail.productDetail_empty}>
           <EmptyComponent
             icon={<RiQuestionFill color="#A8A8A8" size={20} />}
             title={i18n.t("product.isEmpty")}
             button={
               <button
-                className={`btn mt-2 ${styles.btn_primary} ${styles.btn_long}`}
+                className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary} mt-2`}
                 onClick={() =>
                   router.push(`/[lng]/products`, `/${lng}/products`)
                 }
@@ -330,7 +323,7 @@ const Product: FC<any> = ({
         />
       )}
 
-      {data !== null &&
+      {data?.published !== false &&
         <div className="container">
           <div
             className={`
@@ -370,11 +363,11 @@ const Product: FC<any> = ({
               reviewsPaginationClasses={classesPaginationProductReview}
               getTotalAllReviews={(totalItem: number) => setTotalAllReviews(totalItem)}
               itemPerPageOptions={[5, 10, 25, 50, 100]}
-              iconClose={<XIcon color="black" />}
-              iconLeft={<ChevronLeft color="black" />}
-              iconRight={<ChevronRight color="black" />}
-              reviewsNextLabel={<ChevronRight color="black" />}
-              reviewsPrevLabel={<ChevronLeft color="black" />}
+              iconClose={<RiCloseLine color="#444444" />}
+              iconLeft={<RiArrowLeftSLine color="#444444" />}
+              iconRight={<RiArrowRightSLine color="#444444" />}
+              reviewsPrevLabel={<RiArrowLeftSLine color="#444444" />}
+              reviewsNextLabel={<RiArrowRightSLine color="#444444" />}
               thumborSetting={{
                 width: size.width < 575 ? 350 : 500,
                 format: 'webp',

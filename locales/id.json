@@ -75,7 +75,9 @@
     "cart": "Keranjang",
     "login": "Masuk",
     "account": "Akun",
-    "search": "Pencarian"
+    "search": "Pencarian",
+    "lookbook": "Lookbook",
+    "forgotPassword":"Lupa Kata Sandi"
   },
   "cart": {
     "amount": "Jumlah",
@@ -151,7 +153,8 @@
   },
   "forgotPassword": {
     "requestFail": "Pengaturan ulang sandi gagal.",
-    "requestSuccessful": "Pengaturan ulang kata sandi berhasil. Silakan periksa email Anda."
+    "titleSuccessful": "Cek Email Anda!",
+    "requestSuccessful": "Kami telah mengirim instruksi ke email Anda untuk memperbarui kata sandi Anda."
   },
   "giftCard": {
     "desc": "Berikan sesuatu untuk membuat seseorang tersenyum dengan membeli kartu hadiah online kami. Email yang berisi kartu hadiah elektronik akan dikirim kepada mereka dan mereka dapat membelanjakannya untuk barang apa pun.",
@@ -211,7 +214,7 @@
     "email": "Email",
     "failed": "Gagal untuk login cek kembali email dan kata sandi anda",
     "insertEmail": "Masukan Email Anda",
-    "insertPassword": " Masukan Kata Sandi Anda",
+    "insertPassword": "Masukan Kata Sandi Anda",
     "login": "Masuk",
     "password": "Kata Sandi",
     "success": "Login berhasil",
@@ -228,7 +231,9 @@
     "isEmpty": "Belum ada lookbook",
     "seeCollection": "Lihat Koleksi",
     "seeMore": "Lebih Banyak",
-    "title": "Lookbook"
+    "title": "Lookbook",
+    "back": "Kembali",
+    "relatedProducts": "Produk Terkait"
   },
   "membership": {
     "exchangePoints": "Tukar Poin Anda",

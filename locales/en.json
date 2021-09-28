@@ -75,7 +75,9 @@
     "cart": "Cart",
     "login": "Login",
     "account": "Account",
-    "search": "Search"
+    "search": "Search",
+    "lookbook":"Lookbook",
+    "forgotPassword":"Forgot Password"
   },
   "cart": {
     "amount": "Amount",
@@ -151,7 +153,8 @@
   },
   "forgotPassword": {
     "requestFail": "Password reset request fail.",
-    "requestSuccessful": "Password reset request successful. Please check your email."
+    "titleSuccessful": "Check Your Email!",
+    "requestSuccessful": "We have sent instructions to your email to update your password."
   },
   "giftCard": {
     "desc": "Give someone something to smile about by purchasing our online gift card. An email containing the e-gift card will be sent to them and they can spend it on any item(s).",
@@ -228,7 +231,9 @@
     "isEmpty": "Lookbook is empty",
     "seeCollection": "See Collection",
     "seeMore": "See More",
-    "title": "Lookbook"
+    "title": "Lookbook",
+    "back": "Back",
+    "relatedProducts": "Related Products"
   },
   "membership": {
     "exchangePoints": "Redeem your Point",

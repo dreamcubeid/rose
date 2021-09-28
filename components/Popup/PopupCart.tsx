@@ -107,11 +107,6 @@ const classesPlaceholderProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__card}`,
 };
 
-const classesEmptyComponent = {
-  emptyContainer: styles.cart_empty,
-  emptyTitle: styles.cart_emptyTitle
-}
-
 const classesPlaceholderCart = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cart}`
 };
@@ -215,7 +210,6 @@ const PopupCart: FC<PopupPropsType> = ({
               }
               emptyCartPlaceHolder={
                 <EmptyComponent
-                  classes={classesEmptyComponent}
                   title={i18n.t("cart.isEmpty")}
                   button={
                     <button

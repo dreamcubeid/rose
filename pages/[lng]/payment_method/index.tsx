@@ -88,11 +88,6 @@ const classesListPaymentMethod = {
   pointButtonRemoveClassName: styles.payment_pointAppliedRemove,
 };
 
-const classesEmptyComponent = {
-  emptyContainer: styles.payment_empty,
-  emptyTitle: styles.payment_empty__title
-}
-
 const classesPlaceholderCustomerDetail = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_customerDetail}`
 }
@@ -163,7 +158,7 @@ const PaymentMethods: FC<any> = ({
                 </div>
                 <hr className={styles.payment_line} />
                 <div className={styles.payment_steps}>
-                  <Breadcrumb currentStep={3} />
+                  <Breadcrumb steps={[]} />
                 </div>
                 <hr className={`${styles.payment_lineSecond}`} />
                 <div className="container">
@@ -236,7 +231,6 @@ const PaymentMethods: FC<any> = ({
                           }
                           emptyState={
                             <EmptyComponent
-                              classes={classesEmptyComponent}
                               title={i18n.t("payment.isEmpty")}
                             />
                           }

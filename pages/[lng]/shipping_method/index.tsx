@@ -145,11 +145,6 @@ const classesCartDetails = {
   removeButtonClassName: "d-none",
 }
 
-const classesEmptyComponent = {
-  emptyContainer: styles.cart__empty,
-  emptyTitle: styles.cart__empty__title
-}
-
 const classesPlaceholderCartPlaceorder = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_cartPlaceorder}`,
   placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_cartPlaceorderTitle}`
@@ -245,7 +240,7 @@ const ShippingMethodPage: FC<any> = ({
                       </div>
                       <hr className={styles.shipping_line} />
                       <div className={styles.shipping_steps}>
-                        <Breadcrumb currentStep={2} />
+                        <Breadcrumb steps={[]} />
                       </div>
                       <hr className={`${styles.shipping_lineSecond}`} />
                     </div>
@@ -287,7 +282,6 @@ const ShippingMethodPage: FC<any> = ({
                               ),
                               emptyCartPlaceHolder: (
                                 <EmptyComponent
-                                  classes={classesEmptyComponent}
                                   title={i18n.t("cart.isEmpty")}
                                 />
                               ),
@@ -390,7 +384,6 @@ const ShippingMethodPage: FC<any> = ({
                             ),
                             emptyCartPlaceHolder: (
                               <EmptyComponent
-                                classes={classesEmptyComponent}
                                 title={i18n.t("cart.isEmpty")}
                               />
                             ),

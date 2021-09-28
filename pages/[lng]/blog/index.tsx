@@ -38,11 +38,6 @@ const classesBlogCategories = {
   linkClassName: styles.blog_categoryLink,
 }
 
-const classesEmptyComponent = {
-  emptyContainer: styles.blog_empty,
-  emptyTitle: styles.blog_emptyTitle
-};
-
 const classesPagination = {
   pagingClassName: styles.pagination,
   activeClassName: styles.pagination_active,
@@ -112,7 +107,6 @@ const Blog: FC<any> = ({
               }
               emptyStateComponent={
                 <EmptyComponent
-                  classes={classesEmptyComponent}
                   title={i18n.t("blog.isEmpty")}
                 />
               }

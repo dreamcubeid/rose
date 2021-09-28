@@ -166,12 +166,6 @@ const classesPaginationProductReview = {
   itemClassName: styles.pagination_item
 }
 
-const classesEmptyComponent = {
-  emptyContainer: styles.productdetail_empty,
-  emptyTitle: styles.productdetail_empty_title,
-  emptyDesc: styles.productdetail_empty_desc,
-}
-
 const classesPlaceholderProduct = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_product__cardDetail}`,
   placeholderTitle: `${styles.placeholderItem} ${styles.placeholderItem_product__title}`,
@@ -352,7 +346,6 @@ const Product: FC<any> = ({
           <div className="col-12 col-lg-8 offset-lg-2">
             {data === null ? (
               <EmptyComponent
-                classes={classesEmptyComponent}
                 title={i18n.t("product.isEmpty")}
                 button={
                   <button
@@ -473,8 +466,7 @@ const Product: FC<any> = ({
                   customEmptyComponentReviews={
                     <div className="col-12">
                       <EmptyComponent
-                        classes={classesEmptyComponent}
-                        desc={i18n.t("product.isEmptyReview")}
+                        
                       />
                     </div>
                   }

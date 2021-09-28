@@ -329,6 +329,7 @@ const Product: FC<any> = ({
             className={`
             ${styleProductDetail.ratingReview}
             ${!showRatingReview && styleProductDetail.ratingReview_extra}
+            ${totalItems > 0 && styleProductDetail.ratingReview_extraRevert}
           `}
             onClick={() => toggleRatingReview()}
           >

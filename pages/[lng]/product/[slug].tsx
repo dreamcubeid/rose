@@ -218,6 +218,8 @@ const Product: FC<any> = ({
 
   const toggleRatingReview = () => setShowRatingReview(!showRatingReview)
 
+  console.log(data)
+
   return (
     <Layout
       i18n={i18n}
@@ -323,7 +325,7 @@ const Product: FC<any> = ({
         />
       )}
 
-      {(data?.published !== false || data !== null) &&
+      {(data?.published === true || data !== null) &&
         <div className="container">
           <div
             className={`
@@ -387,46 +389,50 @@ const Product: FC<any> = ({
         </div>
       }
 
-      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className={`container ${styleProductDetail.upSell}`}>
-          <h6 className={styleProductDetail.upSell_title}>
-            {i18n.t("product.related")}
-          </h6>
-          <div className="row">
-            <Products
-              filter={{ openOrderScheduled: false, published: true }}
-              classes={classesProductRelate}
-              slug={slug}
-              getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-              itemPerPage={2}
-              isButton
-              fullPath={`product/{id}`}
-              pathPrefix='product'
-              lazyLoadedImage={false}
-              thumborSetting={{
-                width: size.width < 768 ? 350 : 600,
-                format: "webp",
-                quality: 85
-              }}
-              loadingComponent={
-                <>
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                </>
-              }
-            />
-          </div>
-        </div>
+      {(data?.published === true || data !== null) &&
+        <>
+          {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
+            <div className={`container ${styleProductDetail.upSell}`}>
+              <h6 className={styleProductDetail.upSell_title}>
+                {i18n.t("product.related")}
+              </h6>
+              <div className="row">
+                <Products
+                  filter={{ openOrderScheduled: false, published: true }}
+                  classes={classesProductRelate}
+                  slug={slug}
+                  getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+                  itemPerPage={2}
+                  isButton
+                  fullPath={`product/{id}`}
+                  pathPrefix='product'
+                  lazyLoadedImage={false}
+                  thumborSetting={{
+                    width: size.width < 768 ? 350 : 600,
+                    format: "webp",
+                    quality: 85
+                  }}
+                  loadingComponent={
+                    <>
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                    </>
+                  }
+                />
+              </div>
+            </div>
+          }
+        </>
       }
 
       <Popup

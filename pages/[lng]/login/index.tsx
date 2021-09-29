@@ -25,7 +25,7 @@ import styleButton from 'public/scss/components/Button.module.scss'
 const loginClasses = {
   containerClassName: styleLogin.login_containerForm,
   inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
-  passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
+  passwordContainerClassName: `${styleForm.form_passwordContainer}`,
   buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
   signUpText: `${styleButton.btn} ${styleButton.btn_secondary} ${styleLogin.login_signUp}`,
   forgotPasswordClass: styleLogin.login_forgotContainer,

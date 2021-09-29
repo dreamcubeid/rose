@@ -267,8 +267,125 @@
     }
   }
 
-  & > span > [class*='react-date-picker']
+  &_passwordContainer
   {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+    & > input 
+    {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+
+    & > button 
+    {
+      color: $color_rose;
+      width: 40px;
+      height: 40px;
+      align-self: center;
+      justify-self: center;
+      z-index: 2;
+      grid-column: 2;
+      grid-row: 1;
+      background-color: $color_rose_bg2;
+      border-radius: 30px;
+      border: none;
+    }
+  }
+
+
+  &_passwordStrengthBarContainer
+  {
+    padding-bottom: 8px;
+  }
+
+  &_passwordStrengthBar
+  {
+    height: 0;
+    width: 100%;
+
+    &::after
+    {
+      content:"";
+      width: 1%;
+      height: 3px;
+      position: absolute;
+      right: 33%;
+      background-color: $color_white;
+    }
+
+    &::before
+    {
+      content:"";
+      position: absolute;
+      width: 1%;
+      height: 3px;
+      left: 33%;
+      background-color: $color_white;
+    }
+
+    &[class*="weak"]
+    {
+      background-image: linear-gradient(to right, $color_error 32%, $color_grey 0%);
+      height: 3px;
+
+      & + span
+      {
+        color: $color_error;
+      }
+    }
+
+    &[class*="medium"]
+    {
+      background-image: linear-gradient(to right, $color_warning 68%, $color_grey 0%);
+      height: 3px;
+
+      & + span
+      {
+        color:$color_warning;
+      }
+    }
+
+    &[class*="strong"]
+    {
+      background: $color_success;
+      height: 3px;
+
+      & + span
+      {
+        color:$color_success;
+      }
+    }
     
+  }
+
+  &_passwordStrengthLabel
+  {
+    @include typographyBuilder(secondary,500,10,16);
+  }
+
+  &_criteriaList
+  {
+    list-style-type:none;
+    display: none;
+    margin: 0;
+    padding: 0 0 16px 0;
+
+    &[class*="show"]
+    {
+      display: grid !important;
+      grid-template-columns: 50% 50%;
+    }
+
+    & > li
+    {
+      @include typographyBuilder(secondary,400,10,16);
+
+      & > svg
+      {
+        margin-right: 7px;
+      }
+    }
   }
 }

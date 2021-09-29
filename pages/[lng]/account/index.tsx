@@ -3,6 +3,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { Account, useI18n, useLogout } from '@sirclo/nexus'
 import { IoArrowBackOutline } from 'react-icons/io5'
 import { RiCloseLine } from 'react-icons/ri'
+import { RiEyeCloseLine, RiEye2Line,RiCheckboxCircleFill,
+  RiCheckboxCircleLine  } from 'react-icons/ri'
 import { BiTargetLock } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
@@ -57,12 +59,12 @@ const classesAccount = {
   // inputLabelClassName: styles.account_edit__label,
   inputDistrictClassName: styleAccount.form_inputCity,
   // changePasswordClassName: styles.account_changePassword,
-  // passwordContainerClassName: `d-flex align-items-center position-relative w-100`,
+  passwordContainerClassName: styleForm.form_passwordContainer,
   // passwordInputClassName: `form-control ${styles.sirclo_form_input}`,
-  // passwordStrengthBarClassName: styles.passwordBar,
-  // passwordStrengthBarContainerClassName: `${styles.passwordValidation} ${styles.marginAccount}`,
-  // passwordCriteriaListClassName: `${styles.formPassword} ${styles.marginAccount} ${styles.formPasswordAccount} d-none`,
-  // passwordCriteriaClassName: styles.formPasswordList,
+  passwordStrengthBarClassName: styleForm.form_passwordStrengthBar,
+  passwordStrengthBarContainerClassName: `${styleForm.form_passwordStrengthBarContainer} ${styleAccount.form_criteria}`,
+  passwordCriteriaListClassName:`${styleForm.form_criteriaList} ${styleAccount.form_criteria}`,
+  // passwordCriteriaClassName: 'ml-1',
   buttonClassName: `${styleButton.btn} ${styleButton.btn_primary} ${styleAccount.account_btn} `,
   /* map */
   mapAreaClassName: styleAccount.mapArea,
@@ -199,10 +201,10 @@ const AccountsPage: FC<any> = ({
             orderHistoryItemPerPage={10}
             paymentHrefPrefix="payment_notif"
             logistixStyles={{ menu: (provided) => ({ ...provided, zIndex: 3 }) }}
-            passwordViewIcon={<Eye />}
-            passwordHideIcon={<EyeOff />}
-            passwordFulfilledCriteriaIcon={<CheckCircle color="green" size={16} />}
-            passwordUnfulfilledCriteriaIcon={<CheckCircle color="gray" size={16} />}
+            passwordViewIcon={<RiEyeCloseLine />}
+            passwordHideIcon={<RiEye2Line />}
+            passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
+            passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
             mapButtonCloseIcon={<RiCloseLine />}
             mapCenterIcon={<BiTargetLock />}
             membershipPaginationClasses={orderHistoryPaginationClasses}

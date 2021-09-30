@@ -77,7 +77,7 @@
     "account": "Akun",
     "search": "Pencarian",
     "lookbook": "Lookbook",
-    "forgotPassword":"Lupa Kata Sandi"
+    "forgotPassword": "Lupa Kata Sandi"
   },
   "cart": {
     "amount": "Jumlah",
@@ -169,6 +169,7 @@
   "global": {
     "back": "Kembali",
     "backHome": "Kembali ke Halaman Utama",
+    "checkoutTitle": "Selesaikan Pesanan",
     "continueShopping": "Lanjutkan Berbelanja",
     "error": "Terjadi kesalahan",
     "loading": "Memuat",
@@ -470,6 +471,8 @@
     "female": "Wanita",
     "firstName": "Nama Depan",
     "firstNamePlaceholder": "Masukan nama depan anda",
+    "fullName": "Nama Lengkap",
+    "fullNamePlaceholder": "Masukan nama lengkap anda",
     "gender": "Jenis Kelamin",
     "genderOption": "Pilih Jenis Kelamin",
     "inputCity": "(ketik nama kecamatan / wilayah anda)",

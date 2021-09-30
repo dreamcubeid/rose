@@ -218,8 +218,6 @@ const Product: FC<any> = ({
 
   const toggleRatingReview = () => setShowRatingReview(!showRatingReview)
 
-  console.log(data)
-
   return (
     <Layout
       i18n={i18n}
@@ -330,7 +328,7 @@ const Product: FC<any> = ({
           <div
             className={`
             ${styleProductDetail.ratingReview}
-            ${!showRatingReview && styleProductDetail.ratingReview_extra}
+            ${!showRatingReview ? styleProductDetail.ratingReview_extra : styleProductDetail.ratingReview_extraBorder}
             ${totalItems > 0 && styleProductDetail.ratingReview_extraRevert}
           `}
             onClick={() => toggleRatingReview()}
@@ -491,11 +489,12 @@ const Product: FC<any> = ({
         withHeader={false}
         visibleState={showModalErrorAddToCart}
         setVisibleState={setShowModalErrorAddToCart}
+        outsideClose={false}
       >
         <>
           <div className={styleProductDetail.productDetail_popupTitle}>
             <h3>
-              {i18n.t("product.successAddToCart")}
+              {i18n.t("product.tryAgain")}
             </h3>
           </div>
           <div className={styleProductDetail.productDetail_popupContent}>
@@ -503,6 +502,12 @@ const Product: FC<any> = ({
               {i18n.t("cart.errorSKUDesc")}
             </p>
           </div>
+          <button
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
+            onClick={() => setShowModalErrorAddToCart(false)}
+          >
+            {i18n.t("product.tryAgain")}
+          </button>
         </>
       </Popup>
 

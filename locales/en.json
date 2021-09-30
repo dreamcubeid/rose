@@ -76,8 +76,8 @@
     "login": "Login",
     "account": "Account",
     "search": "Search",
-    "lookbook":"Lookbook",
-    "forgotPassword":"Forgot Password"
+    "lookbook": "Lookbook",
+    "forgotPassword": "Forgot Password"
   },
   "cart": {
     "amount": "Amount",
@@ -169,6 +169,7 @@
   "global": {
     "back": "Back",
     "backHome": "Back to Home",
+    "checkoutTitle": "Checkout",
     "continueShopping": "Continue Shopping",
     "error": "Error",
     "loading": "Loading",
@@ -469,6 +470,8 @@
     "female": "Female",
     "firstName": "First Name",
     "firstNamePlaceholder": "Input your first name",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Input your full name",
     "gender": "Gender",
     "genderOption": "Select Gender",
     "inputCity": "(type your district / region)",

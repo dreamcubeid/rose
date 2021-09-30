@@ -68,7 +68,9 @@
     "leaveReply": "Leave a reply",
     "postComment": "Post a comment",
     "recentPost": "Recent Post",
-    "title": "Blogs"
+    "title": "Blogs",
+    "allBlog": "All Blogs",
+    "back": "Back to Blog List"
   },
   "breadcrumb": {
     "home": "Home",
@@ -77,7 +79,8 @@
     "account": "Account",
     "search": "Search",
     "lookbook":"Lookbook",
-    "forgotPassword":"Forgot Password"
+    "forgotPassword":"Forgot Password",
+    "blog":"Blog"
   },
   "cart": {
     "amount": "Amount",

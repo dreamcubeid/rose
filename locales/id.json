@@ -68,7 +68,9 @@
     "leaveReply": "Tinggalkan Balasan",
     "postComment": "Kirimkan Komentar",
     "recentPost": "Postingan Terbaru",
-    "title": "Blog"
+    "title": "Blog",
+    "allBlog": "Semua Blog",
+    "back": "Kembali Ke Daftar Blog"
   },
   "breadcrumb": {
     "home": "Beranda",
@@ -77,7 +79,8 @@
     "account": "Akun",
     "search": "Pencarian",
     "lookbook": "Lookbook",
-    "forgotPassword":"Lupa Kata Sandi"
+    "forgotPassword":"Lupa Kata Sandi",
+    "blog": "Blog"
   },
   "cart": {
     "amount": "Jumlah",

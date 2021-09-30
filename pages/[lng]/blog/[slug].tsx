@@ -1,49 +1,38 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { BlogSingle, BlogCategories, useI18n, BlogRecent } from '@sirclo/nexus'
+import { IoArrowBackOutline } from 'react-icons/io5'
+import { BlogSingle, useI18n, BlogRecent } from '@sirclo/nexus'
 import Layout from 'components/Layout/Layout'
 import { useBrand } from 'lib/useBrand'
-import styles from 'public/scss/pages/Blog.module.scss'
+import styleBlog from 'public/scss/pages/Blog.module.scss'
+import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 
 const Placeholder = dynamic(() => import('components/Placeholder'))
 const Popup = dynamic(() => import('components/Popup/Popup'))
 const SocialShare = dynamic(() => import('components/SocialShare'))
 
 const classesBlogSingle = {
-  blogContainerClassName: styles.blog_detail,
-  headerClassName: styles.blog_detailHeader,
-  headerContentClassName: styles.blog_detailHeaderContent,
-  headerDetailClassName: styles.blog_detailMetaWrapper,
+  blogContainerClassName: styleBlog.blog_detail,
+  headerClassName: styleBlog.blog_detail_header,
+  headerContentClassName: styleBlog.blog_detail_title,
   headerEndClassName: 'd-none',
   authorPicContainerClassName: 'd-none',
   authorPicClassName: 'd-none',
   authorInfoClassName: 'd-none',
-  createdByClassName: `d-flex flex-row align-items-center justify-content-start flex-nowrap w-100`,
-  createdByInnerClassName: `${styles.blog_detailMeta} d-flex flex-row align-items-center justify-content-start flex-wrap`,
-  authorClassName: 'd-flex flex-row align-items-center justify-content-start order-2',
-  dateClassName: 'd-flex flex-row align-items-center justify-content-start order-1',
-  blogContentClassName: styles.blog_detailContent,
-}
-
-const classesBlogCategories = {
-  containerClassName: styles.blog_category,
-  categoryClassName: styles.blog_categoryItem,
-  linkClassName: styles.blog_categoryLink,
-}
-
-const classesPlaceholderBlogs = {
-  placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_blogsList}`,
+  createdByInnerClassName: styleBlog.blog_detail_desc,
+  blogContentClassName: styleBlog.blog_detail_content,
 }
 
 const classesBlogRecent = {
-  containerClassName: styles.blog_recent,
-  blogRecentClassName: styles.blog_recentItem,
-  imageClassName: styles.blog_recentItemImage,
-  labelContainerClassName: styles.blog_recentItemContent,
-  titleClassName: styles.blog_recentItemContentTitle,
-  dateClassName: styles.blog_recentItemContentDate,
+  containerClassName: styleBlog.blog_items,
+  blogRecentClassName: styleBlog.blog_item,
+  imageClassName: styleBlog.blog_item_imageContainer,
+  labelContainerClassName: 'm-0',
+  titleClassName: styleBlog.blog_item_title,
+  dateClassName: styleBlog.blog_item_innerFooter,
 }
 
 const BlogSlug: FC<any> = ({
@@ -54,101 +43,65 @@ const BlogSlug: FC<any> = ({
   urlSite,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
-  const [totalCategories, setTotalCategories] = useState(null)
-  const [showShare, setShowShare] = useState<boolean>(false)
-  const toggleShare = () => setShowShare(!showShare)
-
-  const router = useRouter()
+  const [title, setTitle] = useState<string>('')
 
   return (
     <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <BlogSingle
-              classes={classesBlogSingle}
-              ID={slug.toString()}
-              timeIcon={
-                <div className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__time}`}></div>
-              }
-              authorIcon={
-                <div
-                  className={`${styles.blog_detailIcon} ${styles.blog_detailIcon__author}`}
-                ></div>
-              }
-              loadingComponent={
-                <div className="row">
-                  <div className="col-2">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </div>
-                  <div className="col-3">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </div>
-                  <div className="col-12 py-4">
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                    <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  </div>
-                </div>
-              }
-            />
-
-            <div
-              className={`${styles.lookbook_nav} ${styles.blog_detailNavigation} d-flex flex-row align-items-center justify-content-between`}
-            >
-              <button onClick={() => router.back()}>{i18n.t('global.back')}</button>
-              <button onClick={() => toggleShare()} className={styles.blog_detailShare}>
-                {i18n.t('product.share')}
-              </button>
+      <div className={styleBlog.blog_container}>
+        <div className={styleBlog.blog_header}>
+          <Breadcrumb
+            steps={[
+              { label: i18n.t('breadcrumb.home') },
+              {
+                label: i18n.t('breadcrumb.blog'),
+                linkProps: {
+                  href: '/[lng]/blog',
+                  as: `/${lng}/blog`,
+                },
+              },
+              { label: title },
+            ]}
+          />
+        </div>
+        <BlogSingle
+          getTitle={setTitle}
+          classes={classesBlogSingle}
+          ID={slug.toString()}
+          timeIcon={','}
+          authorIcon={i18n.t('blog.by')}
+          loadingComponent={
+            <div className="w-100 text-center">
+              <span className="spinner-border" />
             </div>
+          }
+        />
+        <div className={styleBlog.blog_recent}>
+          <div className={styleBlog.blog_recent_title}>{i18n.t('blog.recentPost')}</div>
 
-            {(totalCategories > 0 || totalCategories === null) && (
-              <>
-                <h2 className={styles.blog_titleSide}>{i18n.t('blog.categories')}</h2>
-                <BlogCategories
-                  classes={classesBlogCategories}
-                  getCategoriesCount={(categoriesCount) => setTotalCategories(categoriesCount)}
-                />
-              </>
-            )}
-
-            <h2 className={styles.blog_titleSide}>{i18n.t('blog.recentPost')}</h2>
-
-            <BlogRecent
-              classes={classesBlogRecent}
-              limit={5}
-              linkPrefix="blog"
-              thumborSetting={{
-                width: 100,
-                format: 'webp',
-                quality: 85,
-              }}
-              loadingComponent={
-                <>
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                  <Placeholder classes={classesPlaceholderBlogs} withImage />
-                </>
-              }
-            />
+          <BlogRecent
+            classes={classesBlogRecent}
+            limit={5}
+            linkPrefix="blog"
+            thumborSetting={{
+              width: 100,
+              format: 'webp',
+              quality: 85,
+            }}
+            loadingComponent={
+              <div className="w-100 text-center">
+                <span className="spinner-border" />
+              </div>
+            }
+          />
+          <div className={styleBlog.blog_footer}>
+            <Link href="/[lng]/blog" as={`/${lng}/blog`}>
+              <a>
+                <IoArrowBackOutline color="#998060" size={12} />
+                <span>{i18n.t('blog.back')}</span>
+              </a>
+            </Link>
           </div>
         </div>
-
-        {showShare && (
-          <Popup
-            withHeader
-            setPopup={toggleShare}
-            mobileFull={false}
-            classPopopBody
-            popupTitle={i18n.t('product.shareProduct')}
-          >
-            <div className="">
-              <SocialShare urlSite={urlSite} />
-            </div>
-          </Popup>
-        )}
       </div>
     </Layout>
   )

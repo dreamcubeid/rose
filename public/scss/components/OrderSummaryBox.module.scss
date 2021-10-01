@@ -502,6 +502,84 @@
         }
     }
 
+    &_pointsFormContainer
+    {
+        position: relative;
+        @include flex(column, center, center);
+    }
+
+    &_pointsForm
+    {
+        @include flex(row, center, center);
+        @include fixedWidth(100%);
+
+        input
+        {
+            @include fixedWidth(calc(100% - 140px));
+            @include typographyBuilder(secondary, 400, 14, 24);
+            color: $color_text_primary;
+            border: 1px solid $color_border;
+            border-radius: 37px;
+            padding: 17px;
+            margin: 0 5px;
+            background: transparent;
+            order: 2;
+
+            &:active,
+            &:focus
+            {
+                outline: 0;
+                box-shadow: none;
+            }
+        }
+    }
+    
+    &_numberOfPoints
+    {
+        padding: 16px 16px 11px 16px;
+    }
+    
+    &_pointsWarning
+    {
+        padding: 0 0 16px;
+
+        p
+        {
+            @include typographyBuilder(secondary, 400, 11, 16);
+            text-align: center;
+            color: $color_error;
+            margin: 8px 0 0 0;
+        }
+    }
+
+    &_totalPoints
+    {
+        @include flex(column, center, center);
+
+        img
+        {
+           width: 25px;
+           margin-bottom: 10px;
+        }
+    }
+
+    &_pointValue
+    {
+        @include typographyBuilder(secondary, 400, 14, 24);
+    }
+    
+    &_pointsInsufficient
+    {
+        @include typographyBuilder(secondary, 500, 14, 18);
+        color: $color_error;
+    }
+
+    &_price
+    {
+        grid-row: 2/2;
+        grid-column: 2/2;
+    }
+
     &_errorCartContainer
     {
         @include flex(row, center, center);

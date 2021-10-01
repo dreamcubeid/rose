@@ -394,9 +394,7 @@
 {
   @include flex(row, center, space-between);
   padding: 32px 0;
-  margin-bottom: 24px;
   border-top: 1px solid $color_border;
-  border-bottom: 1px solid $color_border;
   cursor: pointer;
 
   &_title
@@ -406,7 +404,7 @@
 
   &_extra
   {
-    padding-bottom: 106px;
+    padding-bottom: 116px;
 
     &Revert
     {

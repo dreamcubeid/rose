@@ -1,102 +1,127 @@
 @import "../base/colors.scss";
+@import '../utils/variables';
 @import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "../components/OrderSummary.module.scss";
-@import "../components/Popup.module.scss";
-@import "../components/Password.module.scss";
-@import "../components/Placeholder.module.scss";
 
 .placeorder
 {
-  background: $color_white;
-  margin-bottom: 15px;
-
-  &_container
-  {
-    padding: 2rem 0;
-  }
-
-  &_heading
-  {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-
-    h6
-    {
-      margin: 0;
-      margin-left: 1rem;
-      color: $color_black;
-    }
-  }
-
-  &_headingIcon
-  {
-    cursor: pointer;
-  }
-
-  &_line
-  {
-    border-color: $color_gray_low;
-  }
-
-  &_lineSecond
-  {
-    border-color: $color_gray_low;
-    margin: 0;
-  }
-
-  &_steps
-  {
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-  }
+  padding: 24px 18px;
 
   &_header
   {
     &__label
     {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-
-      @media screen and (max-width: 575px) {
-        flex-direction: column;
-      }
+      margin-bottom: 24px;
     }
 
     &__login
     {
-      margin: 0;
+      @include typographyBuilder(secondary, 400, 12, 16);
+      color: $color_text_primary;
+      text-align: center;
+      margin-bottom: 24px;
 
       span
       {
-        color: black !important;
-        text-decoration: underline !important;
+        color: $color_rose !important;
         margin-left: 5px;
       }
     }
+  }
 
-    &_labelRegister
+  &_labelRegister
+  {
+    @include position(relative);
+
+    input
     {
-      display: flex;
-      align-items: center;
+      @include absolute(4px, auto, auto, 2px);
+      opacity: 1;
+      cursor: pointer;
 
-      label
+      &::after
       {
-        margin: 0;
-        margin-left: 5px;
+        content: "";
+        @include absolute(-2px, auto, auto, -2px);
+        @include fixedWidth(20px);
+        @include fixedHeight(20px);
+        background: $color_white;
+        border: 2px solid $color_rose;
+        border-radius: 2px;
+        z-index: 1;
+      }
+
+      &:checked::after 
+      {
+        border: none;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iMiIgZmlsbD0iIzk5ODA2MCIvPgo8cGF0aCBkPSJNNCAxMUw2IDlMMTAgMTNMOCAxNUw0IDExWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE0IDVMMTYgN0wxMCAxM0w4IDExTDE0IDVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K")
+      }
+    }
+
+    label
+    {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin-left: 32px;
+      margin-bottom: 0;
+    }
+  }
+
+  &_passwordContainer
+  {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+    & > input 
+    {
+      grid-column: 1 / span 2;
+      grid-row: 1;
+    }
+
+    & > button 
+    {
+      color: $color_rose;
+      width: 40px;
+      height: 40px;
+      align-self: center;
+      justify-self: center;
+      z-index: 2;
+      grid-column: 2;
+      grid-row: 1;
+      background-color: $color_rose_bg2;
+      border-radius: 30px;
+      border: none;
+    }
+  }
+
+  &_criteriaList
+  {
+    list-style-type:none;
+    display: none;
+    margin: 0;
+    padding: 0 0 16px 0;
+
+    &[class*="show"]
+    {
+      display: grid !important;
+      grid-template-columns: 50% 50%;
+    }
+
+    & > li
+    {
+      @include typographyBuilder(secondary, 400, 10, 16);
+
+      & > svg
+      {
+        margin-right: 7px;
       }
     }
   }
 
   &_formError
   {
-    background: $color_red_error;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    background: $color_error;
+    padding: 13px 18px;
+    margin-bottom: 24px;
 
     &:empty
     {
@@ -105,6 +130,7 @@
 
     &__label
     {
+      @include typographyBuilder(secondary, 400, 12, 16);
       color: $color_white;
       margin: 0;
     }

@@ -1,0 +1,93 @@
+@import '../utils/variables';
+
+@mixin circle($color) {
+  width: 32px;
+  height: 32px;
+  border: 3px solid $color;
+  background: transparent;
+  border-radius: 100%;
+  transition: width .2s ease-out, height .2s ease-out, border-width .2s ease-out;
+}
+
+.stepper
+{
+  @include flex(row, center, space-between);
+  padding: 16px 18px;
+  background: $color_rose_bg2;
+
+  &_title
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-bottom: 0;
+  }
+
+  &_steps
+  {
+    @include flex(row, center, center);
+    width: 35px;
+    height: 35px;
+    cursor: default;
+
+    span {
+      color: $color_text_primary;
+      position: absolute;
+      display: block;
+      width: 32px;
+      height: 32px;
+      @include typographyBuilder(secondary, 400, 12, 32);
+      text-align: center;
+      transition: font-size .2s ease-out;
+    }
+
+    &:before {
+      position: absolute;
+      content: '';
+      background-color: transparent;
+  
+      @include circle($color_line_brown);
+    }
+  }
+
+  &_percentageBar
+  {
+    @include flex(row, center, center);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    clip-path: inset(0 0 0 50%);
+  }
+}
+
+.percentageBar33
+{ 
+  &:before {
+    @include circle($color_rose);
+    position: absolute;
+    content: '';
+    clip-path: inset(0 50% 0 0);
+    transform: rotate(120deg);
+  }
+}
+
+.percentageBar66
+{ 
+  &:before {
+    @include circle($color_rose);
+    position: absolute;
+    content: '';
+    clip-path: inset(0 50% 0 0);
+    transform: rotate(240deg);
+  }
+}
+
+.percentageBar100
+{ 
+  &:before {
+    @include circle($color_rose);
+    position: absolute;
+    content: '';
+    clip-path: inset(0 50% 0 0);
+    transform: rotate(120deg);
+  }
+}

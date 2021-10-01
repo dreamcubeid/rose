@@ -1,0 +1,18 @@
+@import '../utils/variables';
+
+.checkout
+{
+  &_header
+  {
+    @include fixedHeight(58px);
+    background: $color_rose;
+    padding: 13px 18px;
+
+    &__title
+    {
+      @include typographyBuilder(primary, 500, 20, 32);
+      color: $color_white;
+      margin: 0;
+    }
+  }
+}

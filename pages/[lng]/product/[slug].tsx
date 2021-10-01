@@ -323,12 +323,12 @@ const Product: FC<any> = ({
         />
       )}
 
-      {(data?.published !== false || data !== null) &&
+      {(data?.published === true || data !== null) &&
         <div className="container">
           <div
             className={`
             ${styleProductDetail.ratingReview}
-            ${!showRatingReview && styleProductDetail.ratingReview_extra}
+            ${!showRatingReview ? styleProductDetail.ratingReview_extra : styleProductDetail.ratingReview_extraBorder}
             ${totalItems > 0 && styleProductDetail.ratingReview_extraRevert}
           `}
             onClick={() => toggleRatingReview()}
@@ -387,46 +387,50 @@ const Product: FC<any> = ({
         </div>
       }
 
-      {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
-        <div className={`container ${styleProductDetail.upSell}`}>
-          <h6 className={styleProductDetail.upSell_title}>
-            {i18n.t("product.related")}
-          </h6>
-          <div className="row">
-            <Products
-              filter={{ openOrderScheduled: false, published: true }}
-              classes={classesProductRelate}
-              slug={slug}
-              getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
-              itemPerPage={2}
-              isButton
-              fullPath={`product/{id}`}
-              pathPrefix='product'
-              lazyLoadedImage={false}
-              thumborSetting={{
-                width: size.width < 768 ? 350 : 600,
-                format: "webp",
-                quality: 85
-              }}
-              loadingComponent={
-                <>
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                  <Placeholder
-                    classes={classesPlaceholderRelateProduct}
-                    withImage
-                  />
-                </>
-              }
-            />
-          </div>
-        </div>
+      {(data?.published === true || data !== null) &&
+        <>
+          {allowedProductRecommendation && (totalItems > 0 || totalItems === null) &&
+            <div className={`container ${styleProductDetail.upSell}`}>
+              <h6 className={styleProductDetail.upSell_title}>
+                {i18n.t("product.related")}
+              </h6>
+              <div className="row">
+                <Products
+                  filter={{ openOrderScheduled: false, published: true }}
+                  classes={classesProductRelate}
+                  slug={slug}
+                  getPageInfo={(pageInfo: any) => setTotalItems(pageInfo.totalItems)}
+                  itemPerPage={2}
+                  isButton
+                  fullPath={`product/{id}`}
+                  pathPrefix='product'
+                  lazyLoadedImage={false}
+                  thumborSetting={{
+                    width: size.width < 768 ? 350 : 600,
+                    format: "webp",
+                    quality: 85
+                  }}
+                  loadingComponent={
+                    <>
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                      <Placeholder
+                        classes={classesPlaceholderRelateProduct}
+                        withImage
+                      />
+                    </>
+                  }
+                />
+              </div>
+            </div>
+          }
+        </>
       }
 
       <Popup
@@ -485,11 +489,12 @@ const Product: FC<any> = ({
         withHeader={false}
         visibleState={showModalErrorAddToCart}
         setVisibleState={setShowModalErrorAddToCart}
+        outsideClose={false}
       >
         <>
           <div className={styleProductDetail.productDetail_popupTitle}>
             <h3>
-              {i18n.t("product.successAddToCart")}
+              {i18n.t("product.tryAgain")}
             </h3>
           </div>
           <div className={styleProductDetail.productDetail_popupContent}>
@@ -497,6 +502,12 @@ const Product: FC<any> = ({
               {i18n.t("cart.errorSKUDesc")}
             </p>
           </div>
+          <button
+            className={`${styleProductDetail.btn} ${styleProductDetail.btn_primary}`}
+            onClick={() => setShowModalErrorAddToCart(false)}
+          >
+            {i18n.t("product.tryAgain")}
+          </button>
         </>
       </Popup>
 

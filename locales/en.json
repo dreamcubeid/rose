@@ -56,7 +56,8 @@
     "searchHere": "Search here"
   },
   "article": {
-    "categories": "Help"
+    "categories": "Help",
+    "share": "Share Article"
   },
   "banner": {
     "isEmpty": "Banner is empty"

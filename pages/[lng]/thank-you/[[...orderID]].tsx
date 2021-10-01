@@ -6,6 +6,7 @@ import Layout from "components/Layout/Layout";
 import { useBrand } from "lib/useBrand";
 import { Check } from "react-feather";
 import styles from "public/scss/pages/ThankYou.module.scss";
+import { toast } from "react-toastify";
 
 const classesThankYouPage = {
   thankYouClassName: styles.thankyou_inner,
@@ -36,6 +37,7 @@ const ThankYouPage: FC<any> = ({
             <ThankYou
               thankYouImageURL={<Check className={styles.thankyou_inner__icon} />}
               classes={classesThankYouPage}
+              onSuccessMsg={(msg) => toast.success(msg)}
               withDelay
             />
           </div>

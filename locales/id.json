@@ -56,7 +56,8 @@
     "searchHere": "Cari disini"
   },
   "article": {
-    "categories": "Bantuan"
+    "categories": "Bantuan",
+    "share": "Bagikan Artikel"
   },
   "banner": {
     "isEmpty": "Tidak ada banner"

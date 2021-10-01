@@ -1,0 +1,148 @@
+@import "../utils/variables";
+
+.map
+{
+  &_mapArea
+  {
+    position: relative !important;
+    height: 103px;
+    width: 100%;
+    border: 1px solid $color_border;
+    border-radius: 2px;
+    height: 147px !important;
+
+    & > div > div
+    {
+      top: 32px;
+      left: 12px;
+      width: calc(100% - 24px) !important;
+      height: 103px !important;
+    }
+  }
+
+
+  &_mapPopup
+  {
+    position: fixed;
+    top: 0;
+    left: auto;
+    min-width: 375px;
+    max-width: 375px;
+    width: 375px;
+    z-index: 20;
+    background-color: $color_white;
+    height: 100vh;
+  }
+
+  &_mapPopupHeader
+  {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 48px;
+  }
+
+  &_mapPopupHeaderTitle
+  {
+    width: 100%;
+    text-align: center;
+    @include typographyBuilder(secondary,500,14,24);
+    color: $color_text_primary;
+  }
+
+  &_mapPopupClose
+  {
+    border: none;
+    background: none;
+    padding-right: 18px;
+  }
+
+  &_mapPopupMaps
+  {
+    height: 78vh;
+    position: relative;
+
+    & > :first-child
+    {
+      position: absolute;
+      top: 44px;
+      height: 34px;
+      width: 296px;
+      padding-left: 18px;
+      z-index: 20;
+
+      & > div > input 
+      {
+        width: 100%;
+        height: 34px;
+        border: none;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+      }
+    }
+
+    & > :last-child 
+    {
+      & > div > div {
+        height: 100%;
+      }
+    }
+  }
+
+  &_mapPopupMaps > :last-child 
+  {
+    & > div > div > div > div > div > [class*='gmnoprint gm-bundled-control gm-bundled-control-on-bottom']
+    {
+      top: 50%;
+    }
+  }
+
+  &_mapPopupCenterButton
+  {
+    position: absolute;
+    top: 44px;
+    right: 16px;
+    height: 34px;
+    width: 34px;
+    background: $color_white;
+    border: none;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  &_mapPopupLabelAddress
+  {
+    @include typographyBuilder(secondary,400,12,16);
+    color: $color_text_secondary;
+    padding: 8px 16px;
+  }
+
+  &_btnLocation
+  {
+    height: 58px;
+    background: $color_white;
+    border: 1px solid $color_border;
+    width: 100%;
+    border-radius: 37px;
+    position: relative;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: calc(25%) center;
+    color: $color_text_secondary;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNCAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcgMTQuNjc0OUwxMC43MTI1IDEwLjk2MjRDMTEuNDQ2NyAxMC4yMjgyIDExLjk0NjYgOS4yOTI3MyAxMi4xNDkyIDguMjc0MzVDMTIuMzUxNyA3LjI1NTk2IDEyLjI0NzcgNi4yMDAzOSAxMS44NTAzIDUuMjQxMTFDMTEuNDUyOSA0LjI4MTgzIDEwLjc4IDMuNDYxOTIgOS45MTY2OSAyLjg4NTA3QzkuMDUzMzQgMi4zMDgyMSA4LjAzODMzIDIuMDAwMzIgNyAyLjAwMDMyQzUuOTYxNjcgMi4wMDAzMiA0Ljk0NjY2IDIuMzA4MjEgNC4wODMzMiAyLjg4NTA3QzMuMjE5OTcgMy40NjE5MiAyLjU0NzA2IDQuMjgxODMgMi4xNDk2OSA1LjI0MTExQzEuNzUyMzEgNi4yMDAzOSAxLjY0ODMxIDcuMjU1OTYgMS44NTA4NCA4LjI3NDM1QzIuMDUzMzcgOS4yOTI3MyAyLjU1MzMzIDEwLjIyODIgMy4yODc1IDEwLjk2MjRMNyAxNC42NzQ5Wk03IDE2Ljc5NTlMMi4yMjcgMTIuMDIyOUMxLjI4MzAxIDExLjA3ODkgMC42NDAxNCA5Ljg3NjIgMC4zNzk2OTYgOC41NjY4M0MwLjExOTI1MyA3LjI1NzQ2IDAuMjUyOTMgNS45MDAyNiAwLjc2MzgyNCA0LjY2Njg3QzEuMjc0NzIgMy40MzM0NyAyLjEzOTg4IDIuMzc5MjcgMy4yNDk5MSAxLjYzNzU3QzQuMzU5OTQgMC44OTU4NzggNS42NjQ5OCAwLjUgNyAwLjVDOC4zMzUwMiAwLjUgOS42NDAwNiAwLjg5NTg3OCAxMC43NTAxIDEuNjM3NTdDMTEuODYwMSAyLjM3OTI3IDEyLjcyNTMgMy40MzM0NyAxMy4yMzYyIDQuNjY2ODdDMTMuNzQ3MSA1LjkwMDI2IDEzLjg4MDggNy4yNTc0NiAxMy42MjAzIDguNTY2ODNDMTMuMzU5OSA5Ljg3NjIgMTIuNzE3IDExLjA3ODkgMTEuNzczIDEyLjAyMjlMNyAxNi43OTU5Wk02LjI1IDYuNDk5OTRWNC4yNDk5NEg3Ljc1VjYuNDk5OTRIMTBWNy45OTk5NEg3Ljc1VjEwLjI0OTlINi4yNVY3Ljk5OTk0SDRWNi40OTk5NEg2LjI1WiIgZmlsbD0iI0JDQkNCQyIvPgo8L3N2Zz4K);
+    @include typographyBuilder(secondary,400,14,24);
+  }
+
+  &_btn
+  {
+    width: calc(100% - 32px) !important;
+    margin: auto !important;
+    min-width: unset !important;
+    margin-bottom: 16px !important;
+  }
+
+  div > [class*="gmnoprint gm-bundled-control gm-bundled-control-on-bottom"]
+  {
+    top: 0;
+  }
+}

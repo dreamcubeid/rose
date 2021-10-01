@@ -31,6 +31,8 @@ const Loader = dynamic(() => import('components/Loader/Loader'))
 const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
 /* styles */
 import styleForm from 'public/scss/components/Form.module.scss'
+import styleButton from 'public/scss/components/Button.module.scss'
+import styleMap from 'public/scss/components/Map.module.scss'
 import stylePassword from 'public/scss/components/Password.module.scss'
 import stylePlaceorder from 'public/scss/pages/Placeorder.module.scss'
 
@@ -57,19 +59,17 @@ const placeOrderClasses = {
   datePickerInputClassName: 'date-picker__input',
   datePickerCalendarClassName: 'date-picker__calendar',
   // map
-  mapNoteClassName: stylePlaceorder.placeorder_mapNote,
-  mapSelectAreaClassName: stylePlaceorder.placeorder_mapChooseLocation,
-  mapAreaClassName: stylePlaceorder.placeorder_mapArea,
-  mapPopupClassName: stylePlaceorder.placeorder_mapPopup,
-  mapPopupBackgroundClassName: stylePlaceorder.placeorder_mapPopupContainer,
-  mapClassName: stylePlaceorder.placeorder_mapPopupMaps,
-  mapHeaderWrapperClassName: stylePlaceorder.placeorder_mapPopupHeader,
-  mapHeaderTitleClassName: stylePlaceorder.placeorder_mapPopupHeaderTitle,
-  mapHeaderCloseButtonClassName: stylePlaceorder.placeorder_mapPopupClose,
-  mapHeaderNoteClassName: stylePlaceorder.placeorder_mapPopupNote,
-  mapLabelAddressClassName: stylePlaceorder.placeorder_mapPopupLabelAddress,
-  mapCenterButtonClassName: stylePlaceorder.placeorder_mapPopupCenterButton,
-  mapButtonFooterClassName: `${stylePlaceorder.btn} ${stylePlaceorder.btn_primary} my-3`
+  mapNoteClassName: "d-none",
+  mapAreaClassName: styleMap.map_mapArea,
+  mapSelectAreaClassName: `${styleMap.map_btnLocation}`,
+  mapPopupClassName: styleMap.map_mapPopup,
+  mapClassName: styleMap.map_mapPopupMaps,
+  mapHeaderWrapperClassName: styleMap.map_mapPopupHeader,
+  mapHeaderTitleClassName: styleMap.map_mapPopupHeaderTitle,
+  mapHeaderCloseButtonClassName: styleMap.map_mapPopupClose,
+  mapLabelAddressClassName: styleMap.map_mapPopupLabelAddress,
+  mapCenterButtonClassName: styleMap.map_mapPopupCenterButton,
+  mapButtonFooterClassName: `${styleButton.btn} ${styleButton.btn_primary} ${styleMap.map_btn}`,
 }
 
 type PrivateComponentPropsType = {
@@ -124,6 +124,20 @@ const PlaceOrderPage: FC<any> = ({
             mapButtonCloseIcon={<XIcon />}
             mapCenterIcon={<Crosshair />}
             loadingComponent={<Loader />}
+            logistixStyles={{
+              menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
+              control: (provided) => ({
+                ...provided,
+                borderRadius: '37px',
+                height: '58px',
+                padding: '0 21px',
+                width: '100%',
+                paddingTop: '16px',
+              }),
+              singleValue: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
+              input: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
+              indicatorsContainer: (provided) => ({ ...provided, display: 'none' }),
+            }}
           />
           <OrderSummaryBox
             i18n={i18n}

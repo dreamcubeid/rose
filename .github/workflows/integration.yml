@@ -4,11 +4,9 @@ on:
   pull_request:
     branches:
       - master
-    types: [closed]
 
 jobs:
   merge_pull_request:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:

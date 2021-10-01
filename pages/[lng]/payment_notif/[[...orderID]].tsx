@@ -72,8 +72,8 @@ const PaymentConfirmationPage: FC<any> = ({
                 orderIDProps={orderID}
                 classes={classesPaymentConfirmation}
                 orderDetailIcon={{
-                  close: <ChevronUp />,
-                  open: <ChevronDown />
+                  chevronDown: <ChevronDown />,
+                  chevronUp: <ChevronUp />
                 }}
                 onErrorMsg={(msg) => toast.error(msg)}
                 onSuccessMsg={(msg) => toast.success(msg)}

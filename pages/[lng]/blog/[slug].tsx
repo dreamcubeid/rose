@@ -1,18 +1,21 @@
+/* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { IoArrowBackOutline } from 'react-icons/io5'
-import { BlogSingle, useI18n, BlogRecent } from '@sirclo/nexus'
-import Layout from 'components/Layout/Layout'
+import {
+  BlogSingle,
+  useI18n,
+  BlogRecent
+} from '@sirclo/nexus'
+/* library template */
 import { useBrand } from 'lib/useBrand'
-import styleBlog from 'public/scss/pages/Blog.module.scss'
+/* components */
+import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
-
-const Placeholder = dynamic(() => import('components/Placeholder'))
-const Popup = dynamic(() => import('components/Popup/Popup'))
-const SocialShare = dynamic(() => import('components/SocialShare'))
+import SocialShare from 'components/SocialShare'
+/* styles */
+import styleBlog from 'public/scss/pages/Blog.module.scss'
 
 const classesBlogSingle = {
   blogContainerClassName: styleBlog.blog_detail,
@@ -74,6 +77,10 @@ const BlogSlug: FC<any> = ({
               <span className="spinner-border" />
             </div>
           }
+        />
+        <SocialShare
+          urlSite={urlSite}
+          title={i18n.t("article.share")}
         />
         <div className={styleBlog.blog_recent}>
           <div className={styleBlog.blog_recent_title}>{i18n.t('blog.recentPost')}</div>

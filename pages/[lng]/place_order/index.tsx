@@ -24,6 +24,7 @@ import { useBrand } from 'lib/useBrand'
 /* components */
 import Layout from 'components/Layout/Layout'
 import HeaderCheckout from 'components/Header/HeaderCheckout'
+import Stepper from 'components/Stepper'
 import OrderSummaryBox from 'components/OrderSummaryBox'
 const Popup = dynamic(() => import('components/Popup'))
 const Loader = dynamic(() => import('components/Loader/Loader'))
@@ -106,6 +107,10 @@ const PlaceOrderPage: FC<any> = ({
       >
         <HeaderCheckout
           i18n={i18n}
+        />
+        <Stepper
+          title={i18n.t('placeOrder.userInformation')}
+          step={1}
         />
         <div className={stylePlaceorder.placeorder}>
           <PlaceOrderForm

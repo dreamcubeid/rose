@@ -127,8 +127,9 @@ const PlaceOrderPage: FC<any> = ({
           />
           <OrderSummaryBox
             i18n={i18n}
+            lng={lng}
             page='place_order'
-            withCartDetails={false}
+            withCartDetails
           />
         </div>
         <Popup

@@ -1,8 +1,5 @@
 @import '../utils/variables';
-@import './Form.module.scss';
-@import './Button.module.scss';
-@import './Popup.module.scss';
-@import './CartDetail.module.scss';
+@import '../components/Button.module.scss';
 
 .orderSummary
 {
@@ -244,11 +241,6 @@
     
     &_voucherIcon
     {
-        svg
-        {
-            color: $color_yellow;
-        }
-
         &[class*="end"]
         {
             @include position(absolute, auto, 12px, auto, auto);
@@ -411,21 +403,14 @@
         border: 1px solid $color_border;
         border-radius: 37px;
         padding: 17px;
-        margin-bottom: 12px;
+        margin: 12px 0;
         background: $color_white;
         cursor: pointer;
     }
 
-    &_voucherAppliedIcon
-    {
-        svg
-        {
-            color: $color_green;
-        }
-    }
-
     &_voucherAppliedText
     {
+        @include typographyBuilder(secondary, 400, 16, 24);
         color: $color_text_primary;
         margin-left: 15px;
     }
@@ -516,143 +501,6 @@
             @include position(absolute, auto, 16px, auto, auto)
         }
     }
-    
-    &_pointsIcon
-    {
-        svg
-        {
-            color: $color_yellow;
-        }
-    }
-
-    &_pointsText
-    {
-        color: $color_black;
-        margin-left: 15px;
-    }
-
-    &_pointsFormContainer
-    {
-        position: relative;
-        @include flex(column, center, center);
-    }
-
-    &_pointsForm
-    {
-        @include flex(row, center, center);
-        @include fixedWidth(100%);
-
-        input
-        {
-            @include fixedWidth(calc(100% - 140px));
-            @include typographyBuilder(secondary, 400, 14, 24);
-            color: $color_text_primary;
-            border: 1px solid $color_border;
-            border-radius: 37px;
-            padding: 17px;
-            margin: 0 5px;
-            background: transparent;
-            order: 2;
-
-            &:active,
-            &:focus
-            {
-                outline: 0;
-                box-shadow: none;
-            }
-        }
-    }
-    
-    &_numberOfPoints
-    {
-        padding: 16px 16px 11px 16px;
-    }
-    
-    &_pointsWarning
-    {
-        padding: 0 0 16px;
-
-        p
-        {
-            @include typographyBuilder(secondary, 400, 11, 16);
-            text-align: center;
-            color: $color_red;
-            margin: 8px 0 0 0;
-        }
-    }
-
-    &_totalPoints
-    {
-        @include flex(column, center, center);
-
-        img
-        {
-           width: 25px;
-           margin-bottom: 10px;
-        }
-    }
-
-    &_pointValue
-    {
-        @include typographyBuilder(secondary, 400, 14, 24);
-    }
-    
-    &_pointsInsufficient
-    {
-        @include typographyBuilder(secondary, 500, 14, 18);
-        position: absolute;
-        bottom: -30px;
-        color: $color_red;
-    }
-
-    &_qty
-    {
-        grid-column: 2/3;
-        grid-row: 3;
-        text-align: left;
-    }
-    
-    &_qtyBox
-    {
-        @include typographyBuilder(secondary, 400, 14, 18);
-        border: none;
-        width: 50px;
-        margin: 0;
-        height: 22px;
-        
-        &::before
-        {
-            content: "Qty:";
-        }
-    }
-
-    &_price
-    {
-        grid-row: 2/2;
-        grid-column: 2/2;
-    }
-
-    &_cartItem
-    {
-        &:first-child
-        {
-            padding-top: 8px;
-        }
-    }
-    
-    &_cartDetailsTitle
-    {
-        @include typographyBuilder(secondary, 500, 18, 23);
-        margin: 12px 0 8px 16px;
-    }
-
-    &_cartDetails
-    {
-        padding: 0 16px;
-        max-height: 300px;
-        overflow-y: auto;
-        @extend .scrollbar_main;
-    }
 
     &_errorCartContainer
     {
@@ -683,6 +531,94 @@
     }
 }
 
+.cart
+{
+    &_container
+    {
+        border: 1px solid $color_rose;
+        border-radius: 2px;
+        margin-top: 24px;
+    }
+
+    &_header
+    {
+        @include flex(row, center, space-between);
+        padding: 12px;
+        background: $color_rose_bg2;
+
+        &Title
+        {
+            @include typographyBuilder(secondary, 400, 12, 16);
+            color: $color_text_primary;
+            margin: 0;
+        }
+
+        & > a
+        {
+            @include typographyBuilder(secondary, 400, 12, 16);
+            @include flex(row, center, center);
+            text-decoration: none;
+            color: $color_rose;
+        }
+    }
+
+    &_detail
+    {
+        padding: 12px;
+    }
+
+    &_item
+    {
+        display: grid;
+        grid-template-columns: 64px auto;
+        grid-column-gap: 16px;
+        grid-row-gap: 2px;
+        padding: 12px 0;
+        border-bottom: 1px solid $color_border;
+
+        &:first-child
+        {
+            padding-top: 0;
+        }
+
+        &:last-child
+        {
+            padding-bottom: 0;
+            border-bottom: 0px solid transparent;
+        }
+    }
+
+    &_image
+    {
+        grid-column: 1;
+        grid-row: 1 / 3;
+
+        img
+        {
+            @include fixedWidth(64px);
+            @include fixedHeight(64px);
+            object-fit: cover;
+        }
+    }
+
+    &_title
+    {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+        @include typographyBuilder(secondary, 400, 12, 16);
+        color: $color_text_primary;
+    }
+
+    &_totalPrice
+    {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        @include typographyBuilder(secondary, 400, 12, 16);
+        color: $color_text_secondary;
+    }
+}
 
 @media screen and (max-width: #{$breakpoint_max_sm})
 {

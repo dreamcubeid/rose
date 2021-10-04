@@ -2,6 +2,8 @@
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import { IoArrowBackOutline } from 'react-icons/io5'
 import { 
   isLookbookAllowed, 
   LookbookSingle, 
@@ -18,6 +20,7 @@ import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 import Loader from 'components/Loader/Loader'
+import SocialShare from 'components/SocialShare'
 /* styles */
 import styleLookbook from 'public/scss/pages/Lookbook.module.scss'
 import stylePlaceHolder from 'public/scss/components/Placeholder.module.scss'
@@ -54,6 +57,7 @@ const LookbookSinglePage: FC<any> = ({
   lngDict,
   slug,
   brand,
+  urlSite
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
   const router = useRouter()
@@ -128,7 +132,7 @@ const LookbookSinglePage: FC<any> = ({
         <div className={styleLookbook.lookbook_relatedProducts}>
           {i18n.t("lookbook.relatedProducts")}
         </div>
-        <div className={`container ${styleProducts.products}`}>
+        <div className='container'>
           <div className="row">
             <Products
               tagName={tagname}
@@ -167,6 +171,20 @@ const LookbookSinglePage: FC<any> = ({
             />
           </div>
         </div>
+        <div className={styleLookbook.lookbook_detail_shareContainer}>
+          <SocialShare
+            urlSite={urlSite}
+            title={i18n.t("lookbook.share")}
+            />
+        </div>
+        <div className={styleLookbook.lookbook_detail_footer}>
+          <Link href="/[lng]/lookbook/categories" as={`/${lng}/lookbook/categories`}>
+            <a>
+              <IoArrowBackOutline color="#998060" size={12} />
+              <span>{i18n.t('lookbook.back')}</span>
+            </a>
+          </Link>
+        </div>
       </div>
     </Layout>
   )
@@ -177,12 +195,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
 
   const brand = await useBrand(req)
 
+  const urlSite = `https://${req.headers.host}/${params.lng}/lookbook/categories/${params.slug}`
+
   return {
     props: {
       lng: params.lng,
       slug: params.slug,
       lngDict,
       brand: brand || '',
+      urlSite
     },
   }
 }

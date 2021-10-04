@@ -4,12 +4,14 @@
 {
   &_container
   {
-      padding: 58px 0 106px 0;
+    padding: 58px 0 106px 0;
+    background-color: $color_rose_bg1;
   }
 
   &_header
   {
     padding: 16px 18px 24px 18px;
+    background-color: $color_white;
   }
 
   &_body
@@ -20,10 +22,11 @@
   &_categoryContainer
   {
     display: flex;
-    height: 40px;
+    
     overflow: auto;
     margin-top: 16px;
     margin-left: 17px;
+    padding: 10px 0;
   }
 
   &_category
@@ -32,6 +35,7 @@
     list-style-type:none;
     margin: 0;
     padding: 0;
+    height: 40px;
   }
 
   &_categoryItem
@@ -146,6 +150,8 @@
 
   &_detail
   {
+    background-color: $color_white;
+    padding-bottom: 24px;
 
     &_header
     {
@@ -171,9 +177,10 @@
     {
       color: $color_text_primary;
       @include typographyBuilder(secondary,400,14,24);
+      padding: 0 17px;
+
       & > *
       {
-        padding: 0 17px;
         color: $color_text_primary;
         margin: 0;
       }
@@ -240,7 +247,6 @@
 
   &_recent
   {
-    background-color: $color_rose_bg1;
     padding-top: 24px;
 
     &_title
@@ -278,6 +284,18 @@
       @include typographyBuilder(secondary,500,14,24); 
       color: $color_rose;
       margin-top: 100px;
+    }
+  }
+
+  &_shareContainer
+  {
+    background-color: $color_white;
+    
+    & > div
+    {
+      padding: 24px 0;
+      border-top: 1px solid $color_border;
+      margin: 0 17px;
     }
   }
 }

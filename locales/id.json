@@ -173,6 +173,7 @@
   "global": {
     "back": "Kembali",
     "backHome": "Kembali ke Halaman Utama",
+    "change": "Ubah",
     "changeCart": "Ubah Keranjang",
     "checkoutTitle": "Selesaikan Pesanan",
     "continueShopping": "Lanjutkan Berbelanja",
@@ -540,19 +541,20 @@
     "inDelivery": "Kurir dalam perjalanan menuju pembeli",
     "inTransit": "Pesanan tiba di",
     "noDriver": "Gagal menemukan kurir",
-    "setPinpoint": "Set Pin Lokasi",
-    "updatePinpoint": "Ubah Pin Lokasi",
     "noShipping": "Tidak ada pengiriman tersedia",
     "notCoverage": "Lokasi anda tidak terjangkau",
     "notReady": "Belum dikirim",
     "pickingUp": "Kurir dalam perjalanan menuju toko",
     "returned": "Kurir mengembalikan pesanan ke toko",
+    "setPinpoint": "Set Pin Lokasi",
     "shipTo": "Dikirim ke",
     "shippingMethod": "Metode Pengiriman",
     "subtitleContactInfo": "*tagihan akan dikirim ke kontak ini",
     "subtitleShipTo": "*pesanan Anda akan dikirimkan",
+    "title": "Pengiriman",
     "track": "Lacak Pesanan",
-    "trackDriver": "Lacak kurir"
+    "trackDriver": "Lacak kurir",
+    "updatePinpoint": "Ubah Pin Lokasi"
   },
   "sort": {
     "aToZAscending": "Nama (A-Z)",

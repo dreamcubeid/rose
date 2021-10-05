@@ -173,6 +173,7 @@
   "global": {
     "back": "Back",
     "backHome": "Back to Home",
+    "change": "Change",
     "changeCart": "Change Cart",
     "checkoutTitle": "Checkout",
     "continueShopping": "Continue Shopping",
@@ -550,6 +551,7 @@
     "shippingMethod": "Shipping Method",
     "subtitleContactInfo": "*a bill will be sent to this contact",
     "subtitleShipTo": "*your order will be shipped",
+    "title": "Shipping",
     "track": "Track your order",
     "trackDriver": "Track Driver",
     "updatePinpoint": "Change Location Pin"

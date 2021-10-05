@@ -8,7 +8,7 @@
   @include fixedWidth(375px, true);
   @include transition();
   height: 58px;
-  z-index: 10;
+  z-index: 20;
 
   @media screen and (max-width: $breakpoint_max_sm)
   {
@@ -77,7 +77,7 @@
     overflow-y: auto;
     border: none;
     background-color: $color_rose_bg2;
-    z-index: 10;
+    z-index: 20;
 
     @include transition();
     opacity: 0;

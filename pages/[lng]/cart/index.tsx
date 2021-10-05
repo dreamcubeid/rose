@@ -40,6 +40,7 @@ const classesCartDetails = {
 	itemTitleClassName: styleCart.cartItem_title,
 	itemPriceClassName: styleCart.cartItem_price,
 	itemRegularPriceClassName: styleCart.cartItem_regularPrice,
+	itemSalePriceWrapperClassName: styleCart.cartItem_salePriceWrapper,
 	itemSalePriceClassName: styleCart.cartItem_salePrice,
 	itemDiscountNoteClassName: styleCart.cartItem_discNote,
 	itemQtyClassName: styleCart.cartItem_qty,

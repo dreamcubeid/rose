@@ -78,10 +78,14 @@ const BlogSlug: FC<any> = ({
             </div>
           }
         />
-        <SocialShare
-          urlSite={urlSite}
-          title={i18n.t("article.share")}
-        />
+        <div className={styleBlog.blog_shareContainer}>
+          <div>
+            <SocialShare
+              urlSite={urlSite}
+              title={i18n.t("article.share")}
+              />
+          </div>
+        </div>
         <div className={styleBlog.blog_recent}>
           <div className={styleBlog.blog_recent_title}>{i18n.t('blog.recentPost')}</div>
 

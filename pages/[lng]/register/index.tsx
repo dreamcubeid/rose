@@ -33,17 +33,18 @@ const Loader = dynamic(() => import("components/Loader/Loader"))
 import styleLogin from 'public/scss/pages/Login.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
+import stylePassword from 'public/scss/components/Password.module.scss'
 
 const classesRegister = {
   containerClassName: styleLogin.login_containerForm,
   basicInfoContainerClassName: 'w-100',
   headerLabelClassName: 'd-none',
   inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
-  passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
-  passwordStrengthBarContainerClassName: styleLogin.login_passwordStrengthBarContainer,
-  passwordStrengthBarClassName: styleLogin.login_passwordStrengthBar,
-  passwordCriteriaListClassName:styleLogin.login_criteriaList,
-  passwordStrengthLabelClassName: styleLogin.login_passwordStrengthLabel,
+  passwordInputContainerClassName: stylePassword.password_passwordContainer,
+  passwordStrengthBarContainerClassName: stylePassword.password,
+  passwordStrengthBarClassName: stylePassword.password_bar,
+  passwordStrengthLabelClassName: stylePassword.password_label,
+  passwordCriteriaListClassName: `${stylePassword.password_criteria} d-none`,
   labelRequiredClassName: 'd-none',
   verificationContainerClassName: 'mt-2 mb-4 p-0',
   buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,

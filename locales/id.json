@@ -179,6 +179,8 @@
     "continueShopping": "Lanjutkan Berbelanja",
     "error": "Terjadi kesalahan",
     "loading": "Memuat",
+    "notes": "Catatan",
+    "notesEmpty": "Tidak ada catatan",
     "notImplemented": "Belum tersedia",
     "pageNotFound": "Halaman Tidak Ditemukan"
   },

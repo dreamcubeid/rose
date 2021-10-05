@@ -15,4 +15,10 @@
 {
   padding: 18px;
   background: $color_rose_bg1;
+
+  &_notes
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_secondary;
+  }
 }

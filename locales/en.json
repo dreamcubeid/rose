@@ -179,6 +179,8 @@
     "continueShopping": "Continue Shopping",
     "error": "Error",
     "loading": "Loading",
+    "notes": "Notes",
+    "notesEmpty": "Notes empty",
     "notImplemented": "Not implemented yet",
     "pageNotFound": "Page not found"
   },

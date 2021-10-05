@@ -1,19 +1,9 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import Router from 'next/router'
 import { toast } from 'react-toastify'
-import {
-  ArrowLeft,
-  ShoppingCart,
-  X as XIcon,
-  ChevronDown,
-  ChevronUp,
-  Info,
-  Crosshair
-} from 'react-feather'
 import { FiX } from 'react-icons/fi'
 import { BiTargetLock } from 'react-icons/bi'
 import { HiCheckCircle } from 'react-icons/hi'
@@ -21,7 +11,8 @@ import {
   CustomerDetail,
   ShippingMethods,
   useI18n,
-  PrivateRoute
+  PrivateRoute,
+  useBuyerNotes
 } from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
@@ -30,7 +21,6 @@ import Layout from 'components/Layout/Layout'
 import HeaderCheckout from 'components/Header/HeaderCheckout'
 import Stepper from 'components/Stepper'
 import OrderSummaryBox from 'components/OrderSummaryBox'
-import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 const Placeholder = dynamic(() => import('components/Placeholder'))
 const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
 /* styles */
@@ -91,6 +81,14 @@ type PrivateComponentPropsType = {
   children: any
 }
 
+type TypeCustomerDetail = {
+  i18n: any
+  lng: string
+  title: string
+  withIcon?: boolean
+  toDirect?: string
+}
+
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
     page="shipping_method"
@@ -101,24 +99,33 @@ const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   </PrivateRoute>
 )
 
+const CustomerDetailHeader = ({
+  i18n,
+  lng,
+  title,
+  withIcon = true,
+  toDirect = "place_order"
+}: TypeCustomerDetail) => (
+  <div className={styleCustomer.customer_infoHeader}>
+    <div className={styleCustomer.customer_infoHeaderContainer}>
+      <h3 className={styleCustomer.customer_infoHeaderTitle}>{title}</h3>
+      {withIcon &&
+        <HiCheckCircle color="#53B671" size={20} />
+      }
+    </div>
+    <Link href={`/[lng]/${toDirect}`} as={`/${lng}/${toDirect}`}>
+      <a className={styleCustomer.customer_infoHeaderLink}>{i18n.t("global.change")}</a>
+    </Link>
+  </div>
+)
+
 const ShippingMethodPage: FC<any> = ({
   lng,
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
-
-  const CustomerDetailHeader = ({ title }) => (
-    <div className={styleCustomer.customer_infoHeader}>
-      <div className={styleCustomer.customer_infoHeaderContainer}>
-        <h3 className={styleCustomer.customer_infoHeaderTitle}>{title}</h3>
-        <HiCheckCircle color="#53B671" size={20} />
-      </div>
-      <Link href="/[lng]/place_order" as={`/${lng}/place_order`}>
-        <a className={styleCustomer.customer_infoHeaderLink}>{i18n.t("global.change")}</a>
-      </Link>
-    </div>
-  )
+  const { data: dataBuyerNotes } = useBuyerNotes();
 
   return (
     <PrivateRouteWrapper>
@@ -144,6 +151,8 @@ const ShippingMethodPage: FC<any> = ({
             isBilling={true}
             contactInfoHeader={
               <CustomerDetailHeader
+                i18n={i18n}
+                lng={lng}
                 title={i18n.t("shipping.contactInfo")}
               />
             }
@@ -156,6 +165,8 @@ const ShippingMethodPage: FC<any> = ({
             isBilling={false}
             shippingInfoHeader={
               <CustomerDetailHeader
+                i18n={i18n}
+                lng={lng}
                 title={i18n.t("shipping.shipTo")}
               />
             }
@@ -163,6 +174,16 @@ const ShippingMethodPage: FC<any> = ({
               <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
             }
           />
+          <CustomerDetailHeader
+            i18n={i18n}
+            lng={lng}
+            title={i18n.t("global.notes")}
+            withIcon={false}
+            toDirect="cart"
+          />
+          <div className={styles.customer_notes}>
+            {dataBuyerNotes?.buyerNotes?.buyerNotes || i18n.t("global.notesEmpty")}
+          </div>
         </div>
         <div className={styles.shippingMethod}>
           <h3 className={styles.shippingMethod_title}>

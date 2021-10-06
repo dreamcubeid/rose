@@ -54,7 +54,7 @@
 
       p
       {
-        @include typographyBuilder(secondary, 400, 14, 24);
+        @include typographyBuilder(secondary, 400, 12, 24);
         margin: 0;
         padding: 0;
         color: $color_error;
@@ -71,7 +71,7 @@
     &__pinButton
     {
       order: 4;
-      margin: 12px 0 22px;
+      margin: 12px auto 22px !important;
       width: calc(100% - 32px) !important;
       min-width: calc(100% - 32px) !important;
       max-width: calc(100% - 32px) !important;
@@ -93,8 +93,10 @@
 
       p
       {
+        @include typographyBuilder(secondary, 400, 12, 24);
         margin: 0;
         padding: 0;
+        color: $color_text_primary;
       }
     }
 
@@ -150,7 +152,7 @@
 
       p
       {
-        @include typographyBuilder(secondary, 400, 14, 24);
+        @include typographyBuilder(secondary, 400, 12, 24);
         color: $color_rose;
       }
     }

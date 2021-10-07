@@ -35,6 +35,7 @@ import styleButton from 'public/scss/components/Button.module.scss'
 import styleMap from 'public/scss/components/Map.module.scss'
 import stylePassword from 'public/scss/components/Password.module.scss'
 import stylePlaceorder from 'public/scss/pages/Placeorder.module.scss'
+import styleDatePicker from 'public/scss/components/DatePicker.module.scss'
 
 const placeOrderClasses = {
   billingAddressHeaderClassName: stylePlaceorder.placeorder_header,
@@ -46,6 +47,8 @@ const placeOrderClasses = {
   // form
   formGroupClassName: `${styleForm.form} mb-3`,
   passwordInputContainerClassName: stylePlaceorder.placeorder_passwordContainer,
+  // date picker
+  datePickerInputClassName: styleDatePicker.datePicker,
   // shipping
   shippingCheckboxContainerClassName: stylePlaceorder.placeorder_shipping,
   shippingCheckboxTitleClassName: 'd-none',
@@ -56,8 +59,6 @@ const placeOrderClasses = {
   passwordStrengthBarClassName: stylePassword.password_bar,
   passwordStrengthLabelClassName: stylePassword.password_label,
   passwordCriteriaListClassName: `${stylePassword.password_criteria} d-none`,
-  datePickerInputClassName: 'date-picker__input',
-  datePickerCalendarClassName: 'date-picker__calendar',
   // map
   mapNoteClassName: "d-none",
   mapAreaClassName: styleMap.map_mapArea,

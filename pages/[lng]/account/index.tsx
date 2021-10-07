@@ -67,6 +67,64 @@ const classesAccount = {
   passwordStrengthBarClassName: stylePassword.password_bar,
   passwordStrengthLabelClassName: stylePassword.password_label,
   passwordCriteriaListClassName: `${stylePassword.password_criteria} ${styleAccount.form_criteria} d-none`,
+  // order
+  orderInfoContainerClassName: styleAccount.order_info,
+  OrderInfoIconClassName: styleAccount.order_info_icon,
+  orderItemClassName: styleAccount.order_item,
+  orderHeaderClassName: styleAccount.order_item_header,
+  orderInnerHeaderClassName: styleAccount.order_item_innerHeader,
+  orderTitleClassName: styleAccount.order_item_title,
+  orderDateClassName: styleAccount.order_item_date,
+  orderBodyClassName: styleAccount.order_item_body,
+  orderFooterClassName: styleAccount.order_item_footer,
+  totalCostClassName: styleAccount.order_item_totalCost,
+  buyerNoteContainerClassName: styleAccount.order_item_containerDetail,
+  buyerNoteLabelClassName: styleAccount.order_item_labelDetail,
+  buyerNoteClassName: styleAccount.order_item_note,
+  shippingContainerClassName: styleAccount.order_item_containerDetail,
+  shippingDetailsLabelClassName: styleAccount.order_item_labelDetail,
+  shippingDetailsValueClassName: styleAccount.order_item_valueDetail,
+  shippingMethodContainerClassName: styleAccount.order_item_containerMethod,
+  shippingMethodLabelClassName: styleAccount.order_item_labelDetail,
+  shippingMethodValueClassName: styleAccount.order_item_valueDetail,
+  paymentMethodContainerClassName: `${styleAccount.order_item_containerMethod} ${styleAccount.order_item_paymentMethod}`,
+  paymentMethodLabelClassName: styleAccount.order_item_labelDetail,
+  orderControlClassName: styleAccount.order_item_control,
+  shippingTrackerButton: styleAccount.order_item_controlButton,
+  invoiceButtonClassName: styleAccount.order_item_controlInvoice,
+  orderedItemDetailUploadReceiptClassName: `${styleAccount.order_item_controlButton} ${styleAccount.order_item_controlButton_secondaryBg}`,
+  orderedItemDetailDeliveredClassName: `${styleAccount.order_item_controlButton} ${styleAccount.order_item_controlButton_secondaryBg}`,
+  totalPointsClassName: styleAccount.order_item_totalPoints,
+  orderedItemsLabelClassName: 'd-none',
+  orderedItemsClassName: styleAccount.order_item_orderedItems,
+  orderedItemClassName: styleAccount.order_item_orderedItem,
+  orderedItemImageClassName: styleAccount.order_item_orderedItemImg,
+  orderedItemDetailClassName: styleAccount.order_item_orderedItemDetail,
+  orderedItemDetailTitleClassName: styleAccount.order_item_orderedItemDetail_title,
+  orderedItemDetailPriceClassName: styleAccount.order_item_orderedItemDetail_price,
+  orderedItemDetailNeedReviewClassName: styleAccount.order_item_needReview,
+  paymentStatusPaidClassName: styleAccount.order_status,
+  paymentStatusUnpaidClassName: styleAccount.order_status,
+  paymentStatusCancelledClassName: styleAccount.order_status,
+  paymentStatusReturnedClassName: styleAccount.order_status,
+  paymentStatusReadyToShipClassName: styleAccount.order_status,
+  paymentStatusShippedClassName: styleAccount.order_status,
+  paymentStatusDeliveredClassName: styleAccount.order_status,
+  paymentStatusCompletedClassName: styleAccount.order_status,
+  OrderInfoSearchHereClassName: styleAccount.order_info_button,
+  // tracker
+  shipmentTrackingClassName: styleAccount.shipmentTracking,
+  shipmentHeaderClassName: styleAccount.shipmentTracking_header,
+  shipmentHeaderTextClassName: styleAccount.shipmentTracking_title,
+  shipmentTextClassName: styleAccount.shipmentTracking_subTitle,
+  shipmentCloseIconClassName: styleAccount.shipmentTracking_close,
+  shipmentBodyClassName: styleAccount.shipmentTracking_body,
+  shipmentListWrapperClassName: styleAccount.shipmentTracking_list,
+  shipmentListClassName: styleAccount.shipmentTracking_item,
+  shipmentStatusClassName: styleAccount.shipmentTracking_item_description,
+  shipmentDateClassName: styleAccount.shipmentTracking_item_date,
+  shipmentNoteClassName: styleAccount.shipmentTracking_item_note,
+  shipmentFooterClassName: styleAccount.shipmentTracking_footer,
 }
 
 const AccountsPage: FC<any> = ({
@@ -92,12 +150,7 @@ const AccountsPage: FC<any> = ({
   }
 
   return (
-    <Layout 
-      i18n={i18n} 
-      lng={lng} 
-      lngDict={lngDict} 
-      brand={brand}
-    >
+    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
       <div className={styleAccount.account_container}>
         <div className={styleAccount.account_breadcrumb}>
           <Breadcrumb
@@ -114,6 +167,9 @@ const AccountsPage: FC<any> = ({
           </div>
         </div>
         <Account
+          defaultTab="orderHistory"
+          orderHistoryIsInfinite
+          orderHistoryItemPerPage={1}
           classes={classesAccount}
           currency={ACTIVE_CURRENCY}
           onFetchCompleted={onFetchCompleted}
@@ -121,8 +177,8 @@ const AccountsPage: FC<any> = ({
           onSuccessMsg={onSuccess}
           onSuccessChPass={onSuccessChPass}
           orderHistoryIsCallPagination={true}
-          orderHistoryItemPerPage={10}
           paymentHrefPrefix="payment_notif"
+          orderHistoryType="list"
           logistixStyles={{
             menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
             control: (provided) => ({
@@ -147,8 +203,18 @@ const AccountsPage: FC<any> = ({
             accordionIcon: <BiChevronDown />,
             closeIcon: <RiCloseLine />,
             infoIcon: <RiInformationLine size={12} color="#444444" />,
-            iconTracker: <img src="/images/motorcycle.svg" alt="motorcycle" />,
+            iconTracker: (
+              <div>
+                <img src="/images/motorcycle.svg" alt="motorcycle" />
+              </div>
+            ),
           }}
+          loadingComponent={
+            <div className="w-100 d-flex align-items-center justify-content-center">
+              <span className="spinner-border" style={{ width: 20, height: 20, marginRight: 12 }} />
+              <span>{i18n.t('account.loading')}</span>
+            </div>
+          }
         />
       </div>
     </Layout>

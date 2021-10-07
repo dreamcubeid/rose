@@ -40,20 +40,21 @@
     "passwordSuccess": "Password berhasil diubah!",
     "paymentMethod": "Metode pembayaran",
     "paymentStatus": "Status Pembayaran",
-    "placedOn": "Ditempatkan pada",
+    "placedOn": "",
     "point": "Poin",
     "points": "Points",
     "save": "Simpan Perubahan",
     "sessionExpired": "Sesi anda telah usai",
-    "shippingDetail": "Detil pengiriman",
+    "shippingDetails": "Detil pengiriman",
     "shippingMethod": "Metode Pengiriman",
-    "total": "Jumlah",
+    "total": "Total :",
     "unpaid": "Belum Dibayar",
     "viewInvoice": "Lihat Tagihan",
-    "youGot": "Anda punya",
+    "youGot": "",
     "youHave": "Anda memiliki",
     "cantFindYourOrder": "Tidak menemukan pesanan anda?",
-    "searchHere": "Cari disini"
+    "searchHere": "Cari disini",
+    "loading": "mohon tunggu"
   },
   "article": {
     "categories": "Bantuan",
@@ -267,7 +268,9 @@
   "orderHistory": {
     "lineItemNeedReview": "Needs Review",
     "lineItemReviewed": "Reviewed",
-    "lineItemDelivered": "Selesaikan Pesanan"
+    "lineItemDelivered": "Selesaikan Pesanan",
+    "uploading": "Proses",
+    "uploadReceipt": "Konfirmasi Pembayaran"
   },
   "orderReview": {
     "agree": "Setuju",

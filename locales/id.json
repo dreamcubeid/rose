@@ -238,8 +238,9 @@
     "seeCollection": "Lihat Koleksi",
     "seeMore": "Lebih Banyak",
     "title": "Lookbook",
-    "back": "Kembali",
-    "relatedProducts": "Produk Terkait"
+    "back": "Kembali Ke lookbook",
+    "relatedProducts": "Produk Terkait",
+    "share": "Bagikan Lookbook"
   },
   "membership": {
     "exchangePoints": "Tukar Poin Anda",

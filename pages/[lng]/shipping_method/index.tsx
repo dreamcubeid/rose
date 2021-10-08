@@ -1,7 +1,7 @@
 /* library package */
 import { FC } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
 import { FiX } from 'react-icons/fi'
@@ -83,7 +83,7 @@ type PrivateComponentPropsType = {
 
 type TypeCustomerDetail = {
   i18n: any
-  lng: string
+  router: any
   title: string
   withIcon?: boolean
   toDirect?: string
@@ -101,7 +101,7 @@ const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
 
 const CustomerDetailHeader = ({
   i18n,
-  lng,
+  router,
   title,
   withIcon = true,
   toDirect = "place_order"
@@ -113,9 +113,15 @@ const CustomerDetailHeader = ({
         <HiCheckCircle color="#53B671" size={20} />
       }
     </div>
-    <Link href={`/[lng]/${toDirect}`} as={`/${lng}/${toDirect}`}>
-      <a className={styleCustomer.customer_infoHeaderLink}>{i18n.t("global.change")}</a>
-    </Link>
+    <div
+      className={styleCustomer.customer_infoHeaderLink}
+      onClick={() => router.push({
+        pathname: `/[lng]/${toDirect}`,
+        query: router.query
+      })}
+    >
+      {i18n.t("global.change")}
+    </div>
   </div>
 )
 
@@ -125,7 +131,8 @@ const ShippingMethodPage: FC<any> = ({
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
-  const { data: dataBuyerNotes } = useBuyerNotes();
+  const router: any = useRouter()
+  const { data: dataBuyerNotes } = useBuyerNotes()
 
   return (
     <PrivateRouteWrapper>
@@ -152,7 +159,7 @@ const ShippingMethodPage: FC<any> = ({
             contactInfoHeader={
               <CustomerDetailHeader
                 i18n={i18n}
-                lng={lng}
+                router={router}
                 title={i18n.t("shipping.contactInfo")}
               />
             }
@@ -166,7 +173,7 @@ const ShippingMethodPage: FC<any> = ({
             shippingInfoHeader={
               <CustomerDetailHeader
                 i18n={i18n}
-                lng={lng}
+                router={router}
                 title={i18n.t("shipping.shipTo")}
               />
             }
@@ -174,15 +181,16 @@ const ShippingMethodPage: FC<any> = ({
               <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
             }
           />
-          <CustomerDetailHeader
-            i18n={i18n}
-            lng={lng}
-            title={i18n.t("global.notes")}
-            withIcon={false}
-            toDirect="cart"
-          />
-          <div className={styles.customer_notes}>
-            {dataBuyerNotes?.buyerNotes?.buyerNotes || i18n.t("global.notesEmpty")}
+          <div className={styles.customer_section}>
+            <CustomerDetailHeader
+              i18n={i18n}
+              router={router}
+              title={i18n.t("global.notes")}
+              toDirect="cart"
+            />
+            <div className={styles.customer_notes}>
+              {dataBuyerNotes?.buyerNotes?.buyerNotes || i18n.t("global.notesEmpty")}
+            </div>
           </div>
         </div>
         <div className={styles.shippingMethod}>

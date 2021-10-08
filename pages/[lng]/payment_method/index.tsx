@@ -1,34 +1,51 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Link from 'next/link'
-import Router from "next/router";
-import dynamic from "next/dynamic";
+/* libary package */
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+import { toast } from 'react-toastify'
+import { HiCheckCircle } from 'react-icons/hi'
 import {
   CustomerDetail,
   ListPaymentMethod,
   PrivateRoute,
   useI18n,
-  useShippingMethod
-} from "@sirclo/nexus";
-import SEO from "components/SEO";
-import Layout from "components/Layout/Layout";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
-import Loader from "components/Loader/Loader";
-import EmptyComponent from "components/EmptyComponent/EmptyComponent";
-import { useBrand } from "lib/useBrand";
-import { ArrowLeft, Info } from "react-feather";
-import { toast } from "react-toastify";
-import styles from "public/scss/pages/PaymentMethod.module.scss";
-
-const LoaderPages = dynamic(() => import("components/Loader/LoaderPages"));
-const Placeholder = dynamic(() => import("components/Placeholder"));
+  useShippingMethod,
+  useBuyerNotes
+} from '@sirclo/nexus'
+/* libary template */
+import { useBrand } from 'lib/useBrand'
+/* components */
+import Layout from 'components/Layout/Layout'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
+import Stepper from 'components/Stepper'
+import HeaderCheckout from 'components/Header/HeaderCheckout'
+const Loader = dynamic(() => import('components/Loader/Loader'))
+const LoaderPages = dynamic(() => import('components/Loader/LoaderPages'))
+const Placeholder = dynamic(() => import('components/Placeholder'))
+/* styles */
+import styleCustomer from 'public/scss/components/CustomerDetail.module.scss'
+import styleBtn from 'public/scss/components/Button.module.scss'
+import styles from 'public/scss/pages/PaymentMethod.module.scss'
 
 const classesCustomerDetail = {
-  customerDetailBoxClass: styles.customer,
-  addressContainerClassName: styles.customer_info,
-  addressDetailClassName: styles.customer_infoPerson,
-  addressValueClassName: styles.customer_infoPersonValue
-};
+  customerDetailBoxClass: styleCustomer.customer,
+  addressContainerClassName: styleCustomer.customer_info,
+  addressDetailClassName: styleCustomer.customer_infoPerson,
+  addressValueClassName: styleCustomer.customer_infoPersonValue,
+  changePinClassName: styleCustomer.customer_changePin,
+  // Map Popup
+  mapPopupClassName: styleCustomer.customer_mapPopup,
+  mapPopupBackgroundClassName: styleCustomer.customer_mapPopupContainer,
+  mapClassName: styleCustomer.customer_mapPopupMaps,
+  mapHeaderWrapperClassName: styleCustomer.customer_mapPopupHeader,
+  mapHeaderTitleClassName: styleCustomer.customer_mapPopupHeaderTitle,
+  mapHeaderCloseButtonClassName: styleCustomer.customer_mapPopupClose,
+  mapHeaderNoteClassName: styleCustomer.customer_mapPopupNote,
+  mapLabelAddressClassName: styleCustomer.customer_mapPopupLabelAddress,
+  mapButtonFooterClassName: `${styleBtn.btn} ${styleBtn.btn_primary} d-block mx-auto my-3`,
+  mapCenterButtonClassName: styleCustomer.customer_mapPopupCenterButton
+}
 
 const classesListPaymentMethod = {
   listPaymentDivClassName: "container",
@@ -47,7 +64,7 @@ const classesListPaymentMethod = {
   // footer
   paymentMethodDetailFooterClassName: styles.payment_footer,
   promotionButtonGroupClassName: styles.payment_footer__promotion,
-  couponButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
+  couponButtonClassName: styles.payment_pointButton,
   voucherAppliedTextClassName: styles.payment_voucherAppliedText,
   voucherButtonRemoveClassName: styles.payment_voucherAppliedRemove,
   popupClassName: styles.payment_listItemOverlay,
@@ -66,12 +83,12 @@ const classesListPaymentMethod = {
   agreementContainerClassName: styles.payment_footer__agreement,
   agreementCheckboxClassName: styles.payment_footer__check,
   buttonContainerClassName: styles.payment_footer__button,
-  buttonClassName: `btn ${styles.btn_primary} ${styles.btn_long}`,
+  buttonClassName: `${styleBtn.btn} ${styleBtn.btn_primary}`,
   basePriceClassName: styles.payment_listItemTableRow__priceSale,
   salePriceClassName: styles.payment_listItemTableRow__price,
   shippingPriceClassName: styles.payment_listItemTableRow__priceSale,
   shippingDiscountClassName: styles.payment_listItemTableRow__price,
-  //point
+  // point
   popupBackgroundClassName: styles.payment_listItemOverlay,
   pointsContainerClassName: styles.payment_containerPointPopup,
   numberOfPointsClassName: styles.payment_pointsPopup,
@@ -86,7 +103,7 @@ const classesListPaymentMethod = {
   pointButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
   pointAppliedTextClassName: styles.payment_pointAppliedText,
   pointButtonRemoveClassName: styles.payment_pointAppliedRemove,
-};
+}
 
 const classesPlaceholderCustomerDetail = {
   placeholderImage: `${styles.placeholderItem} ${styles.placeholderItem_customerDetail}`
@@ -97,8 +114,16 @@ const classesPlaceholderPayment = {
 }
 
 type PrivateComponentPropsType = {
-  children: any;
-};
+  children: any
+}
+
+type TypeCustomerDetail = {
+  i18n: any
+  router: any
+  title: string
+  withIcon?: boolean
+  toDirect?: string
+}
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   <PrivateRoute
@@ -109,27 +134,41 @@ const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (
   </PrivateRoute>
 )
 
+const CustomerDetailHeader = ({
+  i18n,
+  router,
+  title,
+  withIcon = true,
+  toDirect = "place_order"
+}: TypeCustomerDetail) => (
+  <div className={styleCustomer.customer_infoHeader}>
+    <div className={styleCustomer.customer_infoHeaderContainer}>
+      <h3 className={styleCustomer.customer_infoHeaderTitle}>{title}</h3>
+      {withIcon &&
+        <HiCheckCircle color="#53B671" size={20} />
+      }
+    </div>
+    <div
+      className={styleCustomer.customer_infoHeaderLink}
+      onClick={() => router.push({
+        pathname: `/[lng]/${toDirect}`,
+        query: router.query
+      })}
+    >
+      {i18n.t("global.change")}
+    </div>
+  </div>
+)
+
 const PaymentMethods: FC<any> = ({
   lng,
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const i18n: any = useI18n();
-  const { data } = useShippingMethod();
-
-  const CustomerDetailHeader = ({ title, linkTo, withLogo = false }) => (
-    <div className={styles.customer_infoHeader}>
-      <div className={styles.customer_infoHeaderContainer}>
-        <h3 className={styles.customer_infoHeaderTitle}>{title}</h3>
-        {withLogo &&
-          <Info color="#767676" size="18" />
-        }
-      </div>
-      <Link href={`/[lng]/${linkTo}`} as={`/${lng}/${linkTo}`}>
-        <a className={styles.customer_infoHeaderLink}>{i18n.t("shipping.change")}</a>
-      </Link>
-    </div>
-  )
+  const i18n: any = useI18n()
+  const router: any = useRouter()
+  const { data } = useShippingMethod()
+  const { data: dataBuyerNotes } = useBuyerNotes()
 
   return (
     <PrivateRouteWrapper>
@@ -139,124 +178,119 @@ const PaymentMethods: FC<any> = ({
         lngDict={lngDict}
         brand={brand}
         withHeader={false}
+        withFooter={false}
+        layoutClassName='layout_fullHeight'
       >
-        <SEO title="Payment Method" />
+        <HeaderCheckout
+          i18n={i18n}
+        />
+        <Stepper
+          title={i18n.t('shipping.title')}
+          step={3}
+        />
+        <div className={styles.customer}>
+          <CustomerDetail
+            classes={classesCustomerDetail}
+            isBilling={true}
+            contactInfoHeader={
+              <CustomerDetailHeader
+                i18n={i18n}
+                router={router}
+                title={i18n.t("shipping.contactInfo")}
+              />
+            }
+            loadingComponent={
+              <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+            }
+          />
+          <CustomerDetail
+            classes={classesCustomerDetail}
+            isBilling={false}
+            shippingInfoHeader={
+              <CustomerDetailHeader
+                i18n={i18n}
+                router={router}
+                title={i18n.t("shipping.shipTo")}
+              />
+            }
+            loadingComponent={
+              <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
+            }
+          />
+          <div className={styles.customer_section}>
+            <CustomerDetailHeader
+              i18n={i18n}
+              router={router}
+              title={i18n.t("global.notes")}
+              toDirect="cart"
+            />
+            <div className={styles.customer_notes}>
+              {dataBuyerNotes?.buyerNotes?.buyerNotes || i18n.t("global.notesEmpty")}
+            </div>
+          </div>
+          {data?.shippingMethod &&
+            <div className={`${styles.customer_section} pb-0`}>
+              <CustomerDetailHeader
+                i18n={i18n}
+                router={router}
+                title={i18n.t("account.shippingMethod")}
+                toDirect="shipping_method"
+              />
+              <div className={styles.payment_shipping}>
+                <h3 className={styles.payment_shippingTitle}>
+                  {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
+                </h3>
+                <h3 className={styles.payment_shippingCost}>
+                  {data?.shippingMethod?.shippingCost}
+                </h3>
+              </div>
+            </div>
+          }
+        </div>
         <div className={styles.payment}>
-          <div className="row mx-0">
-            <div className="col-12 p-0">
-              <div className={styles.payment_container}>
-                <div className="container">
-                  <div className={styles.payment_heading}>
-                    <div
-                      className={styles.payment_headingIcon}
-                      onClick={() => Router.push("/[lng]/products", `/${lng}/products`)}
-                    >
-                      <ArrowLeft color="black" />
-                    </div>
-                    <h6>{i18n.t("placeOrder.checkOrder")}</h6>
-                  </div>
-                </div>
-                <hr className={styles.payment_line} />
-                <div className={styles.payment_steps}>
-                  <Breadcrumb steps={[]} />
-                </div>
-                <hr className={`${styles.payment_lineSecond}`} />
-                <div className="container">
-                  <div className="row">
-                    <div className="col-12 col-md-12 col-lg-6 offset-lg-3">
-                      <CustomerDetail
-                        classes={classesCustomerDetail}
-                        isBilling={true}
-                        contactInfoHeader={
-                          <CustomerDetailHeader
-                            title={i18n.t("shipping.contactInfo")}
-                            linkTo="place_order"
-                            withLogo
-                          />
-                        }
-                        loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
-                        }
-                      />
-                      <CustomerDetail
-                        classes={classesCustomerDetail}
-                        isBilling={false}
-                        shippingInfoHeader={
-                          <CustomerDetailHeader
-                            title={i18n.t("shipping.shipTo")}
-                            linkTo="place_order"
-                            withLogo
-                          />
-                        }
-                        loadingComponent={
-                          <Placeholder classes={classesPlaceholderCustomerDetail} withImage />
-                        }
-                      />
-                      {data?.shippingMethod &&
-                        <>
-                          <CustomerDetailHeader
-                            title={i18n.t("account.shippingMethod")}
-                            linkTo="shipping_method"
-                          />
-                          <div className={styles.payment_shipping}>
-                            <h3 className={styles.payment_shippingTitle}>
-                              {data?.shippingMethod?.shippingProvider}&nbsp;{data?.shippingMethod?.shippingService}
-                            </h3>
-                            <h3 className={styles.payment_shippingCost}>
-                              {data?.shippingMethod?.shippingCost}
-                            </h3>
-                          </div>
-                        </>
-                      }
-                      <div className={styles.payment_list}>
-                        <h3 className={styles.payment_listTitle}>{i18n.t("payment.title")}</h3>
-                        <ListPaymentMethod
-                          classes={classesListPaymentMethod}
-                          onErrorMsg={(msg) => toast.error(msg)}
-                          onErrorMsgCoupon={(msg) => toast.error(msg)}
-                          popupLoader={
-                            <div className={styles.payment_popupProcessOverlay}>
-                              <div className={styles.payment_popupProcessContainer}>
-                                <div className={styles.payment_popupProcessInner}>
-                                  <span className="spinner-border spinner-border-sm mr-3" role="status"></span>
-                                  <span>{i18n.t("payment.prepayment")}</span>
-                                </div>
-                              </div>
-                            </div>
-                          }
-                          loaderElement={
-                            <div className="col-12 text-center mx-auto loader">
-                              <Loader color="text-dark" withText />
-                            </div>
-                          }
-                          emptyState={
-                            <EmptyComponent
-                              title={i18n.t("payment.isEmpty")}
-                            />
-                          }
-                          loadingComponent={
-                            <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
-                          }
-                        />
-                      </div>
-                    </div>
+          <h3 className={styles.payment_listTitle}>
+            {i18n.t("payment.title")}
+          </h3>
+          <ListPaymentMethod
+            classes={classesListPaymentMethod}
+            onErrorMsg={(msg) => toast.error(msg)}
+            onErrorMsgCoupon={(msg) => toast.error(msg)}
+            popupLoader={
+              <div className={styles.payment_popupProcessOverlay}>
+                <div className={styles.payment_popupProcessContainer}>
+                  <div className={styles.payment_popupProcessInner}>
+                    <span className="spinner-border spinner-border-sm mr-3" role="status"></span>
+                    <span>{i18n.t("payment.prepayment")}</span>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            }
+            loaderElement={
+              <div className="col-12 text-center mx-auto loader">
+                <Loader color="text-dark" withText />
+              </div>
+            }
+            emptyState={
+              <EmptyComponent
+                title={i18n.t("payment.isEmpty")}
+              />
+            }
+            loadingComponent={
+              <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
+            }
+          />
         </div>
       </Layout>
     </PrivateRouteWrapper>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   const { default: lngDict = {} } = await import(
     `locales/${params.lng}.json`
-  );
+  )
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
 
   return {
     props: {
@@ -264,7 +298,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
       lngDict,
       brand: brand || ""
     }
-  };
+  }
 }
 
-export default PaymentMethods;
+export default PaymentMethods

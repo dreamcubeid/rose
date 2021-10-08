@@ -1,5 +1,5 @@
 /* library package */
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
@@ -78,7 +78,7 @@ const classesPlaceholderShipping = {
 }
 
 type PrivateComponentPropsType = {
-  children: any
+  children: ReactNode
 }
 
 type TypeCustomerDetail = {

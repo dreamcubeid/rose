@@ -1,5 +1,9 @@
 /* library package */
-import { FC, useState } from 'react'
+import { 
+  FC, 
+  ReactNode,
+  useState
+} from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
@@ -74,7 +78,7 @@ const placeOrderClasses = {
 }
 
 type PrivateComponentPropsType = {
-  children: any
+  children: ReactNode
 }
 
 const PrivateRouteWrapper = ({ children }: PrivateComponentPropsType) => (

@@ -1,143 +1,90 @@
-@import "../base/colors";
-@import "../components/CustomerDetail.module.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "../components/OrderSummary.module.scss";
-@import "../components/Popup.module.scss";
+@import '../base/colors';
+@import '../utils/variables';
+@import '../components/CustomerDetail.module.scss';
+@import '../components/Button.module.scss';
+@import '../components/Form.module.scss';
+@import '../components/OrderSummary.module.scss';
+@import '../components/Popup.module.scss';
 
 .payment
 {
-  background: $color_white;
-
-  &_container
-  {
-    padding: 2rem 0;
-
-    @media screen and (max-width: 991px){
-      min-height: 95vh;
-    }
-  }
-
-  &_heading
-  {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-
-    h6
-    {
-      margin: 0;
-      margin-left: 1rem;
-      color: $color_black;
-    }
-  }
-
-  &_headingIcon
-  {
-    cursor: pointer;
-  }
-
-  &_line
-  {
-    border-color: $color_gray_low;
-  }
-
-  &_lineSecond
-  {
-    border-color: $color_gray_low;
-    margin: 0;
-  }
-
-  &_steps
-  {
-    padding: 0 1rem;
-    display: flex;
-    justify-content: center;
-  }
+  padding: 0 18px 18px;
 
   &_shipping
   {
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border: 1px solid $color_gray_primary;
-    border-radius: 5px;
+    @include flex(row, center, flex-start);
   }
 
   &_shippingTitle
   {
-    font-size: 14px;
-    font-weight: 900;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-bottom: 0;
   }
 
   &_shippingCost
   {
-    font-size: 13px;
-    font-weight: 900;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_secondary;
+    margin-left: 6px;
+    margin-bottom: 0;
   }
 
   &_listTitle
   {
-    font-size: 14px;
-    font-weight: 900;
-    color: $color_gray_dark;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
   }
 
   &_listItemDisabled
   {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $color_gray_primary;
-    border: 1px solid $color_gray_primary;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    @include flex(row, center, space-between, true);
+    background: $color_text_secondary;
+    border: 1px solid $color_border;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_white;
     cursor: pointer;
   }
 
   &_listItemEnabled
   {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid $color_blue;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    @include flex(row, center, space-between, true);
+    background: $color_white;
+    border: 1px solid $color_border;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
     cursor: pointer;
   }
 
   &_listItemOverlay
   {
-    position: fixed;
+    @include fixedWidth(100%);
+    @include fixedHeight(100%);
+    @include flex(row, center, center);
+    padding: 0 16px;
+    background-color: rgba($color_black, 0.8);
+    @include fixed(0, auto, auto, 0);
     z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0 1rem;
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   &_listItemPopup
   {
-    position: relative;
+    @include position(relative);
     z-index: 10;
-    padding: 15px 10px;
+    padding: 16px;
     background: $color_white;
-    border-radius: 5px;
+    border-radius: 2px;
 
     &__close
     {
-      position: absolute;
-      right: 0;
-      top: 0;
+      @include absolute(0, 0, auto, auto);
       background: transparent;
       border: none;
-      padding: .25rem .5rem;
+      padding: 5px 7.5px;
       cursor: pointer;
 
       &:focus,
@@ -164,12 +111,8 @@
 
     &__input
     {
-      width: 300px !important;
+      width: max-content !important;
       border-radius: 0 !important;
-
-      @media screen and (max-width: 575px) {
-        width: max-content !important;
-      }
     }
 
     &__button
@@ -177,7 +120,7 @@
       background: $color_blue;
       color: $color_white;
       height: calc(2em + 1rem + 4px);
-      border-color: #ced4da !important;
+      border-color: $color_border !important;
       border-left: 0 !important;
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;
@@ -187,35 +130,56 @@
 
   &_listItemPayment
   {
+    @include position(relative);
     display: flex;
     flex: 1;
-    padding: 1rem;
-
-    @media screen and (max-width: 575px) {
-      padding: 1rem;
-    }
+    padding: 16px;
 
     &__radio
     {
       margin-top: 2px;
-      margin-right: 1rem;
+      margin-right: 12px;
       padding-right: 0;
+
+      & > input
+      {
+        @include absolute(49%, auto, auto, 24px);
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        cursor: pointer;
+
+        &::after
+        {
+          content: "";
+          @include absolute(-2px, auto, auto, -2px);
+          @include fixedWidth(20px);
+          @include fixedHeight(20px);
+          background: $color_white;
+          border: 1px solid $color_rose;
+          border-radius: 50%;
+          z-index: 1;
+        }
+
+        &:checked::after 
+        {
+          border: none;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgcng9IjkuNSIgZmlsbD0id2hpdGUiLz4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iNiIgZmlsbD0iIzk5ODA2MCIvPgo8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjE5IiBoZWlnaHQ9IjE5IiByeD0iOS41IiBzdHJva2U9IiM5OTgwNjAiLz4KPC9zdmc+Cg==");
+        }
+      }
     }
 
     & > p
     {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      margin-top: 1px;
       margin-bottom: 0;
+      margin-left: 16px;
     }
 
     &__image
     {
       text-align: right;
-      padding: 1rem;
-
-      @media screen and (max-width: 575px) {
-        text-align: left;
-        padding: 0 1rem;
-      }
+      padding: 16px;
 
       img
       {
@@ -236,49 +200,44 @@
   &_listItemBody
   {
     flex-grow: 1;
-    padding: 1rem;
-    border-radius: 5px;
-    background: $color_blue_light;
-    
-    @media screen and (max-width: 575px) {
-      padding: 1rem;
-    }
+    padding: 16px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background: $color_rose_bg1;
+    border-top: 1px solid $color_border;
   }
   
   &_listItemDetail
   {
-    margin-bottom: 2rem;
+    margin-bottom: 12px;
   }
 
   &_listItemTable
   {
-    position: relative;
-    width: 100%;
+    @include position(relative);
+    @include fixedWidth(100%);
     border-collapse: collapse;
   }
 
   &_listItemTableRow
   {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: .25rem 0;
+    @include typographyBuilder(secondary, 400, 14, 24);
+    @include flex(row, center, space-between);
+    @include fixedWidth(100%);
+    padding: 4px 0;
 
     &:last-child
     {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid $color_black;
-      font-family: "roboto-black";
-      font-size: 1.2rem;
-      text-transform: uppercase;
+      @include typographyBuilder(secondary, 500, 14, 24);
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px dashed $color_rose;
     }
 
     &__label
     {
+      @include flex(row, center);
       text-align: left;
-      display: flex;
-      align-items: center;
     }
 
     &__value
@@ -291,7 +250,7 @@
       &:first-of-type:not(:only-of-type)
       {
         text-decoration: line-through;
-        color: $color_gray_dark;
+        color: $color_text_secondary;
 
         @media screen and (max-width: 575px) {
           display: inherit;
@@ -301,39 +260,34 @@
 
     &__price
     {
-      margin-left: .5rem;
+      margin-left: 5px;
     }
   }
 
   &_footer
   {
-    margin-top: 1.5rem;
-
     &__promotion
     {
-      margin: .5rem 0;
+      margin: 12px 0;
     }
 
     &__agreement
     {
-      text-align: right;
-
-      @media screen and (max-width: 575px) {
-        text-align: left;
-      }
+      @include typographyBuilder(secondary, 400, 12, 16);
+      text-align: center;
+      color: $color_text_primary;
     }
 
     &__check
     {
       position: relative;
-      top: 1px;
-      margin-right: .5rem;
+      top: 2px;
+      margin-right: 5px;
     }
 
     &__button
     {
-      text-align: right;
-      margin: 1rem 0;
+      margin: 12px 0;
     }
   }
 
@@ -403,12 +357,25 @@
 
   &_pointButton
   {
-    display: flex;
-    width: max-content;
-    min-width: 300px;
+    @include fixedWidth(100%);
+    @include fixedHeight(60px);
+    @include flex(row, center, flex-start);
+    @include typographyBuilder(secondary, 400, 14, 24);
+    padding: 0 24px;
+    border: 1px solid $color_border;
+    background: $color_white;
+    border-radius: 37px;
+    cursor: pointer;
 
-    @media screen and (max-width: 575px) {
-      width: 100%;
+    &:hover
+    {
+      opacity: .8;
+    }
+
+    &::after
+    {
+      content: "";
+      @include position(absolute, auto, 16px, auto, auto)
     }
   }
 
@@ -527,5 +494,24 @@
       font-size: 12px;
       margin: 0;
     }
+  }
+}
+
+.customer
+{
+  padding: 18px;
+  background: $color_rose_bg1;
+
+  &_section
+  {
+    padding-top: 8px;
+    padding-bottom: 16px;
+    border-top: 1px dashed $color_rose;
+  }
+
+  &_notes
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_secondary;
   }
 }

@@ -1,21 +1,21 @@
-@import "../base/colors";
+@import '../utils/variables';
 
 .customer
 {
-  margin: 1rem 0;
+  margin-bottom: 18px;
+
+  &:last-child
+  {
+    margin: 0
+  }
 
   &_info
   {
-    position: relative;
+    @include position(relative);
   }
 
   &_infoPerson
   {
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid $color_gray_primary;
-    border-radius: 5px;
-
     & > a
     {
       cursor: pointer;
@@ -34,120 +34,102 @@
   }
 
   &_infoPersonValue
+  {
+    color: $color_text_secondary;
+
+    &:first-child
     {
-      &:first-child
-      {
-        font-size: 16px;
-        margin-bottom: .5rem;
-      }
+      @include typographyBuilder(secondary, 500, 16, 24);
+      margin-bottom: 5px;
+      color: $color_text_primary;
     }
+  }
 
   &_infoHeader
   {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    @include flex(row, center, space-between);
+    padding: 8px 0;
   }
 
   &_infoHeaderContainer
   {
-    display: flex;
-    align-items: center;
+    @include flex(row, center);
   }
 
   &_infoHeaderTitle,
   &_infoHeaderLink
   {
-    font-family: "roboto-medium";
-    font-size: 14px;
+    @include typographyBuilder(secondary, 400, 12, 16);
     margin: 0;
+    color: $color_text_primary;
   }
 
   &_infoHeaderTitle
   {
-    color: $color_gray_dark !important;
-    margin-right: .5rem;
+    color: $color_rose !important;
+    margin-right: 5px;
+    text-transform: uppercase;
   }
 
   &_infoHeaderLink
   {
-    color: $color_blue !important;
-  }
+    color: $color_info !important;
 
-  &_changePin
-  {
-    margin: 1.5rem 0 1rem;
-    cursor: pointer;
-
-    & > a
+    &:hover
     {
-      font-family: "roboto-medium";
-      font-size: 14px;
-      padding: 7px 12px;
-      border: 1px solid $color_blue;
-      border-radius: 3px;
-      color: $color_blue !important;
+      text-decoration: none
     }
   }
 
   &_mapPopup
   {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    @include fixed(0, auto, auto, 0);
+    @include fixedWidth(100%);
+    @include fixedHeight(100%);
+    @include flex(row, flex-end, center);
+    background-color: rgba($color_black, 0.8);
+    z-index: 12;
 
-  &_mapCloseIcon
-  {
-    cursor: pointer;
+    @media screen and (max-width: 575px)
+    {
+      @include flex(row, center, center);
+    }
   }
 
   &_mapPopupContainer
   {
-    position: relative;
-    width: 50vw;
+    @include position(relative);
+    @include fixedWidth(375px);
+    @include fixedHeight(80vh);
     background: $color_white;
-    border-radius: 10px;
+    border-radius: 4px 4px 0 0;
 
-    @media screen and (max-width: 991px) {
-      margin: 0 1rem;
-      width: 100%;
-      height: auto;
+    @media screen and (max-width: 575px)
+    {
+      @include fixedWidth(100%);
+      @include fixedHeight(100vh);
+      border-radius: 0;
     }
   }
 
   &_mapPopupHeader
   {
-    display: flex;
-    align-items: center;
-    padding: 15px;
+    @include position(relative);
+    @include flex(row, center, center);
+    padding: 12px;
   }
 
   &_mapPopupHeaderTitle
   {
-    flex: 1;
-    font-size: 16px;
-    color: $color_black;
-    text-align: center;
+    @include typographyBuilder(secondary, 400, 14, 24);
   }
 
   &_mapPopupClose
   {
+    @include absolute(auto, 15px, auto, auto);
     border: none;
     background-color: transparent;
-    font-family: "roboto-black";
-    font-size: 16px;
-    color: $color_blue;
+    padding: 0;
 
     &:focus,
     &:active
@@ -160,55 +142,55 @@
 
   &_mapPopupNote
   {
-    font-size: 14px;
-    background: $color_blue_light;
-    color: $color_black;
-    padding: 15px;
-    text-align: center;
+    @include typographyBuilder(secondary, 400, 12, 16);
+    background: $color_white;
+    color: $color_text_primary;
+    padding: 8px 16px;
   }
 
   &_mapPopupMaps
   {
-    position: relative;
+    @include position(relative);
     background-color: $color_white;
-    z-index: 1;
     width: 100%;
-    height: 320px;
+    height: calc(80vh - 48px * 4);
+    z-index: 1;
+
+    @media screen and (max-width: 575px)
+    {
+      height: calc(100vh - 48px * 4);
+    }
 
     input
     {
-      font-size: 14px;
-      width: calc(100% - 75px);
+      @include typographyBuilder(secondary, 400, 14, 20);
+      @include fixedWidth(calc(100% - 75px));
       padding: 10px 15px;
       border: 1px;
       background: $color_white;
-      z-index: 2;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      left: 16px;
-      border-radius: 4px;
+      border-radius: 2px;
       box-shadow: none;
       outline: 0;
+
+      @include absolute(12px, 12px, auto, 16px);
+      z-index: 2;
     }
   }
 
   &_mapPopupCenterButton
   {
-    position: absolute;
-    right: 10px;
-    background: #fff;
-    padding: 7.5px;
-    top: 12px;
+    @include absolute(12px, 10px, auto, auto);
+    background: $color_white;
+    padding: 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   &_mapPopupLabelAddress
   {
-    font-size: 14px;
+    @include typographyBuilder(secondary, 400, 12, 16);
     background: $color_white;
-    color: $color_black;
-    padding: 15px;
+    color: $color_text_primary;
+    padding: 8px 16px;
   }
 }

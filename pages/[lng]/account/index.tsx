@@ -25,6 +25,7 @@ import styleAccount from 'public/scss/pages/Account.module.scss'
 import styleMap from 'public/scss/components/Map.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
+import styleDatePicker from 'public/scss/components/DatePicker.module.scss'
 import stylePassword from 'public/scss/components/Password.module.scss'
 
 const ACTIVE_CURRENCY = 'IDR'
@@ -43,7 +44,7 @@ const classesAccount = {
   accordionToggleClassName: styleAccount.membership_accordion_toggle,
   accordionIconClassName: styleAccount.membership_accordion_icon,
   membershipProgressClassName: styleAccount.membership_progress,
-  datePickerInputClassName: styleAccount.form_datePicker,
+  datePickerInputClassName: styleDatePicker.datePicker,
   // account
   myAccountContentClassName: styleAccount.myAccount,
   myAccountBodyClassName: styleAccount.myAccount_list,

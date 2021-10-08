@@ -213,48 +213,6 @@
 
 .form
 {
-  &_datePicker
-  {
-    width: 100%;
-
-    & > div
-    {
-      position: relative;
-      @include typographyBuilder(secondary,400,14,24);
-      height: 58px;
-      width: 100%;
-      border: 1px solid $color_border;
-      box-sizing: border-box;
-      border-radius: 37px;
-      padding-left: 24px;
-      background-image:
-        url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwLjMzMzUgMi4wMDAwOEgxMy4wMDAyQzEzLjE3NyAyLjAwMDA4IDEzLjM0NjUgMi4wNzAzMiAxMy40NzE2IDIuMTk1MzRDMTMuNTk2NiAyLjMyMDM3IDEzLjY2NjggMi40ODk5NCAxMy42NjY4IDIuNjY2NzVWMTMuMzMzNEMxMy42NjY4IDEzLjUxMDIgMTMuNTk2NiAxMy42Nzk4IDEzLjQ3MTYgMTMuODA0OEMxMy4zNDY1IDEzLjkyOTggMTMuMTc3IDE0LjAwMDEgMTMuMDAwMiAxNC4wMDAxSDEuMDAwMTZDMC44MjMzNTIgMTQuMDAwMSAwLjY1Mzc4MiAxMy45Mjk4IDAuNTI4NzU4IDEzLjgwNDhDMC40MDM3MzQgMTMuNjc5OCAwLjMzMzQ5NiAxMy41MTAyIDAuMzMzNDk2IDEzLjMzMzRWMi42NjY3NUMwLjMzMzQ5NiAyLjQ4OTk0IDAuNDAzNzM0IDIuMzIwMzcgMC41Mjg3NTggMi4xOTUzNEMwLjY1Mzc4MiAyLjA3MDMyIDAuODIzMzUyIDIuMDAwMDggMS4wMDAxNiAyLjAwMDA4SDMuNjY2ODNWMC42NjY3NDhINS4wMDAxNlYyLjAwMDA4SDkuMDAwMTZWMC42NjY3NDhIMTAuMzMzNVYyLjAwMDA4Wk05LjAwMDE2IDMuMzMzNDFINS4wMDAxNlY0LjY2Njc1SDMuNjY2ODNWMy4zMzM0MUgxLjY2NjgzVjYuMDAwMDhIMTIuMzMzNVYzLjMzMzQxSDEwLjMzMzVWNC42NjY3NUg5LjAwMDE2VjMuMzMzNDFaTTEyLjMzMzUgNy4zMzM0MUgxLjY2NjgzVjEyLjY2NjdIMTIuMzMzNVY3LjMzMzQxWiIgZmlsbD0iIzk5ODA2MCIvPgo8L3N2Zz4K),
-        radial-gradient($color_rose_bg2 70%, transparent 72%);
-      background-position:
-        calc(100% - 24px) calc(100% - 20px),
-        calc(100% - 12px) center;
-      background-size:
-        15px 15px,
-        40px 40px;
-      background-repeat: no-repeat;
-
-      & > div
-      {
-        height: 100%;
-        padding: 0;
-        padding-top: 9px;
-        & > input 
-        {
-          width: auto;
-        }
-      }
-      & > button 
-      {
-        opacity: 0;
-      }
-    }
-  }
-
   &_criteria
   {
     padding-left: 17px !important;

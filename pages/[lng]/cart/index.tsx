@@ -51,6 +51,7 @@ const classesCartDetails = {
 	itemRemoveClassName: styleCart.cartItem_remove,
 	cartFooterClassName: `${styleCart.cartFooter} ${styleForm.form}`,
 	cartFooterTitleClassName: 'd-none',
+	cartFooterTextareaClassName: styleForm.form_textarea,
 }
 
 const classesCrosselProducts = {

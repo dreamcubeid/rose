@@ -46,7 +46,7 @@ const placeOrderClasses = {
   signupContainerClassName: stylePlaceorder.placeorder_labelRegister,
   // form
   formGroupClassName: `${styleForm.form} mb-3`,
-  passwordInputContainerClassName: stylePlaceorder.placeorder_passwordContainer,
+  passwordInputContainerClassName: stylePassword.password_passwordContainer,
   // date picker
   datePickerInputClassName: styleDatePicker.datePicker,
   // shipping

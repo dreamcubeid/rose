@@ -25,11 +25,12 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 import styleLogin from 'public/scss/pages/Login.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
+import stylePassword from 'public/scss/components/Password.module.scss'
 
 const loginClasses = {
   containerClassName: styleLogin.login_containerForm,
   inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
-  passwordContainerClassName: `${styleLogin.login_passwordContainer}`,
+  passwordContainerClassName: stylePassword.password_passwordContainer,
   buttonClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
   signUpText: `${styleButton.btn} ${styleButton.btn_secondary} ${styleLogin.login_signUp}`,
   forgotPasswordClass: styleLogin.login_forgotContainer,

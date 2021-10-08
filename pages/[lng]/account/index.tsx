@@ -26,6 +26,7 @@ import styleMap from 'public/scss/components/Map.module.scss'
 import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import styleDatePicker from 'public/scss/components/DatePicker.module.scss'
+import stylePassword from 'public/scss/components/Password.module.scss'
 
 const ACTIVE_CURRENCY = 'IDR'
 
@@ -61,6 +62,12 @@ const classesAccount = {
   mapLabelAddressClassName: styleMap.map_mapPopupLabelAddress,
   mapCenterButtonClassName: styleMap.map_mapPopupCenterButton,
   mapButtonFooterClassName: `${styleButton.btn} ${styleButton.btn_primary} ${styleMap.map_btn}`,
+  // change password
+  passwordContainerClassName: stylePassword.password_passwordContainer,
+  passwordStrengthBarContainerClassName: `${stylePassword.password} ${styleAccount.form_criteria}`,
+  passwordStrengthBarClassName: stylePassword.password_bar,
+  passwordStrengthLabelClassName: stylePassword.password_label,
+  passwordCriteriaListClassName: `${stylePassword.password_criteria} ${styleAccount.form_criteria} d-none`,
 }
 
 const AccountsPage: FC<any> = ({

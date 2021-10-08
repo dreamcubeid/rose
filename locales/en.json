@@ -238,8 +238,9 @@
     "seeCollection": "See Collection",
     "seeMore": "See More",
     "title": "Lookbook",
-    "back": "Back",
-    "relatedProducts": "Related Products"
+    "back": "Back to lookbook",
+    "relatedProducts": "Related Products",
+    "share": "Bagikan Lookbook"
   },
   "membership": {
     "exchangePoints": "Redeem your Point",

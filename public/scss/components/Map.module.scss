@@ -20,18 +20,34 @@
     }
   }
 
-
   &_mapPopup
   {
-    position: fixed;
-    top: 0;
-    left: auto;
-    min-width: 375px;
-    max-width: 375px;
-    width: 375px;
-    z-index: 20;
-    background-color: $color_white;
-    height: 100vh;
+    @include fixed(0, auto, auto, 0);
+    @include fixedWidth(100%);
+    @include fixedHeight(100%);
+    @include flex(row, flex-end, center);
+    background-color: rgba($color_black, 0.8);
+    z-index: 12;
+
+    @media screen and (max-width: 575px)
+    {
+      @include flex(row, center, center);
+    }
+  }
+
+  &_mapPopupContainer
+  {
+    @include position(relative);
+    @include fixedWidth(375px);
+    @include fixedHeight(80vh);
+    background: $color_white;
+
+    @media screen and (max-width: 575px)
+    {
+      @include fixedWidth(100%);
+      @include fixedHeight(100vh);
+      border-radius: 0;
+    }
   }
 
   &_mapPopupHeader
@@ -59,25 +75,40 @@
 
   &_mapPopupMaps
   {
-    height: 78vh;
     position: relative;
+    height: calc(80vh - 48px * 4);
+    z-index: 1;
+
+    @media screen and (max-width: 575px)
+    {
+      height: calc(100vh - 48px * 4);
+    }
 
     & > :first-child
     {
       position: absolute;
-      top: 44px;
+      top: 12px;
       height: 34px;
-      width: 296px;
+      width: calc(100% - 11px - 34px - 16px);
       padding-left: 18px;
       z-index: 20;
 
       & > div > input 
       {
+        @include typographyBuilder(secondary, 400, 12, 16);
         width: 100%;
         height: 34px;
+        padding-left: 12px;
         border: none;
         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
         border-radius: 2px;
+        color: $color_text_primary;
+
+        &:active,
+        &:focus
+        {
+          outline: 0;
+        }
       }
     }
 
@@ -100,7 +131,7 @@
   &_mapPopupCenterButton
   {
     position: absolute;
-    top: 44px;
+    top: 12px;
     right: 16px;
     height: 34px;
     width: 34px;

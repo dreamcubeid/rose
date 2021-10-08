@@ -1,7 +1,6 @@
 /* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Router from 'next/router'
 import { Account, useI18n } from '@sirclo/nexus'
 import { BiChevronDown } from 'react-icons/bi'
 import {

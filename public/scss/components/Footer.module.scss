@@ -14,7 +14,6 @@
     background: $color_white;
     border-radius: 56px;
     box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.05);
-    height: 100%;
     width: 100%;
     max-width: 340px;
 
@@ -32,6 +31,8 @@
     {
       @include flex(column);
       @include typographyBuilder(secondary,400,10,12.1);
+      padding-top: 12px;
+      
       & > svg
       {
         width: 13.5px;

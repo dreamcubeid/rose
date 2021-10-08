@@ -45,7 +45,7 @@ const placeOrderClasses = {
   signupContainerClassName: stylePlaceorder.placeorder_labelRegister,
   // form
   formGroupClassName: `${styleForm.form} mb-3`,
-  passwordInputContainerClassName: stylePlaceorder.placeorder_passwordContainer,
+  passwordInputContainerClassName: stylePassword.password_passwordContainer,
   // shipping
   shippingCheckboxContainerClassName: stylePlaceorder.placeorder_shipping,
   shippingCheckboxTitleClassName: 'd-none',

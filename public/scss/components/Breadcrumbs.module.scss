@@ -3,7 +3,7 @@
 .breadcrumbs
 {
   @include typographyBuilder(secondary,400,10,16);
-  @include flex(row,start,start);
+  @include flex(row,flex-start,flex-start);
 }
 
 .breadcrumb

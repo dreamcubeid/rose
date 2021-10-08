@@ -1,6 +1,7 @@
 /* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Router from 'next/router'
 import { Account, useI18n } from '@sirclo/nexus'
 import { BiChevronDown } from 'react-icons/bi'
 import {
@@ -11,6 +12,7 @@ import {
   RiCloseLine,
   RiInformationLine,
   RiUser3Line,
+  RiShoppingBag2Line,
 } from 'react-icons/ri'
 import { BiTargetLock } from 'react-icons/bi'
 import { toast } from 'react-toastify'
@@ -20,6 +22,7 @@ import { parseCookies } from 'lib/parseCookies'
 /* components */
 import Layout from 'components/Layout/Layout'
 import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
+import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
 /* styles */
 import styleAccount from 'public/scss/pages/Account.module.scss'
 import styleMap from 'public/scss/components/Map.module.scss'
@@ -213,6 +216,14 @@ const AccountsPage: FC<any> = ({
             <div className="w-100 d-flex align-items-center justify-content-center">
               <span className="spinner-border" style={{ width: 20, height: 20, marginRight: 12 }} />
               <span>{i18n.t('account.loading')}</span>
+            </div>
+          }
+          emptyStateComponent={
+            <div className={styleAccount.order_empty}>
+              <EmptyComponent
+                title={i18n.t('account.noOrder')}
+                icon={<RiShoppingBag2Line />}
+              />
             </div>
           }
         />

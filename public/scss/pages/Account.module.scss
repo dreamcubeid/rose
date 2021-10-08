@@ -563,6 +563,16 @@
       }
     }
   }
+
+  &_empty
+  {
+    padding: 0 18px;
+
+    svg 
+    {
+      color: $color_text_inactive;
+    }
+  }
 }
 
 .shipmentTracking
@@ -714,7 +724,6 @@
       color: $color_text_secondary;
       border-radius: 3px;
     }
-
   }
 
   &_footer

@@ -68,6 +68,7 @@ const placeOrderClasses = {
   mapAreaClassName: styleMap.map_mapArea,
   mapSelectAreaClassName: `${styleMap.map_btnLocation}`,
   mapPopupClassName: styleMap.map_mapPopup,
+  mapPopupBackgroundClassName: styleMap.map_mapPopupContainer,
   mapClassName: styleMap.map_mapPopupMaps,
   mapHeaderWrapperClassName: styleMap.map_mapPopupHeader,
   mapHeaderTitleClassName: styleMap.map_mapPopupHeaderTitle,

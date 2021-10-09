@@ -36,9 +36,7 @@
 
   &_mapPopupHeader
   {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+    @include flex(row-reverse,center,unset);
     height: 48px;
   }
 
@@ -64,8 +62,7 @@
 
     & > :first-child
     {
-      position: absolute;
-      top: 44px;
+      @include absolute(44px,auto,auto,auto);
       height: 34px;
       width: 296px;
       padding-left: 18px;
@@ -99,9 +96,7 @@
 
   &_mapPopupCenterButton
   {
-    position: absolute;
-    top: 44px;
-    right: 16px;
+    @include absolute(44px,16px,auto,auto);
     height: 34px;
     width: 34px;
     background: $color_white;

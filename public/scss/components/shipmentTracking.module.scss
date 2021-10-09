@@ -49,9 +49,7 @@
     height: 20px;  
     float: right;
     cursor: pointer;
-    position: absolute;
-    top: 16px;
-    right: 16px;
+    @include absolute(16px,16px,auto,auto);
 
     & > svg
     {
@@ -99,23 +97,19 @@
     &::after
     {
       content: '';
-      top: -5px;
-      position: absolute;
+      @include absolute(-5px,auto,auto,-26px);
       width: 16px;
       height: 16px;
       background-color: #E8E8E8;
       border-radius: 50%;
       opacity: 1;
-      left: -26px;
     }
 
     &::before
     {
       content:"";
-      position: absolute;
-      left: -19px;
+      @include absolute(13px,auto,auto,-19px);
       border-left: 2px solid #E8E8E8;
-      top: 13px;
       bottom: -9px;
       opacity: 1;
     }
@@ -178,8 +172,7 @@
 
       &::after
       {
-        position: absolute;
-        right: 0;
+        @include absolute(auto,0,auto,auto);
         content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjE3MiAxMkw4LjIyMjA1IDcuMDQ5OTlMOS42MzYwNSA1LjYzNTk5TDE2IDEyTDkuNjM2MDUgMTguMzY0TDguMjIyMDUgMTYuOTVMMTMuMTcyIDEyWiIgZmlsbD0iIzQ0NDQ0NCIvPgo8L3N2Zz4K);
       }
     }

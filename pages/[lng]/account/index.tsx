@@ -29,7 +29,7 @@ import styleButton from 'public/scss/components/Button.module.scss'
 import styleForm from 'public/scss/components/Form.module.scss'
 import stylePassword from 'public/scss/components/Password.module.scss'
 import styleOrderHistory from 'public/scss/components/OrderHistory.module.scss'
-import styleShipmentTracking from 'public/scss/components/ShipmentTracking.module.scss'
+import styleShipmentTracking from 'public/scss/components/shipmentTracking.module.scss'
 
 const ACTIVE_CURRENCY = 'IDR'
 

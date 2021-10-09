@@ -23,9 +23,7 @@
 
   &_mapPopup
   {
-    position: fixed;
-    top: 0;
-    left: auto;
+    @include fixed(0,auto,auto,auto);
     min-width: 375px;
     max-width: 375px;
     width: 375px;

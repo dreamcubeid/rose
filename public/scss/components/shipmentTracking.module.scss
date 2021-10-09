@@ -2,10 +2,8 @@
 
 .shipmentTracking
 {
-  position: fixed;
   background: rgba(0, 0, 0, 0.8);
-  top:0;
-  bottom: 0;
+  @include fixed(0,auto,0,auto);
   margin: auto;
   min-width: 375px;
   max-width: 375px;

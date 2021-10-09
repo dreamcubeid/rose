@@ -356,7 +356,7 @@
     "placeholderOrderId": "Nomor Pesanan",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
-    "checkOrder": "Periksa Pesanan",
+    "checkOrder": "Periksa Nomor Pesanan",
     "details": "Rincian",
     "optional": "Optional",
     "invalidFileType": "Tipe File tidak didukung",

@@ -14,6 +14,7 @@ import Header from '../Header'
 import Footer from '../Footer/Footer'
 import SEO from '../SEO'
 import PageNotFound from 'components/PageNotFound'
+import Copyright from 'components/Copyright'
 /* styles */
 import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
 
@@ -26,6 +27,7 @@ type LayoutPropType = {
   withHeader?: boolean
   headerTitle?: string
   withFooter?: boolean
+  withCopyright?: boolean
   withAllowed?: boolean | undefined
   [otherProp: string]: any
 }
@@ -48,6 +50,7 @@ const Layout: FC<LayoutPropType> = ({
   withHeader = true,
   headerTitle,
   withFooter = true,
+  withCopyright = false,
   withAllowed = true,
   brand,
   ...props
@@ -149,6 +152,9 @@ const Layout: FC<LayoutPropType> = ({
         }
         {withFooter &&
           <Footer brand={brand} />
+        }
+        {withCopyright &&
+          <Copyright brand={brand} />
         }
       </main>
       <ToastContainer />

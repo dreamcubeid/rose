@@ -78,6 +78,7 @@ const ThankYouPage: FC<any> = ({
       brand={brand}
       withHeader={false}
       withFooter={false}
+      withCopyright
       layoutClassName='layout_fullHeight'
     >
       <HeaderCheckout

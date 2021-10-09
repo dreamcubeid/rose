@@ -356,7 +356,7 @@
     "placeholderOrderId": "Order ID",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
-    "checkOrder": "Check Order",
+    "checkOrder": "Check Order Number",
     "details": "Details",
     "optional": "Optional",
     "invalidFileType": "File Type not supported",

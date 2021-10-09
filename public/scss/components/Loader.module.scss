@@ -1,0 +1,32 @@
+@import '../utils/variables';
+
+.loaderPage
+{
+  @include fixed(0, auto, auto, 0);
+  z-index: 1;
+  @include fixedWidth(100vw);
+  @include fixedHeight(100vh);
+  background-color: $color_rose_bg2;
+  @include flex(row, center, center);
+
+  &_container
+  {
+    &Spin
+    {
+      @include fixedWidth(50px);
+      @include fixedHeight(50px);
+      margin: 16px 50px;
+      border-radius: 50%;
+      border: 5px solid $color_border;
+      border-top-color: $color_rose;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin
+{
+  to {
+    transform: rotate(360deg);
+  }
+}

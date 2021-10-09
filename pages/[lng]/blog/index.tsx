@@ -16,6 +16,7 @@ import Breadcrumb from 'components/Breadcrumb/Breadcrumb'
 /* styles */
 import styleBlog from 'public/scss/pages/Blog.module.scss'
 import stylePlaceHolder from 'public/scss/components/Placeholder.module.scss'
+import stylePagination from 'public/scss/components/Pagination.module.scss'
 
 const EmptyComponent = dynamic(() => import('components/EmptyComponent/EmptyComponent'))
 
@@ -39,9 +40,9 @@ const classesBlogCategories = {
 }
 
 const classesPagination = {
-  pagingClassName: styleBlog.blog_pagination,
-  activeClassName: styleBlog.blog_pagination_active,
-  itemClassName: styleBlog.blog_pagination_item,
+  pagingClassName: stylePagination.pagination,
+  itemClassName: stylePagination.pagination_item,
+  activeClassName: stylePagination.pagination_active,
 }
 
 const Blog: FC<any> = ({

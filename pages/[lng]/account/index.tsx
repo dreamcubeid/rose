@@ -13,6 +13,7 @@ import {
   RiUser3Line,
   RiShoppingBag2Line,
 } from 'react-icons/ri'
+import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 import { BiTargetLock } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 /* library template */
@@ -31,6 +32,8 @@ import styleDatePicker from 'public/scss/components/DatePicker.module.scss'
 import stylePassword from 'public/scss/components/Password.module.scss'
 import styleOrderHistory from 'public/scss/components/OrderHistory.module.scss'
 import styleShipmentTracking from 'public/scss/components/shipmentTracking.module.scss'
+import styleMembershipHistory from 'public/scss/components/MembershipHistory.module.scss'
+import stylePagination from 'public/scss/components/Pagination.module.scss'
 
 const ACTIVE_CURRENCY = 'IDR'
 
@@ -130,6 +133,25 @@ const classesAccount = {
   shipmentDateClassName: styleShipmentTracking.shipmentTracking_item_date,
   shipmentNoteClassName: styleShipmentTracking.shipmentTracking_item_note,
   shipmentFooterClassName: styleShipmentTracking.shipmentTracking_footer,
+  // membership history
+  membershipHistoryClassName: styleMembershipHistory.membershipHistory,
+  linkContinueClassName: styleMembershipHistory.membershipHistory_header,
+  pointHistoryItemClassName: styleMembershipHistory.membershipHistory_item,
+  orderIDClassName: styleMembershipHistory.membershipHistory_item_header,
+  transactionTypeClassName: styleMembershipHistory.membershipHistory_item_title,
+  transactionDateClassName: styleMembershipHistory.membershipHistory_item_date,
+  pointDeltaClassName: styleMembershipHistory.membershipHistory_item_point,
+  membershipPaginationClassName: styleMembershipHistory.membershipHistory_pagination,
+  itemPerPageClassName: styleMembershipHistory.membershipHistory_itemPerPage,
+  itemPerPageLabelClassName: styleMembershipHistory.membershipHistory_itemPerPage_label,
+  itemPerPageOptionsClassName: `${styleForm.form} w-100 ${styleMembershipHistory.form_perPage}`,
+  buttonContinueClassName: 'membership-buttonContinueClassName',
+}
+
+const classesMembershipPagination = {
+  pagingClassName: stylePagination.pagination,
+  itemClassName: stylePagination.pagination_item,
+  activeClassName: stylePagination.pagination_active,
 }
 
 const AccountsPage: FC<any> = ({
@@ -172,7 +194,6 @@ const AccountsPage: FC<any> = ({
           </div>
         </div>
         <Account
-          defaultTab="orderHistory"
           orderHistoryIsInfinite
           orderHistoryItemPerPage={1}
           classes={classesAccount}
@@ -228,6 +249,9 @@ const AccountsPage: FC<any> = ({
               />
             </div>
           }
+          membershipPaginationClasses={classesMembershipPagination}
+          membershipPaginationNextLabel={<IoChevronForward />}
+          membershipPaginationPrevLabel={<IoChevronBack />}
         />
       </div>
     </Layout>

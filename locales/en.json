@@ -37,7 +37,7 @@
     "passwordSuccess": "Password changed!",
     "paymentMethod": "Payment Method",
     "paymentStatus": "Payment Status",
-    "placedOn": "Placed on",
+    "placedOn": "",
     "point": "Points",
     "points": "Points",
     "readyToShip": "Ready to Ship",
@@ -45,15 +45,16 @@
     "save": "Save Changes",
     "sessionExpired": "Your session is expired",
     "shipped": "Shipped",
-    "shippingDetail": "Shipping Detail",
+    "shippingDetails": "Shipping Detail",
     "shippingMethod": "Shipping Method",
-    "total": "Total",
+    "total": "Total :",
     "unpaid": "Unpaid",
     "viewInvoice": "View Invoice",
-    "youGot": "You Got",
+    "youGot": "",
     "youHave": "You have",
     "cantFindYourOrder": "Can't find your order?",
-    "searchHere": "Search here"
+    "searchHere": "Search here",
+    "loading": "please wait"
   },
   "article": {
     "categories": "Help",
@@ -271,7 +272,9 @@
   "orderHistory": {
     "lineItemDelivered": "Delivered",
     "lineItemNeedReview": "Needs Review",
-    "lineItemReviewed": "Reviewed"
+    "lineItemReviewed": "Reviewed",
+    "uploading": "Process",
+    "uploadReceipt": "Payment Confirmation"
   },
   "orderReview": {
     "agree": "Agree",

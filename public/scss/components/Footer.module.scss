@@ -25,7 +25,7 @@
   a 
   {
     height: 100%;
-    @include flex(column, center, end);
+    @include flex(column, center, flex-end);
     text-decoration: none;
     & > div
     {

@@ -78,16 +78,6 @@
     }
   }
 
-  &_back
-  {
-    position: absolute;
-    height: 32px;
-    left: 26px;
-    display: flex;
-    align-items: center;
-    top: 0;
-  }
-
   &_input
   {
     padding: 0 17px;
@@ -165,15 +155,14 @@
 
     &_item
     {
-      display: flex;
-      flex-direction: column;
+      @include flex(column,unset,unset);
     }
 
     &_label
     {
       color: $color_text_secondary;
       padding: 9px 24px 0 24px;
-      position: absolute;
+      @include absolute();
       @include typographyBuilder(secondary,500,10,16);
       margin-bottom: 8px;
     }
@@ -217,102 +206,5 @@
   {
     padding-left: 17px !important;
     padding-right: 17px !important;
-  }
-}
-
-.order
-{
-  &_status
-  {
-    width: 100%;
-    top: 0;
-  }
-
-  &_info
-  {
-    @include flex();
-    padding: 12px;
-    margin: 0 17px;
-    margin-bottom: 25px;
-    background-color: $color_rose_bg2;
-    @include typographyBuilder(secondary,400,12,26);
-    color: $color_text_primary;
-
-    &_icon
-    {
-      padding-right: 8px;
-    }
-
-    &_button
-    {
-      border: none;
-      background: none;
-      color: $color_rose;
-    }
-  }
-
-  &_item
-  {
-    margin: 0 17px;
-    display: grid;
-    grid-template-columns: 50% 50%;
-
-    &_header
-    {
-      background-color: $color_line_brown;
-      display: grid;
-      text-align: center;
-      grid-column: 1 / span 2;
-    }
-
-    &_innerHeader
-    {
-      @include flex(column-reverse);
-    }
-
-    &_title
-    {
-      @include typographyBuilder(secondary,500,14,24);
-      height: 40px;
-      width: 50%;
-    }
-
-    &_body
-    {
-      grid-row: 2 / span 3;
-      grid-column: 1 / span 2;
-      z-index: 2
-    }
-
-    &_footer
-    {
-      z-index: 1;
-      grid-column: 1 / span 2;
-      grid-row: 2;
-    }
-
-    &_control
-    {
-      height: 32px;
-      padding: 8px 10px;
-      @include typographyBuilder(secondary,500,12,16);
-      margin: 16px 16px 4px 16px;
-      display: flex;
-      align-items: center;
-      color: $color_text_primary;
-      background-color: $color_rose_bg2;
-
-      &_body
-      {
-        justify-content: end;
-        background-color: transparent;
-        @include typographyBuilder(secondary,400,12,16);
-
-        & > a 
-        {
-          cursor: pointer;
-        }
-      }
-    }
   }
 }

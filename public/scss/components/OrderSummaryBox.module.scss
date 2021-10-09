@@ -692,7 +692,7 @@
     {
         grid-column: 2;
         grid-row: 2;
-        align-self: start;
+        align-self: flex-start;
         @include typographyBuilder(secondary, 400, 12, 16);
         color: $color_text_secondary;
     }

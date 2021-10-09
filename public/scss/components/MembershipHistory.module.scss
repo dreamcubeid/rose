@@ -1,0 +1,122 @@
+@import "../utils/variables";
+
+.membershipHistory
+{
+  padding: 14px 17px;
+
+  &_header
+  {
+    padding: 12px 12px 12px 32px;
+    background-color: $color_rose_bg2;
+    border-radius: 2px;
+    @include typographyBuilder(secondary, 400,12,16);
+    position: relative;
+    margin-bottom: 16px;
+    color: $color_text_primary;
+
+    &::before
+    {
+      @include absolute(22px,auto,auto,12px);
+      content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMyAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjUgMTAuNzUwOUMzLjg4MDU3IDEwLjc1MDkgMS43NDkxNCA4LjYxOTQzIDEuNzQ5MTQgNkMxLjc0OTE0IDMuMzgwNTcgMy44ODA1NyAxLjI0OTE0IDYuNSAxLjI0OTE0QzkuMTE5NDMgMS4yNDkxNCAxMS4yNTA5IDMuMzgwNTcgMTEuMjUwOSA2QzExLjI1MDkgOC42MTk0MyA5LjExOTQzIDEwLjc1MDkgNi41IDEwLjc1MDlaTTYuNSAwQzkuODA4NTcgMCAxMi41IDIuNjkxNDMgMTIuNSA2QzEyLjUgOS4zMDg1NyA5LjgwODU3IDEyIDYuNSAxMkMzLjE5MTQzIDEyIDAuNSA5LjMwODU3IDAuNSA2QzAuNSAyLjY5MTQzIDMuMTkxNDMgMCA2LjUgMFpNNi43MDYyOSA4LjExMDI5SDYuMjk0MjlDNi4wMTAyOSA4LjExMDI5IDUuNzc4ODYgOC4zMiA1Ljc3ODg2IDguNTc4MjlWOS4xODA1N0M1Ljc3ODg2IDkuNDM4MjkgNi4wMTAyOSA5LjY0OCA2LjI5NDI5IDkuNjQ4SDYuNzA2MjlDNi45OTAyOSA5LjY0OCA3LjIyMDU3IDkuNDM4MjkgNy4yMjA1NyA5LjE4MDU3VjguNTc4MjlDNy4yMjA1NyA4LjMyIDYuOTkwMjkgOC4xMDk3MSA2LjcwNjI5IDguMTA5NzFWOC4xMTAyOVpNNi43MDc0MyAyLjI3NzcxSDYuMjkzMTRDNi4wMDQ1NyAyLjI3NzcxIDUuNzc4ODYgMi40Njc0MyA1Ljc3ODg2IDIuNzA4NTdWNy4xODYyOUM1Ljc3ODg2IDcuNDI4IDYuMDA0NTcgNy42MTcxNCA2LjI5MzE0IDcuNjE3MTRINi43MDc0M0M2Ljk5NTQzIDcuNjE3MTQgNy4yMjA1NyA3LjQyODU3IDcuMjIwNTcgNy4xODYyOVYyLjcwODU3QzcuMjIwNTcgMi40Njc0MyA2Ljk5NTQzIDIuMjc3NzEgNi43MDc0MyAyLjI3NzcxWiIgZmlsbD0iIzQ0NDQ0NCIvPgo8L3N2Zz4K);
+    }
+    
+    & > p {
+      display: inline;
+      padding-right: 6px;
+    }
+
+    & > a {
+      color: $color_info;
+    }
+  }
+
+  &_item
+  {
+    margin: 6px 0;
+    border: 1px solid $color_line_brown;
+    border-radius: 2px;
+    position: relative;
+    @include fixedHeight(94px);
+
+    &_header
+    {
+      background-color: $color_line_brown;
+      padding: 8px 12px;
+      @include typographyBuilder(secondary, 400,12,16);
+      color: $color_text_primary;
+      @include fixedHeight(26px);
+    }
+
+    &_title
+    {
+      color: $color_text_primary;
+      @include typographyBuilder(secondary, 400,14,24);
+      @include absolute(38px, auto, auto, 12px);
+      margin: 0;
+    }
+
+    &_date
+    {
+      color: $color_text_primary;
+      @include typographyBuilder(secondary, 400,12,16);
+      @include absolute(auto, auto, 12px, 12px);
+      margin: 0;
+    }
+
+    &_point
+    {
+      @include typographyBuilder(secondary, 400,14,24);
+      @include absolute(auto, 12px, 22px, auto);
+      margin: 0;
+      @include flex(row,center,unset);
+
+      &::after
+      {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        content: "";
+        margin-left: 6px;
+        background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjE3MiAxMkw4LjIyMjA1IDcuMDQ5OTlMOS42MzYwNSA1LjYzNTk5TDE2IDEyTDkuNjM2MDUgMTguMzY0TDguMjIyMDUgMTYuOTVMMTMuMTcyIDEyWiIgZmlsbD0iIzQ0NDQ0NCIvPgo8L3N2Zz4K) no-repeat 0 0;
+        background-size: 100%;
+      }
+    }
+  }
+
+  &_pagination
+  {
+    @include flex(column,flex-end);
+    padding: 18px 12px 0 12px;
+  }
+
+  &_itemPerPage
+  {
+    @include flex(row,center,flex-end);
+    position: relative;
+    @include fixedWidth(222px);
+
+    &_label
+    {
+      @include absolute(9px,auto,auto,24px);
+      z-index: 1;
+      color: $color_text_secondary;
+      @include typographyBuilder(secondary,500,10,16);
+
+      & ~ input, ~ div > input, ~ select
+      {
+        padding: 16px 24px 0 24px;
+      }
+    }
+  }
+}
+
+.form
+{
+  &_perPage
+  {
+    & > select 
+    {
+      padding-top: 15px;
+    }
+  }
+}

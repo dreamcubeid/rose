@@ -174,11 +174,14 @@
   "global": {
     "back": "Back",
     "backHome": "Back to Home",
+    "change": "Change",
     "changeCart": "Change Cart",
     "checkoutTitle": "Checkout",
     "continueShopping": "Continue Shopping",
     "error": "Error",
     "loading": "Loading",
+    "notes": "Notes",
+    "notesEmpty": "Notes empty",
     "notImplemented": "Not implemented yet",
     "pageNotFound": "Page not found"
   },
@@ -239,8 +242,9 @@
     "seeCollection": "See Collection",
     "seeMore": "See More",
     "title": "Lookbook",
-    "back": "Back",
-    "relatedProducts": "Related Products"
+    "back": "Back to lookbook",
+    "relatedProducts": "Related Products",
+    "share": "Bagikan Lookbook"
   },
   "membership": {
     "exchangePoints": "Redeem your Point",
@@ -553,6 +557,7 @@
     "shippingMethod": "Shipping Method",
     "subtitleContactInfo": "*a bill will be sent to this contact",
     "subtitleShipTo": "*your order will be shipped",
+    "title": "Shipping",
     "track": "Track your order",
     "trackDriver": "Track Driver",
     "updatePinpoint": "Change Location Pin"

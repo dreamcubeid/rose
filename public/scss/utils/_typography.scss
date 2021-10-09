@@ -89,7 +89,7 @@ $headings: (
     {
         @include fontPrimary(700);
         @include fontSize($size);
-        @include lineHeight(($size * 150) / 100);
+        @include lineHeight(calc(($size * 150) / 100));
     }
 }
 

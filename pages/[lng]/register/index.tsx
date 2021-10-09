@@ -40,7 +40,7 @@ const classesRegister = {
   basicInfoContainerClassName: 'w-100',
   headerLabelClassName: 'd-none',
   inputContainerClassName: `${styleLogin.login_inputContainer} ${styleForm.form}`,
-  passwordInputContainerClassName: stylePassword.password_passwordContainer,
+  passwordContainerClassName: stylePassword.password_passwordContainer,
   passwordStrengthBarContainerClassName: stylePassword.password,
   passwordStrengthBarClassName: stylePassword.password_bar,
   passwordStrengthLabelClassName: stylePassword.password_label,

@@ -1,0 +1,160 @@
+@import '../utils/variables';
+
+.shipping
+{
+  &_container
+  {
+    padding-bottom: 8px;
+    border-bottom: 1px solid $color_border;
+  }
+
+  &_item
+  {
+    @include flex(row, center, center, true);
+    @include position(relative);
+    border: 1px solid $color_border;
+    background-color: $color_white;
+    border-radius: 2px;
+    margin: 0 0 16px;
+    cursor: pointer;
+
+    &[class*="disabled"] {
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    &:hover
+    {
+      background-color: $color_rose_bg2;
+      border-color: $color_rose;
+
+      [class*="_pinButton"]
+      {
+        background-color: transparent !important;
+        border: solid 1px $color_rose !important;
+        color: $color_rose !important;
+
+        &:hover
+        {
+          background-color: $color_rose !important;
+          color: $color_white !important;
+        }
+      }
+
+    }
+    
+    & > div:not([class])
+    {
+      @include flex(row, center, flex-end);
+      flex-grow: 1;
+      margin: 0 16px;
+      padding: 0;
+      border: none;
+      order: 3;
+
+      p
+      {
+        @include typographyBuilder(secondary, 400, 12, 24);
+        margin: 0;
+        padding: 0;
+        color: $color_error;
+      }
+
+      & ~ div[class*="shipping_item__price"]
+      {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    &__pinButton
+    {
+      order: 4;
+      margin: 12px auto 22px !important;
+      width: calc(100% - 32px) !important;
+      min-width: calc(100% - 32px) !important;
+      max-width: calc(100% - 32px) !important;
+    }
+
+    &__radio,
+    &__label,
+    &__price
+    {
+      @include flex(row, center, center);
+      @include position(relative);
+      margin: 16px 0;
+      padding: 0;
+
+      label
+      {
+        display: none;
+      }
+
+      p
+      {
+        @include typographyBuilder(secondary, 400, 12, 24);
+        margin: 0;
+        padding: 0;
+        color: $color_text_primary;
+      }
+    }
+
+    &__radio
+    {
+      @include position(relative);
+      padding: 0 16px;
+      order: 1;
+
+      & > input
+      {
+        @include absolute(-8px, auto, auto, 16px);
+        opacity: 1;
+        cursor: pointer;
+
+        &::after
+        {
+          content: "";
+          @include absolute(-2px, auto, auto, -2px);
+          @include fixedWidth(20px);
+          @include fixedHeight(20px);
+          background: $color_white;
+          border: 1px solid $color_rose;
+          border-radius: 50%;
+          z-index: 1;
+        }
+
+        &:checked::after 
+        {
+          border: none;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgcng9IjkuNSIgZmlsbD0id2hpdGUiLz4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iNiIgZmlsbD0iIzk5ODA2MCIvPgo8cmVjdCB4PSIwLjUiIHk9IjAuNSIgd2lkdGg9IjE5IiBoZWlnaHQ9IjE5IiByeD0iOS41IiBzdHJva2U9IiM5OTgwNjAiLz4KPC9zdmc+Cg==");
+        }
+      }
+    }
+
+    &__label
+    {
+      order: 2;
+      flex-grow: 1;
+      margin-left: 12px;
+      padding: 0;
+
+      p
+      {
+        @include fixedWidth(100%);
+      }
+    }
+
+    &__price
+    {
+      order: 3;
+      padding: 0 16px;
+
+      p
+      {
+        @include typographyBuilder(secondary, 400, 12, 24);
+        color: $color_rose;
+      }
+    }
+  }
+}

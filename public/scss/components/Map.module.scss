@@ -24,9 +24,7 @@
   &_mapPopup
   {
     @include fixed(0,auto,auto,auto);
-    min-width: 375px;
-    max-width: 375px;
-    width: 375px;
+    @include fixedWidth(375px);
     z-index: 20;
     background-color: $color_white;
     height: 100vh;

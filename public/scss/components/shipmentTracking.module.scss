@@ -5,9 +5,7 @@
   background: rgba(0, 0, 0, 0.8);
   @include fixed(0,auto,0,auto);
   margin: auto;
-  min-width: 375px;
-  max-width: 375px;
-  width: 375px;
+  @include fixedWidth(375px);
   z-index: 20;
   padding: 18px;
   @include flex(column);

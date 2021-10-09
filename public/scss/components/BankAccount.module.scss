@@ -1,0 +1,175 @@
+@import '../utils/variables';
+
+.bankAccount
+{
+  &_container
+  {
+    border: 1px solid $color_border;
+    border-radius: 3px;
+    order: 6;
+  }
+
+  &_section
+  {
+    border-bottom: 1px solid $color_border;
+
+    &:last-child
+    {
+      border-bottom: 0px solid $color_border;
+    }
+  }
+
+  &_header
+  {
+    @include flex(row, center, space-between);
+    padding: 16px;
+  }
+
+  &_titleSection
+  {
+    @include flex(row, center);
+
+    span
+    {
+      margin: 0;
+      margin-left: 12px;
+    }
+  }
+
+  &_iconCollapse
+  {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    svg
+    {
+      color: $color_text_primary !important;
+    }
+  }
+
+  &_title
+  {
+    @include flex(row, center);
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+  }
+
+  &_logo
+  {
+    @include fixedWidth(50px);
+  }
+
+  &_body
+  {
+    background: $color_rose_bg2;
+    padding: 16px;
+  }
+
+  &_infoAccount
+  {
+    @include flex(row, center, space-between);
+  }
+
+  &_labelAccount
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_secondary;
+  }
+
+  &_labelAccountName
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary;
+  }
+
+  &_iconCollapse
+  {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    svg
+    {
+      color: $color_text_primary !important;
+    }
+  }
+
+  &_accountNumber
+  {
+    @include flex(row, center, space-between);
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-top: 8px;
+    padding: 15px 12px 15px 15px;
+    background: $color_white;
+    border: 1px solid $color_border;
+    border-radius: 37px;
+
+    span
+    {
+      margin: 0;
+      letter-spacing: 1px;
+    }
+  }
+
+  &_copyButtonIcon
+  {
+    width: 20px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxNiAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMuODMzMzMgNFYxLjVDMy44MzMzMyAxLjI3ODk4IDMuOTIxMTMgMS4wNjcwMiA0LjA3NzQxIDAuOTEwNzQyQzQuMjMzNjkgMC43NTQ0NjEgNC40NDU2NSAwLjY2NjY2NCA0LjY2NjY3IDAuNjY2NjY0SDE0LjY2NjdDMTQuODg3NyAwLjY2NjY2NCAxNS4wOTk2IDAuNzU0NDYxIDE1LjI1NTkgMC45MTA3NDJDMTUuNDEyMiAxLjA2NzAyIDE1LjUgMS4yNzg5OCAxNS41IDEuNVYxMy4xNjY3QzE1LjUgMTMuMzg3NyAxNS40MTIyIDEzLjU5OTYgMTUuMjU1OSAxMy43NTU5QzE1LjA5OTYgMTMuOTEyMiAxNC44ODc3IDE0IDE0LjY2NjcgMTRIMTIuMTY2N1YxNi41QzEyLjE2NjcgMTYuOTYgMTEuNzkxNyAxNy4zMzMzIDExLjMyNzUgMTcuMzMzM0gxLjMzOTE3QzEuMjI5MjcgMTcuMzM0IDEuMTIwMzMgMTcuMzEyOSAxLjAxODYgMTcuMjcxNEMwLjkxNjg3MyAxNy4yMjk4IDAuODI0MzYxIDE3LjE2ODUgMC43NDYzODIgMTcuMDkxMUMwLjY2ODQwMyAxNy4wMTM2IDAuNjA2NDk0IDE2LjkyMTYgMC41NjQyMTIgMTYuODIwMUMwLjUyMTkzIDE2LjcxODcgMC41MDAxMDggMTYuNjA5OSAwLjUgMTYuNUwwLjUwMjUgNC44MzMzM0MwLjUwMjUgNC4zNzMzMyAwLjg3NzUgNCAxLjM0MTY3IDRIMy44MzMzM1pNMi4xNjkxNyA1LjY2NjY2TDIuMTY2NjcgMTUuNjY2N0gxMC41VjUuNjY2NjZIMi4xNjkxN1pNNS41IDRIMTIuMTY2N1YxMi4zMzMzSDEzLjgzMzNWMi4zMzMzM0g1LjVWNFoiIGZpbGw9IiM5OTgwNjAiLz4KPC9zdmc+Cg==");
+  }
+
+  &_container
+  {
+    &TitlePrimary
+    {
+      font-size: 22px;
+      text-align: center;
+      color: $color_success;
+    }
+  }
+
+  &_inner
+  {
+    width: 570px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    &Icon
+    {
+      height: 140px;
+      margin: 2rem 0;
+      order: 1;
+
+      @media screen and (max-width: 576px) {
+        height: 100px;
+      }
+    }
+
+    & > h3
+    {
+     display: none;
+    }
+
+    & > span
+    {
+      display: block;
+      background: $color_border;
+      padding: 1rem;
+      margin: 2rem 5rem;
+      border-radius: 4px;
+
+      @media screen and (max-width: 576px) {
+        margin: 2rem 0;
+      }
+    }
+  }
+}

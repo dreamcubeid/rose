@@ -1,80 +1,53 @@
-@import "../base/colors.scss";
+@import '../utils/variables';
 
-.thankyou
+.thankYou
 {
-  &_container
+  &_header
   {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5rem;
-    min-height: 60vh;
+    @include flex(row, center, space-between);
+    background: $color_rose_bg2;
+    padding: 16px 18px;
 
-    @media screen and (max-width: 768px) {
-      min-height: 72.5vh;
-    }
-
-    @media screen and (max-width: 575px) {
-      min-height: 65vh;
-    }
-
-    &_titlePrimary
+    &Title
     {
-      font-size: 22px;
-      text-align: center;
-      color: $color_green;
-    }
-  }
-
-  &_label {
-    display: block ruby;
-  }
-
-  &_message {
-    margin: 20px 0px;
-    font-size: 14px;
-  }
-
-  &_orderID {
-    margin-bottom: 12px;
-    font-size: 16px;
-
-    span {
-      font-weight: bold;
-      text-align: center;
-      margin: auto;
-      display: block;
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin: 0;
     }
   }
 
   &_inner
   {
-    width: 320px;
-    align-items: center;
-    text-align: center;
-
-    @media screen and (max-width: 575px) {
-      width: 100%;
-      padding: 0 1rem;
-    }
-
-    &__icon
-    {
-      display: flex;
-      padding: 0.2rem;
-      background: $color_blue;
-      color: $color_white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      text-align: center;
-      flex-flow: row wrap;
-      margin: auto;
-    }
+    padding: 24px 18px 8px;
 
     h3
     {
-      display: inline-block;
-      margin: 16px 0px 32px 0px;
+      display: none;
+    }
+  }
+
+  &_message
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-bottom: 24px;
+  }
+
+  &_paymentInformation
+  {
+    margin: 24px 0;
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_primary; 
+  }
+
+  &_footer
+  {
+    padding: 0 18px 24px;
+
+    &Btn
+    {
+      background: none;
+      color: $color_rose;
     }
   }
 }

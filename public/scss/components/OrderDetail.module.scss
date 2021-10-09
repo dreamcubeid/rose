@@ -1,0 +1,139 @@
+@import '../utils/variables';
+
+.orderDetail
+{
+  &_header
+  {
+    @include flex(row, center, space-between);
+    background: $color_line_brown;
+    padding: 12px 16px;
+    border-radius: 3px 3px 0 0;
+
+    &Title
+    {
+      @include typographyBuilder(secondary, 400, 10, 16);
+      color: $color_text_secondary;
+
+      span
+      {
+        display: block;
+        @include typographyBuilder(secondary, 400, 12, 16);
+        color: $color_text_primary;
+      }
+    }
+  }
+
+  &_status
+  {
+    @include typographyBuilder(secondary, 400, 10, 16);
+    padding: 6px 10px;
+    border-radius: 23px;
+    color: $color_white;
+
+    &Cancelled
+    {
+      color: $color_text_secondary;
+    }
+
+    &Common
+    {
+      color: $color_white;
+    }
+  }
+
+  &_content
+  {
+    background: $color_rose_bg2;
+    border-radius: 0 0 3px 3px;
+  }
+
+  &_contentHeader
+  {
+    @include flex(row, center, space-between);
+    padding: 12px 16px;
+  }
+
+  &_contentTotalAmount
+  {
+    @include typographyBuilder(secondary, 400, 10, 16);
+    color: $color_text_secondary;
+
+    span
+    {
+      display: block;
+      @include typographyBuilder(secondary, 500, 14, 24);
+      color: $color_text_primary;
+    }
+  }
+
+  &_contentDropdown
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_info;
+    cursor: pointer;
+  }
+
+  &_body
+  {
+    background: $color_white;
+    border: 1px solid $color_rose_bg2;
+    border-radius: 0 0 3px 3px;
+    margin: 0;
+  }
+
+  &_item
+  {
+    display: grid;
+    grid-template-columns: 45px 45% auto;
+    grid-column-gap: 8px;
+    padding: 16px;
+
+    &Image
+    {
+      @include fixedWidth(45px);
+      @include fixedHeight(45px);
+
+      img
+      {
+        @include fixedWidth(45px);
+        @include fixedHeight(45px);
+        object-fit: cover;
+      }
+    }
+
+    &Label
+    {
+      @include typographyBuilder(secondary, 400, 12, 16);
+      color: $color_text_primary;
+    }
+
+    &Price
+    {
+      @include typographyBuilder(secondary, 400, 12, 16);
+      color: $color_text_primary;
+      justify-self: flex-end; 
+    }
+  }
+
+  &_breakdown
+  {
+    padding: 0 16px 16px;
+
+    &Field
+    {
+      @include flex(row, center, space-between);
+      @include typographyBuilder(secondary, 400, 12, 16);
+      color: $color_text_primary;
+      margin-bottom: 8px;
+    }
+
+    &Total
+    {
+      border-top: 1px dashed $color_rose;
+      padding-top: 8px;
+      @include flex(row, center, space-between);
+      @include typographyBuilder(secondary, 500, 12, 16);
+      color: $color_text_primary;
+    }
+  }
+}

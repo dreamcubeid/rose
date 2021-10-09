@@ -356,7 +356,7 @@
     "placeholderOrderId": "Nomor Pesanan",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
-    "checkOrder": "Periksa Pesanan",
+    "checkOrder": "Periksa Nomor Pesanan",
     "details": "Rincian",
     "optional": "Optional",
     "invalidFileType": "Tipe File tidak didukung",
@@ -608,7 +608,13 @@
     "submit": "Kirim Ulasan"
   },
   "thankYou": {
-    "message": "Kami mengirimkan Anda email ke {EMAIL} tanda terima pesanan. Jika email tidak ada di kotak masuk Anda, coba periksa bagian folder spam.",
+    "accountNumber": "Nomor Rekening",
+    "bankAccountInformation": "Anda dapat melakukan pembayaran manual transfer melalui beberapa opsi dibawah",
+    "billingAddress": "Alamat tagihan",
+    "continueShopping": "Lanjutkan Belanja",
+    "copyAccountNumberSuccess": "Salin no rekening berhasil",
+    "message": "Terima kasih telah membeli di toko kami. Kami mengirimkan Anda email ke {EMAIL} tanda terima pesanan. Jika email tidak ada di kotak masuk Anda, coba periksa bagian folder spam.",
+    "onBehalf": "a/n",
     "orderDetail": "Order Detail",
     "paymentMethod": "Tujuan Pembayaran",
     "paymentTitle": "Pembayaran",
@@ -618,7 +624,7 @@
     "shippingMethod": "Methode Pengiriman",
     "shippingTitle": "Pengiriman",
     "summaryTitle": "Kamu belanja apa nih?",
-    "thanks": "Pesanan telah dibuat",
+    "thanks": "Pesanan Berhasil Dibuat",
     "yourOrderID": "Nomor pesanan anda"
   }
 }

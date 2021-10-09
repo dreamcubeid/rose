@@ -1,16 +1,16 @@
-import { useI18n } from "@sirclo/nexus"
+/* Library Package */
+import { FC } from 'react'
+/* Styles */
+import styleLoader from 'public/scss/components/Loader.module.scss'
 
-const LoaderPages = () => {
-  const i18n: any = useI18n();
-
+const LoaderPages: FC<any> = () => {
   return (
-    <div className="loader-pages">
-      <div className="loader-pages__container">
-        <div className="loader-pages__container--spin"></div>
-        <p className="loader-pages__container--label">{i18n.t("home.loading")}</p>
+    <div className={styleLoader.loaderPage}>
+      <div className={styleLoader.loaderPage_container}>
+        <div className={styleLoader.loaderPage_containerSpin}></div>
       </div>
     </div>
   )
 }
 
-export default LoaderPages;
+export default LoaderPages

@@ -259,47 +259,6 @@ iframe
   }
 }
 
-.loader-pages
-{
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: $color_white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__container
-  {
-    &--spin
-    {
-      width: 3rem;
-      height: 3rem;
-      margin: 1rem 3rem;
-      border-radius: 50%;
-      border: 0.3rem solid $color_gray;
-      border-top-color: $color_blue;
-      animation: 1.5s spin infinite linear;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    &--label
-    {
-      text-align: center;
-      font-size: 14px;
-      text-transform: lowercase;
-    }
-  }
-}
-
 .autocomplete-dropdown-container 
 {
   z-index: 1;

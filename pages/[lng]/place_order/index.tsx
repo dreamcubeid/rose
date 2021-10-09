@@ -1,6 +1,6 @@
 /* library package */
-import { 
-  FC, 
+import {
+  FC,
   ReactNode,
   useState
 } from 'react'

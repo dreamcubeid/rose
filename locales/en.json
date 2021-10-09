@@ -356,7 +356,7 @@
     "placeholderOrderId": "Order ID",
     "email": "Email",
     "placeholderEmail": "user@gmail.com",
-    "checkOrder": "Check Order",
+    "checkOrder": "Check Order Number",
     "details": "Details",
     "optional": "Optional",
     "invalidFileType": "File Type not supported",
@@ -608,7 +608,13 @@
     "submit": "Submit Review"
   },
   "thankYou": {
-    "message": "We send you an email to {EMAIL} your order receipt. If the email isn't in your inbox, try checking the spam folder section.",
+    "accountNumber": "Account Number",
+    "bankAccountInformation": "You can make manual transfer payments through several options below",
+    "billingAddress": "Billing Address",
+    "continueShopping": "Continue Shopping",
+    "copyAccountNumberSuccess": "Copy account number successful",
+    "message": "Thank you for buying in our shop. We send you an email to {EMAIL} your order receipt. If the email isn't in your inbox, try checking the spam folder section.",
+    "onBehalf": "a/n",
     "orderDetail": "Order Detail",
     "paymentMethod": "Payment To",
     "paymentTitle": "Payment",
@@ -618,7 +624,7 @@
     "shippingMethod": "Shipping Method",
     "shippingTitle": "Delivery",
     "summaryTitle": "What are you shopping for?",
-    "thanks": "Thank You",
+    "thanks": "Order Successfully Created",
     "yourOrderID": "Your Order ID"
   }
 }

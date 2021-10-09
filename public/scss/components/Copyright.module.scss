@@ -1,0 +1,14 @@
+@import '../utils/variables';
+
+.copyright
+{
+  @include typographyBuilder(secondary, 400, 10, 16);
+  padding: 10px;
+  background: $color_rose_bg1;
+  color: $color_rose;
+
+  a
+  {
+    color: $color_rose;
+  }
+}

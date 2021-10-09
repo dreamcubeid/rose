@@ -193,7 +193,6 @@ const AccountsPage: FC<any> = ({
           </div>
         </div>
         <Account
-          defaultTab="membershipHistory"
           orderHistoryIsInfinite
           orderHistoryItemPerPage={1}
           classes={classesAccount}

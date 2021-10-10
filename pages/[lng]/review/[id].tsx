@@ -1,3 +1,4 @@
+/* library package */
 import { FC } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
@@ -5,71 +6,96 @@ import {
   OrderReview,
   useI18n,
 } from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import useWindowSize from "lib/useWindowSize";
-import SEO from "components/SEO";
-import { useBrand } from "lib/useBrand";
+import {
+  RiStarFill,
+  RiStarLine
+} from 'react-icons/ri'
 import { toast } from "react-toastify";
-import { ChevronDown, ChevronUp } from "react-feather";
-import styles from "public/scss/pages/Review.module.scss";
+/* library template */
+import useWindowSize from "lib/useWindowSize";
+import { useBrand } from "lib/useBrand";
+/* components */
+import Layout from "components/Layout/Layout";
+import Breadcrumb from "components/Breadcrumb/Breadcrumb";
+/* styles */
+import styleReview from "public/scss/pages/Review.module.scss";
+import styleForm from "public/scss/components/Form.module.scss";
+import stylePagination from 'public/scss/components/Pagination.module.scss'
+import styleButton from 'public/scss/components/Button.module.scss'
 
 const classesOrderReview = {
-  titleContainerClassName: styles.orderReview_titleContainer,
-  titleClassName: styles.orderReview_title,
-  subTitleClassName: styles.orderReview_subtitle,
-  orderInfoContainerClassName: styles.orderReview_orderInfo,
-  orderInfoLineClassName: styles.orderReview_orderInfoLine,
-  buyerInfoContainerClassName: styles.orderReview_buyerInfo,
-  buyerNameLabelClassName: styles.orderReview_buyerNameLabel,
-  buyerNameClassname: `form-control ${styles.sirclo_form_input} ${styles.size_label}`,
-  buyerHideNameContainerClassName: styles.orderReview_buyerHide,
-  reviewTabContainerClassName: styles.orderReview_reviewTab,
-  needsReviewTabContainerClassName: styles.orderReview_tabItem,
-  reviewedTabContainerClassName: styles.orderReview_tabItem,
-  activeTabClassName: styles.orderReview_activeTab,
-  needsReviewTabLabelClassName: styles.orderReview_tabLabel,
-  reviewedTabLabelClassName: styles.orderReview_tabLabel,
-  productInfoContainerClassName: styles.orderReview_productInfo,
-  productImageClassName: styles.orderReview_productImage,
-  productDetailContainerClassName: styles.orderReview_productDetail,
-  productNameClassName: styles.orderReview_productDetailName,
-  yourRatingTextClassName: styles.orderReview_productDetailRating,
-  productReviewButtonContainerClassName: styles.orderReview_productButton,
-  writeReviewButtonClassName: `btn ${styles.btn_danger}`,
-  itemPerPageClassName: styles.orderReview_itemPerPage,
-  itemPerPageOptionsClassName: styles.orderReview_itemPerPageOptions,
-  formContainerClassName: styles.orderReview_form,
-  formGroupClassName: styles.orderReview_formGroup,
-  formLabelClassName: styles.orderReview_formLabel,
-  starContainerClassName: styles.orderReview_starContainer,
-  starClassName: styles.orderReview_star,
-  containerClassName: styles.orderReview_media,
-  imagesContainerClassName: styles.orderReview_mediaImages,
-  mediaContainerClassName: styles.orderReview_mediaThumbnail,
-  imgClassName: styles.orderReview_mediaImage,
-  mediaRemoverClassName: styles.orderReview_mediaRemove,
-  imgUploadClassName: styles.orderReview_mediaUpload,
-  popupConfirmationSubmitContainerClassName: styles.orderReview_popup,
-  popupConfirmationSubmitContentClassName: styles.orderReview_popupContent,
-  popupConfirmationSubmitTitleClassName: styles.orderReview_popupTitle,
-  popupConfirmationSubmitDescriptionClassName: styles.orderReview_popupDesc,
-  popupConfirmationSubmitWrapButtonClassName: styles.orderReview_popupActionButton,
-  openReviewButtonClassName: `btn ${styles.btn_outerBlack}`,
-  reviewCardContainerClassName: styles.orderReview_reviewCard,
-  tileRatingClassName: styles.orderReview_reviewCardtitleRating,
-  ratingContentClassName: styles.orderReview_ratingContent,
-  ratingDescriptionClassName: styles.orderReview_ratingDesc,
-  titleDescriptionClassName: styles.orderReview_titleDesc,
-  descriptionContentClassName: styles.orderReview_descContent,
-  titleImageClassName: styles.orderReview_titleImages,
-  imageContentClassName: styles.orderReview_imageContent,
-  imageListClassName: styles.orderReview_imageList
+  // header
+  titleContainerClassName: styleReview.review_title,
+  subTitleClassName: 'd-none',
+  orderInfoContainerClassName: styleReview.review_orderInfo,
+  orderInfoLineClassName: styleReview.review_orderInfoLine,
+  buyerInfoContainerClassName: styleReview.orderReview_buyerInfo,
+  buyerNameContainerClassName: styleForm.form,
+  buyerNameClassname: `form-control ${styleReview.sirclo_form_input} ${styleReview.size_label}`,
+  // checkbox
+  buyerHideNameContainerClassName: styleReview.review_checkboxContainer,
+  buyerHideNameLabelClassName: styleReview.review_labelCheckbox,
+  buyerHideNameSwitchClassName: styleForm.form_checkbox,
+  // tab
+  reviewTabContainerClassName: styleReview.review_reviewTab,
+  needsReviewTabContainerClassName: styleReview.review_reviewTabItem,
+  reviewedTabContainerClassName: styleReview.review_reviewTabItem,
+  activeTabClassName: styleReview.review_activeTab,
+  needsReviewTabLabelClassName: styleReview.orderReview_tabLabel,
+  reviewedTabLabelClassName: styleReview.orderReview_tabLabel,
+  productInfoContainerClassName: styleReview.review_product,
+  productImageClassName: styleReview.review_productImage,
+  productNameClassName: styleReview.review_productDetailName,
+  yourRatingTextClassName: styleReview.review_productDetailRating,
+  productReviewButtonContainerClassName: styleReview.review_productButtonContainer,
+  writeReviewButtonClassName: styleReview.review_productButton,
+  // form
+  formContainerClassName: styleReview.review_form,
+  formGroupClassName: `${styleReview.review_formGroup} ${styleForm.form}`,
+  formLabelClassName: styleReview.review_formLabel,
+  starContainerClassName: styleReview.review_starContainer,
+  starClassName: styleReview.review_star,
+  imagesContainerClassName: styleReview.review_imagesContainer,
+  mediaContainerClassName: styleReview.review_mediaThumbnail,
+  imgClassName: styleReview.review_uploadImg,
+  mediaRemoverClassName: styleReview.review_mediaRemover,
+  containerClassName: styleReview.review_media,
+  imgUploadClassName: styleReview.review_upload,
+  itemPerPageClassName: `${styleForm.form_itemPerPage} ${styleReview.review_itemPerPage}`,
+  itemPerPageLabelClassName: styleForm.form_itemPerPage_label,
+  itemPerPageOptionsClassName: `${styleForm.form} w-100 mt-4 ${styleReview.review_itemPerPageOptions}`,
+  openReviewButtonClassName: styleReview.review_productButton,
+  popupConfirmationSubmitContainerClassName: styleReview.review_popup,
+  popupConfirmationSubmitContentClassName: styleReview.review_popupContent,
+  popupConfirmationSubmitTitleClassName: styleReview.review_popupTitle,
+  popupConfirmationSubmitDescriptionClassName: styleReview.review_popupDesc,
+  popupConfirmationSubmitWrapButtonClassName: styleReview.review_popupWrapButton,
+  popupConfirmationSubmitButtonConfirmClassName: `${styleButton.btn} ${styleButton.btn_secondary}`,
+  popupConfirmationSubmitButtonNoClassName: `${styleButton.btn} ${styleButton.btn_primary}`,
+  reviewCardContainerClassName: styleReview.review_reviewCard,
+  tileRatingClassName: styleReview.review_reviewCard_title,
+  ratingContentClassName: styleReview.review_reviewCard_ratingContent,
+  ratingDescriptionClassName: styleReview.review_reviewCard_ratingDesc,
+  titleDescriptionClassName: styleReview.review_reviewCard_title,
+  descriptionContentClassName: styleReview.review_reviewCard_content,
+  titleImageClassName: styleReview.review_reviewCard_title,
+  imageListClassName: styleReview.review_reviewCard_imageList,
+  imageContentClassName: styleReview.review_reviewCard_imageContent,
+  // image pop up
+  reviewPopupContainerClassName: styleReview.review_containerImagePopup,
+  reviewPopupContentClassName: styleReview.review_contentImagePopup,
+  reviewPopupImagePopupClassName: styleReview.review_mainImagePopup,
+  reviewPopupLeftButtonClassName: styleReview.review_popupLeftBtn,
+  reviewPopupRightButtonClassName: styleReview.review_popupRightBtn,
+  reviewPopupButtonCloseClassName: styleReview.review_popupCloseBtn,
+  reviewPopupPreviewClassName: styleReview.review_previewImageContainer,
+  reviewPopupImagePreviewClassName: styleReview.review_previewImagePopup,
 };
 
-const paginationClasses = {
-  pagingClassName: styles.pagination,
-  activeClassName: styles.pagination_active,
-  itemClassName: styles.pagination_item,
+const classesPagination = {
+  pagingClassName: stylePagination.pagination,
+  itemClassName: stylePagination.pagination_item,
+  activeClassName: stylePagination.pagination_active,
 }
 
 const ReviewPage: FC<any> = ({
@@ -84,7 +110,7 @@ const ReviewPage: FC<any> = ({
 
   const newClassesOrderReview = {
     ...classesOrderReview,
-    ...paginationClasses
+    ...classesPagination
   }
 
   return (
@@ -94,27 +120,39 @@ const ReviewPage: FC<any> = ({
       lngDict={lngDict}
       brand={brand}
     >
-      <SEO title={i18n.t("orderReview.title")} />
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
-            <div className={styles.orderReview}>
-              <OrderReview
-                classes={newClassesOrderReview}
-                orderID={id as string}
-                itemPerPageOptions={[5, 10, 15]}
-                arrowIconDown={<ChevronDown color="black" size={20} />}
-                arrowIconUp={<ChevronUp color="black" size={20} />}
-                onSuccessMsg={(msg) => toast.success(msg)}
-                onErrorMsg={(msg) => toast.error(msg)}
-                thumborSetting={{
-                  width: size.width < 768 ? 375 : 500,
-                  format: "webp",
-                  quality: 85,
-                }}
-              />
-            </div>
-          </div>
+      <div className={styleReview.review_container}>
+        <div className={styleReview.review_header}>
+          <Breadcrumb
+            steps={[
+              {
+                label: i18n.t('breadcrumb.account'),
+                linkProps: {
+                  href: '/[lng]/account?tab=orderHistory',
+                  as: `/${lng}/account?tab=orderHistory`,
+                },
+              },
+              {
+                label: i18n.t('breadcrumb.review')
+              }
+            ]}
+          />
+        </div>
+        <div className={styleReview.review_body}>
+          <OrderReview
+            classes={newClassesOrderReview}
+            orderID={id as string}
+            itemPerPageOptions={[5, 10, 15]}
+            filledRatingIcon={<RiStarFill color="998060" size={25}/>}
+            unfilledRatingIcon={<RiStarLine color="998060"size={25}/>}
+            onSuccessMsg={(msg) => toast.success(msg)}
+            starColor="998060"
+            onErrorMsg={(msg) => toast.error(msg)}
+            thumborSetting={{
+              width: size.width < 768 ? 375 : 500,
+              format: "webp",
+              quality: 85,
+            }}
+          />
         </div>
       </div>
     </Layout>

@@ -10,25 +10,27 @@ import {
 import Layout from "components/Layout/Layout";
 import { useBrand } from "lib/useBrand";
 import { toast } from "react-toastify";
-import styles from "public/scss/pages/Contact.module.scss";
+import styleContact from "public/scss/pages/Contact.module.scss";
+import styleForm from "public/scss/components/Form.module.scss";
+import styleButton from "public/scss/components/Button.module.scss";
+import Breadcrumb from "components/Breadcrumb/Breadcrumb";
 
 const Placeholder = dynamic(() => import("components/Placeholder"));
 
 const classesContact = {
-  containerClassName: `${styles.contact_container} d-flex flex-column align-items-start justify-content-start`,
-  mapClassName: styles.contact_map,
-  formContainerClassName: styles.contact_form,
+  containerClassName: styleContact.contact_body,
+  mapClassName: 'd-none',
+  inputContainerClassName: `${styleForm.form} my-4 ${styleContact.contact_form}`,
   titleClassName: "d-none",
-  inputContainerClassName: `${styles.sirclo_form_row}`,
-  inputClassName: `form-control ${styles.sirclo_form_input}`,
-  labelClassName: `d-flex flex-row align-items-center justify-content-start`,
-  buttonContainerClassName: `${styles.contact_buttonContainer} d-block mt-4`,
-  buttonClassName: `${styles.btn} ${styles.btn_primary} ${styles.btn_long} ${styles.btn_full_width} ${styles.btn_center}`,
-  widgetClassName: styles.contact_widget
+  buttonClassName: `${styleButton.btn} ${styleButton.btn_primary} `,
+  // inputClassName: ,
+  // labelClassName: `d-flex flex-row align-items-center justify-content-start`,
+  // buttonContainerClassName: `${styles.contact_buttonContainer} d-block mt-4`,
+  widgetClassName: styleContact.contact_widget
 };
 
 const classesPlaceholderContact = {
-  placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_contactWidget}`
+  // placeholderList: `${styles.placeholderItem} ${styles.placeholderItem_contactWidget}`
 }
 
 const ContactPage: FC<any> = ({
@@ -46,9 +48,37 @@ const ContactPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      headerTitle={i18n.t('contact.title')}
       withAllowed={allowedEnquiry}
     >
-      <div className="container">
+      <div className={styleContact.contact_container}>
+        <div className={styleContact.contact_header}>
+          <Breadcrumb
+            steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.contact') }]}
+          />
+        </div>
+        <Contact
+          classes={classesContact}
+          isAddressDetail={false}
+          onCompleted={() => toast.success(i18n.t("contact.submitSuccess"))}
+          onError={() => toast.error(i18n.t("contact.submitError"))}
+          widget={
+            <Widget
+              pos="footer-4"
+              widgetClassName={styleContact.contact_info}
+              loadingComponent={
+                <Placeholder
+                  classes={classesPlaceholderContact}
+                  withList
+                  listMany={5}
+                />
+              }
+            />
+          }
+        />
+      </div>
+
+      {/* <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
 
@@ -88,7 +118,7 @@ const ContactPage: FC<any> = ({
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 };

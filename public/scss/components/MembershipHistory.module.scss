@@ -88,26 +88,6 @@
     @include flex(column,flex-end);
     padding: 18px 12px 0 12px;
   }
-
-  &_itemPerPage
-  {
-    @include flex(row,center,flex-end);
-    position: relative;
-    @include fixedWidth(222px);
-
-    &_label
-    {
-      @include absolute(9px,auto,auto,24px);
-      z-index: 1;
-      color: $color_text_secondary;
-      @include typographyBuilder(secondary,500,10,16);
-
-      & ~ input, ~ div > input, ~ select
-      {
-        padding: 16px 24px 0 24px;
-      }
-    }
-  }
 }
 
 .form

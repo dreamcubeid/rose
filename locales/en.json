@@ -82,7 +82,8 @@
     "search": "Search",
     "lookbook": "Lookbook",
     "forgotPassword": "Forgot Password",
-    "blog": "Blog"
+    "blog": "Blog",
+    "review": "Review"
   },
   "cart": {
     "amount": "Amount",

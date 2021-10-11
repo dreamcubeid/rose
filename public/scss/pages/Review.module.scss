@@ -1,190 +1,181 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
-@import "./Account.module.scss";
+@import '../utils/variables';
 
-.orderReview
+.review
 {
-  margin: 4rem 0;
-
-  &_titleContainer
+  &_container
   {
-    text-align: center;
+    padding: 58px 0 106px 0;
+    background-color: $color_rose_bg1;
+  }
+
+  &_header
+  {
+    padding: 16px 18px 24px 18px;
+    background-color: $color_white;
+  }
+
+  &_body
+  {
+    padding: 0 17px;
   }
 
   &_title
   {
-    font-family: "roboto-medium";
-    font-size: 18px;
-  }
-
-  &_subtitle
-  {
-    font-size: 11px;
-    color: $color_text;
+    @include typographyBuilder(primary,500,20,32);
+    color: $color-rose;
   }
 
   &_orderInfo
   {
-    display: block;
-    width: 380px;
-    background: $color_blue_light;
-    padding: 20px;
-    margin: 0 auto 20px;
+    padding: 16px;
+    background-color: $color_line_brown;
+    margin-bottom: 24px;
   }
 
   &_orderInfoLine
   {
-    display: flex;
-    align-items: center;
+    @include flex();
+    color: $color_text_primary;
 
-    p
+    &:first-child
     {
-      margin: 0;
-
-      &:first-child
+      @include typographyBuilder(secondary,500,14,24);
+      
+      & > p
       {
-        min-width: 125px;
+        margin:  0 0 8px 0;
       }
+    }
 
-      &:nth-child(2)
+    &:last-child
+    {
+      @include typographyBuilder(secondary,400,12,16);
+      color: $color_text_secondary;
+
+      & > p
       {
-        margin: 0 10px;
+        margin:  0;
       }
     }
   }
 
-  &_buyerInfo
+  &_checkboxContainer
   {
-    display: block;
-    width: 380px;
-    margin: 40px auto;
+    margin: 16px 0 24px 0;
+    @include flex(row-reverse,center,flex-end);
   }
 
-  &_buyerNameLabel
+  &_labelCheckbox
   {
-    display: block;
-  }
-
-  &_buyerHide
-  {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-
-    label
-    {
-      margin: 0;
-    }
+    margin: 0 0 0 12px;
+    @include typographyBuilder(secondary,400,14,24);
+    color: $color_text_primary;
   }
 
   &_reviewTab
   {
-    display: flex;
-    align-items: center;
-    border-top: 7.5px solid $color_gray;
-    padding: 20px 0;
-
-    & > div
-    {
-      flex: 1;
-    }
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border-top: 1px solid $color_line_brown;
+    padding-top: 24px;
+    margin-bottom: 16px;
   }
 
-  &_tabItem
+  &_reviewTabItem
   {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 2px solid $color_gray_low;
+    border-bottom: 1px solid $color_line_brown;
+    @include flex();
+    color: $color_text_secondary;
+    @include typographyBuilder(secondary,400,14,24);
     cursor: pointer;
   }
 
   &_activeTab
   {
-    border-bottom: 3px solid $color_black;
+    border-bottom: 2px solid $color_rose;
+    color: $color_rose;
   }
 
-  &_tabLabel
+  &_product
   {
-    margin: 0;
-  }
+    background-color: $color_rose_bg2;
+    padding: 16px;
+    margin-top: 16px;
+    position: relative;
+    @include flex(row,center,flex-start);
+    position: relative;
+    border: 1px solid $color_line_brown;
+    cursor: pointer;
 
-  &_productInfo
-  {
-    display: flex;
+    &::before
+    {
+      position: absolute;
+      @include flex();
+      content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE0IDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjAwMDIzIDIuODI4MDhMMTEuOTUwMiA3Ljc3ODA4TDEzLjM2NDIgNi4zNjQwOEw3LjAwMDIzIDcuNjI5MzllLTA1TDAuNjM2MjMgNi4zNjQwOEwyLjA1MDIzIDcuNzc4MDhMNy4wMDAyMyAyLjgyODA4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==);
+      background-color: $color_rose;
+      @include fixedWidth(36px);
+      @include fixedHeight(36px);
+      right: 16px;
+      border-radius: 2px;
+    }
+
+    &:only-child::before
+    {
+      content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE0IDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjAwMDIzIDUuMTcxOTJMMTEuOTUwMiAwLjIyMTkyNEwxMy4zNjQyIDEuNjM1OTJMNy4wMDAyMyA3Ljk5OTkyTDAuNjM2MjMgMS42MzU5MkwyLjA1MDIzIDAuMjIxOTI0TDcuMDAwMjMgNS4xNzE5MloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=);
+    }
   }
 
   &_productImage
   {
-    flex: 1;
-    width: 60px;
-    height: 60px;
-    max-width: 60px;
-    max-height: 60px;
-    object-fit: cover;
-    border: 1px solid $color_gray;
-  }
-
-  &_productDetail
-  {
-    flex: auto;
-    margin: 0 20px;
+    @include fixedHeight(60px);
+    @include fixedWidth(60px);
+    object-fit: contain;
+    margin-right: 12px;
   }
 
   &_productDetailName
   {
-    font-size: 14px;
-    margin-bottom: 5px;
+    @include typographyBuilder(secondary,500,14,24);
+    color: $color_text_primary;
+    margin: 0 0 2px 0;
   }
 
   &_productDetailRating
   {
+    @include typographyBuilder(secondary,400,12,16);
+    color: $color_text_secondary;
     margin: 0;
+  }
+
+  &_productButtonContainer
+  {
+    @include absolute(0,0,0,0);
   }
 
   &_productButton
   {
-    align-self: center;
-  }
-
-  &_itemPerPage
-  {
-    margin: 20px 0;
-  }
-
-  &_itemPerPageOptions
-  {
-    select
-    {
-      padding: 6px 12px;
-      border: 1px solid $color_gray_low;
-      border-radius: 4px;
-      width: max-content;
-      -webkit-user-select: none;
-      -moz-user-select: -moz-none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-appearance: none;
-      -moz-appearance: radio-container;
-      appearance: none;
-      padding-right: 35px;
-      background: url("../../images/arrow-down.svg") no-repeat;
-      background-position: right 10px top 50%;
-    }
+    @include absolute(0,0,0,0);
+    width: 100%;
+    opacity: 0;
   }
 
   &_form
   {
-    margin: 20px 0 30px;
+    padding: 24px 16px;
+    border: 1px solid $color_line_brown;
 
-    & > button
+    & > button 
     {
-      padding: 15px 50px;
-      font-size: 13px;
+      @include flex(row, center, center);
+      @include typographyBuilder(secondary, 400, 14, 24);
+      @include fixedWidth(100%);
+      @include transition();
+      text-decoration: none;
+      text-align: center;
+      margin: 22px 0 0 0;
+      padding: 12px;
       border: none;
-      color: $color_white;
-      background-color: $color_black;
+      border-radius: 50px;
       cursor: pointer;
 
       &:active,
@@ -193,271 +184,404 @@
         outline: 0;
         box-shadow: none;
       }
+      color: $color_white !important;
+      background-color: $color_rose !important;
+      border: none !important;
 
       &:hover
       {
-        color: $color_white;
-        background-color: $color_black;
+        color: $color_white !important;
+        background-color: $color_text_primary !important;
+        border: none !important;
       }
 
       &:disabled
       {
-        opacity: 0.5;
-        cursor: unset;
+        color: $color_white !important;
+        background-color: $color_grey !important;
+        border: none !important;
+        cursor: initial;
       }
     }
   }
 
   &_formGroup
   {
-    margin-bottom: 20px;
 
     label
     {
-      display: block;
+      text-align: left;
     }
 
-    textarea
+
+    & > div
     {
       width: 100%;
-      padding: 10px 1rem;
-      border: 1px solid $color_gray_primary;
-      border-radius: .25rem;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #495057;
-      background-color: #fff;
-      background-clip: padding-box;
+      @include flex(column);
 
-      &:focus,
-      &:active
+      & > label
       {
-        outline: 0;
-        box-shadow: none;
+        @include typographyBuilder(secondary,400,12,16);
+        color: $color_text_placeholder;
+        margin: 8px 0 22px 0;
+      }
+    }
+
+    & > textarea ~ label
+    {
+      text-align: center;
+      width: 100%;
+      position: relative;
+      @include typographyBuilder(secondary,400,12,16);
+      color: $color_text_placeholder;
+      padding: 0;
+      margin: 8px 0 22px 0;
+    }
+
+    & > textarea
+    {
+      padding: 22px 24px 0 24px;
+      @include typographyBuilder(secondary,400,14,24);
+      height: 58px;
+      width: 100%;
+      border: 1px solid $color_border;
+      box-sizing: border-box;
+      border-radius: 37px;
+      resize: none;
+      
+      &:focus
+      {
+        outline: none !important;
+        border: 1px solid $color_rose;
+        border-radius: 37px;
       }
     }
   }
 
   &_formLabel
   {
-    display: block;
+    text-align: center;
+    width: 100%;
+    @include typographyBuilder(secondary,500,10,16);
+    color: $color_text_secondary;
   }
 
   &_starContainer
   {
-    width: max-content;
+    @include flex();
+    width: 100%;
+    @include fixedHeight(60px);
+    border-radius: 41px;
+    border: 1px solid $color_border;
+    background-color: $color_white;
+    padding-top: 15px;
   }
 
   &_star
   {
-    background: transparent;
     border: none;
-    padding: 0;
-    font-size: 30px;
-    margin: 2.5px;
+    background: none;
+  }
 
-    &:first-child
-    {
-      margin-left: 0;
-    }
+  &_imagesContainer
+  {
+    @include flex(row,center,center,true);
+  }
 
-    &:last-child
-    {
-      margin-right: 0;
-    }
+  &_mediaThumbnail
+  {
+    width: auto;
+    position: relative;
+    @include fixedHeight(72px);
+    @include fixedWidth(72px);
+    margin: 6px;
+  }
+  
+  &_uploadImg
+  {
+    @include fixedHeight(72px);
+    @include fixedWidth(72px);
+    object-fit: cover;
+  }
 
-    span
+  &_mediaRemover
+  {
+    @include flex();
+    @include absolute(0,0,0,0);
+    cursor: pointer;
+    opacity: 0;
+
+    &:hover
     {
-      color: $color_blue;
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.6);
     }
   }
 
   &_media
   {
-    margin-bottom: 20px;
+    @include flex(column);
   }
 
-  &_mediaImages
+  &_upload
   {
-    display: flex;
-    align-items: center;
-  }
-
-  &_mediaThumbnail
-  {
+    @include fixedHeight(72px);
+    @include fixedWidth(72px);
     position: relative;
-    margin: 5px;
+    margin: 6px;
+    text-align: center;
+    font-size: 10px;
 
-    &:first-child
+    & > input 
     {
-      margin-left: 0;
+      @include absolute(0,0,0,0);
+      margin: 0;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    &::after
+    {
+      content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNyAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuODAwMSA3LjJWNEg5LjQwMDFWNy4ySDEyLjYwMDFWOC44SDkuNDAwMVYxMkg3LjgwMDFWOC44SDQuNjAwMVY3LjJINy44MDAxWk04LjYwMDEgMTZDNC4xODE3IDE2IDAuNjAwMDk4IDEyLjQxODQgMC42MDAwOTggOEMwLjYwMDA5OCAzLjU4MTYgNC4xODE3IDAgOC42MDAxIDBDMTMuMDE4NSAwIDE2LjYwMDEgMy41ODE2IDE2LjYwMDEgOEMxNi42MDAxIDEyLjQxODQgMTMuMDE4NSAxNiA4LjYwMDEgMTZaTTguNjAwMSAxNC40QzEwLjI5NzUgMTQuNCAxMS45MjUzIDEzLjcyNTcgMTMuMTI1NiAxMi41MjU1QzE0LjMyNTggMTEuMzI1MyAxNS4wMDAxIDkuNjk3MzggMTUuMDAwMSA4QzE1LjAwMDEgNi4zMDI2MSAxNC4zMjU4IDQuNjc0NzUgMTMuMTI1NiAzLjQ3NDUyQzExLjkyNTMgMi4yNzQyOCAxMC4yOTc1IDEuNiA4LjYwMDEgMS42QzYuOTAyNzEgMS42IDUuMjc0ODUgMi4yNzQyOCA0LjA3NDYxIDMuNDc0NTJDMi44NzQzOCA0LjY3NDc1IDIuMjAwMSA2LjMwMjYxIDIuMjAwMSA4QzIuMjAwMSA5LjY5NzM4IDIuODc0MzggMTEuMzI1MyA0LjA3NDYxIDEyLjUyNTVDNS4yNzQ4NSAxMy43MjU3IDYuOTAyNzEgMTQuNCA4LjYwMDEgMTQuNFoiIGZpbGw9IiNFN0UxREEiLz4KPC9zdmc+Cg==);
+      @include absolute(0,0,0,0);
+      @include flex();
+      border: 1px solid $color_line_brown;
+      cursor: pointer;
     }
   }
 
-  &_mediaImage
+  &_itemPerPage
   {
-    width: 70px;
-    height: 70px;
-    max-width: 70px;
-    max-height: 70px;
-    object-fit: cover;
-    border: 1px solid $color_gray;
+    max-width: unset !important;
+    @include flex(row,center,flex-end);
+    width: 100% !important;
   }
 
-  &_mediaRemove
+  &_itemPerPageOptions
   {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: max-content;
-    cursor: pointer;
-    background: rgba($color_white, 0.5);
-    padding: 2.5px 5px;
-    font-size: 10px;
-  }
-
-  &_mediaUpload
-  {
-    margin-top: 5px;
+    @include fixedWidth(222px);
   }
 
   &_popup
   {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba($color_black, 0.7);
-    transition: opacity 500ms;
-    opacity: 1;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include fixed(0,0,0,0);
+    z-index: 30;
+    background-color: rgba(0, 0, 0, 0.8);
+    @include flex();
   }
 
   &_popupContent
   {
-    margin: 1rem;
-    padding: 2rem 1.5rem;
-    background: $color_white;
-    border-radius: 4px;
-    position: relative;
-    transition: all .3s ease-in-out;
+    background-color: $color_white;
+    padding: 24px 16px;
+    border-radius: 4px 4px 0px 0px;
   }
 
   &_popupTitle
   {
-    font-size: 16px;
-    margin-bottom: 5px;
+    color: $color_text_primary;
+    @include typographyBuilder(secondary,500,20,24);
+    @include fixedWidth(375px);
+    text-align: center;
+    margin-bottom: 24px;
   }
 
   &_popupDesc
   {
-    font-size: 13px;
-    margin-bottom: 15px;
+    color: $color_text_primary;
+    background-color: $color_rose_bg2;
+    @include typographyBuilder(secondary,400,12,16);
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 24px;
+    border-radius: 2px;
   }
 
-  &_popupActionButton
+  &_popupWrapButton
   {
-    & > button
-    {
-      padding: 10px 40px;
-      font-size: 13px;
-      border: none;
-      color: $color_white;
-      background-color: $color_black;
-      cursor: pointer;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 8px;
+  }
 
-      &:active,
-      &:focus
-      {
-        outline: 0;
-        box-shadow: none;
-      }
+  &_popupConfirmButton
+  {
+    @include flex();
+    color: $color_white;
+    background-color: $color_rose;
+  }
 
-      &:hover
-      {
-        color: $color_white;
-        background-color: $color_black;
-      }
-
-      &:first-child
-      {
-        margin-right: 10px;
-      }
-    }
+  &_popupNoButton
+  {
+    @include flex();
+    background-color: $color_white;
+    color: $color_rose;
   }
 
   &_reviewCard
   {
-    margin: 20px 0;
-  }
+    padding: 24px 16px;
+    border: 1px solid $color_line_brown;
 
-  &_reviewCardtitleRating
-  {
-    font-size: 12px;
-    color: $color_gray_dark;
-  }
-
-  &_ratingContent
-  {
-    margin-right: 10px;
-
-    & > div
+    &_title
     {
-      font-size: 30px;
+      color: $color_text_secondary;
+      text-align: center;
+      @include typographyBuilder(secondary,500,10,16);
+      margin-bottom: 8px;
+    }
+
+    &_ratingContent
+    {
+      background: $color_line_brown;
+      border-radius: 41px;
+      width: 100%;
+      height: 60px;
+      @include flex(row,center,center,false,true);
+      margin-bottom:8px;
+
+      & > div
+      { 
+        font-size: 25px;
+      }
+    }
+
+    &_ratingDesc
+    {
+      color: $color_text_placeholder;
+      text-align: center;
+      @include flex();
+      @include typographyBuilder(secondary,500,12,16);
+      margin-bottom: 22px;
+    }
+
+    &_content
+    {
+      text-align: center;
+      @include typographyBuilder(secondary,400,14,24);
+      color:  $color_text_primary;
+      margin-bottom: 22px;
+    }
+
+    &_imageContent
+    {
+      @include flex(row,center,center,true);
+    }
+
+    &_imageList
+    {
+      @include fixedHeight(72px);
+      @include fixedWidth(72px);
+
+      & > img
+      {
+        
+        @include fixedHeight(72px);
+        @include fixedWidth(72px);
+        object-fit: cover;
+      }
+
     }
   }
 
-  &_ratingDesc
+  &_containerImagePopup
   {
-    font-size: 15px;
+    @include fixed(0,0,0,0);
+    @include flex();
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 30;
   }
 
-  &_titleDesc
+  &_contentImagePopup
   {
-    font-size: 12px;
-    color: $color_gray_dark;
-    margin: 10px 0 0;
+    background-color: $color_white;
+    padding: 16px;
+    border-radius: 2px;
+    position: relative;
   }
 
-  &_descContent
+  &_mainImagePopup
   {
-    font-size: 14px;
-    margin: 10px 0;
-  }
+    margin-bottom: 8px;
+    position: relative;
+    width: 100%;
 
-  &_titleImages
-  {
-    margin-bottom: 12px;
-  }
-
-  &_imageContent
-  {
-    display: flex;
-    align-items: center;
-  }
-
-  &_imageList
-  {
-    width: 90px;
-    height: 90px;
-    max-width: 90px;
-    max-height: 90px;
-    margin: 5px;
-    cursor: pointer;
-
-    img
+    & > img
     {
-      width: 90px;
-      height: 90px;
-      max-width: 90px;
-      max-height: 90px;
+      @include fixedHeight(30vh);
+      @include fixedWidth(30vh);
       object-fit: cover;
-      border: 1px solid $color_gray;
     }
+  }
+
+  &_previewImageContainer
+  {
+    @include flex(row,center,center,true);
+  }
+
+  &_previewImagePopup
+  {
+    & > img
+    {
+      @include fixedHeight(72px);
+      @include fixedWidth(72px);
+      object-fit: cover;
+      margin: 0 4px;
+    }
+  }
+
+  &_popupLeftBtn
+  {
+    @include absolute(50%,auto,auto,0);
+    @include fixedHeight(32px);
+    @include fixedWidth(32px);
+    border: none;
+    background: $color_white;
+    color: transparent;
+
+    &::after
+    {
+      @include absolute(0,0,0,0);
+      content:'';
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDggMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01LjE3MjA1IDYuOTk5OTlMMC4yMjIwNDYgMTEuOTVMMS42MzYwNSAxMy4zNjRMOC4wMDAwNSA2Ljk5OTk5TDEuNjM2MDUgMC42MzU5ODZMMC4yMjIwNDYgMi4wNDk5OUw1LjE3MjA1IDYuOTk5OTlaIiBmaWxsPSIjNDQ0NDQ0Ii8+Cjwvc3ZnPgo=);
+      transform: scale(-1,-1);
+    }
+
+    &:disabled
+    {
+      cursor: not-allowed;
+    }
+  }
+
+  &_popupRightBtn
+  {
+    @include absolute(50%,0,auto,auto);
+    @include fixedHeight(32px);
+    @include fixedWidth(32px);
+    border: none;
+    background: $color_white;
+    color: transparent;
+
+    &::after
+    {
+      @include absolute(0,0,0,0);
+      content:'';
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDggMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01LjE3MjA1IDYuOTk5OTlMMC4yMjIwNDYgMTEuOTVMMS42MzYwNSAxMy4zNjRMOC4wMDAwNSA2Ljk5OTk5TDEuNjM2MDUgMC42MzU5ODZMMC4yMjIwNDYgMi4wNDk5OUw1LjE3MjA1IDYuOTk5OTlaIiBmaWxsPSIjNDQ0NDQ0Ii8+Cjwvc3ZnPgo=);
+    }
+
+    &:disabled
+    {
+      cursor: not-allowed;
+    }
+  }
+
+  &_popupCloseBtn
+  {
+    @include absolute(2px,4px,auto,auto);
+    cursor: pointer;
   }
 }

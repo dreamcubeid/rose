@@ -142,8 +142,8 @@ const classesAccount = {
   transactionDateClassName: styleMembershipHistory.membershipHistory_item_date,
   pointDeltaClassName: styleMembershipHistory.membershipHistory_item_point,
   membershipPaginationClassName: styleMembershipHistory.membershipHistory_pagination,
-  itemPerPageClassName: styleMembershipHistory.membershipHistory_itemPerPage,
-  itemPerPageLabelClassName: styleMembershipHistory.membershipHistory_itemPerPage_label,
+  itemPerPageClassName: styleForm.form_itemPerPage,
+  itemPerPageLabelClassName: styleForm.form_itemPerPage_label,
   itemPerPageOptionsClassName: `${styleForm.form} w-100 ${styleMembershipHistory.form_perPage}`,
   buttonContinueClassName: 'membership-buttonContinueClassName',
 }

@@ -1,211 +1,120 @@
-@import "../base/colors.scss";
-@import "../components/Form.module.scss";
-@import "../components/Button.module.scss";
-@import "../components/Placeholder.module.scss";
+@import '../utils/variables';
 
-.testimonials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  &_list,
-  &_header,
-  &_qtyAdd {
-    width: 29vw;
-  }
-
-  &_header {
-    margin: 1.5rem 0 0 0;
-
-    h4 {
-      font-weight: bold;
-      font-family: 'roboto-medium';
-    }
-
-    p {
-      font-family: 'roboto-regular';
-      color: $color_secondary;
-      line-height: 135%;
-      margin-top: .75rem;
-    }
-  }
-
-  &_qtyAdd {
-    padding: 1rem 1.375rem;
-    background-color: $color_blue_light;
-    border-radius: 3px;
-    text-align: center;
-
-    p {
-      font-size: 11px;
-      line-height: 13px;
-    }
-  }
-
-  &_qtyAddButton,
-  &_backButton {
-    color: $color_blue;
-    border: 1px solid $color_blue;
-    padding: .5rem 1rem;
-    border-radius: 2rem;
-    margin-top: 2rem;
-    cursor: pointer;
-    margin-top: 0;
-    background-color: transparent;
-    
-    &:hover {
-      color: $color_white;
-      background-color: $color_blue;
-    }
-  }
-
-  &_backButton,
-  &_emptyAddButton {
-    cursor: pointer;
-    border-radius: .25rem;
-    margin: .75rem 0 0 0;
-    padding: .5rem 0;
-    width: 256px;
-    text-align: center;
-  }
-
-  &_empty {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 190px);
-  }
-
-  &_list {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 5rem;
-  }
-
-  &_card {
-    border: 2px solid $color_blue_light;
-    border-radius: .25rem;
-    margin: 2rem 0;
-    padding: 1rem;
-  }
-
-  &_main {
+.testimonials
+{
+  &_container
+  {
+    padding: 58px 0 106px 0;
     position: relative;
+    height: 100vh;
   }
 
-  &_user {
-    position: absolute;
-    top: -3rem;
-    left: 3rem;
-
-    font-size: 14px;
-    font-family: 'roboto-medium';
+  &_header
+  {
+    padding: 16px 18px 24px 18px;
   }
 
-  &_date {
-    font-size: 11px;
-    color: $color_secondary;
-
-    p {
-      margin-bottom: 0;
-    }
+  &_body
+  {
+    padding: 0 17px;
   }
 
-  &_content {
-    color: $color_gray_text;
-    font-size: 14px;
-    line-height: 150%;
-  }
-  
-  &_img {
-    width: 2.375rem;
-    height: 2.375rem;
-    border-radius: 100%;
-    margin-bottom: 1rem;
-    object-fit: cover;
-  }
-
-  &_placeholderContainer {
+  &_form
+  {
+    @include absolute(0,0,0,0);
+    z-index: 30;
+    background-color: $color_white;
     display: grid;
-    grid-template-columns: 15% 85%;
-    gap: 16px;
-    margin-top: 1rem;
-
-    div:nth-child(3),
-    div:nth-child(4) {
-      width: 95%;
-      grid-column: 1 / span 2;
-    }
-
-    div:nth-child(4) {
-      width: 80%;
-    }
-
-    div:nth-child(2) {
-      margin-top: 20px;
-      min-height: 20px;
-      height: 20px;
-      width: 30%;
-    }
+    grid-gap: 12px;
+    padding: 24px 17px;
+    overflow: auto;
   }
 
-  &_formPublishOption {
-    input {
-      margin-right: 10px;
-    }
-  }
+  &_input
+  {
+    margin: 6px 0;
 
-  &_placeholder {
-    @extend .placeholderItem;
-
-    position: relative;
-    border: none;
-    border-radius: 3px;
-    overflow: hidden;
-
-    min-height: 20px;
-  }
-
-  &_placeholderImage {
-    @extend .placeholderItem;
-    border-radius: 100%;
-    width: 60px;
-    height: 60px;
-  }
-}
-
-
-.pagination {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &_item {
-    padding: .5rem;
-    margin: .25rem;
-    list-style: none;
-    cursor: pointer;
-  }
-
-  &_active {
-    color: $color_blue;
-    background: $color_blue_light;
-    border: 1px solid $color_blue;
-    border-radius: 4px;
-  }
-}
-
-
-@media screen and (max-width: 767px) {
-  .testimonials {
-    &_list,
-    &_header,
-    &_qtyAdd {
+    & > textarea
+    {
+      padding: 25px 24px 0 24px;
+      @include typographyBuilder(secondary,400,14,24);
+      height: 58px;
       width: 100%;
+      border: 1px solid $color_border;
+      box-sizing: border-box;
+      border-radius: 37px;
+      resize: none;
+      
+      &:focus
+      {
+        outline: none !important;
+        border: 1px solid $color_rose;
+        border-radius: 37px;
+      }
     }
+  }
+
+  &_uploadContainer
+  {
+    position: relative;
+    border-radius: 37px;
+    @include flex();
+    border: 1px solid $color_border;
+    height: 58px;
+  }
+
+  &_upload
+  {
+    @include absolute(0,0,0,0);
+    opacity: 0;
+    width: 100%;
+    height: 58px;
+  }
+
+  &_publishOption
+  {
+    padding: 24px;
+  }
+
+  &_option
+  {
+    margin: 12px 0;
+    padding-left: 36px;
+
+    & > input 
+    {
+      position: relative;
+      color: $color_text_primary;
+      @include typographyBuilder(secondary,400,14,24);
+      height: 0;
+      width: 0;
+
+      &::before 
+      {
+        content: '';
+        border-radius: 50%;
+        @include absolute();
+        width: 20px;
+        height: 20px;
+        margin-top: -15px;
+        margin-left: -36px;
+        border: 1px solid $color_rose;
+        padding: 6px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &:checked::before
+      {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjYiIGZpbGw9IiM5OTgwNjAiLz4KPC9zdmc+Cg==);
+      }
+    }
+  }
+
+  &_verification
+  {
+    margin: 30px 0 24px 0;
+    width: 100%;
+    @include flex();
   }
 }

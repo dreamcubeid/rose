@@ -1,61 +1,50 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
+@import '../utils/variables';
 
 .paymentStatus
 {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5rem;
-  min-height: 70vh;
+  min-height: calc(100vh - 58px - 36px);
 
-  &_inner 
+  &_header
   {
-    width: 400px;
-    padding: 1.5rem;
-    align-items: center;
+    @include flex(row, center, space-between);
+    background: $color_rose_bg2;
+    padding: 16px 18px;
 
-    @media screen and (max-width: 767px) {
-      width: 100%;
+    &Title
+    {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin: 0;
     }
-  }
-
-  &_heading
-  {
-    display: flex;
-    align-items: center;
-  }
-  
-  &_title 
-  {
-    font-family: "roboto-medium";
-    font-size: 20px;
-    text-align: center;
-    color: $color_black;
-    margin-bottom: 0;
   }
 
   &_content
   {
-    margin: 2rem 0;
-  }
+    padding: 24px 18px;
 
-  &_contentDesc
-  {
-    font-size: 14px;
-    color: $color_black;
-    margin-bottom: 0;
+    &Desc
+    {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      margin: 0; 
+    }
   }
 
   &_action
   {
-    margin-top: 2rem;
+    padding: 0 18px;
   }
 
-  &_actionButton
+  &_btnFailed
   {
-    &:nth-child(2)
+    color: $color_rose !important;
+    background: none !important;
+
+    &:hover,
+    &:active
     {
-      margin-top: 1rem;
+      background: none !important;
+      color: $color_rose !important;
     }
   }
 }

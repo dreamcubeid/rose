@@ -292,4 +292,55 @@
       margin: 0;
     }
   }
+
+  &_checkbox
+  {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+
+    &:hover::after {
+      background-color: #ccc;
+      display: flex;
+    }
+    
+    /* When the checkbox is checked, add a blue background */
+    &:checked::after {
+      background-color: $color_black;
+      display: flex;
+    }
+    
+    /* Create the checkmark/indicator (hidden when not checked) */
+    &:after {
+      content: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMiAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgNkwyIDRMNiA4TDQgMTBMMCA2WiIgZmlsbD0iI0ZBRkFGQSIvPgo8cGF0aCBkPSJNMTAgMEwxMiAyTDYgOEw0IDZMMTAgMFoiIGZpbGw9IiNGQUZBRkEiLz4KPC9zdmc+Cg==);
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      @include flex();
+      background-color: $color_text_secondary;
+      border-radius: 2px;
+      display: none;
+    }
+  }
+
+  &_itemPerPage
+  {
+    @include flex(row,center,flex-end);
+    position: relative;
+    @include fixedWidth(222px);
+
+    &_label
+    {
+      @include absolute(9px,auto,auto,24px);
+      z-index: 1;
+      color: $color_text_secondary;
+      @include typographyBuilder(secondary,500,10,16);
+
+      & ~ input, ~ div > input, ~ select
+      {
+        padding: 16px 24px 0 24px;
+      }
+    }
+
+  }
 }

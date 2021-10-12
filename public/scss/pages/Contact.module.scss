@@ -12,6 +12,13 @@
     padding: 16px 18px 24px 18px;
   }
 
+  &_info
+  {
+    padding: 0 17px;
+    @include typographyBuilder(secondary,400,14,24);
+    color : $color_text_secondary;
+  }
+
   &_body
   {
     padding: 0 17px;
@@ -45,7 +52,7 @@
     margin-top: 24px;
   }
 
-  &_info
+  &_widgetInfo
   {
 
     & > *

@@ -372,6 +372,7 @@
     "continueShopping": "Continue Shopping",
     "failedDesc": "Your payment failed to process. Please make a repayment process",
     "orderNotFound": "Order Not Found",
+    "orderNotFoundDesc": "Sorry, you can't find your order number.",
     "titleFailed": "Payment Failed",
     "titleUnfinish": "Incomplete Payment",
     "tryAgain": "Try Again",

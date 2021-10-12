@@ -372,6 +372,7 @@
     "continueShopping": "Lanjutkan Berbelanja",
     "failedDesc": "Pembayaran anda gagal diproses. Silakan lakukan proses pembayaran kembali",
     "orderNotFound": "Pesanan Tidak Ditemukan",
+    "orderNotFoundDesc": "Mohon maaf, nomor pesanan Anda tidak dapat kamu temukan.",
     "titleFailed": "Pembayaran Gagal",
     "titleUnfinish": "Pembayaran tidak lengkap",
     "tryAgain": "Coba lagi",

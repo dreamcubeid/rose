@@ -12,6 +12,14 @@
     padding: 16px 18px 24px 18px;
   }
 
+  &_info
+  {
+    padding: 0 17px;
+    margin-bottom: 24px;
+    color: $color_text_secondary;
+    @include typographyBuilder(secondary,400,14,24);
+  }
+
   &_body
   {
     padding: 0 17px;

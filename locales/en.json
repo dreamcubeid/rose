@@ -169,7 +169,8 @@
     "sender": "Sender Name",
     "title": "Gift Card",
     "value": "Gift Card Value",
-    "welcome": "Add Gift Card To Your Bag"
+    "welcome": "Add Gift Card To Your Bag",
+    "info": "Give someone something to smile about by purchasing our online gift card. An email containing an E-gift card will be sent to them and they can spend it on any item."
   },
   "global": {
     "back": "Back",

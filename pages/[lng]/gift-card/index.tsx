@@ -1,9 +1,13 @@
+/* library package */
 import { FC } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { GiftCard, useI18n } from "@sirclo/nexus";
+/* library template */
 import { useBrand } from "lib/useBrand";
+/* components */
 import Layout from "components/Layout/Layout";
 import Breadcrumb from "components/Breadcrumb/Breadcrumb";
+/* styles */
 import styleGift from "public/scss/pages/GiftCard.module.scss";
 import styleForm from "public/scss/components/Form.module.scss";
 import styleButton from "public/scss/components/Button.module.scss";
@@ -29,6 +33,7 @@ const GiftCardPage: FC<any> = ({
       lng={lng}
       lngDict={lngDict}
       brand={brand}
+      withFooter={false}
       headerTitle={i18n.t("giftCard.title")}
     >
       <div className={styleGift.gift_container}>
@@ -42,6 +47,7 @@ const GiftCardPage: FC<any> = ({
             ]}
           />
         </div>
+        <div className={styleGift.gift_info}>{i18n.t("giftCard.info")}</div>
         <GiftCard
           classes={classesGiftCard}
         />

@@ -10,6 +10,47 @@
     @include typographyBuilder(secondary,500,10,16);
   }
 
+  &_popup
+  {
+    @include fixed(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 30;
+    @include flex(row,flex-end,center);
+
+    &_content
+    {
+      background-color: $color_white;
+      padding: 24px 16px;
+      border-radius: 4px 4px 0px 0px;
+      @include fixedWidth(375px);
+      @include flex(column);
+    }
+
+    &_title
+    {
+      color: $color_text_primary;
+      @include typographyBuilder(secondary,500,20,24);
+    }
+
+    &_desc
+    {
+      padding: 12px;
+      color: $color_text_primary;
+      @include typographyBuilder(secondary,400,12,16);
+      background-color: $color_rose_bg2;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    &_wrapAction
+    {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-gap: 8px;
+      width: 100%;
+    }
+  }
+
   &_info
   {
     @include flex();

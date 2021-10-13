@@ -1,8 +1,9 @@
+/* library package */
 import { ShipmentTracker } from '@sirclo/nexus'
+/* style */
 import styleShipmentTracking from 'public/scss/components/shipmentTracking.module.scss'
 
 const classesTrackerPage = {
-  // shipmentTrackButtonClassName: `${styles.track_shipmentTrackButton} ${styles.track_shipmentTrackButtonGuest}`,
   shipmentTrackingClassName: styleShipmentTracking.shipmentTracking,
   shipmentHeaderClassName: styleShipmentTracking.shipmentTracking_header,
   shipmentHeaderTextClassName: styleShipmentTracking.shipmentTracking_title,

@@ -83,6 +83,7 @@
     "lookbook": "Lookbook",
     "forgotPassword": "Forgot Password",
     "blog": "Blog",
+    "contact": "Contact",
     "giftCard": "Gift Card",
     "review": "Review"
   },
@@ -120,7 +121,8 @@
     "submit": "Submit",
     "submitError": "Failed send a message",
     "submitSuccess": "Success send a message",
-    "title": "Contact"
+    "title": "Contact",
+    "info": "We want to provide you with the best online shopping experience for more information, we will be happy to help answer any questions you may have."
   },
   "coupon": {
     "apply": "Apply",

@@ -1,125 +1,99 @@
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
+@import '../utils/variables';
 
 .contact
 {
-    &_container
+  &_container
+  {
+    padding: 58px 0 106px 0;
+  }
+
+  &_header
+  {
+    padding: 16px 18px 24px 18px;
+  }
+
+  &_info
+  {
+    padding: 0 17px;
+    @include typographyBuilder(secondary,400,14,24);
+    color : $color_text_secondary;
+  }
+
+  &_body
+  {
+    padding: 0 17px;
+  }
+
+  &_form
+  {
+    & > textarea
     {
-        position: relative;
-        padding: 0 0 48px;
+      padding: 25px 24px 0 24px;
+      @include typographyBuilder(secondary,400,14,24);
+      height: 58px;
+      width: 100%;
+      border: 1px solid $color_border;
+      box-sizing: border-box;
+      border-radius: 37px;
+      resize: none;
+
+      &:focus
+      {
+          outline: none !important;
+          border: 1px solid $color_rose;
+          border-radius: 37px;
+      }
+    }
+  }
+
+  &_widget
+  {
+    border-top: 1px solid $color_border;
+    margin-top: 24px;
+  }
+
+  &_widgetInfo
+  {
+
+    & > *
+    {
+      width: 100%;
+      margin: 24px 0 0 0;
     }
 
-    &_form,
-    &_widget,
-    &_map
+    & > p
     {
-        width: 100%;
-        position: relative;
-    }
+      @include typographyBuilder(secondary,400,14,24);
+      color: $color_text_secondary;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
 
-    &_map
-    {
-        display: none;
-        opacity: 0;
-        visibility: hidden;
-    }
+      & > br 
+      {
+        height: 2px;
+      }
 
-    &_form
-    {
-        margin: 0 0 42px;
-    }
+      & > strong
+      {
+        @include typographyBuilder(secondary,500,14,24);
+        color: $color_text_primary;  
+        padding: 24px 0 8px 0;  
+      }
 
-    &_widget
-    {
-        margin-bottom: 58px;
+      & > a
+      {
+        @include typographyBuilder(secondary,500,14,24);
+        color: $color_text_secondary !important; 
+        display: flex;
+        width: 100%; 
+        text-decoration: none !important;
 
-        img
+        & ~ br 
         {
-            margin: 0;
-            padding: 0;
-            border: none;
-            max-width: 100%;
+          display: none;
         }
-
-        video,
-        iframe
-        {
-            min-width: 100%;
-            max-width: 100%;
-            width: 100%;
-        }
+      }
     }
-
-    &_label,
-    &_info
-    {
-        position: relative;
-    }
-
-    &_info
-    {
-        color: $color_secondary;
-
-        strong,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6
-        {
-            color: $color_gray_text;
-        }
-
-        a
-        {
-            color: inherit;
-
-            &:hover
-            {
-                text-decoration: underline;
-            }
-        }
-
-        &__top
-        {
-            margin-top: 42px;
-            
-            & > h1,
-            & > h2,
-            & > h3,
-            & > h4,
-            & > h5,
-            & > h6
-            {
-                margin: 0 0 4px;
-                font-family: "roboto-medium";
-                font-style: normal;
-                font-size: 20px;
-                line-height: 23px;
-
-                color: $color_gray_text;
-            }
-
-            & + div
-            {
-                padding-top: 28px;
-            }
-        }
-    }
-
-    &_buttonContainer
-    {
-        position: relative;
-
-        button
-        {
-            font-family: "roboto-medium";
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-        }
-    }
-
-
+  }
 }

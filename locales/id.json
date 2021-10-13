@@ -83,6 +83,7 @@
     "lookbook": "Lookbook",
     "forgotPassword": "Lupa Kata Sandi",
     "blog": "Blog",
+    "contact": "Kontak",
     "giftCard": "Kartu Hadiah",
     "review": "Ulasan"
   },
@@ -120,7 +121,8 @@
     "submit": "Kirimkan",
     "submitError": "Gagal mengirim pesan",
     "submitSuccess": "Berhasil mengirim pesan",
-    "title": "Kontak"
+    "title": "Kontak",
+    "info": "Kami ingin memberi Anda pengalaman belanja online terbaik untuk informasi lebih lanjut, kami akan dengan senang hati membantu menjawab pertanyaan apa pun yang Anda miliki."
   },
   "coupon": {
     "apply": "Terapkan",

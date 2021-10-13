@@ -30,14 +30,9 @@ const TautanPage: FC<any> = ({
       brand={brand}
       withHeader={false}
       withFooter={false}
+      layoutClassName='layout_fullHeight'
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-            <Links classes={classesLinks} />
-          </div>
-        </div>
-      </div>
+      <Links classes={classesLinks} />
     </Layout>
   )
 }

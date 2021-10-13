@@ -8,7 +8,7 @@
     "completedFailed": "Failed to Complete Order",
     "completedOrderBtnNo": "No",
     "completedOrderBtnYes": "Yes",
-    "completedOrderDescription": "Make sure the product has been received and in accordance with your order",
+    "completedOrderDescription": "By clicking Done, the purchase funds will be forwarded to the Seller. Make sure the product has been received and in accordance with your order.",
     "completedOrderNote": "By clicking Done, the purchase funds will be forwarded to the Seller ",
     "completedOrderTitle": "Complete Order",
     "completedSuccess": "Successfully Complete Order",

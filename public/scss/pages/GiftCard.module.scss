@@ -1,152 +1,50 @@
-@import "../base/colors.scss";
-@import "../components/Button.module.scss";
-@import "../components/Form.module.scss";
+@import '../utils/variables';
 
-.giftcard
+.gift
 {
-  $this: &;
-
-  &_wrapper
+  &_container
   {
-    position: relative;
-    min-height: 100vh;
+    padding: 58px 0 106px 0;
   }
 
   &_header
   {
-    margin-bottom: 27px;
-
-    & > h1
-    {
-      font-family: "roboto-bold";
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    & > p
-    {
-      font-size: 12px;
-      color: $color_gray_dark;
-      margin: 0;
-    }
+    padding: 16px 18px 24px 18px;
   }
 
-  &_item
+  &_info
   {
-    position: relative;
-    margin: 0;
-    padding: 0;
+    padding: 0 17px;
+    margin-bottom: 24px;
+    color: $color_text_secondary;
+    @include typographyBuilder(secondary,400,14,24);
+  }
 
-    width: 100%;
+  &_body
+  {
+    padding: 0 17px;
+    display: grid;
+    grid-gap: 24px;
+  }
 
-    & > small
+  &_form
+  {
+    & > textarea
     {
-      color: $color_gray_dark;
-      padding: 0;
-      font-size: 13px;
-
-      & > span
+      padding: 25px 24px 0 24px;
+      @include typographyBuilder(secondary,400,14,24);
+      height: 58px;
+      width: 100%;
+      border: 1px solid $color_border;
+      box-sizing: border-box;
+      border-radius: 37px;
+      resize: none;
+      
+      &:focus
       {
-        color: $color_red;
-      }
-    }
-
-    & + .login_item
-    {
-      margin-top: 12px;
-    }
-
-    &__form
-    {
-      .sirclo_form_row
-      {
-        label
-        {
-          font-family: "roboto-medium";
-          color: $color_gray_dark;
-
-          span
-          {
-            margin-left: 4px;
-            color: $color_red;
-          }
-        }
-  
-        .form-control,
-        input[type="text"],
-        input[type="email"],
-        input[data-identity="input-password"],
-        input[data-identity="confirm-password"]
-        {
-          border-color: $color_gray_primary;
-  
-          &::-webkit-input-placeholder
-          {
-            color: $color_gray_semi_dark !important;
-            opacity: 1 !important;
-          }
-  
-          &:-ms-input-placeholder
-          {
-            color: $color_gray_semi_dark !important;
-            opacity: 1 !important;
-          }
-  
-          &::-moz-placeholder
-          {
-            color: $color_gray_semi_dark !important;
-            opacity: 1 !important;
-          }
-  
-          &:-moz-placeholder
-          {
-            color: $color_gray_semi_dark !important;
-            opacity: 1 !important;
-          }
-        }
-
-        button[data-identity="show-password"],
-        button[data-identity="show-confirm-password"]
-        {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: nowrap;
-          top: 0;
-          right: 1rem;
-          bottom: 0;
-          height: 100%;
-
-          color: $color_gray_semi_dark;
-
-          &:hover
-          {
-            color: $color_gray_text;
-          }
-        }
-      }
-
-      [class*="passwordValidation"]
-      {
-        margin-bottom: 0 !important;
-
-        & > span
-        {
-          display: block;
-          position: relative;
-          margin-bottom: 1rem;
-
-          &:empty
-          {
-            margin-bottom: 0;
-          }
-        }
-
-        & + [class*="formPassword"]
-        {
-          margin-top: 2rem;
-        }
+        outline: none !important;
+        border: 1px solid $color_rose;
+        border-radius: 37px;
       }
     }
   }

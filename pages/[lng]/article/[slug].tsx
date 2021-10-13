@@ -1,7 +1,11 @@
 /* library package */
 import { FC, useState } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { Article, ArticleCategories, useI18n } from '@sirclo/nexus'
+import { 
+	Article, 
+	ArticleCategories, 
+	useI18n 
+} from '@sirclo/nexus'
 /* library template */
 import { useBrand } from 'lib/useBrand'
 /* components */

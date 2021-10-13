@@ -32,7 +32,11 @@ export async function getServerSideProps({ params }) {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   return {
-    props: { lng: params.lng, lngDict, order_token: params.token },
+    props: { 
+      lng: params.lng, 
+      lngDict, 
+      order_token: params.token 
+    },
   }
 }
 

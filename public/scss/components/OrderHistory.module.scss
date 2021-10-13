@@ -188,8 +188,7 @@
 
     &_orderedItemImg
     {
-      width: 64px;
-      height: 64px;
+      @include fixedWidth(64px);
     }
 
     &_orderedItemDetail

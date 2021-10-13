@@ -29,12 +29,10 @@ const TrackerPage = ({ order_token }) => {
 }
 
 export async function getServerSideProps({ params }) {
-  const lng = params.lng == 'en' ? 'en' : 'id'
-
-  const { default: lngDict = {} } = await import(`locales/${lng}.json`)
+  const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   return {
-    props: { lng: lng, lngDict, order_token: params.token },
+    props: { lng: params.lng, lngDict, order_token: params.token },
   }
 }
 

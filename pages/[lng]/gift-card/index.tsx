@@ -42,7 +42,7 @@ const GiftCardPage: FC<any> = ({
             steps={[
               { label: i18n.t('breadcrumb.home') },
               {
-                label: i18n.t('breadcrumb.blog'),
+                label: i18n.t('breadcrumb.giftCard'),
               },
             ]}
           />

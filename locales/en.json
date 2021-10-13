@@ -8,7 +8,7 @@
     "completedFailed": "Failed to Complete Order",
     "completedOrderBtnNo": "No",
     "completedOrderBtnYes": "Yes",
-    "completedOrderDescription": "Make sure the product has been received and in accordance with your order",
+    "completedOrderDescription": "By clicking Done, the purchase funds will be forwarded to the Seller. Make sure the product has been received and in accordance with your order.",
     "completedOrderNote": "By clicking Done, the purchase funds will be forwarded to the Seller ",
     "completedOrderTitle": "Complete Order",
     "completedSuccess": "Successfully Complete Order",
@@ -84,6 +84,7 @@
     "forgotPassword": "Forgot Password",
     "blog": "Blog",
     "contact": "Contact",
+    "giftCard": "Gift Card",
     "review": "Review"
   },
   "cart": {
@@ -172,7 +173,8 @@
     "sender": "Sender Name",
     "title": "Gift Card",
     "value": "Gift Card Value",
-    "welcome": "Add Gift Card To Your Bag"
+    "welcome": "Add Gift Card To Your Bag",
+    "info": "Give someone something to smile about by purchasing our online gift card. An email containing an E-gift card will be sent to them and they can spend it on any item."
   },
   "global": {
     "back": "Back",
@@ -374,6 +376,7 @@
     "continueShopping": "Continue Shopping",
     "failedDesc": "Your payment failed to process. Please make a repayment process",
     "orderNotFound": "Order Not Found",
+    "orderNotFoundDesc": "Sorry, you can't find your order number.",
     "titleFailed": "Payment Failed",
     "titleUnfinish": "Incomplete Payment",
     "tryAgain": "Try Again",

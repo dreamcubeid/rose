@@ -35,7 +35,13 @@ const ArticleDetail: FC<any> = ({
   const [title, setTitle] = useState<string>('')
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} headerTitle={title} brand={brand}>
+    <Layout 
+			i18n={i18n} 
+			lng={lng} 
+			lngDict={lngDict} 
+			headerTitle={title} 
+			brand={brand}
+		>
       <SEO title={title} />
       <div className={styleArticle.article_container}>
         <div className={styleArticle.article_header}>

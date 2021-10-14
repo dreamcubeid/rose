@@ -1,54 +1,64 @@
-@import "../components/Placeholder.module.scss";
+@import '../utils/variables';
 
 .article 
 {
-  min-height: 58vh;
+  padding: 0 17.5px;
 
-  @media screen and (max-width: 575px) {
-    min-height: 40vh;
-  }
-
-	h1,h2,h3,h4,h5,h6
+  h1,h2,h3,h4,h5,h6
 	{
-		font-family: "roboto-medium";
-		font-size: 16px;
+		@include typographyBuilder(secondary,500,14,24);
+		color: $color_text_primary;
 	}
 
 	p
 	{
-		font-size: 13px;
+		@include typographyBuilder(secondary,400,14,24);
+    color: $color_text_primary;
 	}
 
 	img
 	{
 		width: 100%;
   }
-  
-  &_title
+
+  &_container
   {
-    font-family: "roboto-medium";
-    margin-bottom: 1rem;
+    padding: 58px 0 106px 0;
   }
 
-	&_categories
-	{
-		&_title
-		{
-			font-family: "roboto-medium";
-			font-size: 16px;
-		}
+  &_header
+  {
+    padding: 16px 18px 24px 18px;
   }
-  
+
+  &_categories
+  {
+    padding: 0 17.5px;
+  }
+
   &_categoriesOrder
   {
     margin: 0;
-    margin-top: 1rem;
-    padding: 0;
+    border-top: 1px solid $color_border;
+    padding: 24px 0;
 
     &_list
     {
       list-style: none;
-      margin-bottom: .5rem;
+      margin-bottom: 12px;
+      
+      & > a
+      {
+        color: $color_text_primary !important;
+        text-decoration: none !important;
+        @include typographyBuilder(secondary,400,14,24);
+        
+        &:hover
+        {
+          color: $color_rose !important;
+        }
+      }
+
     }
   }
 }

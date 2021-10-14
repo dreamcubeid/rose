@@ -3,9 +3,8 @@
 .shipmentTracking
 {
   background: rgba(0, 0, 0, 0.8);
-  @include fixed(0,auto,0,auto);
+  @include fixed(0,0,0,0);
   margin: auto;
-  @include fixedWidth(375px);
   z-index: 20;
   padding: 18px;
   @include flex(column);
@@ -16,6 +15,7 @@
     width: 100%;
     padding: 16px;
     position: relative;
+    max-width: 375px;
   }
 
   &_title
@@ -57,6 +57,7 @@
   {
     background-color: $color_white;
     width: 100%;
+    max-width: 375px;
   }
   
   &_list
@@ -93,7 +94,7 @@
     &::after
     {
       content: '';
-      @include absolute(-5px,auto,auto,-26px);
+      @include absolute(0,auto,auto,-26px);
       width: 16px;
       height: 16px;
       background-color: #E8E8E8;
@@ -104,7 +105,7 @@
     &::before
     {
       content:"";
-      @include absolute(13px,auto,auto,-19px);
+      @include absolute(18px,auto,auto,-19px);
       border-left: 2px solid #E8E8E8;
       bottom: -9px;
       opacity: 1;
@@ -147,6 +148,7 @@
     list-style: none;
     background-color: $color_white;
     width: 100%;
+    max-width: 375px;
     
     & > button
     {

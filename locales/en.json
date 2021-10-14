@@ -44,6 +44,7 @@
     "returned": "Returned",
     "save": "Save Changes",
     "sessionExpired": "Your session is expired",
+    "settingNotification": "Notification",
     "shipped": "Shipped",
     "shippingDetails": "Shipping Detail",
     "shippingMethod": "Shipping Method",
@@ -221,23 +222,31 @@
     "loading": "Loading"
   },
   "login": {
+    "chooseAnyAccountToLogin": "You have multiple accounts registered, please select one to login",
     "title": "Login",
     "clickHere": "Forgot your password",
     "forgetPassword": "",
     "dontHaveAccount": "",
     "register": "Register",
     "email": "Email",
+    "disclaimer": "By clicking 'Login' means you agree to receive notifications via Whatsapp and know",
     "failed": "Failed to login, check your email and password",
+    "inputWhatsApp": "Enter your Whatsapp number to enter our store",
     "insertEmail": "Insert Your Email",
     "insertPassword": "Insert Your Password",
     "login": "Login",
+    "loginWithAnotherMethod": "Login with another method",
+    "or": "or login with",
     "password": "Password",
-    "sso": "with Google",
+    "sso": "{SSO_PROVIDER}",
     "success": "Login success",
+    "titleWA": "Login",
     "toRegister": "Sign Up",
     "verifyLoginAttempt": "Please verify that you are human!",
     "welcome": "Welcome back. Log in using your e-email and password.",
-    "or": "or login with"
+    "welcomeEmail": "Log in using your email and password.",
+    "whatsapp": "Whatsapp",
+    "withEmail": "Login with Email"
   },
   "lookbook": {
     "errorButton": "Return to Home Page",
@@ -269,6 +278,13 @@
     "submitError": "Failed subscribe",
     "submitSuccess": "Success subscribe",
     "subscribe": "Subscribe"
+  },
+  "notificationOptIn": {
+    "checkboxLabel": "I want to receive order status via social media",
+    "continuePayment": "Continue to Payment",
+    "description": "You will get a notification of your order via the whatsapp number below",
+    "proceedToPayment": "Proceed to Payment",
+    "title": "Update via Social Media"
   },
   "notifyMe": {
     "phoneInputPlaceholder": "Input your number Whatsapp",
@@ -475,11 +491,13 @@
     "basicInfo": "Contact Information",
     "birthDate": "Birthdate",
     "birthDatePlaceholder": "Input your birthday",
+    "chooseAnyAccountToLogin": "Your number is already registered in our system, please choose one to enter",
     "city": "District / Region",
     "cityPlaceholder": "Type the name of your district/region",
     "confPassword": "Confirm Password",
     "confPasswordPlaceholder": "Input your confirm password",
     "delivery": "Delivery Address",
+    "disclaimer": "By clicking 'Register' means you agree to receive notifications via Whatsapp and know",
     "doesntMatch": "Password doesn't match",
     "duplicateEmail": "Email has been registered",
     "email": "Email",
@@ -492,6 +510,7 @@
     "fullNamePlaceholder": "Input your full name",
     "gender": "Gender",
     "genderOption": "Select Gender",
+    "haveAccount": "Already have an account?",
     "inputCity": "(type your district / region)",
     "lastName": "Last Name",
     "lastNamePlaceholder": "Input your last name",
@@ -500,6 +519,7 @@
     "locationOptional": "* Optional",
     "locationPlaceholder": "Choose Your Location",
     "locationWarning": "Set pin point address",
+    "loginWithAnotherMethod": "Register with another method",
     "male": "Male",
     "mapHeader": "Choose a location",
     "mapHeaderNote": "Make sure the location you mark matches your address",
@@ -509,6 +529,7 @@
     "mobilePhonePlaceholder": "Input your mobile phone",
     "newAccount": "Sign Up",
     "noOptionsMessage": "Please type other keywords",
+    "or": "or register with",
     "password": "Password",
     "passwordHasDigit": "Contains number",
     "passwordHasLowerCase": "Contains lowercase",
@@ -528,6 +549,7 @@
     "success": "Register Successful",
     "successConfPassword": "Password reset succesfully!",
     "title": "Register",
+    "toLogin": "Login",
     "verificationFailed": "Verification failed"
   },
   "resetPassword": {
@@ -543,6 +565,11 @@
     "ratingDescending": "Highest rating",
     "submittedAscending": "Oldest review",
     "submittedDescending": "Recent review"
+  },
+  "settingNotification": {
+    "title": "Notification",
+    "description": "You will get all notification from this store according to the medium you activated below",
+    "emailDescription": "All notification by email cannot changed"
   },
   "shipping": {
     "allocating": "Looking for a driver",
@@ -635,5 +662,33 @@
     "summaryTitle": "What are you shopping for?",
     "thanks": "Order Successfully Created",
     "yourOrderID": "Your Order ID"
+  },
+  "whatsAppOTPInput": {
+    "andConjunction": "and",
+    "changeNumber": "Change number",
+    "chooseAccount": "Select account",
+    "chooseAnyAccount": "Choose an account",
+    "chooseAnyAccountToLogin": "You have multiple accounts registered, please select one to login",
+    "continue": "Login",
+    "disclaimer": "By clicking 'Login' means you agree to receive notifications via Whatsapp and know",
+    "expiredOTP": "OTP code expired, please resend the OTP code",
+    "from": "from",
+    "inputPlaceholder": "0810 0000 0000",
+    "inputWhatsApp": "Enter your Whatsapp number to login our store",
+    "insertVerificationCode": "Enter verification code (OTP)",
+    "loginWithAnotherMethod": "Sign in using another method",
+    "notReceivedMessage": "Haven't received the message yet?",
+    "noWhatsApp": "Don't have whatsapp?",
+    "otpSent": "We have sent a verification code via Whatsapp number ",
+    "privacyPolicy": " Privacy Policy ",
+    "resend": "Resend code OTP",
+    "seconds": "sec",
+    "sendOTP": "Send code OTP",
+    "termsAndCondition": " Terms and Condition ",
+    "verifyYourNumber": "Verify Your Number",
+    "welcome": "Welcome",
+    "whatsappNumber": "Whatsapp Number",
+    "willSendOTP": "We will send a verification code via WhatsApp number",
+    "wrongOTP": "Incorrect OTP code"
   }
 }

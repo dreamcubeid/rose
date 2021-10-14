@@ -12,12 +12,16 @@ import {
   RiInformationLine,
   RiUser3Line,
   RiShoppingBag2Line,
+  RiMailUnreadFill,
+  RiWhatsappFill,
+  RiLineLine
 } from 'react-icons/ri'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 import { BiTargetLock } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 /* library template */
 import { useBrand } from 'lib/useBrand'
+import { useWhatsAppOTPSetting } from 'lib/useWhatsAppOtp'
 import { parseCookies } from 'lib/parseCookies'
 /* components */
 import Layout from 'components/Layout/Layout'
@@ -33,6 +37,7 @@ import stylePassword from 'public/scss/components/Password.module.scss'
 import styleOrderHistory from 'public/scss/components/OrderHistory.module.scss'
 import styleShipmentTracking from 'public/scss/components/shipmentTracking.module.scss'
 import styleMembershipHistory from 'public/scss/components/MembershipHistory.module.scss'
+import stylesNotif from 'public/scss/components/Notification.module.scss'
 import stylePagination from 'public/scss/components/Pagination.module.scss'
 
 const ACTIVE_CURRENCY = 'IDR'
@@ -154,6 +159,25 @@ const classesAccount = {
   itemPerPageLabelClassName: styleForm.form_itemPerPage_label,
   itemPerPageOptionsClassName: `${styleForm.form} w-100 ${styleMembershipHistory.form_perPage}`,
   buttonContinueClassName: 'membership-buttonContinueClassName',
+  // setting notification
+  settingNotifContainer: stylesNotif.notification,
+  settingNotifHeader: "d-none",
+  settingNotifDescription: stylesNotif.notification_desc,
+  settingNotifMediaContainer: stylesNotif.notification_mediaContainer,
+  settingNotifMedia: stylesNotif.notification_media,
+  settingNotifMediaDisabled: stylesNotif.notification_mediaDisable,
+  mediaParent: stylesNotif.notification_mediaParent,
+  mediaLabelContainer: stylesNotif.notification_mediaLabel,
+  mediaInnerLabelContainer: stylesNotif.notification_mediaInnerLabel,
+  mediaDescription: stylesNotif.notification_mediaDesc,
+  mediaCheckboxContainer: stylesNotif.notification_mediaCheckboxContainer,
+  mediaCheckbox: stylesNotif.notification_mediaCheckbox,
+  mediaCheckboxSlider: stylesNotif.notification_mediaCheckboxSlider,
+  mediaDetailContainer: stylesNotif.notification_mediaDetailContainer,
+  mediaDetailLabel: stylesNotif.notification_mediaDetailLabel,
+  mediaDetailCheckboxContainer: stylesNotif.notification_mediaDetailCheckboxContainer,
+  mediaDetailCheckbox: stylesNotif.notification_mediaDetailCheckbox,
+  mediaDetailCheckboxLabel: stylesNotif.notification_mediaDetailCheckboxLabel,
 }
 
 const classesMembershipPagination = {
@@ -165,6 +189,7 @@ const classesMembershipPagination = {
 const AccountsPage: FC<any> = ({
   lng,
   lngDict,
+  hasOtp,
   brand,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
@@ -185,7 +210,13 @@ const AccountsPage: FC<any> = ({
   }
 
   return (
-    <Layout i18n={i18n} lng={lng} lngDict={lngDict} brand={brand}>
+    <Layout
+      i18n={i18n}
+      lng={lng}
+      lngDict={lngDict}
+      brand={brand}
+      layoutClassName="layout_fullHeight"
+    >
       <div className={styleAccount.account_container}>
         <div className={styleAccount.account_breadcrumb}>
           <Breadcrumb
@@ -213,30 +244,23 @@ const AccountsPage: FC<any> = ({
           orderHistoryIsCallPagination={true}
           paymentHrefPrefix="payment_notif"
           orderHistoryType="list"
-          logistixStyles={{
-            menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
-            control: (provided) => ({
-              ...provided,
-              borderRadius: '37px',
-              height: '58px',
-              padding: '0 21px',
-              width: '100%',
-              paddingTop: '16px',
-            }),
-            singleValue: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
-            input: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
-            indicatorsContainer: (provided) => ({ ...provided, display: 'none' }),
-          }}
+          showSettingNotification={hasOtp}
           passwordViewIcon={<RiEyeCloseLine />}
           passwordHideIcon={<RiEye2Line />}
           passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
           passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
           mapButtonCloseIcon={<RiCloseLine />}
           mapCenterIcon={<BiTargetLock />}
+          membershipPaginationClasses={classesMembershipPagination}
+          membershipPaginationNextLabel={<IoChevronForward />}
+          membershipPaginationPrevLabel={<IoChevronBack />}
           icons={{
             accordionIcon: <BiChevronDown />,
             closeIcon: <RiCloseLine />,
             infoIcon: <RiInformationLine size={12} color="#444444" />,
+            email: <RiMailUnreadFill size={20} />,
+            whatsApp: <RiWhatsappFill color="#53B671" size={20} />,
+            line: <RiLineLine color="#53B671" size={20} />,
             iconTracker: (
               <div>
                 <img src="/images/motorcycle.svg" alt="motorcycle" />
@@ -257,9 +281,20 @@ const AccountsPage: FC<any> = ({
               />
             </div>
           }
-          membershipPaginationClasses={classesMembershipPagination}
-          membershipPaginationNextLabel={<IoChevronForward />}
-          membershipPaginationPrevLabel={<IoChevronBack />}
+          logistixStyles={{
+            menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
+            control: (provided) => ({
+              ...provided,
+              borderRadius: '37px',
+              height: '58px',
+              padding: '0 21px',
+              width: '100%',
+              paddingTop: '16px',
+            }),
+            singleValue: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
+            input: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
+            indicatorsContainer: (provided) => ({ ...provided, display: 'none' }),
+          }}
         />
       </div>
     </Layout>
@@ -270,6 +305,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, params 
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)
+  const hasOtp = await useWhatsAppOTPSetting(req);
 
   if (res) {
     const cookies = parseCookies(req)
@@ -287,6 +323,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, params 
     props: {
       lng: params.lng,
       lngDict,
+      hasOtp,
       brand: brand || '',
     },
   }

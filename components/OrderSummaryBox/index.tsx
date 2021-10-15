@@ -117,7 +117,7 @@ const OrderSummaryComponent: FC<iProps> = ({
             <h6 className={styleOrderSummary.cart_headerTitle}>
               {i18n.t("orderSummary.yourCart")}
             </h6>
-            <Link href="[lng]/cart" as={`${lng || "id"}/cart`}>
+            <Link href="/[lng]/cart" as={`/${lng}/cart`}>
               <a>
                 <FiChevronLeft
                   color="#998060"

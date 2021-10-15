@@ -1,0 +1,231 @@
+@import '../utils/variables';
+
+.whatsapp
+{
+  &_header
+  {
+    display: block;
+    @include fixedWidth(250px);
+    text-align: center;
+    margin: 0 auto 24px;
+  }
+
+  &_descWa
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    text-align: center;
+    color: $color_text_secondary;
+    margin-bottom: 32px;
+  }
+
+  &_formWa
+  {
+    &Label
+    {
+      font-size: 13px;
+      color: $color_text_primary;
+    }
+
+    &Desc
+    {
+      @include typographyBuilder(secondary, 400, 12, 16);
+      margin: 24px 0 17px;
+      padding: 10px;
+      text-align: center;
+      color: $color_text_secondary;
+      background: $color_rose_bg2;
+      border-radius: 2px;
+    }
+
+    &Pointer
+    {
+      cursor: pointer;
+      color: $color_info;
+    }
+  }
+
+  &_confirmContainer
+  {
+    @include flex(column, center);
+  }
+
+  &_confirmHeader
+  {
+    @include flex(row, flex-start, flex-start, true);
+    margin-bottom: 24px;
+  }
+
+  &_confirmBack
+  {
+    width: fit-content;
+    background: $color_rose_bg2;
+    padding: 8px;
+    cursor: pointer;
+
+    &Label
+    {
+      display: none;
+    }
+  }
+
+  &_confirmTitle
+  {
+    flex: 1 0 auto;
+    align-self: center;
+    @include typographyBuilder(secondary, 400, 20, 24);
+    color: $color_text_primary;
+    margin-bottom: 0;
+    margin-left: 32px;
+  }
+
+  &_confirmSubtitle
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  &_confirmQuestion
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin: 24px 0 12px;
+  }
+
+  &_confirmWithOtherMethod
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_rose;
+    cursor: pointer;
+  }
+
+  &_verifTitle
+  {
+    @include typographyBuilder(secondary, 400, 20, 24);
+    color: $color_text_primary;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  &_verifBody
+  {
+    margin-bottom: 24px;
+  }
+
+  &_verifSubtitle
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &_verifInputContainer
+  {
+    @include fixedWidth(100%);
+    @include flex(row, center, center);
+  }
+
+  &_verifInputOtp
+  {
+    @include typographyBuilder(secondary, 400, 20, 24);
+    @include fixedWidth(42px);
+    @include fixedHeight(54px);
+    margin: 0 5px;
+    padding: 0;
+    color: $color_text_primary;
+    border: 1px solid $color_border;
+    border-radius: 4px;
+    text-align: center;
+
+    &:active,
+    &:focus
+    {
+      outline: 0;
+    }
+
+    @media screen and (max-width: 375px)
+    {
+      @include fixedWidth(37.5px);
+    }
+  }
+
+  &_verifFooter
+  {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_buttonOtp
+  {
+    &:disabled
+    {
+      background: $color_text_primary !important;
+    }
+  }
+
+  &_verifFooterLabel
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin: 24px 0 12px;
+  }
+
+  &_accountHeader
+  {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &_accountTitle
+  {
+    @include typographyBuilder(secondary, 400, 20, 24);
+    color: $color_text_primary;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  &_accountDesc
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    margin-bottom: 24px;
+  }
+
+  &_accountOptionContainer
+  {
+    margin-bottom: 24px;
+  }
+
+  &_accountOption
+  {
+    @include flex(row, center, flex-start);
+    padding: 10px 24px;
+    margin-bottom: 12px;
+    border: 1px solid $color_border;
+    border-radius: 37px;
+    cursor: pointer;
+
+    &Selected
+    {
+      background: $color_rose_bg2;
+      border-color: $color_rose;
+    }
+  }
+
+  &_accountName
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+  }
+
+  &_accountEmail
+  {
+    @include typographyBuilder(secondary, 400, 12, 16);
+    color: $color_text_secondary;
+  }
+}

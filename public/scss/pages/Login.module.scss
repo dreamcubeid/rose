@@ -43,7 +43,7 @@
     @include flex();
     @include typographyBuilder(secondary,500,14,24);
     grid-row: 3;
-    padding: 23.5px 0 35.5px 0;
+    padding: 23.5px 0 0;
     
     & > span > a 
     {
@@ -63,6 +63,19 @@
     }
   }
 
+  &_haveAccount
+  {
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_secondary;
+    text-align: center;
+
+    span
+    {
+      cursor: pointer;
+      color: $color_rose;
+    }
+  }
+
   &_signUp 
   {
     margin: 12px 0 0 0 !important;
@@ -74,7 +87,7 @@
   {
     @include fixedWidth(100%);
     text-align: center; 
-    border-bottom: 1px solid #E6E6E6; 
+    border-bottom: 1px solid $color_border; 
     line-height: 0.1em;
     margin: 10px 0 24px; 
   
@@ -83,6 +96,7 @@
       @include typographyBuilder(secondary,400,12,16);
       line-height: unset;
       background: $color_white; 
+      color: $color_text_secondary;
       padding:0 10px; 
     }
   }
@@ -109,6 +123,8 @@
       background: $color_rose_bg2 !important;
       width: 54px;
       height: 54px;
+      border: none;
+      box-shadow: none !important;
 
       & > div 
       {

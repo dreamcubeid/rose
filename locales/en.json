@@ -675,7 +675,7 @@
     "from": "from",
     "inputPlaceholder": "0810 0000 0000",
     "inputWhatsApp": "Enter your Whatsapp number to login our store",
-    "insertVerificationCode": "Enter verification code (OTP)",
+    "insertVerificationCode": "Verify Your Number",
     "loginWithAnotherMethod": "Sign in using another method",
     "notReceivedMessage": "Haven't received the message yet?",
     "noWhatsApp": "Don't have whatsapp?",

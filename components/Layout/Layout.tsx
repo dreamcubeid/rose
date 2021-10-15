@@ -7,7 +7,6 @@ import {
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
-import { X as XIcon } from 'react-feather'
 import { withBrand, Newsletter } from '@sirclo/nexus'
 /* components */
 import Header from '../Header'
@@ -17,6 +16,8 @@ import PageNotFound from 'components/PageNotFound'
 import Copyright from 'components/Copyright'
 /* styles */
 import styleNewsletter from 'public/scss/components/Newsletter.module.scss'
+import styleForm from 'public/scss/components/Form.module.scss'
+import styleButton from 'public/scss/components/Button.module.scss'
 
 type LayoutPropType = {
   lngDict: any
@@ -35,10 +36,8 @@ type LayoutPropType = {
 const classesNewsletterPopup = {
   containerClassName: styleNewsletter.newsletter_popupContainer,
   closeButtonClassName: styleNewsletter.newsletter_close,
-  formContainerClassName: styleNewsletter.newsletter_form,
-  labelClassName: "d-none",
-  inputClassName: "form-control",
-  buttonClassName: `btn mt-3 ${styleNewsletter.btn_blue} ${styleNewsletter.btn_center}`,
+  formContainerClassName: styleForm.form,
+  buttonClassName: `${styleButton.btn} ${styleButton.btn_primary} mt-4`,
 }
 
 const Layout: FC<LayoutPropType> = ({
@@ -161,7 +160,7 @@ const Layout: FC<LayoutPropType> = ({
       <div className={styleNewsletter.newsletter_overlay}>
         <Newsletter
           classes={classesNewsletterPopup}
-          closeButton={<XIcon color="black" size="18" />}
+          closeButton={i18n.t("newsletter.close")}
           withForm
           buttonComponent={i18n.t("newsletter.subscribe")}
           onComplete={() => toast.success(i18n.t("newsletter.submitSuccess"))}

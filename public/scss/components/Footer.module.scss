@@ -58,6 +58,24 @@
       color: $color_rose;
     }
   }
+
+  &_menu
+  {
+    position: relative;
+  }
+
+  &_badge
+  {
+    @include absolute(-2px,auto,auto,52%); 
+    @include flex();
+    border-radius: 50%;
+    background-color: $color_error;
+    color: $color_white;
+    @include typographyBuilder(secondary,600,8,16);
+    padding: 0 4px;
+    min-width: 16px;
+    max-width: 24px;
+  }
 }
 
 .active

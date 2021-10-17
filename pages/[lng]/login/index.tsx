@@ -213,7 +213,6 @@ const LoginPage: FC<any> = ({
                   {(hasGoogleAuth || hasFacebookAuth) &&
                     <SingleSignOn
                       className={styleLogin.login_containerAuth_item}
-                      buttonText={`${i18n.t('login.login')} ${i18n.t('login.sso')}`}
                       loadingComponent={
                         <div>
                           <LoaderPages />
@@ -231,7 +230,10 @@ const LoginPage: FC<any> = ({
                         <RiMailFill size={20} color="#998060" />
                       }
                       <span>
-                        {step === STEPS.EMAIL ? i18n.t("login.whatsapp") : i18n.t("login.email")}
+                        {step === STEPS.EMAIL ?
+                          i18n.t("login.whatsapp") :
+                          i18n.t("login.email")
+                        }
                       </span>
                     </button>
                   }

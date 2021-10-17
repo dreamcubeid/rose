@@ -551,7 +551,8 @@
     "successConfPassword": "Berhasil menyimpan kata sandi!",
     "title": "Daftar",
     "toLogin": "Masuk",
-    "verificationFailed": "Gagal verifikasi"
+    "verificationFailed": "Gagal verifikasi",
+    "whatsapp": "Whatsapp"
   },
   "resetPassword": {
     "enterEmailBody": "Silahkan masukan e-mail yang sudah didaftarkan. Kami akan kirimkan link undangan untuk atur ulang kata sandi anda.",

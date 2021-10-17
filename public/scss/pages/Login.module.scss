@@ -65,7 +65,7 @@
 
   &_haveAccount
   {
-    @include typographyBuilder(secondary, 400, 14, 24);
+    @include typographyBuilder(secondary, 500, 14, 24);
     color: $color_text_secondary;
     text-align: center;
 

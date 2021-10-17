@@ -222,6 +222,7 @@
         @include fixedHeight(60px);
         @include flex(row, center, flex-start);
         padding: 0 24px;
+        margin-bottom: 12px;
         border: 1px solid $color_border;
         background: $color_white;
         border-radius: 37px;

@@ -249,6 +249,7 @@
     {
       &:first-of-type:not(:only-of-type)
       {
+        display: block;
         text-decoration: line-through;
         color: $color_text_secondary;
 
@@ -273,9 +274,41 @@
 
     &__agreement
     {
+      @include position(relative);
       @include typographyBuilder(secondary, 400, 12, 16);
       text-align: center;
       color: $color_text_primary;
+      margin: 24px 0;
+
+      & > input
+      {
+        @include absolute(4px, auto, auto, 5px);
+        opacity: 1;
+        cursor: pointer;
+
+        &::after
+        {
+          content: "";
+          @include absolute(-2px, auto, auto, -2px);
+          @include fixedWidth(20px);
+          @include fixedHeight(20px);
+          background: $color_white;
+          border: 2px solid $color_rose;
+          border-radius: 2px;
+          z-index: 1;
+        }
+
+        &:checked::after 
+        {
+          border: none;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iMiIgZmlsbD0iIzk5ODA2MCIvPgo8cGF0aCBkPSJNNCAxMUw2IDlMMTAgMTNMOCAxNUw0IDExWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE0IDVMMTYgN0wxMCAxM0w4IDExTDE0IDVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K")
+        }
+      }
+
+      & > span
+      {
+        margin-left: 20px;
+      }
     }
 
     &__check
@@ -370,12 +403,6 @@
     &:hover
     {
       opacity: .8;
-    }
-
-    &::after
-    {
-      content: "";
-      @include position(absolute, auto, 16px, auto, auto)
     }
   }
 

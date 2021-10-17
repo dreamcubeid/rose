@@ -28,7 +28,8 @@
     }
   }
 
-  &_labelRegister
+  &_labelRegister,
+  &_shipping
   {
     @include position(relative);
 
@@ -87,12 +88,7 @@
 
   &_shipping
   {
-    margin-top: 1.5rem;
-
-    &__checkbox
-    {
-      margin-right: 5px;
-    }
+    margin: 24px 0;
   }
 
   &_popupError

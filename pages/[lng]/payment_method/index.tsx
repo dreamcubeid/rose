@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
 import { HiCheckCircle } from 'react-icons/hi'
+import { FiX } from 'react-icons/fi'
 import {
   CustomerDetail,
   ListPaymentMethod,
@@ -15,6 +16,7 @@ import {
 } from '@sirclo/nexus'
 /* libary template */
 import { useBrand } from 'lib/useBrand'
+import { useWhatsAppOTPSetting } from 'lib/useWhatsAppOtp'
 /* components */
 import Layout from 'components/Layout/Layout'
 import EmptyComponent from 'components/EmptyComponent/EmptyComponent'
@@ -64,7 +66,7 @@ const classesListPaymentMethod = {
   // footer
   paymentMethodDetailFooterClassName: styles.payment_footer,
   promotionButtonGroupClassName: styles.payment_footer__promotion,
-  couponButtonClassName: styles.payment_pointButton,
+  couponButtonClassName: `${styles.payment_pointButton} px-3`,
   voucherAppliedTextClassName: styles.payment_voucherAppliedText,
   voucherButtonRemoveClassName: styles.payment_voucherAppliedRemove,
   popupClassName: styles.payment_listItemOverlay,
@@ -73,13 +75,13 @@ const classesListPaymentMethod = {
   voucherFormContainerClassName: `${styles.payment_listItemPopupForm__body} ${styles.payment_listItemPopup__payment}`,
   voucherFormClassName: `form-inline ${styles.sirclo_form_row}`,
   voucherInputClassName: `form-control ${styles.sirclo_form_input} ${styles.payment_listItemPopupForm__input}`,
-  voucherSubmitButtonClassName: `btn btn-black-outer ${styles.payment_listItemPopupForm__button}`,
+  voucherSubmitButtonClassName: `${styleBtn.btn} ${styles.payment_listItemPopupForm__button}`,
   voucherListClassName: styles.ordersummary_popupVoucher,
   voucherListHeaderClassName: styles.ordersummary_popupVoucherTitle,
   voucherClassName: styles.ordersummary_popupVoucherItem,
   voucherDetailClassName: styles.ordersummary_popupVoucherDetail,
   voucherFooterClassName: styles.ordersummary_popupVoucherFooter,
-  voucherApplyButtonClassName: `btn ${styles.btn_primary}`,
+  voucherApplyButtonClassName: `${styleBtn.btn} ${styles.btn_primary}`,
   agreementContainerClassName: styles.payment_footer__agreement,
   agreementCheckboxClassName: styles.payment_footer__check,
   buttonContainerClassName: styles.payment_footer__button,
@@ -98,9 +100,9 @@ const classesListPaymentMethod = {
   pointsValueClassName: styles.payment_pointsPopupValue,
   changePointsClassName: styles.payment_buttonChangePoint,
   pointsInsufficientClassName: styles.payment_pointsInsufficient,
-  pointsSubmitButtonClassName: `btn ${styles.btn_primary} ${styles.btn_long} w-100 mt-4 mb-0`,
+  pointsSubmitButtonClassName: `${styleBtn.btn} ${styles.btn_primary} mt-4 mb-0`,
   pointsWarningClassName: styles.payment_pointsWarning,
-  pointButtonClassName: `btn ${styles.btn_black} ${styles.btn_long} ${styles.payment_pointButton} mb-3 px-3`,
+  pointButtonClassName: `${styleBtn.btn} ${styles.payment_pointButton} mb-3 px-3`,
   pointAppliedTextClassName: styles.payment_pointAppliedText,
   pointButtonRemoveClassName: styles.payment_pointAppliedRemove,
 }
@@ -163,7 +165,8 @@ const CustomerDetailHeader = ({
 const PaymentMethods: FC<any> = ({
   lng,
   lngDict,
-  brand
+  brand,
+  hasOtp
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const i18n: any = useI18n()
   const router: any = useRouter()
@@ -253,14 +256,20 @@ const PaymentMethods: FC<any> = ({
           </h3>
           <ListPaymentMethod
             classes={classesListPaymentMethod}
+            withNotificationOptInModal={hasOtp}
             onErrorMsg={(msg) => toast.error(msg)}
             onErrorMsgCoupon={(msg) => toast.error(msg)}
+            voucherIcon={<img src="/icons/voucher.svg" className="mr-2" alt="voucher" />}
+            voucherAppliedIcon={<img src="/icons/voucher.svg" className="mr-2" alt="voucher" />}
+            pointIcon={<img src="/icons/point.svg" className="mr-2" alt="voucher" />}
+            pointAppliedIcon={<img src="/icons/point.svg" className="mr-2" alt="voucher" />}
+            removeVoucherIcon={<FiX color="#CC4534" size={16} className="mr-2" />}
             popupLoader={
               <div className={styles.payment_popupProcessOverlay}>
                 <div className={styles.payment_popupProcessContainer}>
                   <div className={styles.payment_popupProcessInner}>
                     <span className="spinner-border spinner-border-sm mr-3" role="status"></span>
-                    <span>{i18n.t("payment.prepayment")}</span>
+                    <span>{i18n.t("global.loading")}</span>
                   </div>
                 </div>
               </div>
@@ -291,11 +300,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
   )
 
   const brand = await useBrand(req)
+  const hasOtp = await useWhatsAppOTPSetting(req)
 
   return {
     props: {
       lng: params.lng,
       lngDict,
+      hasOtp,
       brand: brand || ""
     }
   }

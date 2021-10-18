@@ -277,7 +277,8 @@
     "inputEmailPlaceholder": "Input your email",
     "submitError": "Failed subscribe",
     "submitSuccess": "Success subscribe",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "close": "No, later"
   },
   "notificationOptIn": {
     "checkboxLabel": "I want to receive order status via social media",

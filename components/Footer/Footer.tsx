@@ -11,9 +11,9 @@ import {
 	RiUser3Line,
 	RiUser3Fill,
 } from 'react-icons/ri'
-import { PrivateComponent, useI18n } from '@sirclo/nexus'
+import { PrivateComponent, useI18n, useCart } from '@sirclo/nexus'
 /* styles */
-import styles from 'public/scss/components/Footer.module.scss'
+import styleFooter from 'public/scss/components/Footer.module.scss'
 
 const Footer: FC<any> = () => {
 	const i18n: any = useI18n()
@@ -22,12 +22,14 @@ const Footer: FC<any> = () => {
 		query: { lng },
 	} = useRouter()
 
+	const { data: dataCart } = useCart()
+
 	return (
 		<>
-			<footer className={styles.footer}>
-				<nav className={`${styles.footer_nav}`}>
+			<footer className={styleFooter.footer}>
+				<nav className={`${styleFooter.footer_nav}`}>
 					<Link href="/[lng]" as={`/${lng}`}>
-						<a {...(route == '/[lng]' && { className: styles.active })}>
+						<a {...(route == '/[lng]' && { className: styleFooter.active })}>
 							<div>
 								<RiHomeFill />
 								<span>{i18n.t('footer.home')}</span>
@@ -36,7 +38,7 @@ const Footer: FC<any> = () => {
 						</a>
 					</Link>
 					<Link href="/[lng]/search" as={`/${lng}/search`}>
-						<a {...(route == '/[lng]/search' && { className: styles.active })}>
+						<a {...(route == '/[lng]/search' && { className: styleFooter.active })}>
 							<div>
 								{route == '/[lng]/search' ? <RiSearchFill /> : <RiSearchLine />}
 								<span>{i18n.t('footer.search')}</span>
@@ -45,10 +47,11 @@ const Footer: FC<any> = () => {
 						</a>
 					</Link>
 					<Link href="/[lng]/cart" as={`/${lng}/cart`}>
-						<a {...(route == '/[lng]/cart' && { className: styles.active })}>
-							<div>
+						<a {...(route == '/[lng]/cart' && { className: styleFooter.active })}>
+							<div  className={styleFooter.footer_menu}>
 								{route == '/[lng]/cart' ? <RiShoppingBag2Fill /> : <RiShoppingBag2Line />}
 								<span>{i18n.t('footer.cart')}</span>
+								{dataCart?.totalItem ?<span className={styleFooter.footer_badge}>{dataCart.totalItem}</span>:null}
 								<hr />
 							</div>
 						</a>
@@ -58,7 +61,7 @@ const Footer: FC<any> = () => {
 							<Link href="/[lng]/account" as={`/${lng}/account`}>
 								<a
 									{...(route == '/[lng]/account' && {
-										className: styles.active,
+										className: styleFooter.active,
 									})}
 								>
 									<div>
@@ -73,7 +76,7 @@ const Footer: FC<any> = () => {
 							<Link href="/[lng]/login" as={`/${lng}/login`}>
 								<a
 									{...(route == '/[lng]/login' && {
-										className: styles.active,
+										className: styleFooter.active,
 									})}
 								>
 									<div>

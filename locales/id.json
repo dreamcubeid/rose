@@ -552,7 +552,8 @@
     "successConfPassword": "Berhasil menyimpan kata sandi!",
     "title": "Daftar",
     "toLogin": "Masuk",
-    "verificationFailed": "Gagal verifikasi"
+    "verificationFailed": "Gagal verifikasi",
+    "whatsapp": "Whatsapp"
   },
   "resetPassword": {
     "enterEmailBody": "Silahkan masukan e-mail yang sudah didaftarkan. Kami akan kirimkan link undangan untuk atur ulang kata sandi anda.",
@@ -677,7 +678,7 @@
     "from": "dari",
     "inputPlaceholder": "0810 0000 0000",
     "inputWhatsApp": "Masukan nomor Whatsapp Anda untuk masuk ke toko kami",
-    "insertVerificationCode": "Masukkan kode verifikasi (OTP)",
+    "insertVerificationCode": "Verifikasi Nomor Anda",
     "loginWithAnotherMethod": "Masuk menggunakan metode lain",
     "notReceivedMessage": "Belum terima pesan?",
     "noWhatsApp": "Tidak memiliki whatsapp?",

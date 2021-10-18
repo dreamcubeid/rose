@@ -117,7 +117,7 @@ const OrderSummaryComponent: FC<iProps> = ({
             <h6 className={styleOrderSummary.cart_headerTitle}>
               {i18n.t("orderSummary.yourCart")}
             </h6>
-            <Link href="[lng]/cart" as={`${lng || "id"}/cart`}>
+            <Link href="/[lng]/cart" as={`/${lng}/cart`}>
               <a>
                 <FiChevronLeft
                   color="#998060"
@@ -164,11 +164,11 @@ const OrderSummaryComponent: FC<iProps> = ({
             loadingComponent={<Loader />}
             icons={{
               voucher: <img src="/icons/voucher.svg" alt="voucher" />,
-              points: <img src="/icons/point.svg" alt="voucher" />,
+              points: <img src="/icons/point.svg" alt="points" />,
               close: <FiX size={24} color="#444444" />,
               voucherApplied: <img src="/icons/voucher.svg" alt="voucher" />,
               voucherRemoved: <FiX color="#CC4534" size={16} />,
-              pointsApplied: <img src="/icons/point.svg" alt="voucher" />,
+              pointsApplied: <img src="/icons/point.svg" alt="points" />,
               expand: <FiChevronUp />,
               collapse: <FiChevronDown />,
             }}

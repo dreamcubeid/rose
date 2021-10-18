@@ -551,7 +551,8 @@
     "successConfPassword": "Password reset succesfully!",
     "title": "Register",
     "toLogin": "Login",
-    "verificationFailed": "Verification failed"
+    "verificationFailed": "Verification failed",
+    "whatsapp": "Whatsapp"
   },
   "resetPassword": {
     "enterEmailBody": "Please enter the e-mail that has been registered. We will send you an invitation link to reset your password.",
@@ -676,7 +677,7 @@
     "from": "from",
     "inputPlaceholder": "0810 0000 0000",
     "inputWhatsApp": "Enter your Whatsapp number to login our store",
-    "insertVerificationCode": "Enter verification code (OTP)",
+    "insertVerificationCode": "Verify Your Number",
     "loginWithAnotherMethod": "Sign in using another method",
     "notReceivedMessage": "Haven't received the message yet?",
     "noWhatsApp": "Don't have whatsapp?",

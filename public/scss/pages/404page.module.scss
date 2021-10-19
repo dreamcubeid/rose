@@ -1,5 +1,4 @@
-@import "../base/colors";
-@import "../components/Button.module.scss";
+@import '../utils/variables';
 
 .error
 {
@@ -20,11 +19,8 @@
 
     &__title
     {
-      font-size: 20px;
-
-      @media screen and (max-width: 575px) {
-        font-size: 16px;
-      }
+      @include typographyBuilder(secondary,400,20,24);
+      margin-bottom: 24px;
     }
   }
 }

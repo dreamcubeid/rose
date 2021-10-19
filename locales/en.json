@@ -86,7 +86,8 @@
     "blog": "Blog",
     "contact": "Contact",
     "giftCard": "Gift Card",
-    "review": "Review"
+    "review": "Review",
+    "resetPassword": "Reset Password"
   },
   "cart": {
     "amount": "Amount",

@@ -1,5 +1,5 @@
 /* library package */
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import {
@@ -107,7 +107,6 @@ const OrderSummaryComponent: FC<iProps> = ({
   titleSubmit = i18n.t("orderSummary.placeOrder"),
   totalCrossSell = 0
 }) => {
-  const [showModalErrorAddToCart, setShowModalErrorAddToCart] = useState<boolean>(false)
 
   return (
     <>
@@ -157,7 +156,7 @@ const OrderSummaryComponent: FC<iProps> = ({
             }}
             submitButtonLabel={titleSubmit}
             continueShoppingLabel={i18n.t("orderSummary.continueShopping")}
-            onErrorMsg={() => setShowModalErrorAddToCart(!showModalErrorAddToCart)}
+            onErrorMsg={(msg) => toast.error(msg)}
             onErrorMsgCoupon={(msg) => toast.error(msg)}
             isAccordion
             onAddressInvalid={(e) => toast.error(e)}

@@ -38,25 +38,28 @@ const ForgotPassword: FC<any> = ({
       lngDict={lngDict}
       brand={brand}
       headerTitle={i18n.t('resetPassword.title')}
+      layoutClassName='layout_fullHeight'
+      withCopyright
+      withFooter={false}
     >
-      <div className={styleLogin.login}>
-        <div className={styleLogin.login_breadcrumb}>
-          <Breadcrumb
-            steps={[
-              { label: i18n.t('breadcrumb.home') },
-              { label: i18n.t('breadcrumb.forgotPassword') },
-            ]}
-          />
-        </div>
+      <div className={styleLogin.login_breadcrumb}>
+        <Breadcrumb
+          steps={[
+            { label: i18n.t('breadcrumb.home') },
+            { label: i18n.t('breadcrumb.forgotPassword') },
+          ]}
+        />
+      </div>
+      <div className={styleLogin.forgotPassword}>
         {isSuccess ? (
-          <div className={styleLogin.forgotPassword}>
+          <>
             <div className={styleLogin.forgotPassword_successTitle}>
               {i18n.t('forgotPassword.titleSuccessful')}
             </div>
             <div className={styleLogin.forgotPassword_successDesc}>
               {i18n.t('forgotPassword.requestSuccessful')}
             </div>
-          </div>
+          </>
         ) : (
           <>
             <div className={styleLogin.login_forgotPasswordDesc}>

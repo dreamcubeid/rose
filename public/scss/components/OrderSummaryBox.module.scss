@@ -479,7 +479,7 @@
         @extend .btn;
         @extend .btn_primary;
         @include typographyBuilder(secondary, 400, 12, 18);
-        margin-top: 24px;
+        margin-top: 12px;
     }
 
     &_pointsButton
@@ -539,6 +539,18 @@
     {
         padding: 16px 16px 11px 16px;
     }
+
+    &_pointsInsufficient
+    {
+        @include typographyBuilder(secondary, 400, 12, 18);
+        color: $color_error;
+        margin-top: 12px;
+
+        & > p
+        {
+            margin: 0;
+        }
+    }
     
     &_pointsWarning
     {
@@ -567,12 +579,6 @@
     &_pointValue
     {
         @include typographyBuilder(secondary, 400, 14, 24);
-    }
-    
-    &_pointsInsufficient
-    {
-        @include typographyBuilder(secondary, 500, 14, 18);
-        color: $color_error;
     }
 
     &_price

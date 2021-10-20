@@ -71,17 +71,17 @@ const classesListPaymentMethod = {
   voucherButtonRemoveClassName: styles.payment_voucherAppliedRemove,
   popupClassName: styles.payment_listItemOverlay,
   voucherContainerClassName: styles.payment_listItemPopup,
-  closeButtonClassName: styles.payment_listItemPopup__close,
-  voucherFormContainerClassName: `${styles.payment_listItemPopupForm__body} ${styles.payment_listItemPopup__payment}`,
-  voucherFormClassName: `form-inline ${styles.sirclo_form_row}`,
-  voucherInputClassName: `form-control ${styles.sirclo_form_input} ${styles.payment_listItemPopupForm__input}`,
-  voucherSubmitButtonClassName: `${styleBtn.btn} ${styles.payment_listItemPopupForm__button}`,
+  closeButtonClassName: styles.payment_closeButton,
+  voucherFormContainerClassName: styles.payment_voucherFormContainer,
+  voucherFormClassName: styles.payment_voucherForm,
+  voucherInputClassName: styles.payment_voucherInput,
+  voucherSubmitButtonClassName: `${styleBtn.btn} ${styleBtn.btn_primary} ${styles.payment_voucherSubmitButton}`,
   voucherListClassName: styles.ordersummary_popupVoucher,
   voucherListHeaderClassName: styles.ordersummary_popupVoucherTitle,
   voucherClassName: styles.ordersummary_popupVoucherItem,
   voucherDetailClassName: styles.ordersummary_popupVoucherDetail,
   voucherFooterClassName: styles.ordersummary_popupVoucherFooter,
-  voucherApplyButtonClassName: `${styleBtn.btn} ${styles.btn_primary}`,
+  voucherApplyButtonClassName: `${styleBtn.btn} ${styleBtn.btn_primary}`,
   agreementContainerClassName: styles.payment_footer__agreement,
   agreementCheckboxClassName: styles.payment_footer__check,
   buttonContainerClassName: styles.payment_footer__button,
@@ -91,16 +91,15 @@ const classesListPaymentMethod = {
   shippingPriceClassName: styles.payment_listItemTableRow__priceSale,
   shippingDiscountClassName: styles.payment_listItemTableRow__price,
   // point
-  popupBackgroundClassName: styles.payment_listItemOverlay,
   pointsContainerClassName: styles.payment_containerPointPopup,
-  numberOfPointsClassName: styles.payment_pointsPopup,
+  numberOfPointsClassName: styles.payment_numberOfPoints,
+  pointLabelClassName: 'd-none',
+  totalPointsClassName: styles.payment_pointsPopup,
   pointsFormContainerClassName: styles.payment_pointsFormContainer,
   pointsFormClassName: styles.payment_pointsForm,
-  pointsLabelClassName: styles.payment_pointsPopupLabel,
-  pointsValueClassName: styles.payment_pointsPopupValue,
-  changePointsClassName: styles.payment_buttonChangePoint,
+  changePointsClassName: styles.payment_pointsChange,
   pointsInsufficientClassName: styles.payment_pointsInsufficient,
-  pointsSubmitButtonClassName: `${styleBtn.btn} ${styles.btn_primary} mt-4 mb-0`,
+  pointsSubmitButtonClassName: `${styleBtn.btn} ${styleBtn.btn_primary} ${styles.payment_pointsSubmitButton}`,
   pointsWarningClassName: styles.payment_pointsWarning,
   pointButtonClassName: `${styleBtn.btn} ${styles.payment_pointButton} mb-3 px-3`,
   pointAppliedTextClassName: styles.payment_pointAppliedText,
@@ -259,11 +258,37 @@ const PaymentMethods: FC<any> = ({
             withNotificationOptInModal={hasOtp}
             onErrorMsg={(msg) => toast.error(msg)}
             onErrorMsgCoupon={(msg) => toast.error(msg)}
-            voucherIcon={<img src="/icons/voucher.svg" className="mr-2" alt="voucher" />}
-            voucherAppliedIcon={<img src="/icons/voucher.svg" className="mr-2" alt="voucher" />}
-            pointIcon={<img src="/icons/point.svg" className="mr-2" alt="voucher" />}
-            pointAppliedIcon={<img src="/icons/point.svg" className="mr-2" alt="voucher" />}
-            removeVoucherIcon={<FiX color="#CC4534" size={16} className="mr-2" />}
+            voucherIcon={
+              <img src="/icons/voucher.svg" className="mr-2" alt="voucher" />
+            }
+            voucherAppliedIcon={
+              <img src="/icons/voucher.svg" className="mr-2" alt="voucher" />
+            }
+            pointIcon={
+              <img src="/icons/point.svg" className="mr-2" alt="voucher" />
+            }
+            pointAppliedIcon={
+              <img src="/icons/point.svg" className="mr-2" alt="voucher" />
+            }
+            removeVoucherIcon={
+              <FiX color="#CC4534" size={16} className="mr-2" />
+            }
+            closeButtonIcon={
+              <FiX size={24} color="#444444" />
+            }
+            loadingComponent={
+              <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
+            }
+            emptyState={
+              <EmptyComponent
+                title={i18n.t("payment.isEmpty")}
+              />
+            }
+            loaderElement={
+              <div className="col-12 text-center mx-auto loader">
+                <Loader color="text-dark" withText />
+              </div>
+            }
             popupLoader={
               <div className={styles.payment_popupProcessOverlay}>
                 <div className={styles.payment_popupProcessContainer}>
@@ -273,19 +298,6 @@ const PaymentMethods: FC<any> = ({
                   </div>
                 </div>
               </div>
-            }
-            loaderElement={
-              <div className="col-12 text-center mx-auto loader">
-                <Loader color="text-dark" withText />
-              </div>
-            }
-            emptyState={
-              <EmptyComponent
-                title={i18n.t("payment.isEmpty")}
-              />
-            }
-            loadingComponent={
-              <Placeholder classes={classesPlaceholderPayment} withList listMany={3} />
             }
           />
         </div>

@@ -1,22 +1,25 @@
-import { FC, useState } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import Router from "next/router";
-import dynamic from "next/dynamic";
-import { toast } from "react-toastify";
+/* library package */
+import { FC, useState } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import ReCAPTCHA from 'react-google-recaptcha'
 import {
   useI18n,
   Testimonials,
   isTestimonialAllowed,
   isTestimonialFormAllowed,
   TestimonialForm
-} from "@sirclo/nexus";
-import { useBrand } from "lib/useBrand";
-import ReCAPTCHA from "react-google-recaptcha"
-import Layout from "components/Layout/Layout";
-import Placeholder from "components/Placeholder";
-import styles from "public/scss/pages/Testimonials.module.scss";
-
-const Popup = dynamic(() => import("components/Popup/Popup"));
+} from '@sirclo/nexus'
+/* library template */
+import { useBrand } from 'lib/useBrand'
+/* components */
+import Layout from 'components/Layout/Layout'
+import Placeholder from 'components/Placeholder'
+const Popup = dynamic(() => import('components/Popup'))
+/* styles */
+import styles from 'public/scss/pages/Testimonials.module.scss'
 
 const classesTestimonials = {
   containerClassName: `${styles.testimonials_container}`,
@@ -59,16 +62,16 @@ const TestimonialsPage: FC<any> = ({
   lngDict,
   brand
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const i18n: any = useI18n()
+  const router: any = useRouter()
+  const testimonialAllowed = isTestimonialAllowed()
+  const testimonialFormAllowed = isTestimonialFormAllowed()
 
-  const i18n: any = useI18n();
-  const testimonialAllowed = isTestimonialAllowed();
-  const testimonialFormAllowed = isTestimonialFormAllowed();
-
-  const [totalItem, setTotalItems] = useState<number>(null);
-  const [showAdd, setShowAdd] = useState<boolean>(false);
+  const [totalItem, setTotalItems] = useState<number>(null)
+  const [showAdd, setShowAdd] = useState<boolean>(false)
   const [isVerified, setIsVerified] = useState<boolean>(false)
 
-  const toogleShowAdd = () => setShowAdd(!showAdd);
+  const toggleShowAdd = () => setShowAdd(!showAdd)
 
   return (
     <Layout
@@ -93,7 +96,7 @@ const TestimonialsPage: FC<any> = ({
               </p>
               <button
                 className={styles.testimonials_qtyAddButton}
-                onClick={toogleShowAdd}
+                onClick={toggleShowAdd}
               >
                 {i18n.t("testimonial.add")}
               </button>
@@ -126,13 +129,13 @@ const TestimonialsPage: FC<any> = ({
             <p>{i18n.t("testimonial.isEmpty")}</p>
             <a
               className={`${styles.testimonials_emptyAddButton} ${styles.btn_primary} ${styles.btn_long}`}
-              onClick={toogleShowAdd}
+              onClick={toggleShowAdd}
             >
               {i18n.t("testimonial.add")}
             </a>
             <a
               className={`${styles.testimonials_backButton} ${styles.btn_long}`}
-              onClick={() => Router.push(`/[lng]/products`, `/${lng}/products`)}
+              onClick={() => router.push(`/[lng]/products`, `/${lng}/products`)}
             >
               {i18n.t("product.back")}
             </a>
@@ -141,8 +144,9 @@ const TestimonialsPage: FC<any> = ({
         {(showAdd && testimonialFormAllowed) &&
           <Popup
             withHeader
-            setPopup={toogleShowAdd}
-            popupTitle={i18n.t("testimonial.add")}
+            visibleState={showAdd}
+            setVisibleState={setShowAdd}
+            outsideClose={false}
           >
             <TestimonialForm
               classes={classesTestimonalsForm}
@@ -167,23 +171,34 @@ const TestimonialsPage: FC<any> = ({
         }
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params
+}) => {
   const { default: lngDict = {} } = await import(
     `locales/${params.lng}.json`
-  );
+  )
 
-  const brand = await useBrand(req);
+  const brand = await useBrand(req)
+
+  if (res) {
+    res.writeHead(307, {
+      Location: `/${brand.lng}`,
+    });
+    res.end();
+  }
 
   return {
     props: {
       lng: params.lng,
       lngDict,
-      brand: brand || ""
+      brand: brand || ''
     }
-  };
+  }
 }
 
-export default TestimonialsPage;
+export default TestimonialsPage

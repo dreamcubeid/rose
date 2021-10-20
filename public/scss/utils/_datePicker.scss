@@ -1,9 +1,5 @@
-@import '../components/Form.module.scss';
-
 .react-date-picker
 {
-  @extend .form_input;
-  
   display: flex;
   flex-direction: row;
   align-items: center;

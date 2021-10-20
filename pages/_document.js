@@ -1,9 +1,12 @@
+/* library package */
 import 
   Document, 
   { Html, Main } 
-from 'next/document';
-import { CriticalCssHead } from "../components/CriticalCssHead";
-import { DeferredNextScript } from "../lib/DeferredNextScript";
+from 'next/document'
+/* library template */
+import { DeferredNextScript } from 'lib/DeferredNextScript'
+/* components */
+import { CriticalCssHead } from 'components/CriticalCssHead'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -25,4 +28,4 @@ class MyDocument extends Document {
 	}
 }
 
-export default MyDocument;
+export default MyDocument

@@ -22,7 +22,7 @@ const TrackerPage = ({ order_token }) => {
   return (
     <ShipmentTracker
       token={order_token}
-      iconTracker={<img className="mr-2" src={'/images/motorcycle.svg'} alt="motorcycle" />}
+      iconTracker={<img className="mr-2" src={'/icons/motorcycle.svg'} alt="motorcycle" />}
       classes={classesTrackerPage}
     />
   )
@@ -32,10 +32,10 @@ export async function getServerSideProps({ params }) {
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   return {
-    props: { 
-      lng: params.lng, 
-      lngDict, 
-      order_token: params.token 
+    props: {
+      lng: params.lng,
+      lngDict,
+      order_token: params.token
     },
   }
 }

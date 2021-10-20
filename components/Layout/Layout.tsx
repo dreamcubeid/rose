@@ -113,19 +113,19 @@ const Layout: FC<LayoutPropType> = ({
         <link rel="manifest" href="/manifest.json" />
         <link
           rel="preload"
-          href="webfonts/Roboto-Regular.ttf"
+          href="webfonts/Inter-Regular.ttf"
           as="font"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="webfonts/Roboto-Black.ttf"
+          href="webfonts/Inter-SemiBold.ttf"
           as="font"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="webfonts/Roboto-Medium.ttf"
+          href="webfonts/Lora-Medium.ttf"
           as="font"
           crossOrigin="anonymous"
         />

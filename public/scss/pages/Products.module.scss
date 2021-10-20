@@ -32,37 +32,6 @@
     }
   }
 
-  &_action
-  {
-    @include flex(row, center, center);
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-
-    &_sort,
-    &_top
-    {
-      @include flex(row, center);
-      padding: .5rem 1rem;
-      border-radius: 34px;
-      background: $color_blue;
-      color: $color_white;
-      cursor: pointer;
-
-      &__title
-      {
-        font-size: 16px;
-      }
-    }
-
-    &_top
-    {
-      padding: .5rem;
-    }
-  }
-
   &_sortLabel
   {
     @include fixedWidth(100%);

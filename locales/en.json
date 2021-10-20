@@ -86,7 +86,8 @@
     "blog": "Blog",
     "contact": "Contact",
     "giftCard": "Gift Card",
-    "review": "Review"
+    "review": "Review",
+    "resetPassword": "Reset Password"
   },
   "cart": {
     "amount": "Amount",
@@ -503,6 +504,7 @@
     "duplicateEmail": "Email has been registered",
     "email": "Email",
     "emailPlaceholder": "Input your email",
+    "errorConfPassword": "Reset password failed",
     "failed": "Registration failed",
     "female": "Female",
     "firstName": "First Name",

@@ -41,15 +41,18 @@
 
 .autocomplete-dropdown-container 
 {
+  @include absolute(34px, 12px, auto, 17px);
   z-index: 1;
-  width: calc(100% - 75px);
+  @include typographyBuilder(secondary, 400, 12, 16);
+  width: calc(100% - 16px);
   border: 1px solid $color_border;
   background: $color_white;
-  position: absolute;
   text-align: left;
-  top: 50px;
-  right: 12px;
-  left: 16px;
+
+  &:empty
+  {
+    display: none;
+  }
 
   div {
     padding: 10px;

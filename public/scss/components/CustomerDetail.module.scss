@@ -35,11 +35,12 @@
 
   &_infoPersonValue
   {
+    @include typographyBuilder(secondary, 400, 12, 16);
     color: $color_text_secondary;
 
     &:first-child
     {
-      @include typographyBuilder(secondary, 500, 16, 24);
+      @include typographyBuilder(secondary, 500, 14, 24);
       margin-bottom: 5px;
       color: $color_text_primary;
     }
@@ -164,9 +165,9 @@
 
     input
     {
-      @include typographyBuilder(secondary, 400, 14, 20);
+      @include typographyBuilder(secondary, 400, 12, 16);
       @include fixedWidth(calc(100% - 75px));
-      padding: 10px 15px;
+      padding: 10px 12px;
       border: 1px;
       background: $color_white;
       border-radius: 2px;
@@ -176,13 +177,27 @@
       @include absolute(12px, 12px, auto, 16px);
       z-index: 2;
     }
+
+    [class*="autocomplete-dropdown-container"]
+    {
+      @include absolute(48px, 12px, auto, 16px);
+      width: calc(100% - 75px);
+
+      &:empty
+      {
+        display: none;
+      }
+    }
   }
 
   &_mapPopupCenterButton
   {
     @include absolute(12px, 10px, auto, auto);
+    @include fixedWidth(36px);
+    @include fixedHeight(36px);
+    @include flex(row, center, center);
     background: $color_white;
-    padding: 10px;
+    padding: 0;
     border: none;
     border-radius: 2px;
   }

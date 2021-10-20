@@ -7,11 +7,11 @@ import {
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import dynamic from 'next/dynamic'
 import { toast } from 'react-toastify'
+import { BiTargetLock } from 'react-icons/bi'
 import {
-  X as XIcon,
-  Calendar,
-  Crosshair
-} from 'react-feather'
+  FiX,
+  FiCalendar
+} from 'react-icons/fi'
 import {
   RiEyeCloseLine,
   RiEye2Line,
@@ -126,9 +126,9 @@ const PlaceOrderPage: FC<any> = ({
             passwordHideIcon={<RiEye2Line />}
             passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
             passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
-            datePickerCalendarIcon={<Calendar />}
-            mapButtonCloseIcon={<XIcon />}
-            mapCenterIcon={<Crosshair />}
+            datePickerCalendarIcon={<FiCalendar color="#444444" />}
+            mapButtonCloseIcon={<FiX color="#444444" size={20} />}
+            mapCenterIcon={<BiTargetLock color="#444444" size={20} />}
             loadingComponent={<Loader />}
             logistixStyles={{
               menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),

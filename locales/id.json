@@ -505,6 +505,7 @@
     "duplicateEmail": "Email sudah terdaftar",
     "email": "Email",
     "emailPlaceholder": "Masukan email anda",
+    "errorConfPassword": "Gagal setel ulang kata sandi",
     "failed": "Gagal mendaftar",
     "female": "Wanita",
     "firstName": "Nama Depan",

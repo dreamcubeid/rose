@@ -504,6 +504,7 @@
     "duplicateEmail": "Email has been registered",
     "email": "Email",
     "emailPlaceholder": "Input your email",
+    "errorConfPassword": "Reset password failed",
     "failed": "Registration failed",
     "female": "Female",
     "firstName": "First Name",

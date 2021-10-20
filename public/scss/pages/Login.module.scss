@@ -6,8 +6,8 @@
   
   &_breadcrumb
   {
-    padding: 58px 18px 0 18px;
-    margin: 16px 0 24px 0;
+    padding: 74px 18px 0 18px;
+    margin-bottom: 24px;
   }
 
   &_header
@@ -168,17 +168,18 @@
 
 .forgotPassword
 {
-  padding: 0 17.5px;
+  min-height: calc(100vh - 36px - 58px - 56px);
 
   &_successTitle
   {
     color: $color_rose;
-    padding: 0 0 24px 0;
+    padding: 0 18px 24px;
     @include typographyBuilder(primary,500,28,40);
   }
 
   &_successDesc
   {
     @include typographyBuilder(secondary,400,14,24);
+    padding: 0 18px;
   }
 }

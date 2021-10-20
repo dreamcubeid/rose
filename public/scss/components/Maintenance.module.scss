@@ -1,0 +1,35 @@
+@import '../utils/variables';
+
+.maintenance
+{
+  &_container
+  {
+    @include flex(column, center, center);
+    @include fixedWidth(100%);
+    @include fixedHeight(100vh);
+    padding: 24px;
+
+    &Images
+    {
+      text-align: center;
+      margin: 24px 0;
+
+      &Img
+      {
+        width: 100px;
+      }
+    }
+
+    h1, h2, h3, h4, h5, h6
+    {
+      @include typographyBuilder(secondary, 400, 14, 24);
+      margin-bottom: 24px;
+    }
+
+    p
+    {
+      @include typographyBuilder(secondary, 400, 12, 18);
+      margin-bottom: 0;
+    }
+  }
+}

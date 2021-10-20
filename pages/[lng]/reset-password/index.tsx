@@ -49,29 +49,28 @@ const ResetPasswordPage: FC<any> = ({
       brand={brand}
       headerTitle={i18n.t('resetPassword.setNew')}
       withFooter={false}
+      withCopyright
     >
       <SEO title={i18n.t('resetPassword.setNew')} />
-      <div className={styleLogin.login}>
-        <div className={styleLogin.login_breadcrumb}>
-          <Breadcrumbs
-            steps={[
-              { label: i18n.t('breadcrumb.home') },
-              { label: i18n.t('breadcrumb.resetPassword') },
-            ]}
-          />
-        </div>
-        <div className={styleResetPassword.resetPassword}>
-          <SetNewPassword
-            classes={classesSetNewPassword}
-            onErrorMsg={toast.error}
-            onSuccessMsg={toast.success}
-            passwordViewIcon={<RiEyeCloseLine />}
-            passwordHideIcon={<RiEye2Line />}
-            passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
-            passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
-            loadingComponent={<Loader color="text-light" />}
-          />
-        </div>
+      <div className={styleLogin.login_breadcrumb}>
+        <Breadcrumbs
+          steps={[
+            { label: i18n.t('breadcrumb.home') },
+            { label: i18n.t('breadcrumb.resetPassword') },
+          ]}
+        />
+      </div>
+      <div className={styleResetPassword.resetPassword}>
+        <SetNewPassword
+          classes={classesSetNewPassword}
+          onErrorMsg={(msg: string) => toast.error(msg)}
+          onSuccessMsg={(msg: string) => toast.success(msg)}
+          passwordViewIcon={<RiEyeCloseLine />}
+          passwordHideIcon={<RiEye2Line />}
+          passwordFulfilledCriteriaIcon={<RiCheckboxCircleFill color="#53B671" size={10} />}
+          passwordUnfulfilledCriteriaIcon={<RiCheckboxCircleLine color="#BCBCBC" size={10} />}
+          loadingComponent={<Loader color="text-light" />}
+        />
       </div>
     </Layout>
   )

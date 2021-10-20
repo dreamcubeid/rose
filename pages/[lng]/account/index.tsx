@@ -263,7 +263,7 @@ const AccountsPage: FC<any> = ({
             line: <RiLineLine color="#53B671" size={20} />,
             iconTracker: (
               <div>
-                <img src="/images/motorcycle.svg" alt="motorcycle" />
+                <img src="/icons/motorcycle.svg" alt="motorcycle" />
               </div>
             ),
           }}

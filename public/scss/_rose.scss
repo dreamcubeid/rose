@@ -1,0 +1,70 @@
+@import './utils/variables';
+
+.page-transition
+{
+  &-enter
+  {
+    opacity: 0;
+
+    &-active
+    {
+      opacity: 1;
+      transition: opacity 300ms;
+    }
+
+    &-done
+    {
+      & > section
+      {
+        width: 100% !important;
+        padding: 24px !important;
+
+        & > img
+        {
+          margin: 24px 0 !important;
+        }
+      }
+    }
+  }
+
+  &-exit
+  {
+    opacity: 1;
+
+    &-active
+    {
+      opacity: 0;
+      transition: opacity 300ms;
+    }
+  } 
+}
+
+.autocomplete-dropdown-container 
+{
+  @include absolute(34px, 12px, auto, 17px);
+  z-index: 1;
+  @include typographyBuilder(secondary, 400, 12, 16);
+  width: calc(100% - 16px);
+  border: 1px solid $color_border;
+  background: $color_white;
+  text-align: left;
+
+  &:empty
+  {
+    display: none;
+  }
+
+  div {
+    padding: 10px;
+  }
+
+  div:nth-child(odd) 
+  {
+    background-color: $color_white !important;
+  }
+
+  div:nth-child(even) 
+  {
+    background-color: $color_border !important;
+  }
+}

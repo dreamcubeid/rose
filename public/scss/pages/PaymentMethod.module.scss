@@ -1,14 +1,8 @@
-@import '../base/colors';
 @import '../utils/variables';
-@import '../components/CustomerDetail.module.scss';
-@import '../components/Button.module.scss';
-@import '../components/Form.module.scss';
-@import '../components/OrderSummary.module.scss';
-@import '../components/Popup.module.scss';
 
 .payment
 {
-  padding: 0 18px 18px;
+  padding: 18px;
 
   &_shipping
   {
@@ -73,59 +67,74 @@
 
   &_listItemPopup
   {
-    @include position(relative);
-    z-index: 10;
+    @include fixed(0, 0, 0, 0);
+    @include fixedWidth(375px);
+    @include fixedHeight(80%);
+    @include transition();
+    margin: auto auto 0 !important;
     padding: 16px;
-    background: $color_white;
-    border-radius: 2px;
+    background-color: $color_white;
+    border-radius: 4px 4px 0px 0px;
 
-    &__close
+    @media screen and (max-width: $breakpoint_max_sm)
     {
-      @include absolute(0, 0, auto, auto);
-      background: transparent;
-      border: none;
-      padding: 5px 7.5px;
-      cursor: pointer;
-
-      &:focus,
-      &:active
-      {
-        outline: 0;
-        border: none; 
-      }
-    }
-
-    &__payment
-    {
-      margin: calc(45px + 27px) 0 0;
-      padding: 0 16px;
+      @include fixedWidth(100%, true);
     }
   }
 
-  &_listItemPopupForm
+  &_closeButton
   {
-    &__body
-    {
-      margin-top: 1rem;
-    }
+    @include position(absolute, 14px, 14px, auto, auto);
+    background: transparent;
+    padding: 0;
+    border: none;
 
-    &__input
+    &:active,
+    &:focus
     {
-      width: max-content !important;
-      border-radius: 0 !important;
+      outline: 0;
+      box-shadow: none;
     }
+  }
 
-    &__button
+  &_voucherFormContainer
+  {
+    position: relative;
+    margin-top: 50px;
+    padding: 9px 12px;
+    background: $color_white;
+    border: 1px solid $color_border;
+    border-radius: 37px;
+  }
+
+  &_voucherForm
+  {
+    @include fixedWidth(100%);
+    @include flex(row, center, space-between);
+  }
+
+  &_voucherInput
+  {
+    @include fixedWidth(60%);
+    @include typographyBuilder(secondary, 400, 14, 24);
+    color: $color_text_primary;
+    border: none;
+    padding: 17px;
+    margin: 0 5px;
+    background: transparent;
+
+    &:active,
+    &:focus
     {
-      background: $color_blue;
-      color: $color_white;
-      height: calc(2em + 1rem + 4px);
-      border-color: $color_border !important;
-      border-left: 0 !important;
-      border-top-left-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      border-radius: 0 !important;
+      outline: 0;
+      box-shadow: none;
     }
+  }
+
+  &_voucherSubmitButton
+  {
+    @include typographyBuilder(secondary, 400, 12, 18);
+    @include fixedWidth(30%);
   }
 
   &_listItemPayment
@@ -192,7 +201,7 @@
       display: block;
       width: 100%;
       padding: 0 1rem;
-      color: $color_red;
+      color: $color_error;
       font-size: 14px;
     }
   }
@@ -324,68 +333,33 @@
     }
   }
 
-  &_empty
-  {
-    padding: 2rem 0;
-    text-align: center;
-
-    &__icon
-    {
-      width: 3rem !important;
-      height: 3rem !important;
-    }
-
-    &__title
-    {
-      font-family: "roboto-medium";
-      font-size: 1rem;
-      text-transform: uppercase;
-      margin: 1rem 0 .5rem 0;
-    }
-  }
-
   &_popupProcessOverlay
   {
-    position: fixed;
+    @include fixed(0, auto, auto, 0);
+    @include fixedWidth(100%);
+    @include fixedHeight(100%);
+    @include flex(row, center, center);
     z-index: 10;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: rgba($color_black, 0.8);
   }
 
 
   &_popupProcessContainer
   {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @media screen and (max-width: 991px) {
-      padding: 0 1rem;
-    }
+    @include position(relative);
+    @include flex(row, center, center);
   }
 
   &_popupProcessInner
   {
-    display: flex;
-    align-items: center;
-    width: max-content;
+    @include flex(row, center);
+    width: 100%;
     height: auto;
-    padding: 1.5rem;
+    padding: 16px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: $color_white;
-    box-shadow: 0 0 15px rgba(0,0,0,.15);
-
-    @media screen and (max-width: 991px) {
-      width: 100%;
-    }
+    box-shadow: 0 0 15px rgba($color_black, 0.15);
   }
 
   &_pointButton
@@ -421,105 +395,128 @@
 
   &_containerPointPopup
   {
-    position: relative;
-    z-index: 10;
-    padding: 15px 16px;
-    background: $color_white;
-    border-radius: 5px;
+    @include position(relative);
+    @include fixedWidth(375px);
+    @include transition();
+    min-height: 0;
+    max-height: calc(100vh - 58px);
+    height: auto;
+    margin: auto auto 0 !important;
+    padding: 16px;
+    background-color: $color_white;
+    border-radius: 4px 4px 0px 0px;
 
-    &__close
+    @media screen and (max-width: $breakpoint_max_sm)
     {
-      position: absolute;
-      right: 0;
-      top: 0;
-      background: transparent;
-      border: none;
-      padding: .25rem .5rem;
-      cursor: pointer;
-
-      &:focus,
-      &:active
-      {
-        outline: 0;
-        border: none; 
-      }
+      @include fixedWidth(100%, true);
     }
   }
 
-  &_pointsPopupLabel
+  &_numberOfPoints
   {
-    font-size: 14px;
+    padding: 16px 16px 11px 16px;
   }
 
-  &_pointsPopupValue
+  &_pointsPopup
   {
-    font-size: 12px;
-  }
+    @include flex(column, center, center);
 
-  &_buttonChangePoint
-  {
-    width: 45px;
-    background: transparent;
-    border: 1px solid $color_blue;
-    border-radius: 3px;
-    margin-left: 5px;
-    transition: 0.3s all ease;
-    font-size: 20px;
-
-    &:hover,
-    &:active
+    img
     {
-      background: $color_blue;
-      color: $color_white;
+        width: 25px;
+        margin-bottom: 10px;
+        margin-right: 0 !important;
     }
   }
 
   &_pointsFormContainer
   {
-    margin: 16px 0;
+    position: relative;
+    @include flex(column, center, center);
+  }
+
+  &_pointsChange
+  {
+    @include fixedWidth(60px);
+    @include fixedHeight(60px);
+    @include typographyBuilder(secondary, 400, 24, 24);
+    color: $color_text_primary;
+    border: 1px solid $color_border;
+    border-radius: 37px;
+    background: transparent;
+
+    &:active,
+    &:focus
+    {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    &[class*="increment"]
+    {
+      order: 3;
+    }
+
+    &[class*="decrement"]
+    {
+      order: 1;
+    }
   }
 
   &_pointsForm
   {
-    display: flex;
+    @include flex(row, center, center);
+    @include fixedWidth(100%);
 
-    & > input
+    input
     {
-      border-radius: 3px !important;
+      @include fixedWidth(calc(100% - 140px));
+      @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
+      border: 1px solid $color_border;
+      border-radius: 37px;
+      padding: 17px;
+      margin: 0 5px;
+      background: transparent;
+      order: 2;
 
+      &:active,
       &:focus
       {
-        background: $color_blue_light;
-        border: 1px solid $color_blue;
+        outline: 0;
+        box-shadow: none;
       }
     }
   }
 
+  &_pointsSubmitButton
+  {
+    @include typographyBuilder(secondary, 400, 12, 18);
+    margin-top: 12px;
+  }
+
   &_pointsInsufficient
   {
-    color: $color_red;
+    @include typographyBuilder(secondary, 400, 12, 18);
+    color: $color_error;
+    margin-top: 12px;
 
     & > p
     {
-      font-size: 12px;
       margin: 0;
     }
   }
 
   &_pointsWarning
   {
-    width: 400px;
-    text-align: center;
-    color: $color_red;
+    padding: 0 0 16px;
 
-    @media screen and (max-width: 575px) {
-      width: 100%;
-    }
-
-    & > p
+    p
     {
-      font-size: 12px;
-      margin: 0;
+      @include typographyBuilder(secondary, 400, 11, 16);
+      text-align: center;
+      color: $color_error;
+      margin: 8px 0 0 0;
     }
   }
 }

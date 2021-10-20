@@ -86,7 +86,8 @@
     "blog": "Blog",
     "contact": "Kontak",
     "giftCard": "Kartu Hadiah",
-    "review": "Ulasan"
+    "review": "Ulasan",
+    "resetPassword": "Setel Ulang Kata sandi"
   },
   "cart": {
     "amount": "Jumlah",

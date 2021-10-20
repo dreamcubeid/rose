@@ -49,7 +49,12 @@
         {
           border: none;
           background: transparent;
-          min-width: 10px !important;
+          min-width: 20px !important;
+
+          &[class*='--hasLeadingZero']
+          {
+            min-width: 10px !important;
+          }
 
           &::-webkit-outer-spin-button,
           &::-webkit-inner-spin-button

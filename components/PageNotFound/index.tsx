@@ -1,25 +1,27 @@
-import { useRouter } from "next/router";
-import styles from "public/scss/components/NotFound.module.scss";
+/* library package */
+import Link from 'next/link'
+/* styles */
+import styleError from 'public/scss/pages/404page.module.scss'
+import styleBtn from 'public/scss/components/Button.module.scss'
+
+type TypePageNotFound = {
+  i18n: any
+}
 
 const PageNotFound = ({
   i18n
-}) => {
-  const router = useRouter()
-
+}: TypePageNotFound) => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-12 col-sm-8 offset-sm2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-          <div className={styles.notFound}>
-            <h2>{i18n.t("global.pageNotFound")}</h2>
-            <a
-              className={`btn ${styles.btn_primary} py-3 px-5`}
-              onClick={() => router.push('/')}
-            >
-              {i18n.t("global.backHome")}
-            </a>
-          </div>
-        </div>
+    <div className={styleError.error}>
+      <div className={styleError.error_container}>
+        <h2 className={styleError.error_container__title}>
+          {i18n.t("global.pageNotFound")}
+        </h2>
+        <Link href="/" as="/">
+          <a className={`${styleBtn.btn} ${styleBtn.btn_primary}`}>
+            {i18n.t("global.backHome")}
+          </a>
+        </Link>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ FROM node:12-alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-ENV ASSET_PREFIX=https://template.sirclocdn.com/uno
+ENV ASSET_PREFIX=https://template.sirclocdn.com/rose
 
 # Install app dependencies
 COPY package*.json ./

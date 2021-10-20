@@ -31,7 +31,7 @@ const Footer: FC<any> = () => {
 					<Link href="/[lng]" as={`/${lng}`}>
 						<a {...(route == '/[lng]' && { className: styleFooter.active })}>
 							<div>
-								<RiHomeFill />
+								<RiHomeFill color="#444444" />
 								<span>{i18n.t('footer.home')}</span>
 								<hr />
 							</div>
@@ -48,10 +48,10 @@ const Footer: FC<any> = () => {
 					</Link>
 					<Link href="/[lng]/cart" as={`/${lng}/cart`}>
 						<a {...(route == '/[lng]/cart' && { className: styleFooter.active })}>
-							<div  className={styleFooter.footer_menu}>
+							<div className={styleFooter.footer_menu}>
 								{route == '/[lng]/cart' ? <RiShoppingBag2Fill /> : <RiShoppingBag2Line />}
 								<span>{i18n.t('footer.cart')}</span>
-								{dataCart?.totalItem ?<span className={styleFooter.footer_badge}>{dataCart.totalItem}</span>:null}
+								{dataCart?.totalItem ? <span className={styleFooter.footer_badge}>{dataCart.totalItem}</span> : null}
 								<hr />
 							</div>
 						</a>

@@ -2,16 +2,12 @@
 
 .error
 {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+  @include fixed(0, auto, auto, 0);
+  @include fixedWidth(100%);
+  @include fixedHeight(100%);
+  @include flex(column, center, center);
   background-color: $color_white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 1;
 
   &_container
   {

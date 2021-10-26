@@ -25,7 +25,7 @@ const SEO = ({
     )}
     {description && (
       <>
-        <meta name="description" content={description}></meta>
+        <meta name="description" content={description} />
         <meta property="og:description" content={description} key="ogdescription" />
         <meta property="twitter:description" content={description} key="twitterdescription" />
       </>
@@ -43,7 +43,7 @@ const SEO = ({
         <meta property="twitter:url" content={url} key="twitterurl" />
       </>
     )}
-    {keywords && <meta name="keyword" content={keywords}></meta>}
+    {keywords && <meta name="keyword" content={keywords}/>}
     <link rel="manifest" href="/manifest.json" />
   </Head>
 );

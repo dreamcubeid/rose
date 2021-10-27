@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Links, useI18n } from "@sirclo/nexus";
-import Layout from "components/Layout/Layout";
-import { useBrand } from "lib/useBrand";
-import styles from "public/scss/pages/Tautan.module.scss";
+import { FC } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Links, useI18n } from '@sirclo/nexus'
+import Layout from 'components/Layout/Layout'
+import { useBrand } from 'lib/useBrand'
+import styles from 'public/scss/pages/Tautan.module.scss'
 
 const classesLinks = {
   containerClassName: styles.tautan,

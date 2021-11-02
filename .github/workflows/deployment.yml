@@ -15,8 +15,17 @@ jobs:
     steps:
       - name: Fetch and checkout latest tag
         uses: actions/checkout@v2
-        with:
-          path: '/var/www'
+
+      - name: Fetch origin tags
+        run: git fecth origin --tags
+        working-directory: /var/www/rose
+      
+      - name: Checkout latest tag
+        run: |
+          latesttag=$(git describe --tags)
+          echo checking out ${latesttag}
+          git checkout ${latesttag}
+        working-directory: /var/www/rose
 
       - name: Install dependencies
         run: npm install

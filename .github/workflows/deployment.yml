@@ -16,7 +16,10 @@ jobs:
       - name: Checkout master branch
         uses: actions/checkout@v2
 
-      - name: Pull checkout latest tag
+      - name: Fetch origin tags
+        run: git fetch origin --tags
+
+      - name: Checkout latest tag
         run: | 
           latesttag=$(git describe --tags)
           echo checking out ${latesttag}

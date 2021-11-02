@@ -18,7 +18,8 @@ jobs:
         with:
           path: dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
       
-      - run: mv dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }} /var/www/rose
+      - run: mv dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}/* /var/www/rose/
+        working-directory: /home/rose/actions-runner/_work/rose/rose
 
       - name: Install dependencies
         run: npm install

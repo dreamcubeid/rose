@@ -13,13 +13,13 @@ jobs:
         working-directory: /var/www/rose
 
     steps:
-      - name: Fetch and checkout latest tag
+      - name: Checkout master branch
         uses: actions/checkout@v2
         with:
           path: dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
       
       - run: | 
-          rsync -a dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}/* /var/www/rose/
+          rsync -a dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}/ /var/www/rose/
           rm -rf dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
         working-directory: /home/rose/actions-runner/_work/rose/rose
 

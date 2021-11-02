@@ -18,7 +18,9 @@ jobs:
         with:
           path: dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
       
-      - run: mv dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}/* /var/www/rose/
+      - run: | 
+          rsync -a dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}/* /var/www/rose/
+          rm -rf dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
         working-directory: /home/rose/actions-runner/_work/rose/rose
 
       - name: Install dependencies

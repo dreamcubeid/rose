@@ -15,17 +15,10 @@ jobs:
     steps:
       - name: Fetch and checkout latest tag
         uses: actions/checkout@v2
-
-      - name: Fetch origin tags
-        run: git fetch origin --tags
-        working-directory: /var/www/rose
+        with:
+          path: dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }}
       
-      - name: Checkout latest tag
-        run: |
-          latesttag=$(git describe --tags)
-          echo checking out ${latesttag}
-          git checkout ${latesttag}
-        working-directory: /var/www/rose
+      - run: mv dreamcubeid-rose-${{ github.run_id }}-${{ github.run_number }} /var/www/rose
 
       - name: Install dependencies
         run: npm install

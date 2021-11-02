@@ -15,11 +15,8 @@ jobs:
     steps:
       - name: Fetch and checkout latest tag
         uses: actions/checkout@v2
-        run: |
-          git fetch --prune --unshallow --tags 
-          latesttag=$(git describe --tags)
-          echo checking out ${latesttag}
-          git checkout ${latesttag}
+        with:
+          path: '/var/www'
 
       - name: Install dependencies
         run: npm install

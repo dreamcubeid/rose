@@ -13,14 +13,10 @@ jobs:
         working-directory: /var/www/rose
 
     steps:
-      - name: Checkout master branch
+      - name: Fetch and checkout latest tag
         uses: actions/checkout@v2
-
-      - name: Fetch origin tags
-        run: git fetch origin --tags
-
-      - name: Checkout latest tag
-        run: | 
+        run: |
+          git fetch --prune --unshallow --tags 
           latesttag=$(git describe --tags)
           echo checking out ${latesttag}
           git checkout ${latesttag}

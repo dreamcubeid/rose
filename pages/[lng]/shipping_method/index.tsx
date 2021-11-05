@@ -108,7 +108,9 @@ const CustomerDetailHeader = ({
 }: TypeCustomerDetail) => (
   <div className={styleCustomer.customer_infoHeader}>
     <div className={styleCustomer.customer_infoHeaderContainer}>
-      <h3 className={styleCustomer.customer_infoHeaderTitle}>{title}</h3>
+      <h3 className={styleCustomer.customer_infoHeaderTitle}>
+        {title}
+      </h3>
       {withIcon &&
         <HiCheckCircle color="#53B671" size={20} />
       }

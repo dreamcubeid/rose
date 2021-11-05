@@ -11,6 +11,7 @@ $howManySteps: 10;
 {
   @include flex(row, center, space-between);
   padding: 16px 18px;
+  max-height: 57px;
   background: $color_rose_bg2;
 
   &_title

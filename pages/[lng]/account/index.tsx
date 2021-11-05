@@ -283,13 +283,15 @@ const AccountsPage: FC<any> = ({
           }
           logistixStyles={{
             menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
-            control: (provided) => ({
+            control: (provided,state) => ({
               ...provided,
               borderRadius: '37px',
               height: '58px',
               padding: '0 21px',
               width: '100%',
               paddingTop: '16px',
+              border: state.isFocused ? '1px solid #998060':'1px solid #E8E8E8',
+              boxShadow: 'none',
             }),
             singleValue: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
             input: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),

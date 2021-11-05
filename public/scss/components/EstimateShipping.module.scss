@@ -58,6 +58,12 @@
     color: rgba($color_black, 0);
     cursor: pointer;
   }
+
+  &_cost
+  {
+    @include typographyBuilder(secondary, 500, 12, 16);
+    color: $color_text_primary;
+  }
 }
 
 .popup
@@ -98,6 +104,7 @@
   &_headerTitle
   {
     @include typographyBuilder(secondary, 500, 14, 24);
+    color: $color_text_primary;
   }
 
   &_headerClose

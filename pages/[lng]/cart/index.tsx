@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { IoTrashBinOutline } from 'react-icons/io5'
 import { RiShoppingBag2Line, RiInformationLine } from 'react-icons/ri'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import {
 	useI18n,
 	CartDetails,
@@ -135,7 +136,7 @@ const Cart: FC<any> = ({
 						itemRedirectPathPrefix="product"
 						isEditable={true}
 						removeIcon={<IoTrashBinOutline />}
-						onErrorMsg={(e) => console.log(e)}
+						onErrorMsg={(msg) => toast.error(msg)}
 						onInvalidMsg={(msg) => setInvalidMsg(msg)}
 						thumborSetting={{
 							width: 150,

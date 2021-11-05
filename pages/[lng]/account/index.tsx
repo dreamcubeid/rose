@@ -225,7 +225,9 @@ const AccountsPage: FC<any> = ({
         </div>
         <div className={styleAccount.account_content}>
           <div className={styleAccount.account_header}>
-            <h2 className={styleAccount.account_header_title}>{i18n.t('account.myAccount')}</h2>
+            <h2 className={styleAccount.account_header_title}>
+              {i18n.t('account.myAccount')}
+            </h2>
             <div className={styleAccount.account_header_img}>
               <RiUser3Line size={17} />
             </div>
@@ -305,7 +307,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, params 
   const { default: lngDict = {} } = await import(`locales/${params.lng}.json`)
 
   const brand = await useBrand(req)
-  const hasOtp = await useWhatsAppOTPSetting(req);
+  const hasOtp = await useWhatsAppOTPSetting(req)
 
   if (res) {
     const cookies = parseCookies(req)

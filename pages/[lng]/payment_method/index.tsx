@@ -187,7 +187,7 @@ const PaymentMethods: FC<any> = ({
           i18n={i18n}
         />
         <Stepper
-          title={i18n.t('shipping.title')}
+          title={i18n.t('account.paymentMethod')}
           step={3}
         />
         <div className={styles.customer}>

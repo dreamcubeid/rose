@@ -94,6 +94,7 @@ const classesProductDetail = {
   estimateShippingWrapperClassName: styleEstimate.wrapper,
   estimateShippingTitleClassName: styleEstimate.title,
   estimateShippingDetailClassName: styleEstimate.detail,
+  estimateShippingCostClassName: styleEstimate.detail_cost,
   estimateShippingLogoClassName: styleEstimate.detail_logo,
   estimateShippingLogoImgClassName: styleEstimate.detail_logoImage,
   estimateShippingShowCourierClassName: styleEstimate.detail_showCourier,

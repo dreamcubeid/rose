@@ -23,7 +23,7 @@
       @include fixedWidth(100%);
       background: rgba($color_white, 0.8);
       border: none;
-      text-align: left;
+      text-align: center;
       padding: 12px;
 
       @include typographyBuilder(secondary, 400, 14, 24);

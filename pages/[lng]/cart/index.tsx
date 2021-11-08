@@ -113,13 +113,15 @@ const Cart: FC<any> = ({
 						steps={[{ label: i18n.t('breadcrumb.home') }, { label: i18n.t('breadcrumb.cart') }]}
 					/>
 				</div>
-				<div className={styleCart.cart_header}>
-					<div>{`${i18n.t('cart.prefixItem')} ${dataCart?.totalItem} ${i18n.t('cart.item')}`}</div>
-					<div>
-						<Link href={`/${lng}/products`}>{i18n.t('cart.shopMore')}</Link>
-					</div>
-				</div>
-				{invalidMsg && (
+        {!!dataCart?.totalItem &&
+          <div className={styleCart.cart_header}>
+            <div>{`${i18n.t('cart.prefixItem')} ${dataCart?.totalItem} ${i18n.t('cart.item')}`}</div>
+            <div>
+              <Link href={`/${lng}/products`}>{i18n.t('cart.shopMore')}</Link>
+            </div>
+          </div>
+        }
+				{invalidMsg && !!dataCart?.totalItem && (
 					<div className={styleCart.cart_error}>
 						<div>
 							<RiInformationLine width={13} height={13} />

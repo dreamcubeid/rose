@@ -187,7 +187,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (res) {
     res.writeHead(307, {
-      Location: `/${brand.lng}`,
+      Location: `/`,
     });
     res.end();
   }

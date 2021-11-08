@@ -144,7 +144,9 @@ const CustomerDetailHeader = ({
 }: TypeCustomerDetail) => (
   <div className={styleCustomer.customer_infoHeader}>
     <div className={styleCustomer.customer_infoHeaderContainer}>
-      <h3 className={styleCustomer.customer_infoHeaderTitle}>{title}</h3>
+      <h3 className={styleCustomer.customer_infoHeaderTitle}>
+        {title}
+      </h3>
       {withIcon &&
         <HiCheckCircle color="#53B671" size={20} />
       }
@@ -262,13 +264,13 @@ const PaymentMethods: FC<any> = ({
               <img src="/icons/voucher.svg" className="mr-2" alt="voucher" />
             }
             voucherAppliedIcon={
-              <img src="/icons/voucher.svg" className="mr-2" alt="voucher" />
+              <img src="/icons/voucher.svg" className="mr-2" alt="voucher-applied" />
             }
             pointIcon={
-              <img src="/icons/point.svg" className="mr-2" alt="voucher" />
+              <img src="/icons/point.svg" className="mr-2" alt="point" />
             }
             pointAppliedIcon={
-              <img src="/icons/point.svg" className="mr-2" alt="voucher" />
+              <img src="/icons/point.svg" className="mr-2" alt="point-applied" />
             }
             removeVoucherIcon={
               <FiX color="#CC4534" size={16} className="mr-2" />

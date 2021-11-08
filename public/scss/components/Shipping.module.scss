@@ -81,7 +81,7 @@
     &__label,
     &__price
     {
-      @include flex(row, center, center);
+      @include flex(column, center, center);
       @include position(relative);
       margin: 16px 0;
       padding: 0;
@@ -98,6 +98,12 @@
         padding: 0;
         color: $color_text_primary;
       }
+    }
+
+    &__errorMsg
+    {
+      width: 50px !important;
+      color: $color_error !important;
     }
 
     &__radio

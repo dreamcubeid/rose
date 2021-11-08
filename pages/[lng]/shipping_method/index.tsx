@@ -56,6 +56,7 @@ const classesShippingMethod = {
   shippingNameClass: styleShipping.shipping_item__title,
   shippingPriceDivClass: styleShipping.shipping_item__price,
   pinPointLocationClassName: `${styleBtn.btn} ${styleBtn.btn_secondary} ${styleShipping.shipping_item__pinButton} mb-3`,
+  shippingErrorMsgClass: styleShipping.shipping_item__errorMsg,
   // Map Popup
   mapPopupClassName: styleCustomer.customer_mapPopup,
   mapPopupBackgroundClassName: styleCustomer.customer_mapPopupContainer,

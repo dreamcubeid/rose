@@ -134,7 +134,7 @@
 
     &__title
     {
-      @include typographyBuilder(secondary, 600, 14, 18);
+      @include typographyBuilder(secondary, 600, 14, 24);
       margin-bottom: 5px;
       white-space: normal;
       overflow: hidden;

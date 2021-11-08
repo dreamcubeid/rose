@@ -234,6 +234,7 @@
       @include fixedWidth(100%);
       @include fixedHeight(48px);
       @include typographyBuilder(secondary, 400, 14, 24);
+      color: $color_text_primary;
       border: 1px solid $color_border;
       border-radius: 50px;
       text-align: center;
@@ -246,6 +247,13 @@
 
       &[type=number] {
         -moz-appearance: textfield;
+      }
+
+      &:focus
+      {
+        outline: none !important;
+        border: 1px solid $color_rose;
+        border-radius: 37px;
       }
     }
   }
@@ -400,6 +408,8 @@
   &_title
   {
     margin: 0;
+    color: $color_text_primary;
+    @include typographyBuilder(secondary,400,12,16);
   }
 
   &_extra

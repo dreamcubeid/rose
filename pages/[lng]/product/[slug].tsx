@@ -208,7 +208,7 @@ const Product: FC<any> = ({
   useEffect(() => {
     if (showRatingReview) {
       const ratingReview = document.getElementById('ratingReview')
-      ratingReview.scrollIntoView({
+      ratingReview?.scrollIntoView({
         behavior: 'smooth',
         block: 'end',
         inline: 'nearest'

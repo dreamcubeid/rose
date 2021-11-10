@@ -178,6 +178,17 @@ const classesAccount = {
   mediaDetailCheckboxContainer: stylesNotif.notification_mediaDetailCheckboxContainer,
   mediaDetailCheckbox: stylesNotif.notification_mediaDetailCheckbox,
   mediaDetailCheckboxLabel: stylesNotif.notification_mediaDetailCheckboxLabel,
+  // Popup Cari Pesanan
+  checkPaymentOrderContainerClassName: styleOrderHistory.order_searchOverlay,
+  checkPaymentOrderContainerBodyClassName: styleOrderHistory.order_searchInner,
+  checkPaymentOrderHeaderClassName: styleOrderHistory.order_searchHeader,
+  checkPaymentOrderTitleClassName: styleOrderHistory.order_searchHeaderTitle,
+  checkPaymentOrderCloseButtonClassName: styleOrderHistory.order_searchHeaderClose,
+  checkPaymentOrderContentClassName: styleOrderHistory.order_searchContent,
+  checkPaymentOrderDescriptionClassName: styleOrderHistory.order_searchDesc,
+  checkPaymentOrderInputContentClassName: `${styleForm.form} ${styleOrderHistory.order_searchForm}`,
+  checkPaymentOrderInputTitleClassName: styleOrderHistory.order_searchInputTitle,
+  checkPaymentOrderSubmitButtonClassName: `${styleButton.btn} ${styleButton.btn_primary} ${styleOrderHistory.order_searchBtn}`
 }
 
 const classesMembershipPagination = {
@@ -285,14 +296,14 @@ const AccountsPage: FC<any> = ({
           }
           logistixStyles={{
             menu: (provided) => ({ ...provided, zIndex: 3, marginTop: '1px' }),
-            control: (provided,state) => ({
+            control: (provided, state) => ({
               ...provided,
               borderRadius: '37px',
               height: '58px',
               padding: '0 21px',
               width: '100%',
               paddingTop: '16px',
-              border: state.isFocused ? '1px solid #998060':'1px solid #E8E8E8',
+              border: state.isFocused ? '1px solid #998060' : '1px solid #E8E8E8',
               boxShadow: 'none',
             }),
             singleValue: (provided) => ({ ...provided, marginRight: '0', marginLeft: '-8px' }),
